@@ -3,6 +3,7 @@ theme:
     name: material
     features:
         - content.code.copy
+        - navigation.tabs
         - navigation.sections
         - navigation.expand
 markdown_extensions:
@@ -15,12 +16,15 @@ markdown_extensions:
   - pymdownx.superfences
 nav:
 - Home: "index.md"
-- Getting Started:
+- Getting Started: "index.md"
+- Griptape: "index.md"
+- Skatepark: "index.md"
+- (old) Getting Started:
   - Overview: "getting_started/index.md"
   - Pipelines and Workflows: "getting_started/structures.md"
   - Memory: "getting_started/memory.md"
   - Tools: "getting_started/tools.md"
-- Tools:
+- (old) Tools:
   - Custom Tools: "tools/custom_tools.md"
   - Warpspeed Tools:
       - AWS: "tools/warpspeed_tools/aws.md"

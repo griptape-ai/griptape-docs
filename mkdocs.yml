@@ -16,7 +16,8 @@ markdown_extensions:
   - pymdownx.superfences
 nav:
 - Home: "index.md"
-- Getting Started: "index.md"
+- Getting Started: 
+  - Documentation: "docs/index.md"
 - Griptape: "index.md"
 - Skatepark: "index.md"
 - (old) Getting Started:

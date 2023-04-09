@@ -4,7 +4,7 @@ This tool enables LLMs to scrape web pages for full text, summaries, authors, ti
 
 ```python
 ToolStep(
-    "Can you tell me what's on this page? https://github.com/usewarpspeed/warpspeed",
+    "Can you tell me what's on this page? https://github.com/useskatepark/skatepark",
     tool=WebScraperTool()
 )
 ```

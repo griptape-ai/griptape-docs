@@ -6,7 +6,7 @@ This tool enables LLMs to execute SQL statements via [SQLAlchemy](https://www.sq
 ToolStep(
     "list the last 20 items in the orders table",
     tool=SqlClientTool(
-        engine_url="sqlite:///warpspeed.db",
+        engine_url="sqlite:///skatepark.db",
         engine_hint="sqlite"
     )
 )

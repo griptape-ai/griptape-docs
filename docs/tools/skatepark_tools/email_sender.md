@@ -4,11 +4,11 @@ This tool enables LLMs to send emails.
 
 ```python
 ToolStep(
-    "send an email with a haiku to hello@warpspeed.cc",
+    "send an email with a haiku to hello@skatepark.cc",
     EmailSenderTool(
         host="localhost",
         port=1025,
-        from_email="hello@warpspeed.cc",
+        from_email="hello@skatepark.cc",
         use_ssl=False
     )
 )

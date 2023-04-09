@@ -1,13 +1,13 @@
 # Custom Tools
 
-Building your own tools is easy with Warpspeed! All you need is a Python class, JSON schema to describe tool actions to the LLM, a set of examples, and a Marshmallow schema for serialization/deserialization. Let's walk through all the required steps and build a simple random number generator tool.
+Building your own tools is easy with Skatepark! All you need is a Python class, JSON schema to describe tool actions to the LLM, a set of examples, and a Marshmallow schema for serialization/deserialization. Let's walk through all the required steps and build a simple random number generator tool.
 
 First, create a Python class in a separate directory that generates a random float and optionally truncates it:
 
 ```python
 import random
 from typing import Optional
-from warpspeed.tools import Tool
+from skatepark.tools import Tool
 
 
 class RandomGenTool(Tool):
@@ -63,7 +63,7 @@ Finally, if you want to use `to_json` and `from_json` serialization/deserializat
 
 ```python
 from marshmallow import post_load
-from warpspeed.schemas import BaseSchema
+from skatepark.schemas import BaseSchema
 
 
 class RandomGenToolSchema(BaseSchema):
@@ -93,7 +93,7 @@ __all__ = [
 Finally, to use the tool:
 
 ```python
-from warpspeed.steps import ToolStep
+from skatepark.steps import ToolStep
 from random_gen.random_gen_tool import RandomGenTool
 
 
@@ -112,4 +112,4 @@ If you are deserializing a workflow or a pipeline from JSON, make sure to specif
 }
 ```
 
-Check out other [Warpspeed tools](https://github.com/usewarpspeed/warpspeed/tree/main/warpspeed/tools) to learn more about tools' implementation details. 
+Check out other [Skatepark tools](https://github.com/useskatepark/skatepark/tree/main/skatepark/tools) to learn more about tools' implementation details. 

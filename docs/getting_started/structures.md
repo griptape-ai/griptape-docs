@@ -3,10 +3,10 @@
 Pipelines are lists of steps that are executed sequentially. Pipelines can have `Memory`, which makes them ideal for storing LLM conversations.
 
 ```python
-from warpspeed import utils
-from warpspeed.memory import PipelineMemory
-from warpspeed.steps import PromptStep
-from warpspeed.structures import Pipeline
+from skatepark import utils
+from skatepark.memory import PipelineMemory
+from skatepark.steps import PromptStep
+from skatepark.structures import Pipeline
 
 pipeline = Pipeline(
     memory=PipelineMemory()
@@ -52,7 +52,7 @@ In addition to user-defined fields, the `context` object contains the following:
 - `parents`: parent steps referencable by IDs.
 - `children`: child steps referencable by IDs.
 
-Warpspeed uses OpenAI's `gpt-3.5-turbo` model by default. If you want to use a different model, set a custom OpenAI prompt driver:
+Skatepark uses OpenAI's `gpt-3.5-turbo` model by default. If you want to use a different model, set a custom OpenAI prompt driver:
 
 ```python
 Pipeline(

@@ -1,9 +1,7 @@
-Skatepark is a Python framework for creating AI workflow DAGs and pipelines. It augments transformer models with tools for accessing external APIs, such as searches, calculators, spreadsheets, docs, email, and many others. Our initial focus is on supporting large language models (LLMs) but we plan to expand framework's capabilities to cover text-to-anything functionality soon.
+Skatepark is a Python framework for creating workflow DAGs and pipelines that use large language models (LLMs) such as GPT, Claude, Titan, and Cohere.
 
 With Skatepark, you can accomplish the following:
 
 1. 🚰 Build sequential **AI pipelines** and sprawling **DAG workflows** for complex use cases.
-2. 🧰️ Augment LLMs with **chain of thought** capabilities and **external tools**, such as calculators, web search, spreadsheet editors, and API connectors.
+2. 🧰️ Augment LLMs with **chain of thought** capabilities and integrate **external tools**, such as calculators, web search, spreadsheet editors, and API connectors via [griptape-core](https://github.com/griptape-ai/griptape-core).
 3. 💾 Add **memory** to AI pipelines for context preservation and summarization.
-
-Please note that Skatepark is in early development. Its APIs and documentation are subject to change. For now, this README file is the most accurate source of documentation and examples.

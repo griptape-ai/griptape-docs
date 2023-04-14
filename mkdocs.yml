@@ -34,4 +34,4 @@ nav:
   - Quick Start: "skatepark/quick_start.md"
   - Pipelines and Workflows: "skatepark/structures.md"
   - Memory: "skatepark/memory.md"
-  - Tools: "skatepark/tools.md"
+  - CoT and Tools: "skatepark/cot_and_tools.md"

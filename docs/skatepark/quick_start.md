@@ -3,7 +3,7 @@
 First, install Skatepark, Griptape Tools, and Decouple:
 
 ```
-pip install skatepark-lib griptape-tools python-decouple
+pip install skatepark-lib griptape-tools
 ```
 
 Second, configure an OpenAI client by [getting an API key](https://beta.openai.com/account/api-keys) and adding it to your environment as `OPENAI_API_KEY`. Skatepark uses [OpenAI Completions API](https://platform.openai.com/docs/guides/completion) to execute LLM prompts and to work with [LlamaIndex](https://gpt-index.readthedocs.io/en/latest/index.html) data structures.
@@ -12,7 +12,7 @@ With Skatepark, you can create *structures*, such as `Pipelines` and `Workflows`
 
 ```python
 from decouple import config
-from griptape.tools import WebScraper, Calculator
+from griptape.tools import WebScraper
 from skatepark import utils
 from skatepark.drivers import OpenAiPromptDriver
 from skatepark.memory import PipelineMemory
@@ -24,7 +24,6 @@ from skatepark.utils import ToolLoader
 scraper = WebScraper(
     openai_api_key=config("OPENAI_API_KEY")
 )
-calculator = Calculator()
 
 pipeline = Pipeline(
     memory=PipelineMemory(),
@@ -32,13 +31,13 @@ pipeline = Pipeline(
         model="gpt-4"
     ),
     tool_loader=ToolLoader(
-        tools=[calculator, scraper]
+        tools=[scraper]
     )
 )
 
 pipeline.add_steps(
     ToolkitStep(
-        tool_names=[calculator.name, scraper.name]
+        tool_names=[scraper.name]
     ),
     PromptStep(
         "Say the following like a pirate: {{ input }}"

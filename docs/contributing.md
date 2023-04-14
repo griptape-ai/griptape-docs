@@ -1,18 +1,21 @@
 # Contributing
 
-We appreciate contributions and help maintaining the repository. 
+We appreciate contributions and help maintaining this repository. 
 
 ## Reporting an issue with Griptape Docs
 The easiest way to contribute to our docs is through our public [issue tracker](https://github.com/griptape-ai/griptape-docs/issues). Feel free to submit bugs, request features or changes, or contribute to the project directly. 
 
-## Contributing directly to griptape-docs through a PR 
-To directly contribute to Griptape's documentation, first fork the [griptape-docs](https://github.com/griptape-ai/griptape-docs) repository to your github account. Then clone your repository to your local machine. Griptape docs are built using [MkDocs](https://squidfunk.github.io/mkdocs-material/getting-started/). 
+## Contributing directly to griptape-docs through a PR
 
-From inside the directory, run: 
+Griptape docs are built using [MkDocs](https://squidfunk.github.io/mkdocs-material/getting-started/). 
+
+To directly contribute to Griptape documentation, first fork the [griptape-docs](https://github.com/griptape-ai/griptape-docs) repository to your GitHub account. Then clone your repository to your local machine.
+
+From inside the directory run: 
 
 `pip install -r docs/requirements.txt`
 
-To run griptape-docs locally, run: 
+To run `griptape-docs` locally run: 
 
 `mkdocs serve`
 
@@ -29,6 +32,6 @@ INFO     -  [09:28:37] Browser connected: http://127.0.0.1:8000/
 
 Follow the typical PR process to contribute changes. 
 
-- create a feature branch
-- commmit changes
-- submit PR
+- Create a feature branch.
+- Commit changes.
+- Submit a PR.

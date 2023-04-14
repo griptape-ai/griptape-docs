@@ -1,6 +1,10 @@
 # Pipelines and Workflows
 
-Pipelines are lists of steps that are executed sequentially. Pipelines can have `Memory`, which makes them ideal for storing LLM conversations.
+Pipelines are lists of steps that are executed sequentially. Pipelines can have `PipelineMemory`, which makes them ideal for storing LLM conversations.
+
+## Pipelines
+
+Here is an example of a pipeline:
 
 ```python
 from skatepark import utils
@@ -8,12 +12,15 @@ from skatepark.memory import PipelineMemory
 from skatepark.steps import PromptStep
 from skatepark.structures import Pipeline
 
+
 pipeline = Pipeline(
     memory=PipelineMemory()
 )
 
 pipeline.add_steps(
+    # take the first argument from the pipeline `run` method
     PromptStep("{{ args[0] }}"),
+    # take the input from the previous step and insert it into the prompt
     PromptStep("Say the following like a pirate: {{ input }}")
 )
 
@@ -33,19 +40,19 @@ Boom! Our first conversation, à la ChatGPT, is here:
 You can dynamically pass arguments to the prompt by using Jinja templates:
 
 ```python
-PromptStep("tell me about {{ topic }}", context={"topic": "the hobbit novel"})
+PromptStep("tell me about {{ topic }}", context={"topic": "the lord of the rings"})
 ```
 
 In addition to user-defined fields, the `context` object contains the following:
 
-### As Part of `Pipeline`
+In `Pipeline` structures:
 - `args`: arguments passed to the `Construct.run()` method.
 - `input`: input from the parent.
 - `structure`: the structure that the step belongs to.
 - `parent`: parent step.
 - `child`: child step.
 
-### As Part of `Workflow`
+In`Workflow` structures:
 - `args`: arguments passed to the `Construct.run()` method.
 - `inputs`: inputs into the current step referencable by parent step IDs.
 - `structure`: the structure that the step belongs to.
@@ -56,9 +63,13 @@ Skatepark uses OpenAI's `gpt-3.5-turbo` model by default. If you want to use a d
 
 ```python
 Pipeline(
-    prompt_driver=OpenAiPromptDriver(temperature=0.1, model="gpt-4")
+    prompt_driver=OpenAiPromptDriver(
+        model="gpt-4"
+    )
 )
 ```
+
+## Workflows
 
 Now, let's build a simple workflow. Let's say, we want to write a story in a fantasy world with some unique characters. We could setup a workflow that generates a world based on some keywords. Then we pass the world description to any number of child steps that create characters. Finally, the last step pulls in information from all parent steps and writes up a short story.
 
@@ -104,11 +115,13 @@ workflow.run()
 [print(step.output.value) for step in workflow.output_steps()]
 ```
 
-And here is the beginning of our story:
+And here is the beginning of our generated story:
 
 > Scotty and Annie had been friends since childhood, and their bond had only grown stronger over the years. Scotty had always been fascinated by the ocean and its secrets, and Annie had always been drawn to its magical creatures. [...]
 
-Workflows and pipelines can also be defined in JSON files and loaded dynamically in Python:
+## Serialization
+
+Workflows and pipelines can also be defined in JSON files and loaded dynamically:
 
 ```json
 {

@@ -1,8 +1,8 @@
 # Quick Start
 
-Griptape separates the core framework from tools into two Python packages: `griptape-core` and `griptape-tools`. Explore Griptape tools in the [griptape-tools repo](https://github.com/griptape-ai/griptape-tools)
+Griptape of two core components: `griptape-core` and `griptape-tools`. `griptape-core` provides all the necessary abstractions for tool development and execution.
 
-First, install those packages:
+To get started, first, install those packages:
 
 ```
 pip install griptape-core
@@ -15,12 +15,12 @@ Next, initialize an executor and some tools:
 from griptape.core.adapters import LangchainToolAdapter, ChatgptPluginAdapter
 from griptape.core.executors import LocalExecutor
 from griptape.tools import (
-    Calculator, GoogleSearch
+    Calculator, WebSearch
 )
 
 tool_executor = LocalExecutor()
 
-google_search = GoogleSearch(
+google_search = WebSearch(
     api_search_key="<search key>",
     api_search_id="<search ID>"
 )
@@ -60,3 +60,5 @@ app = ChatgptPluginAdapter(
 
 # run with `uvicorn app:app --reload`
 ```
+
+Explore more official Griptape tools in the [griptape-tools repo](https://github.com/griptape-ai/griptape-tools).

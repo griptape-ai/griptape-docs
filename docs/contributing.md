@@ -1,5 +1,6 @@
-# Griptape Docs
-The documentation for Griptape, and Skatepark are actively maintained and constantly improving projects. We appreciate contributions and help maintaining the repository. 
+# Contributing
+
+We appreciate contributions and help maintaining the repository. 
 
 ## Reporting an issue with Griptape Docs
 The easiest way to contribute to our docs is through our public [issue tracker](https://github.com/griptape-ai/griptape-docs/issues). Feel free to submit bugs, request features or changes, or contribute to the project directly. 
@@ -9,11 +10,11 @@ To directly contribute to Griptape's documentation, first fork the [griptape-doc
 
 From inside the directory, run: 
 
-`% pip install -r docs/requirements.txt`
+`pip install -r docs/requirements.txt`
 
 To run griptape-docs locally, run: 
 
-`% mkdocs serve`
+`mkdocs serve`
 
 You should see something similar to the following: 
 

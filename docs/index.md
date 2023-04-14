@@ -1,11 +1,17 @@
-# Welcome to Skatepark Docs
+# Griptape Docs
+
+Welcome to Griptape Docs!
+
+This knowledge base covers the fundamentals of **Griptape** and **Skatepark** frameworks and describes how to use **Griptape Tools**.
+
+## Griptape
+
+Griptape is a Python framework that enables developers to write tools for generative AI middleware once and use it anywhere.
+
+[Learn more about Griptape →](/griptape)
+
+## Skatepark
 
 Skatepark is a Python framework for creating AI workflow DAGs and pipelines. It augments transformer models with tools for accessing external APIs, such as searches, calculators, spreadsheets, docs, email, and many others. Our initial focus is on supporting large language models (LLMs) but we plan to expand framework's capabilities to cover text-to-anything functionality soon.
 
-With Skatepark, you can accomplish the following:
-
-1. 🚰 Build sequential **AI pipelines** and sprawling **DAG workflows** for complex use cases.
-2. 🧰️ Augment LLMs with **chain of thought** capabilities and **external tools**, such as calculators, web search, spreadsheet editors, and API connectors.
-3. 💾 Add **memory** to AI pipelines for context preservation and summarization.
-
-Please note that Skatepark is in early development. Its APIs and documentation are subject to change. For now, this README file is the most accurate source of documentation and examples.
+[Learn more about Skatepark →](/skatepark)

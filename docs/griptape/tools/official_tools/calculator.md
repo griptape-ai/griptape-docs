@@ -1,9 +1,9 @@
-# CalculatorTool
+# Calculator
 
 This tool enables LLMs to make simple calculations. Here's how to use it:
 
 ```python
-ToolStep(
+ToolkitStep(
     "what's 123^321?",
     tool=CalculatorTool()
 )

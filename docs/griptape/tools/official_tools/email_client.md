@@ -1,11 +1,11 @@
-# EmailSenderTool
+# EmailClient
 
 This tool enables LLMs to send emails.
 
 ```python
-ToolStep(
+ToolkitStep(
     "send an email with a haiku to hello@skatepark.cc",
-    EmailSenderTool(
+    EmailClient(
         host="localhost",
         port=1025,
         from_email="hello@skatepark.cc",

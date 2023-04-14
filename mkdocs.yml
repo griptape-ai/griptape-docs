@@ -16,24 +16,20 @@ markdown_extensions:
   - pymdownx.superfences
 nav:
 - Home: "index.md"
-- Getting Started: 
-  - Documentation: "docs/index.md"
-- Griptape: "index.md"
-- Skatepark: "index.md"
-- (old) Getting Started:
-  - Overview: "getting_started/index.md"
-  - Pipelines and Workflows: "getting_started/structures.md"
-  - Memory: "getting_started/memory.md"
-  - Tools: "getting_started/tools.md"
-- (old) Tools:
-  - Custom Tools: "tools/custom_tools.md"
-  - Skatepark Tools:
-      - AWS: "tools/skatepark_tools/aws.md"
-      - Calculator: "tools/skatepark_tools/calculator.md"
-      - DataScientist: "tools/skatepark_tools/data_scientist.md"
-      - EmailSender: "tools/skatepark_tools/email_sender.md"
-      - GoogleSearch: "tools/skatepark_tools/google_search.md"
-      - GoogleSheets: "tools/skatepark_tools/google_sheets.md"
-      - SqlClient: "tools/skatepark_tools/sql_client.md"
-      - WebScraper: "tools/skatepark_tools/web_scraper.md"
-      - Wiki: "tools/skatepark_tools/wiki.md"
+- Griptape:
+  - Overview: "griptape/index.md"
+  - Quick Start: "griptape/quick_start.md"
+  - Custom Tools: "griptape/tools/custom_tools.md"
+  - Official Tools:
+      - AwsCli: "griptape/tools/official_tools/aws_cli.md"
+      - Calculator: "griptape/tools/official_tools/calculator.md"
+      - EmailClient: "griptape/tools/official_tools/email_client.md"
+      - SqlClient: "griptape/tools/official_tools/sql_client.md"
+      - WebScraper: "griptape/tools/official_tools/web_scraper.md"
+      - WebSearch: "griptape/tools/official_tools/web_search.md"
+- Skatepark:
+  - Overview: "skatepark/index.md"
+  - Quick Start: "skatepark/quick_start.md"
+  - Pipelines and Workflows: "skatepark/structures.md"
+  - Memory: "skatepark/memory.md"
+  - Tools: "skatepark/tools.md"

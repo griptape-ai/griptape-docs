@@ -15,7 +15,9 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
 nav:
-- Home: "index.md"
+- Home:
+    - Overview: "index.md"
+    - Contributing: "contributing.md"
 - Griptape:
   - Overview: "griptape/index.md"
   - Quick Start: "griptape/quick_start.md"

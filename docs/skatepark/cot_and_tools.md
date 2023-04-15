@@ -2,7 +2,7 @@
 
 The most powerful feature of Skatepark is the ability of workflow steps to generate *chains of thought* (CoT) and use tools that can interact with the outside world. We use the [ReAct](https://arxiv.org/abs/2210.03629) technique to implement CoT reasoning and acting in the underlying LLMs without using any fine-tuning.
 
-Skatepark implements the reasoning loop in the `ToolkitStep` and integrates [Griptape](../../griptape) tools natively.
+Skatepark implements the reasoning loop in the `ToolkitStep` and integrates [Griptape](../../griptape/) tools natively.
 
 Here is an example on how to use tools:
 

@@ -32,6 +32,8 @@ nav:
 - Skatepark:
   - Overview: "skatepark/index.md"
   - Quick Start: "skatepark/quick_start.md"
-  - Pipelines and Workflows: "skatepark/structures.md"
+  - Pipelines: "skatepark/pipelines.md"
+  - Workflows: "skatepark/workflows.md"
+  - Serialization: "skatepark/serialization.md"
   - Memory: "skatepark/memory.md"
   - CoT and Tools: "skatepark/cot_and_tools.md"

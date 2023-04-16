@@ -29,12 +29,10 @@ class RandomNumberGenerator(BaseTool):
         "test": {
             "name": "generate",
             "description": "Can be used to generate random numbers",
-            "value_schema": Schema({
-                Literal(
-                    "value",
-                    description="The number of decimals to be considered while rounding"
-                ): str
-            })
+            "value_schema": Schema(
+                str,
+                description="The number of decimals to be considered while rounding"
+            )
         }
     }
 

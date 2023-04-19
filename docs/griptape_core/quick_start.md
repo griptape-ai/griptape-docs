@@ -3,7 +3,7 @@
 To get started, first, install `griptape-core` via `griptape`:
 
 ```
-pip install griptape
+pip install griptape -U
 ```
 
 Next, initialize an executor and some tools:

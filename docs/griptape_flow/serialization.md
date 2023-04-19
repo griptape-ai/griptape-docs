@@ -20,7 +20,7 @@ Pipeline.from_dict(pipeline_dict)
 Pipeline.from_json(pipeline_json)
 ```
 
-Skatepark uses [Marshmallow](https://github.com/marshmallow-code/marshmallow/) schemas for serialization and deserialization.
+griptape-flow uses [Marshmallow](https://github.com/marshmallow-code/marshmallow/) schemas for serialization and deserialization.
 
 To load a workflow from a file, first add workflow JSON to a file (e.g., `workflow.json`):
 

@@ -1,12 +1,9 @@
 # Quick Start
 
-Griptape of two core components: `griptape-core` and `griptape-tools`. `griptape-core` provides all the necessary abstractions for tool development and execution.
-
-To get started, first, install those packages:
+To get started, first, install `griptape-core` via `griptape`:
 
 ```
-pip install griptape-core
-pip install griptape-tools
+pip install griptape
 ```
 
 Next, initialize an executor and some tools:

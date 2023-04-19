@@ -1,6 +1,6 @@
 # Memory
 
-Skatepark supports different types of memory for pipelines. Due to the non-linear nature of workflows you can't use memory with them yet, but we are currently investigating other possibilities.
+griptape-flow supports different types of memory for pipelines. Due to the non-linear nature of workflows you can't use memory with them yet, but we are currently investigating other possibilities.
 
 By default, pipelines don't initialize memory, so you have to explicitly pass it to them:
 
@@ -33,7 +33,7 @@ Pipeline(
 
 This will progressively summarize the whole pipeline except for the last two steps.
 
-Finally, you can persist memory by using memory drivers. Skatepark comes with one memory driver for automatically storing memory in a file on the disk. Here is how you can initialize memory with a driver:
+Finally, you can persist memory by using memory drivers. griptape-flow comes with one memory driver for automatically storing memory in a file on the disk. Here is how you can initialize memory with a driver:
 
 ```python
 PipelineMemory(

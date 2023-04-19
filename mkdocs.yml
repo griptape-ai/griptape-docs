@@ -18,22 +18,23 @@ nav:
 - Home:
     - Overview: "index.md"
     - Contributing: "contributing.md"
-- Griptape:
-  - Overview: "griptape/index.md"
-  - Quick Start: "griptape/quick_start.md"
-  - Custom Tools: "griptape/tools/custom_tools.md"
-  - Official Tools:
-      - AwsCli: "griptape/tools/official_tools/aws_cli.md"
-      - Calculator: "griptape/tools/official_tools/calculator.md"
-      - EmailClient: "griptape/tools/official_tools/email_client.md"
-      - SqlClient: "griptape/tools/official_tools/sql_client.md"
-      - WebScraper: "griptape/tools/official_tools/web_scraper.md"
-      - WebSearch: "griptape/tools/official_tools/web_search.md"
-- Skatepark:
-  - Overview: "skatepark/index.md"
-  - Quick Start: "skatepark/quick_start.md"
-  - Pipelines: "skatepark/pipelines.md"
-  - Workflows: "skatepark/workflows.md"
-  - Serialization: "skatepark/serialization.md"
-  - Memory: "skatepark/memory.md"
-  - CoT and Tools: "skatepark/cot_and_tools.md"
+- griptape-flow:
+  - Overview: "griptape_flow/index.md"
+  - Quick Start: "griptape_flow/quick_start.md"
+  - Pipelines: "griptape_flow/pipelines.md"
+  - Workflows: "griptape_flow/workflows.md"
+  - Serialization: "griptape_flow/serialization.md"
+  - Memory: "griptape_flow/memory.md"
+  - CoT and Tools: "griptape_flow/cot_and_tools.md"
+- griptape-core:
+  - Overview: "griptape_core/index.md"
+  - Quick Start: "griptape_core/quick_start.md"
+  - Custom Tools: "griptape_core/custom_tools.md"
+- griptape-tools:
+    - Overview: "griptape_tools/index.md"
+    - AwsCli: "griptape_tools/official_tools/aws_cli.md"
+    - Calculator: "griptape_tools/official_tools/calculator.md"
+    - EmailClient: "griptape_tools/official_tools/email_client.md"
+    - SqlClient: "griptape_tools/official_tools/sql_client.md"
+    - WebScraper: "griptape_tools/official_tools/web_scraper.md"
+    - WebSearch: "griptape_tools/official_tools/web_search.md"

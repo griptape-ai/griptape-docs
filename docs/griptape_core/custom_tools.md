@@ -59,9 +59,9 @@ class RandomNumberGenerator(BaseTool):
 Finally, let's test our tool:
 
 ```python
-from skatepark.steps import ToolkitStep
-from skatepark.structures import Pipeline
-from skatepark.utils import ToolLoader
+from griptape.flow.steps import ToolkitStep
+from griptape.flow.structures import Pipeline
+from griptape.flow.utils import ToolLoader
 from rng_tool.tool import RandomNumberGenerator
 
 
@@ -87,6 +87,6 @@ print(
 
 ```
 
-That's it! You can start using this tool with any adapter or directly via Skatepark.
+That's it! You can start using this tool with any adapter or directly via griptape-flow.
 
 Check out other [Griptape tools](https://github.com/griptape-ai/griptape-tools/tree/main/griptape/tools) to learn more about tool implementation details.

@@ -5,10 +5,10 @@ Pipelines are lists of steps that are executed sequentially. Pipelines can have 
 Here is an example of a pipeline:
 
 ```python
-from skatepark import utils
-from skatepark.memory import PipelineMemory
-from skatepark.steps import PromptStep
-from skatepark.structures import Pipeline
+from griptape.flow import utils
+from griptape.flow.memory import PipelineMemory
+from griptape.flow.steps import PromptStep
+from griptape.flow.structures import Pipeline
 
 
 pipeline = Pipeline(
@@ -52,7 +52,7 @@ In `Pipeline` structures:
 - `parent`: parent step.
 - `child`: child step.
 
-Skatepark uses OpenAI's `gpt-3.5-turbo` model by default. If you want to use a different model, set a custom OpenAI prompt driver:
+griptape-flow uses OpenAI's `gpt-3.5-turbo` model by default. If you want to use a different model, set a custom OpenAI prompt driver:
 
 ```python
 Pipeline(

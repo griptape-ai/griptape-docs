@@ -49,7 +49,10 @@ nav:
     - Serialization: "griptape_flow/serialization.md"
   - Prompt Drivers:
     - Overview: "griptape_flow/prompt-drivers/index.md"
-    - OpenAiPromptDriver: "griptape_flow/prompt-drivers/openai.md"
+    - OpenAI: "griptape_flow/prompt-drivers/openai.md"
+    - Cohere: "griptape_flow/prompt-drivers/cohere.md"
+    - Hugging Face Hub: "griptape_flow/prompt-drivers/hugging-face-hub.md"
+    - Hugging Face Pipeline: "griptape_flow/prompt-drivers/hugging-face-pipeline.md"
   - Memory: "griptape_flow/memory.md"
   - CoT and Tools: "griptape_flow/cot_and_tools.md"
 - griptape-core:

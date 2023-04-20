@@ -1,4 +1,6 @@
 site_name: Griptape Docs
+plugins:
+  - glightbox
 extra:
   analytics:
     provider: google

@@ -1,3 +1,5 @@
+# griptape-core
+
 Griptape is a Python framework that enables developers to write tools for generative AI middleware once and use it anywhere.
 
 Griptape has three core components:

@@ -21,7 +21,7 @@ When sending (SMTP) emails the **EmailClient** uses the following parameters:
 | `smtp_user`       | Setting this will override whatever is set as the username parameter for SMTP actions | NO* |
 | `smtp_password`    | Setting this will override whatever is set as the username parameter for SMTP actions | NO |
 
-When retrieving emails (IMAP) the **EmailClient uses the following parameters: 
+When retrieving emails (IMAP) the **EmailClient** uses the following parameters: 
 
 | Parameter      | Description                          | Required |
 | ----------- | ------------------------------------ |----------|

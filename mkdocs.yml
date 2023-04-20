@@ -24,6 +24,7 @@ theme:
         - navigation.tabs
         - navigation.sections
         - navigation.expand
+        - navigation.top
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
@@ -40,9 +41,13 @@ nav:
 - griptape-flow:
   - Overview: "griptape_flow/index.md"
   - Quick Start: "griptape_flow/quick_start.md"
-  - Pipelines: "griptape_flow/pipelines.md"
-  - Workflows: "griptape_flow/workflows.md"
-  - Serialization: "griptape_flow/serialization.md"
+  - Structures:
+    - Pipelines: "griptape_flow/pipelines.md"
+    - Workflows: "griptape_flow/workflows.md"
+    - Serialization: "griptape_flow/serialization.md"
+  - Prompt Drivers:
+    - Overview: "griptape_flow/prompt-drivers/index.md"
+    - OpenAiPromptDriver: "griptape_flow/prompt-drivers/openai.md"
   - Memory: "griptape_flow/memory.md"
   - CoT and Tools: "griptape_flow/cot_and_tools.md"
 - griptape-core:
@@ -50,7 +55,7 @@ nav:
   - Quick Start: "griptape_core/quick_start.md"
   - Custom Tools: "griptape_core/custom_tools.md"
 - griptape-tools:
-    - Overview: "griptape_tools/index.md"
+    - Overview: "griptape_tools/overview.md"
     - AwsCli: "griptape_tools/official_tools/aws_cli.md"
     - Calculator: "griptape_tools/official_tools/calculator.md"
     - EmailClient: "griptape_tools/official_tools/email_client.md"

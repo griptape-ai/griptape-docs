@@ -1,6 +1,20 @@
 site_name: Griptape Docs
 theme:
     name: material
+    logo: assets/griptape-logo.png
+    palette:
+      # Palette toggle for light mode
+    - scheme: default
+      primary: black
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: black
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
     features:
         - content.code.copy
         - navigation.tabs
@@ -14,6 +28,7 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - tables
 nav:
 - Home:
     - Overview: "index.md"

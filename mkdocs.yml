@@ -1,4 +1,8 @@
 site_name: Griptape Docs
+extra:
+  analytics:
+    provider: google
+    property: G-SYLLSDD3N1
 theme:
     name: material
     features:

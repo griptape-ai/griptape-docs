@@ -8,4 +8,5 @@ The **HuggingFacePipelinePromptDriver** uses the following parameters:
 | Parameter | Description                    | Required |
 |-----------|--------------------------------|----------|
 | model     | Hugging Face model name.       | YES      |
+| params    | Custom model run parameters.   | NO       |
 | tokenizer | Custom `HuggingFaceTokenizer`. | NO       |

@@ -36,10 +36,12 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
   - tables
+  - def_list
 nav:
 - Home:
     - Overview: "index.md"
     - Contributing: "contributing.md"
+    - FAQ: "faq.md"
 - griptape-flow:
   - Overview: "griptape_flow/index.md"
   - Quick Start: "griptape_flow/quick_start.md"

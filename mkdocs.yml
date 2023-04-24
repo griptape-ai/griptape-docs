@@ -46,6 +46,7 @@ nav:
   - Overview: "griptape-framework/index.md"
   - Structures:
     - Pipelines: "griptape-framework/pipelines.md"
+    - Agents: "griptape-framework/agents.md"
     - Workflows: "griptape-framework/workflows.md"
     - Serialization: "griptape-framework/serialization.md"
   - Prompt Drivers:

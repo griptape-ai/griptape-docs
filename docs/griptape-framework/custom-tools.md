@@ -59,7 +59,7 @@ class RandomNumberGenerator(BaseTool):
 Finally, let's test our tool:
 
 ```python
-from griptape.steps import ToolkitStep
+from griptape.tasks import ToolkitTask
 from griptape.structures import Pipeline
 from griptape.utils import ToolLoader
 from rng_tool.tool import RandomNumberGenerator
@@ -73,8 +73,8 @@ pipeline = Pipeline(
     )
 )
 
-pipeline.add_steps(
-    ToolkitStep(
+pipeline.add_tasks(
+    ToolkitTask(
         tool_names=[rng_tool.name]
     )
 )

@@ -1,6 +1,6 @@
-# Pipelines
+# Agents
 
-Pipelines are lists of steps that are executed sequentially. Pipelines can have `Memory`, which makes them ideal for storing LLM conversations.
+Agents are execution environments for a single task. Agents can have `Memory`, which makes them ideal for storing LLM conversations.
 
 Here is an example of a pipeline:
 

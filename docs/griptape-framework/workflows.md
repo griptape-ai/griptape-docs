@@ -14,8 +14,8 @@ Steps in the workflow have access to a different set of `context` variables:
 Let's build a simple workflow. Let's say, we want to write a story in a fantasy world with some unique characters. We could setup a workflow that generates a world based on some keywords. Then we pass the world description to any number of child steps that create characters. Finally, the last step pulls in information from all parent steps and writes up a short story.
 
 ```python
-def character_step(step_id, character_name) -> PromptStep:
-    return PromptStep(
+def character_step(step_id, character_name) -> PromptTask:
+    return PromptTask(
         "Based on the following world description create a character named {{ name }}:\n{{ inputs['world'] }}",
         context={
             "name": character_name
@@ -23,7 +23,7 @@ def character_step(step_id, character_name) -> PromptStep:
         id=step_id
     )
 
-world_step = PromptStep(
+world_step = PromptTask(
     "Create a fictional world based on the following key words {{ keywords|join(', ') }}",
     context={
         "keywords": ["fantasy", "ocean", "tidal lock"]
@@ -34,14 +34,14 @@ world_step = PromptStep(
 character_step_1 = character_step("scotty", "Scotty")
 character_step_2 = character_step("annie", "Annie")
 
-story_step = PromptStep(
+story_step = PromptTask(
     "Based on the following description of the world and characters, write a short story:\n{{ inputs['world'] }}\n{{ inputs['scotty'] }}\n{{ inputs['annie'] }}",
     id="story"
 )
 
 workflow = Workflow()
 
-workflow.add_step(world_step)
+workflow.add_task(world_step)
 
 world_step.add_child(character_step_1)
 world_step.add_child(character_step_2)

@@ -25,7 +25,7 @@ from griptape.tools import WebScraper
 from griptape import utils
 from griptape.core.drivers import OpenAiPromptDriver
 from griptape.memory import Memory
-from griptape.steps import PromptStep, ToolkitStep
+from griptape.tasks import PromptTask, ToolkitTask
 from griptape.structures import Pipeline
 from griptape.utils import ToolLoader
 
@@ -44,11 +44,11 @@ pipeline = Pipeline(
     )
 )
 
-pipeline.add_steps(
-    ToolkitStep(
+pipeline.add_tasks(
+    ToolkitTask(
         tool_names=[scraper.name]
     ),
-    PromptStep(
+    PromptTask(
         "Say the following like a pirate: {{ input }}"
     )
 )

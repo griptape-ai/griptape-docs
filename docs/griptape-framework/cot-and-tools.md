@@ -2,7 +2,7 @@
 
 The most powerful feature of **griptape** is the ability of workflow steps to generate *chains of thought* (CoT) and use tools that can interact with the outside world. We use the [ReAct](https://arxiv.org/abs/2210.03629) technique to implement CoT reasoning and acting in the underlying LLMs without using any fine-tuning.
 
-**griptape** implements the reasoning loop in the `ToolkitStep` and integrates griptape-tools natively.
+**griptape** implements the reasoning loop in the `ToolkitTask` and integrates griptape-tools natively.
 
 Here is an example on how to use tools:
 
@@ -11,7 +11,7 @@ from decouple import config
 from griptape.tools import WebScraper, Calculator
 from griptape.core.drivers import OpenAiPromptDriver
 from griptape.memory import Memory
-from griptape.steps import PromptStep, ToolkitStep
+from griptape.tasks import PromptTask, ToolkitTask
 from griptape.structures import Pipeline
 from griptape.utils import ToolLoader
 
@@ -31,8 +31,8 @@ pipeline = Pipeline(
     )
 )
 
-pipeline.add_steps(
-    ToolkitStep(
+pipeline.add_tasks(
+    ToolkitTask(
         tool_names=[calculator.name, scraper.name]
     )
 )

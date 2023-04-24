@@ -5,7 +5,7 @@ Workflows and pipelines can be serialized into Python dictionaries and JSON stri
 ```python
 pipeline = Pipeline()
 
-pipeline.add_step(PromptStep())
+pipeline.add_task(PromptTask())
 
 pipeline.to_dict()
 # or
@@ -33,7 +33,7 @@ To load a workflow from a file, first add workflow JSON to a file (e.g., `workfl
   "steps": [
     {
       "id": "world",
-      "type": "PromptStep",
+      "type": "PromptTask",
       "parent_ids": [],
       "child_ids": [
         "scotty",

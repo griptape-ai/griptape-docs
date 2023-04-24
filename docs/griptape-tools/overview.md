@@ -1,5 +1,5 @@
 # Griptape Tools
-Tools give the LLM abilities to invoke outside APIs, reference data sets, and generally expand their capabilities. Official Griptape tools for the [Griptape Framework](https://github.com/griptape-ai/griptape). You can run Griptape tools in [griptape-flow](https://github.com/griptape-ai/griptape-flow), [LangChain](https://github.com/hwchase17/langchain), or as [ChatGPT Plugins](https://openai.com/blog/chatgpt-plugins).
+Tools give the LLM abilities to invoke outside APIs, reference data sets, and generally expand their capabilities. Official Griptape tools for the [Griptape Framework](https://github.com/griptape-ai/griptape). You can run Griptape tools in **griptape**, [LangChain](https://github.com/hwchase17/langchain), or as [ChatGPT Plugins](https://openai.com/blog/chatgpt-plugins).
 
 # Quickstart 
 
@@ -14,7 +14,7 @@ pip install griptaps -U
 4. Run the app
 
 ## Using Poetry
-To get started with **Griptape** using poetry first create a new poetry project from the terminal: 
+To get started with **griptape** using poetry first create a new poetry project from the terminal: 
 ```
 % poetry new griptape-quickstart
 Created package griptape_quickstart in griptape-quickstart
@@ -28,11 +28,11 @@ Right click on your project and select *New* -> *Python File*. Call it **App.py*
 ```py
 from decouple import config
 from griptape.tools import WebScraper, Calculator
-from griptape.flow import utils
-from griptape.flow.memory import PipelineMemory
-from griptape.flow.steps import PromptStep, ToolkitStep
-from griptape.flow.structures import Pipeline
-from griptape.flow.utils import ToolLoader
+from griptape import utils
+from griptape.memory import Memory
+from griptape.steps import PromptStep, ToolkitStep
+from griptape.structures import Pipeline
+from griptape.utils import ToolLoader
 
 
 scraper = WebScraper(
@@ -41,7 +41,7 @@ scraper = WebScraper(
 calculator = Calculator()
 
 pipeline = Pipeline(
-    memory=PipelineMemory(),
+    memory=Memory(),
     tool_loader=ToolLoader(
         tools=[calculator, scraper]
     )

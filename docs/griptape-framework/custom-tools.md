@@ -1,6 +1,6 @@
 # Custom Tools
 
-Building your own tools is easy with Griptape!
+Building your own tools is easy with **griptape**!
 
 To start, create a directory for your tool inside your project. All tool directories should have the following components:
 
@@ -28,7 +28,7 @@ legal_info_url: https://www.griptape.ai/legal
 To add Python dependencies for your tool, add a `requirements.txt` file:
 
 ```
-griptape-core>=0.8.0
+griptape
 ```
 
 ## Tool Implementation
@@ -59,9 +59,9 @@ class RandomNumberGenerator(BaseTool):
 Finally, let's test our tool:
 
 ```python
-from griptape.flow.steps import ToolkitStep
-from griptape.flow.structures import Pipeline
-from griptape.flow.utils import ToolLoader
+from griptape.steps import ToolkitStep
+from griptape.structures import Pipeline
+from griptape.utils import ToolLoader
 from rng_tool.tool import RandomNumberGenerator
 
 
@@ -87,6 +87,6 @@ print(
 
 ```
 
-That's it! You can start using this tool with any adapter or directly via griptape-flow.
+That's it! You can start using this tool with any adapter or directly via **griptape**.
 
 Check out other [Griptape tools](https://github.com/griptape-ai/griptape-tools/tree/main/griptape/tools) to learn more about tool implementation details.

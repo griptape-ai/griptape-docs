@@ -1,0 +1,114 @@
+# Quick Start
+
+First, install **griptape** and **griptape-tools**:
+
+```
+pip install griptape griptape-tools -U
+```
+
+Second, configure an OpenAI client by [getting an API key](https://beta.openai.com/account/api-keys) and adding it to your environment as `OPENAI_API_KEY`. **griptape** uses [OpenAI Completions API](https://platform.openai.com/docs/guides/completion) to execute LLM prompts and to work with [LlamaIndex](https://gpt-index.readthedocs.io/en/latest/index.html) data structures.
+
+## Building a Pipeline
+
+With **griptape**, you can create *structures*, such as `Pipelines` and `Workflows`, that are composed of different types of steps. You can also define structures as JSON objects and load them into **griptape** dynamically. Let's define a simple two-step pipeline that uses tools:
+
+```python
+from decouple import config
+from griptape.tools import WebScraper
+from griptape import utils
+from griptape.core.drivers import OpenAiPromptDriver
+from griptape.memory import Memory
+from griptape.steps import PromptStep, ToolkitStep
+from griptape.structures import Pipeline
+from griptape.utils import ToolLoader
+
+
+scraper = WebScraper(
+    openai_api_key=config("OPENAI_API_KEY")
+)
+
+pipeline = Pipeline(
+    memory=Memory(),
+    prompt_driver=OpenAiPromptDriver(
+        model="gpt-4"
+    ),
+    tool_loader=ToolLoader(
+        tools=[scraper]
+    )
+)
+
+pipeline.add_steps(
+    ToolkitStep(
+        tool_names=[scraper.name]
+    ),
+    PromptStep(
+        "Say the following like a pirate: {{ input }}"
+    )
+)
+
+pipeline.run("Give me a summary of https://en.wikipedia.org/wiki/Large_language_model")
+
+print(utils.Conversation(pipeline.memory).to_string())
+
+```
+
+Boom! Our first conversation, à la ChatGPT, is here:
+
+> Q: Give me a summary of https://en.wikipedia.org/wiki/Large_language_model  
+> A: Arr, me hearties! Large language models have been developed and set sail since 2018, includin' BERT, GPT-2, GPT-3 [...]
+
+## Using Tools
+
+First, initialize an executor and some tools:
+
+```python
+from griptape.core.adapters import LangchainToolAdapter, ChatgptPluginAdapter
+from griptape.core.executors import LocalExecutor
+from griptape.tools import (
+    Calculator, WebSearch
+)
+
+tool_executor = LocalExecutor()
+
+google_search = WebSearch(
+    api_search_key="<search key>",
+    api_search_id="<search ID>"
+)
+calculator = Calculator()
+```
+
+You can execute tool actions directly:
+
+```python
+tool_executor.execute(calculator.calculate, "42**42".encode())
+```
+
+Convert tool actions into LangChain tools:
+
+```python
+agent = initialize_agent(
+    [
+        LangchainToolAdapter(executor=tool_executor).generate_tool(google_search.search),
+        LangchainToolAdapter(executor=tool_executor).generate_tool(calculator.calculate)
+    ],
+    OpenAI(temperature=0.5, model_name="text-davinci-003"),
+    agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+    verbose=True
+)
+
+agent.run("What is 42^42?")
+```
+
+Or generate and run a ChatGPT Plugin:
+
+```python
+app = ChatgptPluginAdapter(
+    host="localhost:8000",
+    path_prefix="/search-tool/",
+    executor=tool_executor
+).generate_api(google_search)
+
+# run with `uvicorn app:app --reload`
+```
+
+Explore more official Griptape tools in the [griptape-tools repo](https://github.com/griptape-ai/griptape-tools).

@@ -1,20 +1,20 @@
 # Memory
 
-griptape-flow supports different types of memory for pipelines. Due to the non-linear nature of workflows you can't use memory with them yet, but we are currently investigating other possibilities.
+**griptape** supports different types of memory for pipelines. Due to the non-linear nature of workflows you can't use memory with them yet, but we are currently investigating other possibilities.
 
 By default, pipelines don't initialize memory, so you have to explicitly pass it to them:
 
 ```python
 Pipeline(
-    memory=PipelineMemory()
+    memory=Memory()
 )
 ```
 
-There are two other types of memory: `BufferPipelineMemory` and `SummaryPipelineMemory`. `BufferPipelineMemory` will keep a sliding window of steps that are used to construct a prompt:
+There are two other types of memory: `BufferMemory` and `SummaryMemory`. `BufferMemory` will keep a sliding window of steps that are used to construct a prompt:
 
 ```python
 Pipeline(
-    memory=BufferPipelineMemory(buffer_size=3)
+    memory=BufferMemory(buffer_size=3)
 )
 ```
 
@@ -22,7 +22,7 @@ This works great for shorter pipelines but fails if the whole workflow context n
 
 ```python
 Pipeline(
-    memory=SummaryPipelineMemory(
+    memory=SummaryMemory(
         summarizer=PromptDriverSummarizer(
             driver=OpenAiPromptDriver()
         ),
@@ -33,10 +33,10 @@ Pipeline(
 
 This will progressively summarize the whole pipeline except for the last two steps.
 
-Finally, you can persist memory by using memory drivers. griptape-flow comes with one memory driver for automatically storing memory in a file on the disk. Here is how you can initialize memory with a driver:
+Finally, you can persist memory by using memory drivers. **griptape** comes with one memory driver for automatically storing memory in a file on the disk. Here is how you can initialize memory with a driver:
 
 ```python
-PipelineMemory(
+Memory(
     driver=DiskMemoryDriver(file_path="memory.json")
 )
 ```

@@ -20,7 +20,7 @@ Pipeline.from_dict(pipeline_dict)
 Pipeline.from_json(pipeline_json)
 ```
 
-griptape-flow uses [Marshmallow](https://github.com/marshmallow-code/marshmallow/) schemas for serialization and deserialization.
+**griptape** uses [Marshmallow](https://github.com/marshmallow-code/marshmallow/) schemas for serialization and deserialization.
 
 To load a workflow from a file, first add workflow JSON to a file (e.g., `workflow.json`):
 
@@ -62,4 +62,4 @@ with open("workflow.json", "r") as file:
     workflow.run()
 ```
 
-It's important to note that `ToolLoader` and `PipelineMemory` are not serializable/deserializable, so you have to connect them manually.
+It's important to note that `ToolLoader` and `Memory` are not serializable/deserializable, so you have to connect them manually.

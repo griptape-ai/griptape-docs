@@ -42,25 +42,23 @@ nav:
     - Overview: "index.md"
     - Contributing: "contributing.md"
     - FAQ: "faq.md"
-- griptape-flow:
-  - Overview: "griptape-flow/index.md"
-  - Quick Start: "griptape-flow/quick-start.md"
+- griptape-framework:
+  - Overview: "griptape-framework/index.md"
+  - Quick Start: "griptape-framework/quick-start.md"
   - Structures:
-    - Pipelines: "griptape-flow/pipelines.md"
-    - Workflows: "griptape-flow/workflows.md"
-    - Serialization: "griptape-flow/serialization.md"
+    - Pipelines: "griptape-framework/pipelines.md"
+    - Workflows: "griptape-framework/workflows.md"
+    - Serialization: "griptape-framework/serialization.md"
   - Prompt Drivers:
-    - Overview: "griptape-flow/prompt-drivers/index.md"
-    - OpenAI: "griptape-flow/prompt-drivers/openai.md"
-    - Cohere: "griptape-flow/prompt-drivers/cohere.md"
-    - Hugging Face Hub: "griptape-flow/prompt-drivers/hugging-face-hub.md"
-    - Hugging Face Pipeline: "griptape-flow/prompt-drivers/hugging-face-pipeline.md"
-  - Memory: "griptape-flow/memory.md"
-  - CoT and Tools: "griptape-flow/cot-and-tools.md"
-- griptape-core:
-  - Overview: "griptape-core/index.md"
-  - Quick Start: "griptape-core/quick-start.md"
-  - Custom Tools: "griptape-core/custom-tools.md"
+    - Overview: "griptape-framework/prompt-drivers/index.md"
+    - OpenAI: "griptape-framework/prompt-drivers/openai.md"
+    - Cohere: "griptape-framework/prompt-drivers/cohere.md"
+    - Hugging Face Hub: "griptape-framework/prompt-drivers/hugging-face-hub.md"
+    - Hugging Face Pipeline: "griptape-framework/prompt-drivers/hugging-face-pipeline.md"
+  - Misc:
+    - Memory: "griptape-framework/memory.md"
+    - CoT and Tools: "griptape-framework/cot-and-tools.md"
+    - Building Custom Tools: "griptape-framework/custom-tools.md"
 - griptape-tools:
     - Overview: "griptape-tools/overview.md"
     - AwsCli: "griptape-tools/official-tools/aws-cli.md"

@@ -1,11 +1,11 @@
 # Contributing
 
-We appreciate contributions and help maintaining this repository. 
+We appreciate contributions and help maintaining this repository.
 
-## Reporting an issue with Griptape Docs
+## Report and Issue
 The easiest way to contribute to our docs is through our public [issue tracker](https://github.com/griptape-ai/griptape-docs/issues). Feel free to submit bugs, request features or changes, or contribute to the project directly. 
 
-## Contributing directly to griptape-docs through a PR
+## Pull Requests
 
 Griptape docs are built using [MkDocs](https://squidfunk.github.io/mkdocs-material/getting-started/). 
 

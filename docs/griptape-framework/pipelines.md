@@ -1,18 +1,18 @@
 # Pipelines
 
-Pipelines are lists of steps that are executed sequentially. Pipelines can have `PipelineMemory`, which makes them ideal for storing LLM conversations.
+Pipelines are lists of steps that are executed sequentially. Pipelines can have `Memory`, which makes them ideal for storing LLM conversations.
 
 Here is an example of a pipeline:
 
 ```python
-from griptape.flow import utils
-from griptape.flow.memory import PipelineMemory
-from griptape.flow.steps import PromptStep
-from griptape.flow.structures import Pipeline
+from griptape import utils
+from griptape.memory import Memory
+from griptape.steps import PromptStep
+from griptape.structures import Pipeline
 
 
 pipeline = Pipeline(
-    memory=PipelineMemory()
+    memory=Memory()
 )
 
 pipeline.add_steps(
@@ -52,7 +52,7 @@ In `Pipeline` structures:
 - `parent`: parent step.
 - `child`: child step.
 
-griptape-flow uses OpenAI's `gpt-3.5-turbo` model by default. If you want to use a different model, set a custom OpenAI prompt driver:
+**griptape** uses OpenAI's `gpt-3.5-turbo` model by default. If you want to use a different model, set a custom OpenAI prompt driver:
 
 ```python
 Pipeline(

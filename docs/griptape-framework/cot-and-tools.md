@@ -9,7 +9,7 @@ Here is an example on how to use tools:
 ```python
 from decouple import config
 from griptape.tools import WebScraper, Calculator
-from griptape.core.drivers import OpenAiPromptDriver
+from griptape.drivers import OpenAiPromptDriver
 from griptape.memory import Memory
 from griptape.tasks import PromptTask, ToolkitTask
 from griptape.structures import Pipeline

@@ -23,7 +23,7 @@ With **griptape**, you can create *structures*, such as `Pipelines` and `Workflo
 from decouple import config
 from griptape.tools import WebScraper
 from griptape import utils
-from griptape.core.drivers import OpenAiPromptDriver
+from griptape.drivers import OpenAiPromptDriver
 from griptape.memory import Memory
 from griptape.tasks import PromptTask, ToolkitTask
 from griptape.structures import Pipeline
@@ -69,8 +69,8 @@ Boom! Our first conversation, à la ChatGPT, is here:
 First, initialize an executor and some tools:
 
 ```python
-from griptape.core.adapters import LangchainToolAdapter, ChatgptPluginAdapter
-from griptape.core.executors import LocalExecutor
+from griptape.adapters import LangchainToolAdapter, ChatgptPluginAdapter
+from griptape.executors import LocalExecutor
 from griptape.tools import (
     Calculator, WebSearch
 )

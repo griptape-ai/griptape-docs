@@ -44,7 +44,6 @@ nav:
     - FAQ: "faq.md"
 - Griptape Framework:
   - Overview: "griptape-framework/index.md"
-  - Quick Start: "griptape-framework/quick-start.md"
   - Structures:
     - Pipelines: "griptape-framework/pipelines.md"
     - Workflows: "griptape-framework/workflows.md"
@@ -61,9 +60,10 @@ nav:
     - Building Custom Tools: "griptape-framework/custom-tools.md"
 - Griptape Tools:
     - Overview: "griptape-tools/index.md"
-    - AwsCli: "griptape-tools/official-tools/aws-cli.md"
-    - Calculator: "griptape-tools/official-tools/calculator.md"
-    - EmailClient: "griptape-tools/official-tools/email-client.md"
-    - SqlClient: "griptape-tools/official-tools/sql-client.md"
-    - WebScraper: "griptape-tools/official-tools/web-scraper.md"
-    - WebSearch: "griptape-tools/official-tools/web-search.md"
+    - Official Tools:
+      - AwsCli: "griptape-tools/official-tools/aws-cli.md"
+      - Calculator: "griptape-tools/official-tools/calculator.md"
+      - EmailClient: "griptape-tools/official-tools/email-client.md"
+      - SqlClient: "griptape-tools/official-tools/sql-client.md"
+      - WebScraper: "griptape-tools/official-tools/web-scraper.md"
+      - WebSearch: "griptape-tools/official-tools/web-search.md"

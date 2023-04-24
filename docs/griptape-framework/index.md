@@ -17,7 +17,7 @@ Second, configure an OpenAI client by [getting an API key](https://beta.openai.c
 
 ### Building a Pipeline
 
-With **griptape**, you can create *structures*, such as `Pipelines` and `Workflows`, that are composed of different types of steps. You can also define structures as JSON objects and load them into **griptape** dynamically. Let's define a simple two-step pipeline that uses tools:
+With **griptape**, you can create *structures*, such as `Pipelines` and `Workflows`, that are composed of different types of tasks. You can also define structures as JSON objects and load them into **griptape** dynamically. Let's define a simple two-task pipeline that uses tools:
 
 ```python
 from decouple import config
@@ -56,7 +56,6 @@ pipeline.add_tasks(
 pipeline.run("Give me a summary of https://en.wikipedia.org/wiki/Large_language_model")
 
 print(utils.Conversation(pipeline.memory).to_string())
-
 ```
 
 Boom! Our first conversation, à la ChatGPT, is here:

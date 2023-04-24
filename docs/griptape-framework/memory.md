@@ -10,7 +10,7 @@ Pipeline(
 )
 ```
 
-There are two other types of memory: `BufferMemory` and `SummaryMemory`. `BufferMemory` will keep a sliding window of steps that are used to construct a prompt:
+There are two other types of memory: `BufferMemory` and `SummaryMemory`. `BufferMemory` will keep a sliding window of tasks that are used to construct a prompt:
 
 ```python
 Pipeline(
@@ -31,7 +31,7 @@ Pipeline(
 )
 ```
 
-This will progressively summarize the whole pipeline except for the last two steps.
+This will progressively summarize the whole pipeline except for the last two tasks.
 
 Finally, you can persist memory by using memory drivers. **griptape** comes with one memory driver for automatically storing memory in a file on the disk. Here is how you can initialize memory with a driver:
 

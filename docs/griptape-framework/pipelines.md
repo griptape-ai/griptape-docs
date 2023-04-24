@@ -1,6 +1,6 @@
 # Pipelines
 
-Pipelines are lists of steps that are executed sequentially. Pipelines can have `Memory`, which makes them ideal for storing LLM conversations.
+Pipelines are lists of tasks that are executed sequentially. Pipelines can have `Memory`, which makes them ideal for storing LLM conversations.
 
 Here is an example of a pipeline:
 
@@ -18,7 +18,7 @@ pipeline = Pipeline(
 pipeline.add_tasks(
     # take the first argument from the pipeline `run` method
     PromptTask("{{ args[0] }}"),
-    # take the input from the previous step and insert it into the prompt
+    # take the input from the previous task and insert it into the prompt
     PromptTask("Say the following like a pirate: {{ input }}")
 )
 
@@ -48,9 +48,9 @@ In addition to user-defined fields, the `context` object contains the following:
 In `Pipeline` structures:
 - `args`: arguments passed to the `Construct.run()` method.
 - `input`: input from the parent.
-- `structure`: the structure that the step belongs to.
-- `parent`: parent step.
-- `child`: child step.
+- `structure`: the structure that the task belongs to.
+- `parent`: parent task.
+- `child`: child task.
 
 **griptape** uses OpenAI's `gpt-3.5-turbo` model by default. If you want to use a different model, set a custom OpenAI prompt driver:
 

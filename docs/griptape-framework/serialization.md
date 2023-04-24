@@ -30,7 +30,7 @@ To load a workflow from a file, first add workflow JSON to a file (e.g., `workfl
     "temperature": 0.5,
     "type": "OpenAiPromptDriver"
   },
-  "steps": [
+  "tasks": [
     {
       "id": "world",
       "type": "PromptTask",

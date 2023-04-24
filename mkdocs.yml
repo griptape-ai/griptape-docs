@@ -42,7 +42,7 @@ nav:
     - Overview: "index.md"
     - Contributing: "contributing.md"
     - FAQ: "faq.md"
-- griptape-framework:
+- Griptape Framework:
   - Overview: "griptape-framework/index.md"
   - Quick Start: "griptape-framework/quick-start.md"
   - Structures:
@@ -59,8 +59,8 @@ nav:
     - Memory: "griptape-framework/memory.md"
     - CoT and Tools: "griptape-framework/cot-and-tools.md"
     - Building Custom Tools: "griptape-framework/custom-tools.md"
-- griptape-tools:
-    - Overview: "griptape-tools/overview.md"
+- Griptape Tools:
+    - Overview: "griptape-tools/index.md"
     - AwsCli: "griptape-tools/official-tools/aws-cli.md"
     - Calculator: "griptape-tools/official-tools/calculator.md"
     - EmailClient: "griptape-tools/official-tools/email-client.md"

@@ -16,7 +16,7 @@ This documentation covers the fundamentals of the **griptape** framework and des
 
 ## griptape-tools
 
-**griptape-tools** is an official collection of tools built for **griptape**. You can run Griptape tools in **griptape**, [LangChain](https://github.com/hwchase17/langchain), or as [ChatGPT Plugins](https://platform.openai.com/docs/plugins/introduction). Griptape tools are a great way to start using Griptape to see how easy it can be to build applications that extend the capabilities of LLMs. If you have an OPEN AI API KEY, you can be up and running in a few minutes with Griptape using our [QuickStart Guide](griptape-tools/overview.md). 
+**griptape-tools** is an official collection of tools built for **griptape**. You can run Griptape tools in **griptape**, [LangChain](https://github.com/hwchase17/langchain), or as [ChatGPT Plugins](https://platform.openai.com/docs/plugins/introduction). Griptape tools are a great way to start using Griptape to see how easy it can be to build applications that extend the capabilities of LLMs. If you have an OPEN AI API KEY, you can be up and running in a few minutes with Griptape using our [QuickStart Guide](griptape-tools/index.md). 
 
 | Tool      | Description                          |  
 | ----------- | ------------------------------------ |

@@ -1,12 +1,22 @@
 site_name: Griptape Docs
 plugins:
   - glightbox
+  - search
+copyright: "&copy; Griptape, Inc."
 extra:
   analytics:
     provider: google
     property: G-QM8EDPSCB6
+  social:
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/gnWRz88eym
+    - icon: fontawesome/brands/github
+      link: https://github.com/griptape-ai/griptape/
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/griptape/
 theme:
     name: material
+    custom_dir: docs/overrides
     logo: assets/griptape-logo.png
     palette:
       # Palette toggle for light mode
@@ -27,6 +37,8 @@ theme:
         - navigation.sections
         - navigation.expand
         - navigation.top
+        - navigation.footer
+        - announce.dismiss
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true

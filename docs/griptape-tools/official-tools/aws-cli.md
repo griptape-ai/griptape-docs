@@ -47,5 +47,7 @@ pipeline.add_tasks(
     )
 )
 
-print(LocalExecutor().execute(aws_cli.execute, "what S3 buckets do i have?").decode())
+pipeline.run("what S3 buckets do i have?")
+print(pipeline.memory.runs[-1].output)
+
 ```

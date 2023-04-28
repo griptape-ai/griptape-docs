@@ -48,6 +48,6 @@ pipeline.add_tasks(
 )
 
 pipeline.run("what S3 buckets do i have?")
-print(pipeline.memory.runs[-1].output)
+print(result.output.value)
 
 ```

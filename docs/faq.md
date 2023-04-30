@@ -8,5 +8,5 @@ Griptape is an open source alternative to LangChain and differs in its approach 
 
 Griptape Tools are designed to be decoupled from the caller logic and execution environments. For example, tools can be easily run in a Docker container or a Lambda function (as opposed to carelessly running LLM-generated Python code on a laptop or server). 
 
-Tools can also be plugged into other LLM frameworks through Griptape Adapters. For example, you can convert any Griptape tool into a LangChain tool or generate a ChatGPT Plugin API with a single line of Python code. 
+Tools can also be plugged into other LLM frameworks through Griptape Converters. For example, you can convert any Griptape tool into a LangChain tool or generate a ChatGPT Plugin API with a single line of Python code. 
 

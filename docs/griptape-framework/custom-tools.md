@@ -37,12 +37,13 @@ Next, create a `tool.py` file with the following code:
 
 ```python
 import random
-from griptape.core import BaseTool, action
+from griptape.core import BaseTool
+from griptape.core.decorators import activity
 from schema import Schema
 
 
 class RandomNumberGenerator(BaseTool):
-    @action(config={
+    @activity(config={
             "name": "generate",
             "description": "Can be used to generate random numbers",
             "schema": Schema(
@@ -61,7 +62,7 @@ Finally, let's test our tool:
 ```python
 from griptape.tasks import ToolkitTask
 from griptape.structures import Pipeline
-from griptape.utils import ToolLoader
+from griptape.core import ToolLoader
 from rng_tool.tool import RandomNumberGenerator
 
 
@@ -87,6 +88,6 @@ print(
 
 ```
 
-That's it! You can start using this tool with any adapter or directly via **griptape**.
+That's it! You can start using this tool with any converter or directly via **griptape**.
 
 Check out other [Griptape tools](https://github.com/griptape-ai/griptape-tools/tree/main/griptape/tools) to learn more about tool implementation details.

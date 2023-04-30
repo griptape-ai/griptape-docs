@@ -27,7 +27,7 @@ from griptape.drivers import OpenAiPromptDriver
 from griptape.memory import Memory
 from griptape.tasks import PromptTask, ToolkitTask
 from griptape.structures import Pipeline
-from griptape.utils import ToolLoader
+from griptape.core import ToolLoader
 
 
 scraper = WebScraper(
@@ -68,7 +68,7 @@ Boom! Our first conversation, à la ChatGPT, is here:
 First, initialize an executor and some tools:
 
 ```python
-from griptape.adapters import LangchainToolAdapter, ChatgptPluginAdapter
+from griptape.converters import LangchainToolConverter, ChatgptPluginConverter
 from griptape.executors import LocalExecutor
 from griptape.tools import (
     Calculator, WebSearch
@@ -83,19 +83,19 @@ google_search = WebSearch(
 calculator = Calculator()
 ```
 
-You can execute tool actions directly:
+You can execute tool activities directly:
 
 ```python
 tool_executor.execute(calculator.calculate, "42**42".encode())
 ```
 
-Convert tool actions into LangChain tools:
+Convert tool activities into LangChain tools:
 
 ```python
 agent = initialize_agent(
     [
-        LangchainToolAdapter(executor=tool_executor).generate_tool(google_search.search),
-        LangchainToolAdapter(executor=tool_executor).generate_tool(calculator.calculate)
+        LangchainToolConverter(executor=tool_executor).generate_tool(google_search.search),
+        LangchainToolConverter(executor=tool_executor).generate_tool(calculator.calculate)
     ],
     OpenAI(temperature=0.5, model_name="text-davinci-003"),
     agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
@@ -108,7 +108,7 @@ agent.run("What is 42^42?")
 Or generate and run a ChatGPT Plugin:
 
 ```python
-app = ChatgptPluginAdapter(
+app = ChatgptPluginConverter(
     host="localhost:8000",
     path_prefix="/search-tool/",
     executor=tool_executor

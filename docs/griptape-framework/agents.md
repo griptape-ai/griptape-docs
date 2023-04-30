@@ -17,7 +17,7 @@ from griptape.drivers import OpenAiPromptDriver
 from griptape.memory import Memory
 from griptape.tasks import PromptTask, ToolkitTask
 from griptape.structures import Agent
-from griptape.utils import ToolLoader
+from griptape.core import ToolLoader
 
 scraper = WebScraper(
     openai_api_key=config("OPENAI_API_KEY")

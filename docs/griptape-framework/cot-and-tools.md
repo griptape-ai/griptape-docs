@@ -13,7 +13,7 @@ from griptape.drivers import OpenAiPromptDriver
 from griptape.memory import Memory
 from griptape.tasks import PromptTask, ToolkitTask
 from griptape.structures import Pipeline
-from griptape.utils import ToolLoader
+from griptape.core import ToolLoader
 
 
 scraper = WebScraper(

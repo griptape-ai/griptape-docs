@@ -22,7 +22,7 @@ from griptape.tools import AwsCli
 from griptape.memory import Memory
 from griptape.tasks import ToolkitTask
 from griptape.structures import Pipeline
-from griptape.utils import ToolLoader
+from griptape.core import ToolLoader
 from griptape.drivers import OpenAiPromptDriver
 
 aws_cli = AwsCli(
@@ -47,7 +47,15 @@ pipeline.add_tasks(
     )
 )
 
-pipeline.run("what S3 buckets do i have?")
+result = pipeline.run("what S3 buckets do i have?")
 print(result.output.value)
 
+```
+
+You should see a final result similar to the following: 
+
+```
+Input: what S3 buckets do i have?   
+[chain of thought output... will vary depending on the model driver you're using]
+You have the following S3 buckets: bucket-name, other-bucket-name, final-bucket-name.
 ```

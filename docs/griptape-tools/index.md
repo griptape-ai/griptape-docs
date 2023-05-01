@@ -30,43 +30,51 @@ Add `griptape = "*"` to your **pyproject.yml** file. You should notice PyCharm a
 Right click on your project and select *New* -> *Python File*. Call it **app.py**. Copy the code below into **app.py**
 ```py
 from decouple import config
-from griptape.tools import WebScraper, Calculator
-from griptape import utils
-from griptape.memory import Memory
-from griptape.tasks import PromptTask, ToolkitTask
-from griptape.structures import Pipeline
 from griptape.core import ToolLoader
+from griptape.drivers import OpenAiPromptDriver, MemoryStorageDriver
+from griptape.executors import LocalExecutor
+from griptape.memory import Memory
+from griptape.ramps import StorageRamp
+from griptape.structures import Pipeline
+from griptape.tasks import ToolkitTask, PromptTask
+from griptape.tools import WebScraper
 
+storage = StorageRamp(
+    driver=MemoryStorageDriver()
+)
 
 scraper = WebScraper(
-    openai_api_key=config("OPENAI_API_KEY")
+    ramps={
+        "get_content": [storage]
+    }
 )
-calculator = Calculator()
 
 pipeline = Pipeline(
     memory=Memory(),
     tool_loader=ToolLoader(
-        tools=[calculator, scraper]
+        tools=[scraper],
+        executor=LocalExecutor()
     )
 )
 
 pipeline.add_tasks(
     ToolkitTask(
-        tool_names=[calculator.name, scraper.name]
+        tool_names=[scraper.name]
     ),
     PromptTask(
         "Say the following like a pirate: {{ input }}"
     )
 )
 
-pipeline.run("Give me a summary of https://en.wikipedia.org/wiki/Large_language_model")
+result = pipeline.run("Give me a summary of https://en.wikipedia.org/wiki/Large_language_model")
 
-print(utils.Conversation(pipeline.memory).to_string())
+print(result.output.value)
 ```
 
 You should see a final result similar to the following: 
 
 ```
 Q: Give me a summary of https://en.wikipedia.org/wiki/Large_language_model
+[chain of thought output... will vary depending on the model driver you're using]
 A: Arrr, me hearty! Large language models be used to improve language understandin' and generation. Some o' the [...]
 ```

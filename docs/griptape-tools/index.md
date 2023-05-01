@@ -62,7 +62,7 @@ pipeline.add_tasks(
         tool_names=[scraper.name]
     ),
     PromptTask(
-        "Say the following like a pirate: {{ input }}"
+        "Say the following like a skater: {{ input }}"
     )
 )
 
@@ -76,5 +76,13 @@ You should see a final result similar to the following:
 ```
 Q: Give me a summary of https://en.wikipedia.org/wiki/Large_language_model
 [chain of thought output... will vary depending on the model driver you're using]
-A: Arrr, me hearty! Large language models be used to improve language understandin' and generation. Some o' the [...]
+A: Dude, like, large language models are, like, developed by all these rad 
+organizations and researchers, ya know? Some gnarly models include Amazon Science's 
+20B-parameter Alexa model for few-shot learning, Facebook's 65-billion-parameter 
+LLaMA model, Stanford CRFM's Alpaca model, OpenAI's GPT-4 model, Cerebras' 
+Cerebras-GPT model, TII's ChatGPT model, and BloombergGPT's language 
+model for finance, man. Ren and the crew also dropped the PanGu-Σ model for 
+trillion parameter language modeling with sparse heterogeneous computing, 
+which is sick! These models have been shreddin' it for solving quantitative 
+reasoning problems, science, and other rad applications, bro.
 ```

@@ -17,12 +17,12 @@ This documentation covers the fundamentals of the **griptape** framework and des
 
 ## griptape-tools
 
-**griptape-tools** is an official collection of tools built for **griptape**. You can run Griptape tools in **griptape**, [LangChain](https://github.com/hwchase17/langchain), or as [ChatGPT Plugins](https://platform.openai.com/docs/plugins/introduction). Griptape tools are a great way to start using Griptape to see how easy it can be to build applications that extend the capabilities of LLMs. If you have an OPEN AI API KEY, you can be up and running in a few minutes with Griptape using our [QuickStart Guide](griptape-tools/index.md).
+**griptape-tools** is an official collection of tools built for **griptape**. You can run Griptape tools in **griptape**, [LangChain](https://github.com/hwchase17/langchain), or as [ChatGPT Plugins](https://platform.openai.com/docs/plugins/introduction). Griptape tools are a great way to start using Griptape to see how easy it can be to build applications that extend the capabilities of LLMs. If you have an OpenAI API key, you can be up and running in a few minutes with Griptape using our [QuickStart Guide](griptape-tools/index.md).
 
 | Tool                                                          | Description                          |  
 |---------------------------------------------------------------| ------------------------------------ |
 | [AWS CLI](griptape-tools/official-tools/aws-cli.md)           | This tool allows the LLM to invoke AWS CLI commands restricted by a policy. |
-| [Calculator](griptape-tools/official-tools/calculator.md)     | An exmaple of a simple tool that the LLM can use for basic mathematical calculations.  | 
+| [Calculator](griptape-tools/official-tools/calculator.md)     | An example of a simple tool that the LLM can use for basic mathematical calculations.  | 
 | [Email Client](griptape-tools/official-tools/email-client.md) | The EmailClient tool gives the LLM access to send emails using SMTP or search a mailbox using IMAP |
 | [SQL Client](griptape-tools/official-tools/sql-client.md)     | The SQL Client tool gives the LLM access to execute SQL queries on a give DB or `engine` |
 | [Web Search](griptape-tools/official-tools/web-search.md)     | The Web Seach tools allows the LLM to make search engine queries to forumate better output |

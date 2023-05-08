@@ -27,5 +27,6 @@ This documentation covers the fundamentals of the **griptape** framework and des
 | [SQL Client](griptape-tools/official-tools/sql-client.md)     | The SQL Client tool gives the LLM access to execute SQL queries on a give DB or `engine` |
 | [Web Search](griptape-tools/official-tools/web-search.md)     | The Web Seach tools allows the LLM to make search engine queries to forumate better output |
 | [Web Scraper](griptape-tools/official-tools/web-scraper.md)   | The Web Scraper tool gives the LLM access to scrape a webpage for things like the title, the full page, or keyword searches within the page |
+| [REST API](griptape-tools/official-tools/rest-api.md)         | The REST API tool gives the LLM the ability to invoke REST APIs |
 
 [Learn more about griptape tools →](griptape-tools/)

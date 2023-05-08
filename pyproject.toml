@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "griptape-docs"
+version = "0.1.0"
+description = ""
+authors = ["Griptape <hello@griptape.ai>"]
+license = "Apache 2.0"
+readme = "README.md"
+packages = [{include = "griptape_docs"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+
+[tool.poetry.group.dev.dependencies]
+mkdocs = "^1.4.3"
+mkdocs-material = "^9.1.11"
+mkdocs-glightbox = "^0.3.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

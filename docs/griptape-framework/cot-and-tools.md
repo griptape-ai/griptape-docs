@@ -7,7 +7,6 @@ The most powerful feature of **griptape** is the ability of workflow tasks to ge
 Here is an example on how to use tools:
 
 ```python
-from decouple import config
 from griptape.tools import WebScraper, Calculator
 from griptape.drivers import OpenAiPromptDriver
 from griptape.memory import Memory
@@ -16,9 +15,7 @@ from griptape.structures import Pipeline
 from griptape.core import ToolLoader
 
 
-scraper = WebScraper(
-    openai_api_key=config("OPENAI_API_KEY")
-)
+scraper = WebScraper()
 calculator = Calculator()
 
 pipeline = Pipeline(

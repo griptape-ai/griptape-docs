@@ -19,7 +19,6 @@ The following example is built using [https://jsonplaceholder.typicode.com/guide
   
 ```python
 from json import dumps
-import logging
 from griptape.drivers import MemoryStorageDriver, OpenAiPromptDriver
 from griptape.memory import Memory
 from griptape.ramps import StorageRamp

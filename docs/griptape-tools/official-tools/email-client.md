@@ -31,11 +31,11 @@ When retrieving emails (IMAP) the **EmailClient** uses the following parameters:
 
 ```python
 email_client = EmailClient(
-    host=config("SMTP_HOST"),
-    port=config("SMTP_PORT"),
-    password=config("SMTP_PASSWORD"),
-    from_email=config("FROM_EMAIL"),
-    use_ssl=config("SMTP_USE_SSL", cast=bool)
+    host=os.environ.get("SMTP_HOST"),
+    port=os.environ.get("SMTP_PORT"),
+    password=os.environ.get("SMTP_PASSWORD"),
+    from_email=os.environ.get("FROM_EMAIL"),
+    use_ssl=os.environ.get("SMTP_USE_SSL", cast=bool)
 )
 ```
 

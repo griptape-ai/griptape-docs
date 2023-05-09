@@ -26,7 +26,6 @@ Here are some things you can try:
 
 ```python
 import json
-from decouple import config
 from griptape.tools import AwsCli
 from griptape.memory import Memory
 from griptape.tasks import ToolkitTask
@@ -35,8 +34,8 @@ from griptape.core import ToolLoader
 from griptape.drivers import OpenAiPromptDriver
 
 aws_cli = AwsCli(
-    aws_access_key_id=config("AWS_ACCESS_KEY_ID"),
-    aws_secret_access_key=config("AWS_SECRET_ACCESS_KEY"),
+    aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
+    aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY"),
     aws_cli_policy="""{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":"*","Resource":"*"}]}"""
 )
 

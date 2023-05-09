@@ -10,18 +10,14 @@ Tasks in the workflow have access to the following `context` variables:
 Using agents is similar to pipelines:
 
 ```python
-from decouple import config
 from griptape.tools import WebScraper
-from griptape import utils
 from griptape.drivers import OpenAiPromptDriver
 from griptape.memory import Memory
 from griptape.tasks import PromptTask, ToolkitTask
 from griptape.structures import Agent
 from griptape.core import ToolLoader
 
-scraper = WebScraper(
-    openai_api_key=config("OPENAI_API_KEY")
-)
+scraper = WebScraper()
 
 agent = Agent(
     task=ToolkitTask(

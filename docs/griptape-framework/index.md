@@ -30,9 +30,7 @@ from griptape.structures import Pipeline
 from griptape.core import ToolLoader
 
 
-scraper = WebScraper(
-    openai_api_key=config("OPENAI_API_KEY")
-)
+scraper = WebScraper()
 
 pipeline = Pipeline(
     memory=Memory(),

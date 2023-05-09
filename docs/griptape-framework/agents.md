@@ -11,7 +11,7 @@ Using agents is similar to pipelines:
 
 ```python
 from griptape.tools import WebScraper
-from griptape.drivers import OpenAiPromptDriver
+from griptape.drivers import OpenAiPromptDriver, MemoryStorageDriver
 from griptape.memory import Memory
 from griptape.ramps import StorageRamp
 from griptape.tasks import PromptTask, ToolkitTask

@@ -2,117 +2,101 @@
 
 1. 🤖 Build **AI agents**, sequential **LLM pipelines** and sprawling **DAG workflows** for complex use cases.
 2. ⛓️ Augment LLMs with **chain of thought** capabilities.
-3. 🧰️ Integrate other services and functionality into LLMs as [tools](https://github.com/griptape-ai/griptape-tools) (e.g., calculators, web scrapers, spreadsheet editors, and API connectors); run tools in any environment (local, containerized, cloud, etc.); use tools directly in **griptape** or convert them into middleware abstractions, such as ChatGPT Plugins, LangChain tools, or Fixie.ai agents.
+3. 🧰️ Integrate other services and functionality into LLMs as [tools](https://github.com/griptape-ai/griptape-tools) (e.g., calculators, web scrapers, spreadsheet editors, and API connectors); run tools in any environment (local, containerized, cloud, etc.); and wrap tools with off prompt data storage that prevents LLMs from accessing your data directly.
 4. 💾 Add **memory** to AI pipelines for context preservation and summarization.
 
 ## Quick Start
 
-First, install **griptape** and **griptape-tools**:
+First, configure an OpenAI client by [getting an API key](https://beta.openai.com/account/api-keys) and adding it to your environment as `OPENAI_API_KEY`. Griptape uses [OpenAI Completions API](https://platform.openai.com/docs/guides/completion) to execute LLM prompts and to work with [LlamaIndex](https://gpt-index.readthedocs.io/en/latest/index.html) data structures.
+
+### Using pip
+
+Install **griptape** and **griptape-tools**:
 
 ```
 pip install griptape griptape-tools -U
 ```
 
-Second, configure an OpenAI client by [getting an API key](https://beta.openai.com/account/api-keys) and adding it to your environment as `OPENAI_API_KEY`. **griptape** uses [OpenAI Completions API](https://platform.openai.com/docs/guides/completion) to execute LLM prompts and to work with [LlamaIndex](https://gpt-index.readthedocs.io/en/latest/index.html) data structures.
+### Using Poetry
 
-### Building a Pipeline
+To get started with **griptape** using Poetry first create a new poetry project from the terminal: 
 
-With **griptape**, you can create *structures*, such as `Pipelines` and `Workflows`, that are composed of different types of tasks. You can also define structures as JSON objects and load them into **griptape** dynamically. Let's define a simple two-task pipeline that uses tools:
+```
+% poetry new griptape-quickstart
+Created package griptape_quickstart in griptape-quickstart
+```
+
+If you're using PyCharm, open the directory, and you'll be prompted to setup the Poetry environment.:
+
+![Poetry Setup](../assets/tools/poetry_setup.png)
+
+Add `griptape = "*"` to your **pyproject.yml** file. You should notice PyCharm asking if it should run `poetry update`. The answer is yes:
+
+![TOML](../assets/tools/toml.png)
+
+### Build a Simple Pipeline
+
+With **griptape**, you can create *structures*, such as `Agents`, `Pipelines`, and `Workflows`, that are composed of different types of tasks. You can also define structures as JSON objects and load them into **griptape** dynamically. Let's define a simple two-task pipeline that uses tools and ramps:
 
 ```python
-from decouple import config
-from griptape.tools import WebScraper
-from griptape import utils
-from griptape.drivers import OpenAiPromptDriver
 from griptape.memory import Memory
-from griptape.tasks import PromptTask, ToolkitTask
+from griptape.ramps import TextStorageRamp, BlobStorageRamp
 from griptape.structures import Pipeline
-from griptape.core import ToolLoader
+from griptape.tasks import ToolkitTask, PromptTask
+from griptape.tools import WebScraper, TextProcessor, FileManager
 
+# Ramps enable LLMs to store and manipulate data without ever looking at it directly.
+text_storage = TextStorageRamp()
+blob_storage = BlobStorageRamp()
 
-scraper = WebScraper()
+# Connect a web scraper to load web pages.
+web_scraper = WebScraper(
+    ramps={
+        "get_content": [text_storage]
+    }
+)
 
+# TextProcessor enables LLMs to summarize and query text.
+text_processor = TextProcessor(
+    ramps={
+        "summarize": [text_storage],
+        "query": [text_storage]
+    }
+)
+
+# File manager can load and store files locally.
+file_manager = FileManager(
+    ramps={
+        "load": [blob_storage],
+        "save": [text_storage, blob_storage]
+    }
+)
+
+# Pipelines represent sequences of tasks.
 pipeline = Pipeline(
-    memory=Memory(),
-    prompt_driver=OpenAiPromptDriver(
-        model="gpt-4"
-    ),
-    tool_loader=ToolLoader(
-        tools=[scraper]
-    )
+    memory=Memory()
 )
 
 pipeline.add_tasks(
+    # Load up the first argument from `pipeline.run`.
     ToolkitTask(
-        tool_names=[scraper.name]
+        "{{ args[0] }}",
+        tools=[web_scraper, text_processor, file_manager]
     ),
+    # Augment `input` from the previous task.
     PromptTask(
-        "Say the following like a pirate: {{ input }}"
+        "Say the following in spanish: {{ input }}"
     )
 )
 
-pipeline.run("Give me a summary of https://en.wikipedia.org/wiki/Large_language_model")
+result = pipeline.run("Load https://griptape.readthedocs.io, summarize it, and store it in griptape.txt")
 
-print(utils.Conversation(pipeline.memory).to_string())
+print(result.output.to_text())
 ```
 
-Boom! Our first conversation, à la ChatGPT, is here:
+Boom! Our first LLM pipeline with two sequential tasks generated the following exchange:
 
-> Q: Give me a summary of https://en.wikipedia.org/wiki/Large_language_model  
-> A: Arr, me hearties! Large language models have been developed and set sail since 2018, includin' BERT, GPT-2, GPT-3 [...]
-
-### Using Tools
-
-First, initialize an executor and some tools:
-
-```python
-from griptape.converters import LangchainToolConverter, ChatgptPluginConverter
-from griptape.executors import LocalExecutor
-from griptape.tools import (
-    Calculator, WebSearch
-)
-
-tool_executor = LocalExecutor()
-
-google_search = WebSearch(
-    api_search_key="<search key>",
-    api_search_id="<search ID>"
-)
-calculator = Calculator()
 ```
-
-You can execute tool activities directly:
-
-```python
-tool_executor.execute(calculator.calculate, "42**42".encode())
+Q: Load https://griptape.readthedocs.io, summarize it, and store it in griptape.txt
+A: El contenido de https://griptape.readthedocs.io ha sido resumido y almacenado en griptape.txt.
 ```
-
-Convert tool activities into LangChain tools:
-
-```python
-agent = initialize_agent(
-    [
-        LangchainToolConverter(executor=tool_executor).generate_tool(google_search.search),
-        LangchainToolConverter(executor=tool_executor).generate_tool(calculator.calculate)
-    ],
-    OpenAI(temperature=0.5, model_name="text-davinci-003"),
-    agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-    verbose=True
-)
-
-agent.run("What is 42^42?")
-```
-
-Or generate and run a ChatGPT Plugin:
-
-```python
-app = ChatgptPluginConverter(
-    host="localhost:8000",
-    path_prefix="/search-tool/",
-    executor=tool_executor
-).generate_api(google_search)
-
-# run with `uvicorn app:app --reload`
-```
-
-Explore more official Griptape tools in the [griptape-tools repo](https://github.com/griptape-ai/griptape-tools).

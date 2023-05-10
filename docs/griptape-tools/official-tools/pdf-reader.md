@@ -7,24 +7,16 @@ from griptape.tools import PdfReader
 from griptape.memory import Memory
 from griptape.tasks import ToolkitTask
 from griptape.structures import Pipeline
-from griptape.core import ToolLoader
-from griptape.drivers import OpenAiPromptDriver
 
 pdf_reader = PdfReader("https://github.com/griptape-ai/griptape-tools/blob/fccf9d1a34d8b6adc04773d048d8a0463b725418/tests/unit/bitcoin.pdf")
 
 pipeline = Pipeline(
-    memory=Memory(),
-    prompt_driver=OpenAiPromptDriver(
-        model="gpt-4"
-    ),
-    tool_loader=ToolLoader(
-        tools=[pdf_reader]
-    )
+    memory=Memory()
 )
 
 pipeline.add_tasks(
     ToolkitTask(
-        tool_names=[pdf_reader.name]
+        tools=[pdf_reader]
     )
 )
 

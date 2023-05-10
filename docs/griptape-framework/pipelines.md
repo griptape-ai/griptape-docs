@@ -40,34 +40,28 @@ Boom! Our first conversation, à la ChatGPT, is here:
 You can dynamically pass arguments to the prompt by using Jinja templates:
 
 ```python
-PromptTask("tell me about {{ topic }}", context={"topic": "the lord of the rings"})
+PromptTask(
+    "tell me about {{ topic }}",
+    context={"topic": "the lord of the rings"}
+)
 ```
 
 In addition to user-defined fields, the `context` object contains the following:
 
 In `Pipeline` structures:
+
 - `args`: arguments passed to the `Construct.run()` method.
 - `input`: input from the parent.
 - `structure`: the structure that the task belongs to.
 - `parent`: parent task.
 - `child`: child task.
 
+## Prompt Drivers
+
 **griptape** uses OpenAI's `gpt-3.5-turbo` model by default. If you want to use a different model, set a custom OpenAI prompt driver:
 
 ```python
 Pipeline(
-    prompt_driver=OpenAiPromptDriver(
-        model="gpt-4"
-    )
-)
-```
-
-## Prompt Drivers
-
-You can specify a custom `prompt_driver` for pipelines and workflows (e.g., to specify a different model):
-
-```python
-pipeline = Pipeline(
     prompt_driver=OpenAiPromptDriver(
         model="gpt-4"
     )

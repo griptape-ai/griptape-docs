@@ -25,13 +25,10 @@ Here are some things you can try:
   * "what was my aws bill like the last few months?" - remember to add the [calculator](calculator.md) tool as well if you want it to roll up any billing summaries
 
 ```python
-import json
 from griptape.tools import AwsCli
 from griptape.memory import Memory
 from griptape.tasks import ToolkitTask
 from griptape.structures import Pipeline
-from griptape.core import ToolLoader
-from griptape.drivers import OpenAiPromptDriver
 
 aws_cli = AwsCli(
     aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
@@ -40,22 +37,16 @@ aws_cli = AwsCli(
 )
 
 pipeline = Pipeline(
-    memory=Memory(),
-    prompt_driver=OpenAiPromptDriver(
-        model="gpt-4"
-    ),
-    tool_loader=ToolLoader(
-        tools=[aws_cli]
-    )
+    memory=Memory()
 )
 
 pipeline.add_tasks(
     ToolkitTask(
-        tool_names=[aws_cli.name]
+        tools=[aws_cli]
     )
 )
 
-result = pipeline.run("what S3 buckets do i have?")
+result = pipeline.run("what S3 buckets do I have?")
 print(result.output.value)
 
 ```

@@ -37,22 +37,28 @@ Next, create a `tool.py` file with the following code:
 
 ```python
 import random
+from griptape.artifacts import TextArtifact
 from griptape.core import BaseTool
 from griptape.core.decorators import activity
-from schema import Schema
+from schema import Schema, Literal, Optional
 
 
 class RandomNumberGenerator(BaseTool):
     @activity(config={
             "name": "generate",
             "description": "Can be used to generate random numbers",
-            "schema": Schema(
-                int,
-                description="Number of decimals to round the random number to"
-            )
+            "schema": Schema({
+                Optional(Literal(
+                    "decimals",
+                    description="Number of decimals to round the random number to"
+                )): int
+            })
         })
-    def generate(self, value: bytes) -> str:
-        return str(round(random.random(), int(value.decode())))
+    def generate(self, params: dict) -> TextArtifact:
+        return TextArtifact(
+            str(round(random.random(), params["values"]["decimals"]))
+        )
+
 ```
 
 ## Testing Custom Tools
@@ -61,27 +67,19 @@ Finally, let's test our tool:
 
 ```python
 from griptape.tasks import ToolkitTask
-from griptape.structures import Pipeline
-from griptape.core import ToolLoader
+from griptape.structures import Agent
 from rng_tool.tool import RandomNumberGenerator
-
 
 rng_tool = RandomNumberGenerator()
 
-pipeline = Pipeline(
-    tool_loader=ToolLoader(
+agent = Agent(
+    task=ToolkitTask(
         tools=[rng_tool]
     )
 )
 
-pipeline.add_tasks(
-    ToolkitTask(
-        tool_names=[rng_tool.name]
-    )
-)
-
 print(
-    pipeline.run(
+    agent.run(
         "generate a random number rounded to 5 decimal places"
     ).output.value
 )

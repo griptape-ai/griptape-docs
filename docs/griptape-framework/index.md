@@ -36,7 +36,7 @@ Add `griptape = "*"` to your **pyproject.yml** file. You should notice PyCharm a
 
 ### Build a Simple Pipeline
 
-With **griptape**, you can create *structures*, such as `Agents`, `Pipelines`, and `Workflows`, that are composed of different types of tasks. You can also define structures as JSON objects and load them into **griptape** dynamically. Let's define a simple two-task pipeline that uses tools and ramps:
+With **griptape**, you can create *structures*, such as `Agents`, `Pipelines`, and `Workflows`, that are composed of different types of tasks. Let's define a simple two-task pipeline that uses tools and ramps:
 
 ```python
 from griptape.memory import Memory

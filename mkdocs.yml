@@ -8,6 +8,8 @@ extra:
     provider: google
     property: G-QM8EDPSCB6
   social:
+    - icon: fontawesome/solid/house
+      link: https://www.griptape.ai
     - icon: fontawesome/brands/discord
       link: https://discord.gg/gnWRz88eym
     - icon: fontawesome/brands/github

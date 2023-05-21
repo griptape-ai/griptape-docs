@@ -25,7 +25,7 @@ pipeline.add_tasks(
 pipeline.run("I am Scotty, who are you?")
 pipeline.run("Who am I?")
 
-print(utils.Conversation(pipeline.memory).to_string())
+print(utils.Conversation(pipeline.memory))
 ```
 
 Boom! Our first conversation, à la ChatGPT, is here:

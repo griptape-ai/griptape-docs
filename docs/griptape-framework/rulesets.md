@@ -5,9 +5,8 @@ Here is an example of how to use rulesets:
 ```python
 from griptape import utils
 from griptape.memory import Memory
-from griptape.rules.ruleset import Ruleset
 from griptape.structures import Agent
-from griptape.rules import Rule
+from griptape.rules import Rule, Ruleset
 
 agent = Agent(
     memory=Memory(),

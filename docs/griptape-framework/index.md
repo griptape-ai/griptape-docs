@@ -44,6 +44,8 @@ from griptape.ramps import TextStorageRamp, BlobStorageRamp
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask, PromptTask
 from griptape.tools import WebScraper, TextProcessor, FileManager
+from griptape import utils
+
 
 # Ramps enable LLMs to store and manipulate data without ever looking at it directly.
 text_storage = TextStorageRamp()
@@ -91,12 +93,10 @@ pipeline.add_tasks(
 
 result = pipeline.run("Load https://griptape.readthedocs.io, summarize it, and store it in griptape.txt")
 
-print(result.output.to_text())
+print(utils.Conversation(pipeline.memory))
 ```
 
 Boom! Our first LLM pipeline with two sequential tasks generated the following exchange:
 
-```
-Q: Load https://griptape.readthedocs.io, summarize it, and store it in griptape.txt
-A: El contenido de https://griptape.readthedocs.io ha sido resumido y almacenado en griptape.txt.
-```
+> Q: Load https://griptape.readthedocs.io, summarize it, and store it in griptape.txt  
+> A: El contenido de https://griptape.readthedocs.io ha sido resumido y almacenado en griptape.txt.

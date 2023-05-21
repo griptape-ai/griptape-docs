@@ -68,6 +68,11 @@ nav:
     - Cohere: "griptape-framework/prompt-drivers/cohere.md"
     - Hugging Face Hub: "griptape-framework/prompt-drivers/hugging-face-hub.md"
     - Hugging Face Pipeline: "griptape-framework/prompt-drivers/hugging-face-pipeline.md"
+  - Data:
+    - Overview: "griptape-framework/data/index.md"
+    - Artifacts: "griptape-framework/data/artifacts.md"
+    - Embeddings: "griptape-framework/data/embeddings.md"
+    - Vector Storage: "griptape-framework/data/vector-storage.md"
   - Misc:
     - Memory: "griptape-framework/memory.md"
     - CoT and Tools: "griptape-framework/cot-and-tools.md"
@@ -83,5 +88,6 @@ nav:
       - RestApi: "griptape-tools/official-tools/rest-api.md"
       - SqlClient: "griptape-tools/official-tools/sql-client.md"
       - TextProcessor: "griptape-tools/official-tools/text-processor.md"
+      - VectorStorageClient: "griptape-tools/official-tools/vector-storage-client.md"
       - WebScraper: "griptape-tools/official-tools/web-scraper.md"
       - WebSearch: "griptape-tools/official-tools/web-search.md"

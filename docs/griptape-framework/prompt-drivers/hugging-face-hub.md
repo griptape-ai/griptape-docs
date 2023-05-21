@@ -1,7 +1,7 @@
 This driver connects to the [Hugging Face API](https://huggingface.co/docs/hub/api). It supports models with the following tasks:
 
-- text2text-generation
-- text-generation
+* text2text-generation
+* text-generation
 
 The **HuggingFaceHubPromptDriver** uses the following parameters:
 

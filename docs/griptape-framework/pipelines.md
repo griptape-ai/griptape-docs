@@ -50,11 +50,11 @@ In addition to user-defined fields, the `context` object contains the following:
 
 In `Pipeline` structures:
 
-- `args`: arguments passed to the `Construct.run()` method.
-- `input`: input from the parent.
-- `structure`: the structure that the task belongs to.
-- `parent`: parent task.
-- `child`: child task.
+* `args`: arguments passed to the `Construct.run()` method.
+* `input`: input from the parent.
+* `structure`: the structure that the task belongs to.
+* `parent`: parent task.
+* `child`: child task.
 
 ## Prompt Drivers
 

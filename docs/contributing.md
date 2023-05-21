@@ -32,6 +32,6 @@ INFO     -  [09:28:37] Browser connected: http://127.0.0.1:8000/
 
 Follow the typical PR process to contribute changes. 
 
-- Create a feature branch.
-- Commit changes.
-- Submit a PR.
+* Create a feature branch.
+* Commit changes.
+* Submit a PR.

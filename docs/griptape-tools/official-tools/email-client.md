@@ -6,8 +6,8 @@ The **EmailClient** tool uses the following parameters:
 
 | Parameter      | Description                                                            | Required |
 | ----------- |------------------------------------------------------------------------|----------|
-| `username`  | Used by default for both SMTP and IMAP activities                      | NO* |
-| `password`       | Used by default for both SMTP and IMAP activities                         | NO* |
+| `username`  | Used by default for both SMTP and IMAP activities                      | NO |
+| `password`       | Used by default for both SMTP and IMAP activities                         | NO |
 | `email_max_retrieve_count`    | Used to limit the number of messages retrieved during any given activities | NO |
 
 When sending (SMTP) emails the **EmailClient** uses the following parameters:
@@ -18,7 +18,7 @@ When sending (SMTP) emails the **EmailClient** uses the following parameters:
 | `smtp_port`       | The port name of the SMTP server (465) | YES |
 | `smtp_from_email`    | The `From:` email that should be used when sending emails | YES |
 | `smtp_use_ssl` | Should **EmailClient** use SSL when sending | NO |
-| `smtp_user`       | Setting this will override whatever is set as the username parameter for SMTP activities | NO* |
+| `smtp_user`       | Setting this will override whatever is set as the username parameter for SMTP activities | NO |
 | `smtp_password`    | Setting this will override whatever is set as the username parameter for SMTP activities | NO |
 
 When retrieving emails (IMAP) the **EmailClient** uses the following parameters: 
@@ -26,8 +26,8 @@ When retrieving emails (IMAP) the **EmailClient** uses the following parameters:
 | Parameter      | Description                          | Required |
 | ----------- | ------------------------------------ |----------|
 | `imap_url`  | The hostname or url of the SMTP server (imap.gmail.com)  | YES |
-| `imap_user`       | Setting this will override whatever is set as the username parameter for IMAP activities | NO* |
-| `imap_password`    | Setting this will override whatever is set as the username parameter for IMAP activities | NO* |
+| `imap_user`       | Setting this will override whatever is set as the username parameter for IMAP activities | NO |
+| `imap_password`    | Setting this will override whatever is set as the username parameter for IMAP activities | NO |
 
 ```python
 email_client = EmailClient(

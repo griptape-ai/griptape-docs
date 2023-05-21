@@ -4,11 +4,11 @@ Workflows are non-sequential DAGs that can be used for complex concurrent scenar
 
 Tasks in the workflow have access to the following `context` variables:
 
-- `args`: arguments passed to the `Construct.run()` method.
-- `inputs`: inputs into the current task referencable by parent task IDs.
-- `structure`: the structure that the task belongs to.
-- `parents`: parent tasks referencable by IDs.
-- `children`: child tasks referencable by IDs.
+* `args`: arguments passed to the `Construct.run()` method.
+* `inputs`: inputs into the current task referencable by parent task IDs.
+* `structure`: the structure that the task belongs to.
+* `parents`: parent tasks referencable by IDs.
+* `children`: child tasks referencable by IDs.
 
 Let's build a simple workflow. Let's say, we want to write a story in a fantasy world with some unique characters. We could setup a workflow that generates a world based on some keywords. Then we pass the world description to any number of child tasks that create characters. Finally, the last task pulls in information from all parent tasks and writes up a short story.
 

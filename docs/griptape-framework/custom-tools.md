@@ -1,6 +1,6 @@
 # Custom Tools
 
-Building your own tools is easy with **griptape**!
+Building your own tools is easy with Griptape!
 
 To start, create a directory for your tool inside your project. All tool directories should have the following components:
 
@@ -86,6 +86,6 @@ print(
 
 ```
 
-That's it! You can start using this tool with any converter or directly via **griptape**.
+That's it! You can start using this tool with any converter or directly via Griptape.
 
 Check out other [Griptape tools](https://github.com/griptape-ai/griptape-tools/tree/main/griptape/tools) to learn more about tool implementation details.

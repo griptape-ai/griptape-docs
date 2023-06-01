@@ -1,6 +1,6 @@
 # Prompt Drivers
 
-Prompt drivers are used by **griptape** structures to make calls to the underlying foundation models. **OpenAiPromptDriver** is the default prompt driver used in all structures.
+Prompt drivers are used by Griptape structures to make calls to the underlying foundation models. **OpenAiPromptDriver** is the default prompt driver used in all structures.
 
 You can instantiate drivers and pass them to structures:
 

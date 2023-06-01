@@ -8,7 +8,7 @@ Here is an example on how to use tools:
 
 ```python
 from griptape.tools import WebScraper, Calculator
-from griptape.memory import Memory
+from griptape.memory.structure import ConversationMemory
 from griptape.tasks import PromptTask, ToolkitTask
 from griptape.structures import Pipeline
 
@@ -17,7 +17,7 @@ scraper = WebScraper()
 calculator = Calculator()
 
 pipeline = Pipeline(
-    memory=Memory()
+    memory=ConversationMemory()
 )
 
 pipeline.add_tasks(

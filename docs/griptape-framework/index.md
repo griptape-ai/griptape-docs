@@ -39,7 +39,7 @@ Add `griptape = "*"` to your **pyproject.yml** file. You should notice PyCharm a
 With Griptape, you can create *structures*, such as `Agents`, `Pipelines`, and `Workflows`, that are composed of different types of tasks. Let's define a simple two-task pipeline that uses tools and ramps:
 
 ```python
-from griptape.memory import Memory
+from griptape.memory.structure import ConversationMemory
 from griptape.ramps import TextStorageRamp, BlobStorageRamp
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask, PromptTask
@@ -76,7 +76,7 @@ file_manager = FileManager(
 
 # Pipelines represent sequences of tasks.
 pipeline = Pipeline(
-    memory=Memory()
+    memory=ConversationMemory()
 )
 
 pipeline.add_tasks(

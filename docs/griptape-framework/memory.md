@@ -6,7 +6,7 @@ By default, pipelines don't initialize memory, so you have to explicitly pass it
 
 ```python
 Pipeline(
-    memory=Memory()
+    memory=ConversationMemory()
 )
 ```
 

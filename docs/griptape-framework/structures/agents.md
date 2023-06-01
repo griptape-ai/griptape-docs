@@ -11,7 +11,7 @@ Using agents is similar to pipelines:
 
 ```python
 from griptape.tools import Calculator
-from griptape.memory import Memory
+from griptape.memory.structure import ConversationMemory
 from griptape.tasks import ToolkitTask
 from griptape.structures import Agent
 
@@ -21,7 +21,6 @@ agent = Agent(
     task=ToolkitTask(
         tools=[calculator]
     ),
-    memory=Memory()
 )
 
 agent.run("what's 123^312?")

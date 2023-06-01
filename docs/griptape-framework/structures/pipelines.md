@@ -6,13 +6,13 @@ Here is an example of a pipeline:
 
 ```python
 from griptape import utils
-from griptape.memory import Memory
+from griptape.memory.structure import ConversationMemory
 from griptape.tasks import PromptTask
 from griptape.structures import Pipeline
 
 
 pipeline = Pipeline(
-    memory=Memory()
+    memory=ConversationMemory()
 )
 
 pipeline.add_tasks(

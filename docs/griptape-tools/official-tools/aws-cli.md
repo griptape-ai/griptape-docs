@@ -26,7 +26,7 @@ Here are some things you can try:
 
 ```python
 from griptape.tools import AwsCli
-from griptape.memory import Memory
+from griptape.memory.structure import ConversationMemory
 from griptape.tasks import ToolkitTask
 from griptape.structures import Pipeline
 
@@ -37,7 +37,7 @@ aws_cli = AwsCli(
 )
 
 pipeline = Pipeline(
-    memory=Memory()
+    memory=ConversationMemory()
 )
 
 pipeline.add_tasks(

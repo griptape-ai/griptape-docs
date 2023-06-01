@@ -4,14 +4,14 @@ This tool enables LLMs to read the text content of a PDF.
 
 ```python
 from griptape.tools import PdfReader
-from griptape.memory import Memory
+from griptape.memory.structure import ConversationMemory
 from griptape.tasks import ToolkitTask
 from griptape.structures import Pipeline
 
 pdf_reader = PdfReader("https://github.com/griptape-ai/griptape-tools/blob/fccf9d1a34d8b6adc04773d048d8a0463b725418/tests/unit/bitcoin.pdf")
 
 pipeline = Pipeline(
-    memory=Memory()
+    memory=ConversationMemory()
 )
 
 pipeline.add_tasks(

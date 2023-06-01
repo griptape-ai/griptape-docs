@@ -7,7 +7,7 @@ Griptape ramps are tool wrappers that handle data returned by tool activities. I
 Here is an end-to-end example of how ramps can be used in unison with multiple tools to store and load content:
 
 ```python
-from griptape.memory import Memory
+from griptape.memory.structure import ConversationMemory
 from griptape.ramps import TextStorageRamp, BlobStorageRamp
 from griptape.structures import Agent
 from griptape.tasks import ToolkitTask
@@ -65,7 +65,6 @@ file_manager = FileManager(
 )
 
 agent = Agent(
-    memory=Memory(),
     task=ToolkitTask(
         tools=[web_scraper, text_processor, file_manager]
     )

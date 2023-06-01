@@ -14,7 +14,7 @@ There are two other types of memory: `BufferMemory` and `SummaryMemory`. `Buffer
 
 ```python
 Pipeline(
-    memory=BufferMemory(buffer_size=3)
+    memory=BufferConversationMemory(buffer_size=3)
 )
 ```
 
@@ -22,7 +22,7 @@ This works great for shorter pipelines but fails if the whole workflow context n
 
 ```python
 Pipeline(
-    memory=SummaryMemory(
+    memory=SummaryConversationMemory(
         summarizer=PromptDriverSummarizer(
             driver=OpenAiPromptDriver()
         ),

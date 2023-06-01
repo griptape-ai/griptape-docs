@@ -44,7 +44,6 @@ from schema import Schema, Literal, Optional
 
 class RandomNumberGenerator(BaseTool):
     @activity(config={
-            "name": "generate",
             "description": "Can be used to generate random numbers",
             "schema": Schema({
                 Optional(Literal(

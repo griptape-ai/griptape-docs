@@ -2,7 +2,7 @@
 
 ## TextArtifact
 
-Used for passing text data of arbitrary size around the framework. Can be used to count tokens with `token_count()` with a tokenizer and generate text embeddings with `embedding()` with an embeddings driver.
+Used for passing text data of arbitrary size around the framework. It can be used to count tokens with `token_count()` with a tokenizer. It can also be used to generate a text embedding with `generate_embedding()` and access it with `embedding`.
 
 `TextStorageRamp` automatically stores `TextArtifact`s returned by tool activities and returns artifact IDs back to the LLM.
 

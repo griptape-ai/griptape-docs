@@ -7,7 +7,6 @@ To start, create a directory for your tool inside your project. All tool directo
 * `manifest.yml` with a YAML manifest.
 * `tool.py` file with a tool Python class.
 * `requirements.txt` file with tool Python dependencies.
-* Optional `Dockerfile` if you are using `DockerExecutor` to run your tool, and you want to install custom OS-level packages.
 
 Let's build a simple random number generator tool! First, create a new directory for your tool `rng_tool`. This is where all tool files will go.
 

@@ -65,9 +65,7 @@ file_manager = FileManager(
 )
 
 agent = Agent(
-    task=ToolkitTask(
-        tools=[web_scraper, text_processor, file_manager]
-    )
+    tools=[web_scraper, text_processor, file_manager]
 )
 
 agent.run(

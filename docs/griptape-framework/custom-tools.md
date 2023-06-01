@@ -71,9 +71,7 @@ from rng_tool.tool import RandomNumberGenerator
 rng_tool = RandomNumberGenerator()
 
 agent = Agent(
-    task=ToolkitTask(
-        tools=[rng_tool]
-    )
+    tools=[rng_tool]
 )
 
 print(

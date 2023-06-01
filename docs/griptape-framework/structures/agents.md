@@ -1,6 +1,6 @@
 # Agents
 
-Agents are similar to pipelines, but they only consist of one task.
+Agents are similar to pipelines, but they can only run one task at a time. They take in `tools` and `prompt_template` directly, which the agent uses to dynamically determine whether to use `PromptTask` or `ToolkitTask`.
 
 Tasks in the workflow have access to the following `context` variables:
 
@@ -18,9 +18,7 @@ from griptape.structures import Agent
 calculator = Calculator()
 
 agent = Agent(
-    task=ToolkitTask(
-        tools=[calculator]
-    ),
+    tools=[calculator]
 )
 
 agent.run("what's 123^312?")

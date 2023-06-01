@@ -33,12 +33,7 @@ pinecone = VectorStorageClient(
 )
 
 agent = Agent(
-    prompt_driver=OpenAiPromptDriver(
-        model="gpt-4"
-    ),
-    task=ToolkitTask(
-        tools=[pinecone]
-    )
+    tools=[pinecone]
 )
 
 agent.run(

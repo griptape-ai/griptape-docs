@@ -87,7 +87,7 @@ nav:
       - EmailClient: "griptape-tools/official-tools/email-client.md"
       - FileManager: "griptape-tools/official-tools/file-manager.md"
       - PdfReader: "griptape-tools/official-tools/pdf-reader.md"
-      - RestApi: "griptape-tools/official-tools/rest-api.md"
+      - RestApiClient: "griptape-tools/official-tools/rest-api-client.md"
       - SqlClient: "griptape-tools/official-tools/sql-client.md"
       - TextProcessor: "griptape-tools/official-tools/text-processor.md"
       - VectorStorageClient: "griptape-tools/official-tools/vector-storage-client.md"

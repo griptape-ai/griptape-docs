@@ -1,8 +1,8 @@
-# RestApi
+# RestApiClient
 
 This tool enables LLMs to call REST APIs.
 
-The **RestApi** tool uses the following parameters: 
+The **RestApiClient** tool uses the following parameters: 
 
 | Parameter      | Description                          | Required |
 | ----------- | ------------------------------------ |----------|
@@ -23,11 +23,11 @@ from griptape.drivers import MemoryStorageDriver, OpenAiPromptDriver
 from griptape.memory.structure import ConversationMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask
-from griptape.tools import RestApi
+from griptape.tools import RestApiClient
 
 storage = TextStorageRamp()
 
-posts_client = RestApi(
+posts_client = RestApiClient(
     base_url="https://jsonplaceholder.typicode.com",
     path="posts",
     description="Allows for creating, updating, deleting, patching, and getting posts.",

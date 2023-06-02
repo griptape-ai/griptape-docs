@@ -2,9 +2,9 @@ Tool memory augments activity inputs and outputs with storage capabilities. It's
 
 * **Security requirements**: many organizations don't want data to leave their cloud for regulatory and security reasons.
 * **Long textual content**: when textual content returned by tools can't fit in the token limit, it's often useful to perform operations on it in a separate process, not in the main LLM.
-* **Non-textual content**: tools can generate images, videos, PDFs, and other non-textual content that can be stored in ramps and acted upon later by other tools.
+* **Non-textual content**: tools can generate images, videos, PDFs, and other non-textual content that can be stored in memory and acted upon later by other tools.
 
-Here is an end-to-end example of how ramps can be used in unison with multiple tools to store and load content:
+Here is an end-to-end example of how memory can be used in unison with multiple tools to store and load content:
 
 ```python
 from griptape.memory.tool import TextToolMemory, BlobToolMemory

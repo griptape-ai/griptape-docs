@@ -21,7 +21,6 @@ The following example is built using [https://jsonplaceholder.typicode.com/guide
 from json import dumps
 from griptape.drivers import MemoryStorageDriver, OpenAiPromptDriver
 from griptape.memory.structure import ConversationMemory
-from griptape.ramps import TextStorageRamp
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask
 from griptape.tools import RestApi
@@ -31,13 +30,6 @@ storage = TextStorageRamp()
 posts_client = RestApi(
     base_url="https://jsonplaceholder.typicode.com",
     path="posts",
-    ramps={
-        'get': [storage],
-        'post': [storage],
-        'put': [storage],
-        'patch': [storage],
-        'delete': [storage],
-    },
     description="Allows for creating, updating, deleting, patching, and getting posts.",
     request_body_schema=dumps(
         {

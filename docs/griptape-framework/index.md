@@ -36,41 +36,51 @@ Add `griptape = "*"` to your **pyproject.yml** file. You should notice PyCharm a
 
 ### Build a Simple Pipeline
 
-With Griptape, you can create *structures*, such as `Agents`, `Pipelines`, and `Workflows`, that are composed of different types of tasks. Let's define a simple two-task pipeline that uses tools and ramps:
+With Griptape, you can create *structures*, such as `Agents`, `Pipelines`, and `Workflows`, that are composed of different types of tasks. Let's define a simple two-task pipeline that uses tools and memory:
 
 ```python
 from griptape.memory.structure import ConversationMemory
-from griptape.ramps import TextStorageRamp, BlobStorageRamp
+from griptape.memory.tool import TextToolMemory, BlobToolMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask, PromptTask
 from griptape.tools import WebScraper, TextProcessor, FileManager
 from griptape import utils
 
-
-# Ramps enable LLMs to store and manipulate data without ever looking at it directly.
-text_storage = TextStorageRamp()
-blob_storage = BlobStorageRamp()
+# Tool memory enables LLMs to store and manipulate data
+# without ever looking at it directly.
+text_tool_memory = TextToolMemory()
+blob_tool_memory = BlobToolMemory()
 
 # Connect a web scraper to load web pages.
 web_scraper = WebScraper(
-    ramps={
-        "get_content": [text_storage]
+    memory={
+        "get_content": {
+            "output": [text_tool_memory]
+        }
     }
 )
 
 # TextProcessor enables LLMs to summarize and query text.
 text_processor = TextProcessor(
-    ramps={
-        "summarize": [text_storage],
-        "query": [text_storage]
+    memory={
+        "summarize": {
+            "input": [text_tool_memory]
+        },
+        "query": {
+            "input": [text_tool_memory]
+        }
     }
 )
 
 # File manager can load and store files locally.
 file_manager = FileManager(
-    ramps={
-        "load": [blob_storage],
-        "save": [text_storage, blob_storage]
+    memory={
+        "load": {
+            "output": [blob_tool_memory]
+        },
+        "save": {
+            "input": [text_tool_memory, blob_tool_memory]
+        }
     }
 )
 
@@ -91,9 +101,13 @@ pipeline.add_tasks(
     )
 )
 
-result = pipeline.run("Load https://griptape.readthedocs.io, summarize it, and store it in griptape.txt")
+result = pipeline.run(
+    "Load https://www.griptape.ai, summarize it, and store it in griptape.txt"
+)
 
-print(utils.Conversation(pipeline.memory))
+print(
+    utils.Conversation(pipeline.memory)
+)
 ```
 
 Boom! Our first LLM pipeline with two sequential tasks generated the following exchange:

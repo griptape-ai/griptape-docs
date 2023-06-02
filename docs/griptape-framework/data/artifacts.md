@@ -1,4 +1,4 @@
-**Artifacts** are used for passing different types of data between Griptape components. All tools return artifacts that are later consumed by tasks and ramps. Artifacts make sure framework components enforce contracts when passing and consuming data.
+**Artifacts** are used for passing different types of data between Griptape components. All tools return artifacts that are later consumed by tasks and tool memory. Artifacts make sure framework components enforce contracts when passing and consuming data.
 
 ## TextArtifact
 
@@ -8,11 +8,11 @@ Used for passing text data of arbitrary size around the framework. It can be use
 
 ## InfoArtifact
 
-Used for passing short notifications back to the LLM without ramps modifying them.
+Used for passing short notifications back to the LLM without tool memory storing them.
 
 ## ErrorArtifact
 
-Used for passing errors back to the LLM without ramps modifying them.
+Used for passing errors back to the LLM without tool memory storing them.
 
 ## BlobArtifact
 

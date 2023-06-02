@@ -64,21 +64,21 @@ nav:
     - Workflows: "griptape-framework/structures/workflows.md"
     - Conversation Memory: "griptape-framework/structures/conversation-memory.md"
     - Rulesets: "griptape-framework/structures/rulesets.md"
+  - Tools:
+      - Overview: "griptape-framework/tools/index.md"
+      - Tool Memory: "griptape-framework/tools/tool-memory.md"
+      - Building Custom Tools: "griptape-framework/tools/custom-tools.md"
+  - Data:
+    - Overview: "griptape-framework/data/index.md"
+    - Artifacts: "griptape-framework/data/artifacts.md"
+    - Embeddings: "griptape-framework/data/embeddings.md"
+    - Vector Storage: "griptape-framework/data/vector-storage.md"
   - Prompt Drivers:
     - Overview: "griptape-framework/prompt-drivers/index.md"
     - OpenAI: "griptape-framework/prompt-drivers/openai.md"
     - Cohere: "griptape-framework/prompt-drivers/cohere.md"
     - Hugging Face Hub: "griptape-framework/prompt-drivers/hugging-face-hub.md"
     - Hugging Face Pipeline: "griptape-framework/prompt-drivers/hugging-face-pipeline.md"
-  - Data:
-    - Overview: "griptape-framework/data/index.md"
-    - Artifacts: "griptape-framework/data/artifacts.md"
-    - Embeddings: "griptape-framework/data/embeddings.md"
-    - Vector Storage: "griptape-framework/data/vector-storage.md"
-  - Misc:
-    - CoT and Tools: "griptape-framework/cot-and-tools.md"
-    - Ramps: "griptape-framework/ramps.md"
-    - Building Custom Tools: "griptape-framework/custom-tools.md"
 - Griptape Tools:
     - Overview: "griptape-tools/index.md"
     - Official Tools:

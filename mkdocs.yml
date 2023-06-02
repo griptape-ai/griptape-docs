@@ -72,6 +72,9 @@ nav:
     - Overview: "griptape-framework/data/index.md"
     - Artifacts: "griptape-framework/data/artifacts.md"
     - Embeddings: "griptape-framework/data/embeddings.md"
+    - Chunkers: "griptape-framework/data/chunkers.md"
+    - Loaders: "griptape-framework/data/loaders.md"
+    - Query Engines: "griptape-framework/data/query-engines.md"
     - Vector Storage: "griptape-framework/data/vector-storage.md"
   - Prompt Drivers:
     - Overview: "griptape-framework/prompt-drivers/index.md"

@@ -59,3 +59,7 @@ vector_driver.query(
     namespace="supermarket-products"
 )
 ```
+
+## MemoryVectorStorageDriver
+
+Can be used to load and query data from memory.

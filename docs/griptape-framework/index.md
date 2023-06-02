@@ -1,9 +1,6 @@
-Griptape is a modular Python framework for LLM workflows, tools, memory, and data that enables developers to:
+**Griptape** offers developers the ability to build AI systems that operate across two dimensions: predictability and creativity.
 
-1. 🤖 Build **AI agents**, sequential **LLM pipelines** and sprawling **DAG workflows** for complex use cases.
-2. ⛓️ Augment LLMs with **chain of thought** capabilities.
-3. 🧰️ Integrate other services and functionality into LLMs as [tools](https://github.com/griptape-ai/griptape-tools) (e.g., calculators, web scrapers, spreadsheet editors, and API connectors); run tools in any environment (local, containerized, cloud, etc.); and wrap tools with off prompt data storage that prevents LLMs from accessing your data directly.
-4. 💾 Add **memory** to AI pipelines for context preservation and summarization.
+For **predictability**, software structures like sequential pipelines and directed acyclic graphs (DAGs) are enforced. **Creativity**, on the other hand, is facilitated by safely prompting LLMs with [tools](https://github.com/griptape-ai/griptape-tools) that connect to external APIs and data sources. Developers can move between these two dimensions according to their use case.
 
 ## Quick Start
 
@@ -22,8 +19,7 @@ pip install griptape griptape-tools -U
 To get started with Griptape using Poetry first create a new poetry project from the terminal: 
 
 ```
-% poetry new griptape-quickstart
-Created package griptape_quickstart in griptape-quickstart
+poetry new griptape-quickstart
 ```
 
 If you're using PyCharm, open the directory, and you'll be prompted to setup the Poetry environment.:

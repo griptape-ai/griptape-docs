@@ -62,6 +62,8 @@ nav:
     - Pipelines: "griptape-framework/structures/pipelines.md"
     - Agents: "griptape-framework/structures/agents.md"
     - Workflows: "griptape-framework/structures/workflows.md"
+    - Conversation Memory: "griptape-framework/structures/conversation-memory.md"
+    - Rulesets: "griptape-framework/structures/rulesets.md"
   - Prompt Drivers:
     - Overview: "griptape-framework/prompt-drivers/index.md"
     - OpenAI: "griptape-framework/prompt-drivers/openai.md"
@@ -74,8 +76,6 @@ nav:
     - Embeddings: "griptape-framework/data/embeddings.md"
     - Vector Storage: "griptape-framework/data/vector-storage.md"
   - Misc:
-    - Memory: "griptape-framework/memory.md"
-    - Rulesets: "griptape-framework/rulesets.md"
     - CoT and Tools: "griptape-framework/cot-and-tools.md"
     - Ramps: "griptape-framework/ramps.md"
     - Building Custom Tools: "griptape-framework/custom-tools.md"

@@ -1,6 +1,6 @@
-# Memory
+# Conversation Memory
 
-Griptape supports different types of memory for pipelines. Due to the non-linear nature of workflows you can't use memory with them yet, but we are currently investigating other possibilities.
+Griptape supports different types of conversation memory for pipelines and agents.
 
 By default, pipelines don't initialize memory, so you have to explicitly pass it to them:
 
@@ -10,7 +10,7 @@ Pipeline(
 )
 ```
 
-There are two other types of memory: `BufferMemory` and `SummaryMemory`. `BufferMemory` will keep a sliding window of tasks that are used to construct a prompt:
+There are two other types of memory: `BufferConversationMemory` and `SummaryConversationMemory`. `BufferConversationMemory` will keep a sliding window of tasks that are used to construct a prompt:
 
 ```python
 Pipeline(
@@ -18,7 +18,7 @@ Pipeline(
 )
 ```
 
-This works great for shorter pipelines but fails if the whole workflow context needs to be present. You can use `SummaryMemory` to address that:
+This works great for shorter pipelines but fails if the whole workflow context needs to be present. You can use `SummaryConversationMemory` to address that:
 
 ```python
 Pipeline(
@@ -33,7 +33,7 @@ Pipeline(
 
 This will progressively summarize the whole pipeline except for the last two tasks.
 
-Finally, you can persist memory by using memory drivers. Griptape comes with one memory driver for automatically storing memory in a file on the disk. Here is how you can initialize memory with a driver:
+Finally, you can persist memory by using memory drivers. Griptape comes with one memory driver for automatically storing memory on disk. Here is how you can initialize memory with a driver:
 
 ```python
 Memory(

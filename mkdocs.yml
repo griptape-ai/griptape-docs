@@ -4,7 +4,7 @@ plugins:
   - search
 copyright: "&copy; Griptape, Inc."
 extra_css:
-  - stylesheets/extra.css
+  - assets/css/extra.css
 extra:
   analytics:
     provider: google
@@ -21,7 +21,7 @@ extra:
 theme:
     name: material
     custom_dir: docs/overrides
-    logo: assets/griptape-logo.png
+    logo: assets/img/griptape-logo.png
     palette:
       # Palette toggle for light mode
     - scheme: default
@@ -92,3 +92,8 @@ nav:
       - VectorClient: "griptape-tools/official-tools/vector-client.md"
       - WebScraper: "griptape-tools/official-tools/web-scraper.md"
       - WebSearch: "griptape-tools/official-tools/web-search.md"
+- Examples:
+    - Overview: "examples/index.md"
+    - Physics Tutor: "examples/physics-tutor.md"
+    - Load and Query Pinecone: "examples/load-and-query-pinecone.md"
+    - Query a Webpage: "examples/query-webpage.md"

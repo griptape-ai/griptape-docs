@@ -24,11 +24,11 @@ poetry new griptape-quickstart
 
 If you're using PyCharm, open the directory, and you'll be prompted to setup the Poetry environment.:
 
-![Poetry Setup](../assets/tools/poetry_setup.png)
+![Poetry Setup](../assets/img/tools/poetry_setup.png)
 
 Add `griptape = "*"` to your **pyproject.yml** file. You should notice PyCharm asking if it should run `poetry update`. The answer is yes:
 
-![TOML](../assets/tools/toml.png)
+![TOML](../assets/img/tools/toml.png)
 
 ### Build a Simple Pipeline
 

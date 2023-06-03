@@ -1,8 +1,8 @@
 Griptape provides a way to build drivers for vector DBs where embeddings can be stored and queried. Every vector storage driver implements the following methods:
 
-* `insert_text_artifact()` for inserting `TextArtifact` values into vector DBs. The method will automatically generate embeddings for a given value.
-* `insert_text()` for inserting arbitrary string values into vector DBs. The method will automatically generate embeddings for a given value.
-* `insert_vector()` for inserting vectors directly.
+* `upsert_text_artifact()` for updating and inserting new `TextArtifact` values into vector DBs. The method will automatically generate embeddings for a given value.
+* `upsert_text()` for updating and inserting new arbitrary strings into vector DBs. The method will automatically generate embeddings for a given value.
+* `upsert_vector()` for updating and inserting new vectors directly.
 * `query()` for querying vector DBs.
 
 Each vector storage driver takes a `BaseEmbeddingDriver` used to dynamically generate embeddings for strings.
@@ -20,7 +20,7 @@ from griptape.loaders import WebLoader
 vector_driver = MemoryVectorStorageDriver()
 artifacts = WebLoader(max_tokens=100).load("https://www.griptape.ai")
 
-[vector_driver.insert_text_artifact(a, namespace="griptape") for a in artifacts]
+[vector_driver.upsert_text_artifact(a, namespace="griptape") for a in artifacts]
 
 results = vector_driver.query(
     "creativity",
@@ -54,7 +54,7 @@ def load_data(driver: PineconeVectorStorageDriver) -> None:
     )
 
     for product in json.loads(response.read()):
-        driver.insert_text(
+        driver.upsert_text(
             product["description"],
             vector_id=hashlib.md5(product["title"].encode()).hexdigest(),
             meta={

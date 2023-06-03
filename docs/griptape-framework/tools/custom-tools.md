@@ -24,11 +24,7 @@ legal_info_url: https://www.griptape.ai/legal
 
 ## Tool Dependencies
 
-To add Python dependencies for your tool, add a `requirements.txt` file:
-
-```
-griptape
-```
+To add Python dependencies for your tool, add a `requirements.txt` file. The tool we are building is pretty simple, so you can leave that file empty.
 
 ## Tool Implementation
 

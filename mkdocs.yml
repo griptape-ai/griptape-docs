@@ -3,6 +3,8 @@ plugins:
   - glightbox
   - search
 copyright: "&copy; Griptape, Inc."
+extra_css:
+  - stylesheets/extra.css
 extra:
   analytics:
     provider: google
@@ -39,7 +41,6 @@ theme:
         - navigation.sections
         - navigation.expand
         - navigation.top
-        - navigation.footer
         - announce.dismiss
 markdown_extensions:
   - pymdownx.highlight:

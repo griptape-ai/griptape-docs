@@ -7,6 +7,32 @@ Griptape provides a way to build drivers for vector DBs where embeddings can be 
 
 Each vector storage driver takes a `BaseEmbeddingDriver` used to dynamically generate embeddings for strings.
 
+## MemoryVectorStorageDriver
+
+This driver can be used to load and query data from memory. Here is a complete example of how the driver can be used to load a webpage into the driver and query it later:
+
+```python
+from griptape.artifacts import BaseArtifact
+from griptape.drivers import MemoryVectorStorageDriver
+from griptape.loaders import WebLoader
+
+
+vector_driver = MemoryVectorStorageDriver()
+artifacts = WebLoader(max_tokens=100).load("https://www.griptape.ai")
+
+[vector_driver.insert_text_artifact(a, namespace="griptape") for a in artifacts]
+
+results = vector_driver.query(
+    "creativity",
+    count=3,
+    namespace="griptape"
+)
+
+values = [BaseArtifact.from_json(r.meta["artifact"]).value for r in results]
+
+print("\n\n".join(values))
+```
+
 ## PineconeVectorStorageDriver
 
 This driver supports the [Pinecone vector database](https://www.pinecone.io/). In addition to standard vector storage driver methods it provides the `create_index()` for easy index creation.
@@ -59,7 +85,3 @@ vector_driver.query(
     namespace="supermarket-products"
 )
 ```
-
-## MemoryVectorStorageDriver
-
-Can be used to load and query data from memory.

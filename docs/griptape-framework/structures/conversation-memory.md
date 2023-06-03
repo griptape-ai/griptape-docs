@@ -36,15 +36,15 @@ This will progressively summarize the whole pipeline except for the last two tas
 Finally, you can persist memory by using memory drivers. Griptape comes with one memory driver for automatically storing memory on disk. Here is how you can initialize memory with a driver:
 
 ```python
-Memory(
-    driver=DiskMemoryDriver(file_path="memory.json")
+ConversationMemory(
+    driver=DiskConversationMemoryDriver(file_path="memory.json")
 )
 ```
 
 To load memory:
 
 ```python
-DiskMemoryDriver(file_path="memory.json").load()
+DiskConversationMemoryDriver(file_path="memory.json").load()
 ```
 
-You can easily build drivers for your own data stores by extending `MemoryDriver`. You only need to implement `store` and `load` methods.
+You can easily build drivers for your own data stores by extending `BaseConversationMemoryDriver`. You only need to implement `store` and `load` methods.

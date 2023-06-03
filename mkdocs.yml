@@ -89,6 +89,6 @@ nav:
       - RestApiClient: "griptape-tools/official-tools/rest-api-client.md"
       - SqlClient: "griptape-tools/official-tools/sql-client.md"
       - TextProcessor: "griptape-tools/official-tools/text-processor.md"
-      - VectorStorageClient: "griptape-tools/official-tools/vector-storage-client.md"
+      - VectorClient: "griptape-tools/official-tools/vector-client.md"
       - WebScraper: "griptape-tools/official-tools/web-scraper.md"
       - WebSearch: "griptape-tools/official-tools/web-search.md"

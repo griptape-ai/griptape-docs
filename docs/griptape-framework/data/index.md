@@ -10,4 +10,4 @@ Griptape provides several abstractions for working with data.
 
 **Query engines** are used to search text storages.
 
-**Vector storage drivers** are used to store and query vector databases.
+**Vector drivers** are used to store and query vector databases.

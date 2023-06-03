@@ -19,13 +19,11 @@ The following example is built using [https://jsonplaceholder.typicode.com/guide
   
 ```python
 from json import dumps
-from griptape.drivers import MemoryStorageDriver, OpenAiPromptDriver
+from griptape.drivers import OpenAiPromptDriver
 from griptape.memory.structure import ConversationMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask
 from griptape.tools import RestApiClient
-
-storage = TextStorageRamp()
 
 posts_client = RestApiClient(
     base_url="https://jsonplaceholder.typicode.com",

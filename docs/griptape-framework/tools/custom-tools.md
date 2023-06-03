@@ -60,7 +60,6 @@ class RandomNumberGenerator(BaseTool):
 Finally, let's test our tool:
 
 ```python
-from griptape.tasks import ToolkitTask
 from griptape.structures import Agent
 from rng_tool.tool import RandomNumberGenerator
 

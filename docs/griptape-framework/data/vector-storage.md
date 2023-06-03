@@ -5,19 +5,19 @@ Griptape provides a way to build drivers for vector DBs where embeddings can be 
 * `upsert_vector()` for updating and inserting new vectors directly.
 * `query()` for querying vector DBs.
 
-Each vector storage driver takes a `BaseEmbeddingDriver` used to dynamically generate embeddings for strings.
+Each vector driver takes a `BaseEmbeddingDriver` used to dynamically generate embeddings for strings.
 
-## MemoryVectorStorageDriver
+## MemoryVectorDriver
 
 This driver can be used to load and query data from memory. Here is a complete example of how the driver can be used to load a webpage into the driver and query it later:
 
 ```python
 from griptape.artifacts import BaseArtifact
-from griptape.drivers import MemoryVectorStorageDriver
+from griptape.drivers import MemoryVectorDriver
 from griptape.loaders import WebLoader
 
 
-vector_driver = MemoryVectorStorageDriver()
+vector_driver = MemoryVectorDriver()
 artifacts = WebLoader(max_tokens=100).load("https://www.griptape.ai")
 
 [vector_driver.upsert_text_artifact(a, namespace="griptape") for a in artifacts]
@@ -33,9 +33,9 @@ values = [BaseArtifact.from_json(r.meta["artifact"]).value for r in results]
 print("\n\n".join(values))
 ```
 
-## PineconeVectorStorageDriver
+## PineconeVectorDriver
 
-This driver supports the [Pinecone vector database](https://www.pinecone.io/). In addition to standard vector storage driver methods it provides the `create_index()` for easy index creation.
+This driver supports the [Pinecone vector database](https://www.pinecone.io/). In addition to standard vector driver methods it provides the `create_index()` for easy index creation.
 
 Here is a complete example of how the driver can be used to load and query information from Pinecone:
 
@@ -44,10 +44,10 @@ import hashlib
 import json
 from urllib.request import urlopen
 from decouple import config
-from griptape.drivers import PineconeVectorStorageDriver
+from griptape.drivers import PineconeVectorDriver
 
 
-def load_data(driver: PineconeVectorStorageDriver) -> None:
+def load_data(driver: PineconeVectorDriver) -> None:
     response = urlopen(
         "https://raw.githubusercontent.com/wedeploy-examples/"
         "supermarket-web-example/master/products.json"
@@ -67,7 +67,7 @@ def load_data(driver: PineconeVectorStorageDriver) -> None:
             namespace="supermarket-products"
         )
 
-vector_driver = PineconeVectorStorageDriver(
+vector_driver = PineconeVectorDriver(
     api_key=config("PINECONE_API_KEY"),
     environment=config("PINECONE_ENVIRONMENT"),
     index_name="griptape-dev"

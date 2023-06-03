@@ -2,7 +2,7 @@ Query engines are used to search text storages.
 
 ## VectorQueryEngine
 
-Used to query vector storages. You can set a custom `prompt_driver` and `vector_storage_driver`. Uses `MemoryVectorStorageDriver` by default.
+Used to query vector storages. You can set a custom `prompt_driver` and `vector_driver`. Uses `MemoryVectorDriver` by default.
 
 Use the `insert` method to insert `TextArtifact`s into vector storage with an optional `namespace`.
 

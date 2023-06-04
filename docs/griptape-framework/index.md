@@ -62,7 +62,7 @@ text_processor = TextProcessor(
         "summarize": {
             "input": [text_tool_memory]
         },
-        "query": {
+        "search": {
             "input": [text_tool_memory]
         }
     }

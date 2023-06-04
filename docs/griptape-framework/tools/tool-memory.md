@@ -46,7 +46,7 @@ text_processor = TextProcessor(
         "summarize": {
             "input": [text_memory]
         },
-        "query": {
+        "search": {
             "input": [text_memory]
         }
     }

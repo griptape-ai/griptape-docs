@@ -66,7 +66,7 @@ file_manager = FileManager(
         "load_from_disk": {
             "output": [blob_memory]
         },
-        "save": {
+        "save_to_disk": {
             "input": [text_memory, blob_memory]
         }
     }

@@ -71,10 +71,10 @@ text_processor = TextProcessor(
 # File manager can load and store files locally.
 file_manager = FileManager(
     memory={
-        "load": {
+        "load_from_disk": {
             "output": [blob_tool_memory]
         },
-        "save": {
+        "save_to_disk": {
             "input": [text_tool_memory, blob_tool_memory]
         }
     }

@@ -35,9 +35,9 @@ web_scraper = WebScraper(
 )
 
 """
-TextProcessor enables LLMs to summarize and query text.
+TextProcessor enables LLMs to summarize and search text.
 
-Here we wrap `summarize` and `query` methods with the same
+Here we wrap `summarize` and `search` methods with the same
 text memory, so that those activities can access data
 in that memory.
 """

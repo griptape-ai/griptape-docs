@@ -1,6 +1,6 @@
 # TextProcessor
 
-This tool enables LLMs to summarize and query text from artifacts.
+This tool enables LLMs to summarize and search text from artifacts.
 
 ```python
 TextProcessor()

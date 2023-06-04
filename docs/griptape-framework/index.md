@@ -56,7 +56,7 @@ web_scraper = WebScraper(
     }
 )
 
-# TextProcessor enables LLMs to summarize and query text.
+# TextProcessor enables LLMs to summarize and search text.
 text_processor = TextProcessor(
     memory={
         "summarize": {

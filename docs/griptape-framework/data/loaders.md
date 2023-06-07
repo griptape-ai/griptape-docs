@@ -23,5 +23,5 @@ WebLoader().load("https://www.griptape.ai")
 Inherits from the `TextLoader` and can be used to load PDFs from a path or from an IO stream:
 
 ```python
-PdfLoader().load("path/to/file/pdf")
+PdfLoader().load("path/to/file.pdf")
 ```

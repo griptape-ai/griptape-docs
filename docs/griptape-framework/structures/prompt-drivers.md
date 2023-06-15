@@ -20,6 +20,9 @@ OpenAiPromptDriver(
 ).run("Q: give me some ideas for writing a fantasy book\nA:")
 ```
 
+!!! info
+    More prompt drivers are coming soon.
+
 ## OpenAI
 
 This driver connects to OpenAI [Text Completion](https://platform.openai.com/docs/guides/completion) and [Chat Completion](https://platform.openai.com/docs/guides/chat) APIs.
@@ -32,13 +35,26 @@ The **OpenAiPromptDriver** uses the following parameters:
 | api_version  | API version.                                                                          | NO       |
 | api_base     | API URL.                                                                              | NO       |
 | api_key      | API key to pass directly; by default uses `OPENAI_API_KEY_PATH` environment variable. | NO       |
+| model        | OpenAI model name. Uses `gpt-3.5.turbo` by default.                                   | NO       |
 | organization | OpenAI organization.                                                                  | NO       |
 | tokenizer    | Custom `TiktokenTokenizer`                                                            | NO       |
 | user         | OpenAI user.                                                                          | NO       |
 
+## Azure OpenAI
+
+This driver connects to Azure OpenAI [Text Completion](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference) and [Chat Completion](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference) APIs.
+
+The **AzureOpenAiPromptDriver** uses the same parameters as **OpenAiPromptDriver** with updated defaults. In addition to those parameters, **AzureOpenAiPromptDriver** has the following additional and modified parameters:
+
+| Parameter     | Description                 | Required |
+|---------------|-----------------------------|----------|
+| api_base      | API URL.                    | YES      |
+| deployment_id | Azure OpenAI deployment ID. | YES      |
+| model         | OpenAI model name.          | YES      |
+
 ## Cohere
 
-This driver connects to Cohere [Generate](https://docs.cohere.ai/reference/generate) API..
+This driver connects to the Cohere [Generate](https://docs.cohere.ai/reference/generate) API.
 
 The **CoherePromptDriver** uses the following parameters:
 
@@ -48,6 +64,18 @@ The **CoherePromptDriver** uses the following parameters:
 | model     | Cohere model name. Defaults to `xlarge`. | NO       |
 | client    | Custom `cohere.Client`.                  | NO       |
 | tokenizer | Custom `CohereTokenizer`.                | NO       |
+
+## Anthropic
+
+This driver connects to the Anthropic [Completions](https://docs.anthropic.com/claude/reference/complete_post) API..
+
+The **AnthropicPromptDriver** uses the following parameters:
+
+| Parameter | Description                              | Required |
+|-----------|------------------------------------------|----------|
+| api_key   | Cohere API key.                          | YES      |
+| model     | Cohere model name. Defaults to `xlarge`. | NO       |
+| tokenizer | Custom `AnthropicTokenizer`.             | NO       |
 
 ## Hugging Face Hub
 

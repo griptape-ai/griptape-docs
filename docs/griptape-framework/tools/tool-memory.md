@@ -9,7 +9,7 @@ Here is an end-to-end example of how memory can be used in unison with multiple 
 ```python
 from griptape.memory.tool import TextToolMemory, BlobToolMemory
 from griptape.structures import Agent
-from griptape.tools import WebScraper, TextProcessor, FileManager
+from griptape.tools import WebScraper, TextMemoryExtractor, FileManager
 
 """
 Define tool memory for storing textual and
@@ -29,51 +29,37 @@ ID will be returned to the LLM.
 web_scraper = WebScraper(
     memory={
         "get_content": {
-            "output":  [text_memory]
+            "output": [text_memory]
         }
     }
 )
 
 """
-TextProcessor enables LLMs to summarize and search text.
+TextMemoryExtractor enables LLMs to summarize and query text memory.
 
-Here we wrap `summarize` and `search` methods with the same
-text memory, so that those activities can access data
-in that memory.
+Here we initialize and connect it to our `TextToolMemory`.
 """
-text_processor = TextProcessor(
-    memory={
-        "summarize": {
-            "input": [text_memory]
-        },
-        "search": {
-            "input": [text_memory]
-        }
-    }
+text_memory_extractor = TextMemoryExtractor(
+    tool_memory=text_memory
 )
 
 """
 FileManager enables LLMs to store and load files from disk.
 
-Here we wrap the `load` activity with the blob memory
+Here we wrap the `load_from_disk` activity with the blob memory
 to load arbitrary files.
-
-We also wrap the `save` activity with both memories to provide
-that activity with access to both storages.
 """
 file_manager = FileManager(
+    tool_memory=text_memory,
     memory={
         "load_from_disk": {
             "output": [blob_memory]
-        },
-        "save_to_disk": {
-            "input": [text_memory, blob_memory]
         }
     }
 )
 
 agent = Agent(
-    tools=[web_scraper, text_processor, file_manager]
+    tools=[web_scraper, text_memory_extractor, file_manager]
 )
 
 agent.run(

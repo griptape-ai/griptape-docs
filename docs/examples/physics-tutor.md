@@ -4,7 +4,7 @@ from griptape.engines import VectorQueryEngine
 from griptape.loaders import WebLoader
 from griptape.rules import Ruleset, Rule
 from griptape.structures import Agent
-from griptape.tools import VectorClient
+from griptape.tools import KnowledgeBaseClient
 from griptape.utils import Chat
 
 
@@ -19,7 +19,7 @@ artifacts = WebLoader().load(
 engine.insert(artifacts, namespace=namespace)
 
 
-vector_client_tool = VectorClient(
+vector_client_tool = KnowledgeBaseClient(
     description="This vector database contains information about physics. "
                 "Use it to answer any physics-related questions.",
     query_engine=engine,

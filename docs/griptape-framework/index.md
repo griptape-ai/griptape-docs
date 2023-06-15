@@ -39,43 +39,34 @@ from griptape.memory.structure import ConversationMemory
 from griptape.memory.tool import TextToolMemory, BlobToolMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask, PromptTask
-from griptape.tools import WebScraper, TextProcessor, FileManager
+from griptape.tools import WebScraper, TextMemoryExtractor, FileManager
 from griptape import utils
 
 # Tool memory enables LLMs to store and manipulate data
 # without ever looking at it directly.
-text_tool_memory = TextToolMemory()
-blob_tool_memory = BlobToolMemory()
+text_memory = TextToolMemory()
+blob_memory = BlobToolMemory()
 
 # Connect a web scraper to load web pages.
 web_scraper = WebScraper(
     memory={
         "get_content": {
-            "output": [text_tool_memory]
+            "output": [text_memory]
         }
     }
 )
 
-# TextProcessor enables LLMs to summarize and search text.
-text_processor = TextProcessor(
-    memory={
-        "summarize": {
-            "input": [text_tool_memory]
-        },
-        "search": {
-            "input": [text_tool_memory]
-        }
-    }
+# TextMemoryExtractor enables LLMs to summarize and search text.
+text_memory_extractor = TextMemoryExtractor(
+    tool_memory=text_memory
 )
 
 # File manager can load and store files locally.
 file_manager = FileManager(
+    tool_memory=text_memory,
     memory={
         "load_from_disk": {
-            "output": [blob_tool_memory]
-        },
-        "save_to_disk": {
-            "input": [text_tool_memory, blob_tool_memory]
+            "output": [blob_memory]
         }
     }
 )
@@ -89,7 +80,7 @@ pipeline.add_tasks(
     # Load up the first argument from `pipeline.run`.
     ToolkitTask(
         "{{ args[0] }}",
-        tools=[web_scraper, text_processor, file_manager]
+        tools=[web_scraper, text_memory_extractor, file_manager]
     ),
     # Augment `input` from the previous task.
     PromptTask(

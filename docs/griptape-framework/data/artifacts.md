@@ -6,6 +6,10 @@ Used for passing text data of arbitrary size around the framework. It can be use
 
 `TextToolMemory` automatically stores `TextArtifact`s returned by tool activities and returns artifact IDs back to the LLM.
 
+## CsvRowArtifact
+
+Used for passing structured row data around the framework. It inherits from `TextArtifact` and overrides the `to_text()` method, which always returns a valid CSV row.
+
 ## InfoArtifact
 
 Used for passing short notifications back to the LLM without tool memory storing them.
@@ -19,7 +23,3 @@ Used for passing errors back to the LLM without tool memory storing them.
 Used for passing binary large objects (blobs) back to the LLM. Treat it as a way to return unstructured data, such as images, videos, audio, and other files back from tools. Each blob has a `name` and ` dir` to uniquely identify stored objects.
 
 `BlobToolMemory` automatically stores `BlobArtifact`s returned by tool activities that can be reused by other tools.
-
-## ListArtifact
-
-Used for storing multiple other artifacts in a list. Useful when tools need to return multiple objects.

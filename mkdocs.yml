@@ -47,9 +47,11 @@ markdown_extensions:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
+  - admonition
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.details
   - tables
   - def_list
 nav:
@@ -77,7 +79,8 @@ nav:
     - Chunkers: "griptape-framework/data/chunkers.md"
     - Loaders: "griptape-framework/data/loaders.md"
     - Query Engines: "griptape-framework/data/query-engines.md"
-    - Vector Storage: "griptape-framework/data/vector-storage.md"
+    - Vector Stores: "griptape-framework/data/vector-stores.md"
+    - SQL Drivers: "griptape-framework/data/sql-drivers.md"
 - Griptape Tools:
     - Overview: "griptape-tools/index.md"
     - Official Tools:
@@ -88,8 +91,8 @@ nav:
       - PdfReader: "griptape-tools/official-tools/pdf-reader.md"
       - RestApiClient: "griptape-tools/official-tools/rest-api-client.md"
       - SqlClient: "griptape-tools/official-tools/sql-client.md"
-      - TextProcessor: "griptape-tools/official-tools/text-processor.md"
-      - VectorClient: "griptape-tools/official-tools/vector-client.md"
+      - TextMemoryExtractor: "griptape-tools/official-tools/text-memory-extractor.md"
+      - KnowledgeBaseClient: "griptape-tools/official-tools/knowledge-base-client.md"
       - WebScraper: "griptape-tools/official-tools/web-scraper.md"
       - WebSearch: "griptape-tools/official-tools/web-search.md"
 - Examples:

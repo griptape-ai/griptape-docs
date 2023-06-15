@@ -49,25 +49,21 @@ blob_memory = BlobToolMemory()
 
 # Connect a web scraper to load web pages.
 web_scraper = WebScraper(
-    memory={
-        "get_content": {
-            "output": [text_memory]
-        }
+    output_memory={
+        "get_content": [text_memory]
     }
 )
 
 # TextMemoryExtractor enables LLMs to summarize and search text.
 text_memory_extractor = TextMemoryExtractor(
-    tool_memory=text_memory
+    input_memory=text_memory
 )
 
 # File manager can load and store files locally.
 file_manager = FileManager(
-    tool_memory=text_memory,
-    memory={
-        "load_from_disk": {
-            "output": [blob_memory]
-        }
+    input_memory=text_memory,
+    output_memory={
+        "load_files_from_disk": [blob_memory]
     }
 )
 

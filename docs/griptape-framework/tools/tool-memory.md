@@ -27,10 +27,8 @@ activity will be stored in that memory and the result
 ID will be returned to the LLM.
 """
 web_scraper = WebScraper(
-    memory={
-        "get_content": {
-            "output": [text_memory]
-        }
+    output_memory={
+        "get_content": [text_memory]
     }
 )
 
@@ -40,21 +38,19 @@ TextMemoryExtractor enables LLMs to summarize and query text memory.
 Here we initialize and connect it to our `TextToolMemory`.
 """
 text_memory_extractor = TextMemoryExtractor(
-    tool_memory=text_memory
+    input_memory=text_memory
 )
 
 """
 FileManager enables LLMs to store and load files from disk.
 
-Here we wrap the `load_from_disk` activity with the blob memory
-to load arbitrary files.
+Here we set input_memory for tool activities to pull data from and
+wrap the `load_files_from_disk` activity output with the blob memory.
 """
 file_manager = FileManager(
-    tool_memory=text_memory,
-    memory={
-        "load_from_disk": {
-            "output": [blob_memory]
-        }
+    input_memory=text_memory,
+    output_memory={
+        "load_files_from_disk": [blob_memory]
     }
 )
 

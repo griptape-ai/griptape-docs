@@ -97,6 +97,8 @@ nav:
       - WebSearch: "griptape-tools/official-tools/web-search.md"
 - Examples:
     - Overview: "examples/index.md"
-    - Physics Tutor: "examples/physics-tutor.md"
-    - Load and Query Pinecone: "examples/load-and-query-pinecone.md"
-    - Query a Webpage: "examples/query-webpage.md"
+    - Agents:
+      - Physics Tutor: "examples/physics-tutor.md"
+    - Data:
+      - Load and Query Pinecone: "examples/load-and-query-pinecone.md"
+      - Query a Webpage: "examples/query-webpage.md"

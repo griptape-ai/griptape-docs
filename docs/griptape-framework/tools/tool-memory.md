@@ -46,7 +46,7 @@ file_manager = FileManager(
 )
 
 agent = Agent(
-    tools=[web_scraper, text_memory_extractor, file_manager]
+    tools=[web_scraper, file_manager]
 )
 
 agent.run(

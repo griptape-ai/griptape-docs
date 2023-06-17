@@ -71,7 +71,7 @@ pipeline.add_tasks(
     # Load up the first argument from `pipeline.run`.
     ToolkitTask(
         "{{ args[0] }}",
-        tools=[web_scraper, text_memory_extractor, file_manager]
+        tools=[web_scraper, file_manager]
     ),
     # Augment `input` from the previous task.
     PromptTask(

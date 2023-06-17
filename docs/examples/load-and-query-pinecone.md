@@ -3,10 +3,10 @@ import hashlib
 import json
 from urllib.request import urlopen
 from decouple import config
-from griptape.drivers import PineconeVectorDriver
+from griptape.drivers import PineconeVectorStoreDriver
 
 
-def load_data(driver: PineconeVectorDriver) -> None:
+def load_data(driver: PineconeVectorStoreDriver) -> None:
     response = urlopen(
         "https://raw.githubusercontent.com/wedeploy-examples/"
         "supermarket-web-example/master/products.json"
@@ -27,15 +27,15 @@ def load_data(driver: PineconeVectorDriver) -> None:
         )
 
 
-vector_driver = PineconeVectorDriver(
+vector_store_driver = PineconeVectorStoreDriver(
     api_key=config("PINECONE_API_KEY"),
     environment=config("PINECONE_ENVIRONMENT"),
     index_name=config("PINECONE_INDEX_NAME")
 )
 
-load_data(vector_driver)
+load_data(vector_store_driver)
 
-result = vector_driver.query(
+result = vector_store_driver.query(
     "fruit",
     count=3,
     filter={

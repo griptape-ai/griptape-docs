@@ -11,22 +11,22 @@ Each vector driver takes a `BaseEmbeddingDriver` used to dynamically generate em
 !!! info
     More vector drivers are coming soon.
 
-## MemoryVectorDriver
+## LocalVectorStoreDriver
 
 This driver can be used to load and query data from memory. Here is a complete example of how the driver can be used to load a webpage into the driver and query it later:
 
 ```python
 from griptape.artifacts import BaseArtifact
-from griptape.drivers import MemoryVectorDriver
+from griptape.drivers import LocalVectorStoreDriver
 from griptape.loaders import WebLoader
 
 
-vector_driver = MemoryVectorDriver()
+vector_store_driver = LocalVectorStoreDriver()
 artifacts = WebLoader(max_tokens=100).load("https://www.griptape.ai")
 
-[vector_driver.upsert_text_artifact(a, namespace="griptape") for a in artifacts]
+[vector_store_driver.upsert_text_artifact(a, namespace="griptape") for a in artifacts]
 
-results = vector_driver.query(
+results = vector_store_driver.query(
     "creativity",
     count=3,
     namespace="griptape"
@@ -37,7 +37,7 @@ values = [BaseArtifact.from_json(r.meta["artifact"]).value for r in results]
 print("\n\n".join(values))
 ```
 
-## PineconeVectorDriver
+## PineconeVectorStoreDriver
 
 This driver supports the [Pinecone vector database](https://www.pinecone.io/). In addition to standard vector driver methods it provides the `create_index()` for easy index creation.
 
@@ -48,10 +48,10 @@ import hashlib
 import json
 from urllib.request import urlopen
 from decouple import config
-from griptape.drivers import PineconeVectorDriver
+from griptape.drivers import PineconeVectorStoreDriver
 
 
-def load_data(driver: PineconeVectorDriver) -> None:
+def load_data(driver: PineconeVectorStoreDriver) -> None:
     response = urlopen(
         "https://raw.githubusercontent.com/wedeploy-examples/"
         "supermarket-web-example/master/products.json"
@@ -71,15 +71,15 @@ def load_data(driver: PineconeVectorDriver) -> None:
             namespace="supermarket-products"
         )
 
-vector_driver = PineconeVectorDriver(
+vector_store_driver = PineconeVectorStoreDriver(
     api_key=config("PINECONE_API_KEY"),
     environment=config("PINECONE_ENVIRONMENT"),
     index_name="griptape-dev"
 )
 
-load_data(vector_driver)
+load_data(vector_store_driver)
 
-vector_driver.query(
+vector_store_driver.query(
     "fruit",
     count=3,
     filter={

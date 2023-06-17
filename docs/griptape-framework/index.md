@@ -6,16 +6,6 @@ For **predictability**, software structures like sequential pipelines and direct
 
 First, configure an OpenAI client by [getting an API key](https://beta.openai.com/account/api-keys) and adding it to your environment as `OPENAI_API_KEY`. Griptape uses [OpenAI Completions API](https://platform.openai.com/docs/guides/completion) to execute LLM prompts and to work with [LlamaIndex](https://gpt-index.readthedocs.io/en/latest/index.html) data structures.
 
-Griptape provides compatibility with Azure-hosted OpenAI LLMs as well. To enable this, make sure to set the following environment variables:
-
-`API_TYPE: azure`
-`API_BASE: "https://YOUR_RESOURCE_NAME.openai.azure.com"`
-`API_VERSION: 2023-03-15-preview`
-`ENGINE: <your model>`
-`OPENAI_API_KEY: <your api key>`
-`ENGINE_EMBEDDING: <your embedding model>`
-`API_VERSION_EMBEDDING: 2023-05-15`
-
 ### Using pip
 
 Install **griptape** and **griptape-tools**:

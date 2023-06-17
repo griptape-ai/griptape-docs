@@ -37,14 +37,14 @@ Finally, you can persist memory by using memory drivers. Griptape comes with one
 
 ```python
 ConversationMemory(
-    driver=DiskConversationMemoryDriver(file_path="memory.json")
+    driver=LocalConversationMemoryDriver(file_path="memory.json")
 )
 ```
 
 To load memory:
 
 ```python
-DiskConversationMemoryDriver(file_path="memory.json").load()
+LocalConversationMemoryDriver(file_path="memory.json").load()
 ```
 
 You can easily build drivers for your own data stores by extending `BaseConversationMemoryDriver`. You only need to implement `store` and `load` methods.

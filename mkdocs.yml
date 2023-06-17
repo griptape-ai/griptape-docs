@@ -91,7 +91,6 @@ nav:
       - PdfReader: "griptape-tools/official-tools/pdf-reader.md"
       - RestApiClient: "griptape-tools/official-tools/rest-api-client.md"
       - SqlClient: "griptape-tools/official-tools/sql-client.md"
-      - TextMemoryExtractor: "griptape-tools/official-tools/text-memory-extractor.md"
       - KnowledgeBaseClient: "griptape-tools/official-tools/knowledge-base-client.md"
       - WebScraper: "griptape-tools/official-tools/web-scraper.md"
       - WebSearch: "griptape-tools/official-tools/web-search.md"

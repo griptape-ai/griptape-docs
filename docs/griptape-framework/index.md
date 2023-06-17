@@ -39,7 +39,7 @@ from griptape.memory.structure import ConversationMemory
 from griptape.memory.tool import TextToolMemory, BlobToolMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask, PromptTask
-from griptape.tools import WebScraper, TextMemoryExtractor, FileManager
+from griptape.tools import WebScraper, FileManager
 from griptape import utils
 
 # Tool memory enables LLMs to store and manipulate data
@@ -52,11 +52,6 @@ web_scraper = WebScraper(
     output_memory={
         "get_content": [text_memory]
     }
-)
-
-# TextMemoryExtractor enables LLMs to summarize and search text.
-text_memory_extractor = TextMemoryExtractor(
-    input_memory=text_memory
 )
 
 # File manager can load and store files locally.

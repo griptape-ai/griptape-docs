@@ -4,7 +4,6 @@ Here is an example of how to use rulesets:
 
 ```python
 from griptape import utils
-from griptape.memory.structure import ConversationMemory
 from griptape.structures import Agent
 from griptape.rules import Rule, Ruleset
 

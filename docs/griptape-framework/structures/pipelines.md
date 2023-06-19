@@ -5,7 +5,6 @@ Pipelines are lists of tasks that are executed sequentially. Pipelines can have 
 Here is an example of a pipeline:
 
 ```python
-from griptape import utils
 from griptape.memory.structure import ConversationMemory
 from griptape.tasks import PromptTask
 from griptape.structures import Pipeline
@@ -24,8 +23,6 @@ pipeline.add_tasks(
 
 pipeline.run("I am Scotty, who are you?")
 pipeline.run("Who am I?")
-
-print(utils.Conversation(pipeline.memory))
 ```
 
 Boom! Our first conversation, à la ChatGPT, is here:

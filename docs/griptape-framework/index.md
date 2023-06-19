@@ -40,7 +40,7 @@ from griptape.memory.tool import TextToolMemory, BlobToolMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask, PromptTask
 from griptape.tools import WebScraper, FileManager
-from griptape import utils
+
 
 # Tool memory enables LLMs to store and manipulate data
 # without ever looking at it directly.
@@ -79,12 +79,8 @@ pipeline.add_tasks(
     )
 )
 
-result = pipeline.run(
+pipeline.run(
     "Load https://www.griptape.ai, summarize it, and store it in griptape.txt"
-)
-
-print(
-    utils.Conversation(pipeline.memory)
 )
 ```
 

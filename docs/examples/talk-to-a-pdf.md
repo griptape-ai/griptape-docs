@@ -16,7 +16,7 @@ engine = VectorQueryEngine()
 
 engine.vector_store_driver.upsert_text_artifacts(
     {
-        "attention-paper": PdfLoader().load(
+        namespace: PdfLoader().load(
             io.BytesIO(response.content)
         )
     }

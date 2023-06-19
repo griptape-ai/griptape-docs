@@ -9,7 +9,7 @@ from griptape.tools import KnowledgeBaseClient
 from griptape.utils import Chat
 
 
-namespace = "physics"
+namespace = "physics-wiki"
 
 engine = VectorQueryEngine()
 
@@ -18,7 +18,7 @@ artifacts = WebLoader().load(
 )
 
 engine.vector_store_driver.upsert_text_artifacts(
-    {"physics-wiki": artifacts}
+    {namespace: artifacts}
 )
 
 

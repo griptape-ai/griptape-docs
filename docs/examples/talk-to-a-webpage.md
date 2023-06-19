@@ -1,5 +1,6 @@
+This example demonstrates how to vectorize a webpage and setup a Griptape agent with rules and the `KnowledgeBase` tool to use it during conversations.
+
 ```python
-from griptape.drivers import OpenAiPromptDriver
 from griptape.engines import VectorQueryEngine
 from griptape.loaders import WebLoader
 from griptape.rules import Ruleset, Rule
@@ -16,11 +17,13 @@ artifacts = WebLoader().load(
     "https://en.wikipedia.org/wiki/Physics"
 )
 
-engine.insert(artifacts, namespace=namespace)
+engine.vector_store_driver.upsert_text_artifacts(
+    {"physics-wiki": artifacts}
+)
 
 
-vector_client_tool = KnowledgeBaseClient(
-    description="This vector database contains information about physics. "
+kb_client = KnowledgeBaseClient(
+    description="Contains information about physics. "
                 "Use it to answer any physics-related questions.",
     query_engine=engine,
     namespace=namespace
@@ -40,10 +43,8 @@ agent = Agent(
             ]
         )
     ],
-    tools=[vector_client_tool],
-    prompt_driver=OpenAiPromptDriver(temperature=0.5)
+    tools=[kb_client]
 )
 
 Chat(agent).start()
-
 ```

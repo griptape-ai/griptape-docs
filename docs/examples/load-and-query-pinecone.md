@@ -27,15 +27,15 @@ def load_data(driver: PineconeVectorStoreDriver) -> None:
         )
 
 
-vector_store_driver = PineconeVectorStoreDriver(
+vector_driver = PineconeVectorStoreDriver(
     api_key=config("PINECONE_API_KEY"),
     environment=config("PINECONE_ENVIRONMENT"),
     index_name=config("PINECONE_INDEX_NAME")
 )
 
-load_data(vector_store_driver)
+load_data(vector_driver)
 
-result = vector_store_driver.query(
+result = vector_driver.query(
     "fruit",
     count=3,
     filter={

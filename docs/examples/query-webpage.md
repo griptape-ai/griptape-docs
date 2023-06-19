@@ -4,12 +4,14 @@ from griptape.drivers import LocalVectorStoreDriver
 from griptape.loaders import WebLoader
 
 
-vector_store_driver = LocalVectorStoreDriver()
-artifacts = WebLoader(max_tokens=100).load("https://www.griptape.ai")
+vector_store = LocalVectorStoreDriver()
 
-[vector_store_driver.upsert_text_artifact(a, namespace="griptape") for a in artifacts]
+[
+    vector_store.upsert_text_artifact(a, namespace="griptape")
+    for a in WebLoader(max_tokens=100).load("https://www.griptape.ai")
+]
 
-results = vector_store_driver.query(
+results = vector_store.query(
     "creativity",
     count=3,
     namespace="griptape"
@@ -18,5 +20,4 @@ results = vector_store_driver.query(
 values = [BaseArtifact.from_json(r.meta["artifact"]).value for r in results]
 
 print("\n\n".join(values))
-
 ```

@@ -24,7 +24,7 @@ engine.vector_store_driver.upsert_text_artifacts(
 
 kb_client = KnowledgeBaseClient(
     description="Contains information about the Attention Is All You Need paper. "
-                "Use it to answer any any related questions.",
+                "Use it to answer any related questions.",
     query_engine=engine,
     namespace=namespace
 )

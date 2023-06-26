@@ -97,6 +97,7 @@ nav:
 - Examples:
     - Overview: "examples/index.md"
     - Agents:
+      - Talk to SQL: "examples/talk-to-sql.md"
       - Talk to a Webpage: "examples/talk-to-a-webpage.md"
       - Talk to a PDF: "examples/talk-to-a-pdf.md"
     - Data:

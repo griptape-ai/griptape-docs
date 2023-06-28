@@ -52,8 +52,10 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
   - pymdownx.details
+  - pymdownx.tabbed
   - tables
   - def_list
+  - footnotes
 nav:
 - Home:
     - Overview: "index.md"

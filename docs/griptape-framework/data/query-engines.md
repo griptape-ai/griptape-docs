@@ -1,4 +1,4 @@
-Query engines are used to search text storages.
+Query engines are used to search collections of text.
 
 ## VectorQueryEngine
 

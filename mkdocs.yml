@@ -79,6 +79,7 @@ nav:
     - Chunkers: "griptape-framework/data/chunkers.md"
     - Loaders: "griptape-framework/data/loaders.md"
     - Query Engines: "griptape-framework/data/query-engines.md"
+    - Summary Engines: "griptape-framework/data/summary-engines.md"
     - Vector Stores: "griptape-framework/data/vector-stores.md"
     - SQL Drivers: "griptape-framework/data/sql-drivers.md"
 - Griptape Tools:
@@ -86,6 +87,7 @@ nav:
     - Official Tools:
       - AwsCli: "griptape-tools/official-tools/aws-cli.md"
       - Calculator: "griptape-tools/official-tools/calculator.md"
+      - DateTime: "griptape-tools/official-tools/date-time.md"
       - EmailClient: "griptape-tools/official-tools/email-client.md"
       - FileManager: "griptape-tools/official-tools/file-manager.md"
       - PdfReader: "griptape-tools/official-tools/pdf-reader.md"

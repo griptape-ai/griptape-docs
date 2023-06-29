@@ -6,15 +6,15 @@ This documentation covers the fundamentals of the **Griptape** framework and des
 
 ## Griptape
 
-**griptape** offers developers the ability to build AI systems that operate across two dimensions: predictability and creativity.
+The Griptape framework provides developers with the ability to create AI systems that operate across two dimensions: predictability and creativity. For predictability, Griptape enforces structures like sequential pipelines, DAG-based workflows, and long-term memory. To facilitate creativity, Griptape safely prompts LLMs with [tools](https://github.com/griptape-ai/griptape-tools) and short-term memory connecting them to external APIs and data stores. The framework allows developers to transition between those two dimensions effortlessly based on their use case.
 
-For **predictability**, software structures like sequential pipelines and directed acyclic graphs (DAGs) are enforced. **Creativity**, on the other hand, is facilitated by safely prompting LLMs with [tools](https://github.com/griptape-ai/griptape-tools) that connect to external APIs and data sources. Developers can move between these two dimensions according to their use case.
+Griptape not only helps developers harness the potential of LLMs but also enforces trust boundaries, schema validation, and tool activity-level permissions. By doing so, Griptape maximizes LLMs’ reasoning while adhering to strict policies regarding their capabilities.
 
 [Learn more about griptape →](griptape-framework/)
 
 ## Griptape Tools
 
-**griptape-tools** is a PyPI package with official tools. It's a great way to start using Griptape to see how easy it can be to build applications that extend LLMs' creative capabilities.
+**griptape-tools** is a PyPI package with official tools. It's a great way to start using Griptape to see how easy it can be to build applications that extend LLMs' creative capabilities. Agents (or any other structure for that matter) can be used to connect your pre-processed data to LLMs via tools. Griptape tools are Python classes with activities. Activities are Python methods decorated with the @activity decorator. Each activity has a description (used to provide context to the LLM) and the input schema that the LLM must follow in order to use the tool. Griptape validates LLM outputs against the schema to ensure each tool activity is used correctly.
 
 [Learn more about griptape tools →](griptape-tools/)
 

@@ -37,6 +37,7 @@ theme:
         name: Switch to light mode
     features:
         - content.code.copy
+        - content.code.annotate
         - navigation.tabs
         - navigation.sections
         - navigation.expand
@@ -52,8 +53,10 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
   - pymdownx.details
+  - pymdownx.tabbed
   - tables
   - def_list
+  - footnotes
 nav:
 - Home:
     - Overview: "index.md"

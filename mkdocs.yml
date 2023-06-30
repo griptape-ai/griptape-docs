@@ -109,3 +109,5 @@ nav:
     - Data:
       - Load and Query Pinecone: "examples/load-and-query-pinecone.md"
       - Query a Webpage: "examples/query-webpage.md"
+    - Misc:
+        - Count Tokens: "examples/count-tokens.md"

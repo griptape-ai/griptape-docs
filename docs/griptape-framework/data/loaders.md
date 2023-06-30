@@ -38,16 +38,21 @@ SqlLoader().load_collection(
 
 ## TextLoader
 
-Used to load arbitrary text:
+Used to load arbitrary text and text files:
 
 ```python
 TextLoader().load(
     "my text"
 )
 
+TextLoader().load(
+    Path("path/to/file.txt")
+)
+
 TextLoader().load_collection(
     "my text",
-    "my other text"
+    "my other text",
+    Path("path/to/file.txt")
 )
 ```
 

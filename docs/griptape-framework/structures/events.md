@@ -3,7 +3,6 @@ Griptape event listeners can be used to listen for events during a structure's e
 You can listen to specific event types: 
 
 ```python
-import logging
 from griptape.structures import Agent
 from griptape.events import (
     BaseEvent,
@@ -16,7 +15,7 @@ from griptape.events import (
 )
 
 def handler(e: BaseEvent):
-    logging.getLogger("griptape").info(e)
+    print(event)
 
 agent = Agent(
     event_listeners = {
@@ -31,23 +30,23 @@ agent = Agent(
 
 agent.run("tell me about griptape")
 ```
-Or listen to all events:
+
+Or listen to all events with two different handlers:
+
 ```python
-import logging
 from griptape.structures import Agent
 from griptape.events import BaseEvent
 
 
 def handler1(event: BaseEvent):
-    logging.getLogger("griptape").info(event)
+    print(event)
 
 
 def handler2(event: BaseEvent):
-    logging.getLogger("griptape").info(event)
+    print(event)
 
 
 agent = Agent(event_listeners=[handler1, handler2])
 
 agent.run("tell me about griptape")
 ```
-

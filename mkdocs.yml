@@ -71,6 +71,7 @@ nav:
     - Prompt Drivers: "griptape-framework/structures/prompt-drivers.md"
     - Conversation Memory: "griptape-framework/structures/conversation-memory.md"
     - Rulesets: "griptape-framework/structures/rulesets.md"
+    - Events: "griptape-framework/structures/events.md"
   - Tools:
       - Overview: "griptape-framework/tools/index.md"
       - Tool Memory: "griptape-framework/tools/tool-memory.md"

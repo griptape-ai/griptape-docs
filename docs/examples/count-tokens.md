@@ -11,7 +11,6 @@ from griptape.structures import Agent
 token_counter = utils.TokenCounter()
 
 agent = Agent(
-    custom_logger=None,
     event_listeners={
         StartPromptEvent: [
             lambda e: token_counter.add_tokens(e.token_count)

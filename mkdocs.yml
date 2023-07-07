@@ -89,7 +89,8 @@ nav:
 - Griptape Tools:
     - Overview: "griptape-tools/index.md"
     - Official Tools:
-      - AwsCli: "griptape-tools/official-tools/aws-cli.md"
+      - AwsIamClient: "griptape-tools/official-tools/aws-iam-client.md"
+      - AwsS3Client: "griptape-tools/official-tools/aws-s3-client.md"
       - Calculator: "griptape-tools/official-tools/calculator.md"
       - DateTime: "griptape-tools/official-tools/date-time.md"
       - EmailClient: "griptape-tools/official-tools/email-client.md"
@@ -97,6 +98,7 @@ nav:
       - PdfReader: "griptape-tools/official-tools/pdf-reader.md"
       - RestApiClient: "griptape-tools/official-tools/rest-api-client.md"
       - SqlClient: "griptape-tools/official-tools/sql-client.md"
+      - TextMemoryBrowser: "griptape-tools/official-tools/text-memory-browser.md"
       - KnowledgeBaseClient: "griptape-tools/official-tools/knowledge-base-client.md"
       - WebScraper: "griptape-tools/official-tools/web-scraper.md"
       - WebSearch: "griptape-tools/official-tools/web-search.md"

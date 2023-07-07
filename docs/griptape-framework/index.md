@@ -114,7 +114,7 @@ from griptape.memory.structure import ConversationMemory
 from griptape.memory.tool import TextToolMemory, BlobToolMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask, PromptTask
-from griptape.tools import WebScraper, FileManager
+from griptape.tools import WebScraper, FileManager, TextMemoryBrowser
 
 
 # Tool memory enables LLMs to store and manipulate data
@@ -137,6 +137,11 @@ file_manager = FileManager(
     }
 )
 
+# Can summarize, extract, and query text memory.
+memory_browser_tool = TextMemoryBrowser(
+    input_memory=[text_memory]
+)
+
 # Pipelines represent sequences of tasks.
 pipeline = Pipeline(
     memory=ConversationMemory()
@@ -146,7 +151,7 @@ pipeline.add_tasks(
     # Load up the first argument from `pipeline.run`.
     ToolkitTask(
         "{{ args[0] }}",
-        tools=[web_scraper, file_manager]
+        tools=[web_scraper, file_manager, memory_browser_tool]
     ),
     # Augment `input` from the previous task.
     PromptTask(

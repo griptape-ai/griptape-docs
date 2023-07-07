@@ -23,7 +23,7 @@ from griptape.loaders import SqlLoader
 from griptape.memory.tool import TextToolMemory
 from griptape.rules import Ruleset, Rule
 from griptape.structures import Agent
-from griptape.tools import SqlClient, FileManager
+from griptape.tools import SqlClient, FileManager, TextMemoryBrowser
 from griptape.utils import Chat
 
 prompt_driver = OpenAiPromptDriver(
@@ -46,6 +46,10 @@ file_manager_tool = FileManager(
     input_memory=[text_memory]
 )
 
+memory_browser_tool = TextMemoryBrowser(
+    input_memory=[text_memory]
+)
+
 sql_tool = SqlClient(
     sql_loader=sql_loader,
     table_name="people",
@@ -58,7 +62,7 @@ sql_tool = SqlClient(
 
 agent = Agent(
     prompt_driver=prompt_driver,
-    tools=[sql_tool, file_manager_tool],
+    tools=[sql_tool, file_manager_tool, memory_browser_tool],
     rulesets=[
         Ruleset(
             name="HumansOrg Agent",

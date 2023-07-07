@@ -9,7 +9,7 @@ Here is an end-to-end example of how memory can be used in unison with multiple 
 ```python
 from griptape.memory.tool import TextToolMemory, BlobToolMemory
 from griptape.structures import Agent
-from griptape.tools import WebScraper, FileManager
+from griptape.tools import WebScraper, FileManager, TextBrowserTool
 
 """
 Define tool memory for storing textual and
@@ -45,8 +45,15 @@ file_manager = FileManager(
     }
 )
 
+"""
+TextMemoryBrowser enables LLMs to browse, extract, and query text memory.
+"""
+memory_browser = TextMemoryBrowser(
+    input_memory=[text_memory]
+)
+
 agent = Agent(
-    tools=[web_scraper, file_manager]
+    tools=[web_scraper, file_manager, memory_browser]
 )
 
 agent.run(

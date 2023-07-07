@@ -34,9 +34,7 @@ posts_client = RestApiClient(
     output_memory={
         "get": [text_memory]
     },
-    input_memory={
-        "get": [text_memory]
-    },
+    input_memory=[text_memory],
     request_body_schema=dumps(
         {
             "$schema": "https://json-schema.org/draft/2019-09/schema",

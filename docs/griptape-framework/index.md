@@ -131,7 +131,7 @@ web_scraper = WebScraper(
 
 # File manager can load and store files locally.
 file_manager = FileManager(
-    input_memory=text_memory,
+    input_memory=[text_memory],
     output_memory={
         "load_files_from_disk": [blob_memory]
     }

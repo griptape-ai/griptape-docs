@@ -39,7 +39,7 @@ Here we set input_memory for tool activities to pull data from and
 wrap the `load_files_from_disk` activity output with the blob memory.
 """
 file_manager = FileManager(
-    input_memory=text_memory,
+    input_memory=[text_memory],
     output_memory={
         "load_files_from_disk": [blob_memory]
     }

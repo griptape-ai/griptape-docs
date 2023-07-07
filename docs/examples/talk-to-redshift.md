@@ -43,7 +43,7 @@ text_memory = TextToolMemory(
 )
 
 file_manager_tool = FileManager(
-    input_memory=text_memory
+    input_memory=[text_memory]
 )
 
 sql_tool = SqlClient(

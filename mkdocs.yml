@@ -95,7 +95,6 @@ nav:
       - DateTime: "griptape-tools/official-tools/date-time.md"
       - EmailClient: "griptape-tools/official-tools/email-client.md"
       - FileManager: "griptape-tools/official-tools/file-manager.md"
-      - PdfReader: "griptape-tools/official-tools/pdf-reader.md"
       - RestApiClient: "griptape-tools/official-tools/rest-api-client.md"
       - SqlClient: "griptape-tools/official-tools/sql-client.md"
       - TextMemoryBrowser: "griptape-tools/official-tools/text-memory-browser.md"

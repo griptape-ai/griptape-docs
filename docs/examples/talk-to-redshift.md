@@ -1,23 +1,10 @@
-This example demonstrates how to build an agent that can dynamically query AWS Redshift tables and store its contents on the local hard drive.
+This example demonstrates how to build an agent that can dynamically query Amazon Redshift Serverless tables and store its contents on the local hard drive.
 
-Before running this example, make sure to install the following dependencies, so that the `SqlDriver` works correctly with Redshift:
-
-```shell
-pip install sqlalchemy~="1.0"
-pip install sqlalchemy-redshift
-
-# Before installing psycopg2, install postgresql-devel in your system.
-# For example, `sudo yum install postgresql-devel`.
-pip install psycopg2
-pip install psycopg2-binary
-pip install redshift_connector
-```
-
-Now, let's build a support agent that uses GPT-4:
+Let's build a support agent that uses GPT-4:
 
 ```python
-from decouple import config
-from griptape.drivers import SqlDriver, OpenAiPromptDriver
+import boto3
+from griptape.drivers import AmazonRedshiftSqlDriver, OpenAiPromptDriver
 from griptape.engines import VectorQueryEngine
 from griptape.loaders import SqlLoader
 from griptape.memory.tool import TextToolMemory
@@ -30,9 +17,13 @@ prompt_driver = OpenAiPromptDriver(
     model="gpt-4"
 )
 
+session = boto3.Session(region_name="REGION_NAME")
+
 sql_loader = SqlLoader(
-    sql_driver=SqlDriver(
-        engine_url=config("REDSHIFT_URL")
+    sql_driver=AmazonRedshiftSqlDriver(
+        database="DATABASE",
+        session=session,
+        workgroup_name="WORKGROUP_NAME"
     )
 )
 

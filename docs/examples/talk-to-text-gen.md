@@ -1,13 +1,12 @@
-
-This example demonstrates how to build an agent that can integrate with [text generation webui](https://github.com/oobabooga/text-generation-webui)
+This example demonstrates how to build an agent that can integrate with [Text Generation Web UI](https://github.com/oobabooga/text-generation-webui).
 
 To be able to perform successful connection, run text gen with '--api' and if you running text gen not on the same host, add '--listen'. see more option [here](https://github.com/oobabooga/text-generation-webui)
 
-Raw API  usage [example](https://github.com/oobabooga/text-generation-webui/blob/main/api-examples/api-example.py)
+Check out the bare API usage [example](https://github.com/oobabooga/text-generation-webui/blob/main/api-examples/api-example.py).
 
 ## Tokenizer
 
-To match the tokenizer used in the text gen, one can use ['PreTrainedTokenizerFast'](https://huggingface.co/docs/transformers/fast_tokenizers#loading-from-a-json-file) to load tokenizer from saved json setting file.
+To match the tokenizer used in the text gen, one can use [PreTrainedTokenizerFast](https://huggingface.co/docs/transformers/fast_tokenizers#loading-from-a-json-file) to load tokenizer from saved json setting file.
 
 Example:
 

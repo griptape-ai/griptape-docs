@@ -12,8 +12,57 @@ SQL drivers can be used to make SQL queries and load table schemas. They are use
 This is a basic SQL loader based on [SQLAlchemy 1.x](https://docs.sqlalchemy.org/en/14/). Here is an example of how to use it:
 
 ```python
+from griptape.drivers import SqlDriver
+
 driver = SqlDriver(
     engine_url="sqlite:///:memory:"
+)
+
+driver.execute_query("select * from users;")
+```
+
+## AmazonRedshiftSqlDriver
+
+This is a SQL driver for interacting with the [Amazon Redshift Data API](https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html) 
+to execute statements. Here is an example of how to use it for Redshift Serverless:
+
+```python
+import boto3
+from griptape.drivers import AmazonRedshiftSqlDriver
+
+session = boto3.Session(region_name="us-east-1")
+
+driver=AmazonRedshiftSqlDriver(
+    database="dev",
+    session=session,
+    workgroup_name="dev"
+)
+
+driver.execute_query("select * from users;")
+```
+
+## SnowflakeSqlDriver
+
+This is a SQL driver based on the [Snowflake SQLAlchemy Toolkit](https://docs.snowflake.com/en/developer-guide/python-connector/sqlalchemy) which runs on top of the Snowflake Connector for Python. Here is an example of how to use it:
+
+```python
+import snowflake.connector
+from snowflake.connector import SnowflakeConnection
+from griptape.drivers import SnowflakeSqlDriver
+
+PWD = os.environ.get('PWD')
+
+def get_snowflake_connection() -> SnowflakeConnection:
+    return snowflake.connector.connect(
+        account = 'account',
+        user = 'user',
+        password = PWD,
+        database = 'database',
+        schema = 'schema',
+    )
+
+driver=SnowflakeSqlDriver(
+    connection_func=get_snowflake_connection
 )
 
 driver.execute_query("select * from users;")

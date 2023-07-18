@@ -48,9 +48,9 @@ file_manager = FileManager(
 )
 
 """
-TextMemoryBrowser enables LLMs to browse, extract, and query text memory.
+ToolOutputProcessor enables LLMs to browse, extract, and query text memory.
 """
-memory_browser = TextMemoryBrowser(
+memory_browser = ToolOutputProcessor(
     input_memory=[text_memory]
 )
 

@@ -113,4 +113,4 @@ nav:
       - Query a Webpage: "examples/query-webpage.md"
     - Misc:
         - Count Tokens: "examples/count-tokens.md"
-        - Text Generation Web UI: "examples/talk-to-text-gen.md"
+        - Using Text Generation Web UI: "examples/using-text-generation-web-ui.md"

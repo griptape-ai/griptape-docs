@@ -4,6 +4,8 @@ Tool memory augments activity inputs and outputs with storage capabilities. It's
 * **Long textual content**: when textual content returned by tools can't fit in the token limit, it's often useful to perform operations on it in a separate process, not in the main LLM.
 * **Non-textual content**: tools can generate images, videos, PDFs, and other non-textual content that can be stored in memory and acted upon later by other tools.
 
+By default, Griptape augments all tool outputs with `TextToolMemory` but you can override at the structure, task, or tool activity level.
+
 Here is an end-to-end example of how memory can be used in unison with multiple tools to store and load content:
 
 ```python

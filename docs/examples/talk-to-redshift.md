@@ -5,12 +5,10 @@ Let's build a support agent that uses GPT-4:
 ```python
 import boto3
 from griptape.drivers import AmazonRedshiftSqlDriver, OpenAiPromptDriver
-from griptape.engines import VectorQueryEngine
 from griptape.loaders import SqlLoader
-from griptape.memory.tool import TextToolMemory
 from griptape.rules import Ruleset, Rule
 from griptape.structures import Agent
-from griptape.tools import SqlClient, FileManager, TextMemoryBrowser
+from griptape.tools import SqlClient, FileManager, ToolOutputProcessor
 from griptape.utils import Chat
 
 prompt_driver = OpenAiPromptDriver(
@@ -27,33 +25,16 @@ sql_loader = SqlLoader(
     )
 )
 
-text_memory = TextToolMemory(
-    query_engine=VectorQueryEngine(
-        prompt_driver=prompt_driver
-    )
-)
-
-file_manager_tool = FileManager(
-    input_memory=[text_memory]
-)
-
-memory_browser_tool = TextMemoryBrowser(
-    input_memory=[text_memory]
-)
-
 sql_tool = SqlClient(
     sql_loader=sql_loader,
     table_name="people",
     table_description="contains information about tech industry professionals",
-    engine_name="redshift",
-    output_memory={
-        "execute_query": [text_memory]
-    }
+    engine_name="redshift"
 )
 
 agent = Agent(
     prompt_driver=prompt_driver,
-    tools=[sql_tool, file_manager_tool, memory_browser_tool],
+    tools=[sql_tool, FileManager(), ToolOutputProcessor()],
     rulesets=[
         Ruleset(
             name="HumansOrg Agent",

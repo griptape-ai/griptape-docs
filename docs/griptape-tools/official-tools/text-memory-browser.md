@@ -1,11 +1,7 @@
 # TextMemoryBrowser
 
-This tool enables LLMs to query, extract, and summarize text memory.
+This tool enables LLMs to query, extract, and summarize tool outputs via shared short-term tool memory.
 
 ```python
-memory = TextToolMemory()
-
-TextMemoryBrowser(
-    input_memory=[memory]
-)
+TextMemoryBrowser()
 ```

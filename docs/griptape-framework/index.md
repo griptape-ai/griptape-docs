@@ -111,36 +111,10 @@ Let's define a simple two-task pipeline that uses tools and memory:
 
 ```python
 from griptape.memory.structure import ConversationMemory
-from griptape.memory.tool import TextToolMemory, BlobToolMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask, PromptTask
-from griptape.tools import WebScraper, FileManager, TextMemoryBrowser
+from griptape.tools import WebScraper, FileManager, ToolOutputProcessor
 
-
-# Tool memory enables LLMs to store and manipulate data
-# without ever looking at it directly.
-text_memory = TextToolMemory()
-blob_memory = BlobToolMemory()
-
-# Connect a web scraper to load web pages.
-web_scraper = WebScraper(
-    output_memory={
-        "get_content": [text_memory]
-    }
-)
-
-# File manager can load and store files locally.
-file_manager = FileManager(
-    input_memory=[text_memory],
-    output_memory={
-        "load_files_from_disk": [blob_memory]
-    }
-)
-
-# Can summarize, extract, and query text memory.
-memory_browser_tool = TextMemoryBrowser(
-    input_memory=[text_memory]
-)
 
 # Pipelines represent sequences of tasks.
 pipeline = Pipeline(
@@ -151,7 +125,9 @@ pipeline.add_tasks(
     # Load up the first argument from `pipeline.run`.
     ToolkitTask(
         "{{ args[0] }}",
-        tools=[web_scraper, file_manager, memory_browser_tool]
+        # Add tools for web scraping, file management, and
+        # tool output processing
+        tools=[WebScraper(), FileManager(), ToolOutputProcessor()]
     ),
     # Augment `input` from the previous task.
     PromptTask(

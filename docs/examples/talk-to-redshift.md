@@ -8,7 +8,7 @@ from griptape.drivers import AmazonRedshiftSqlDriver, OpenAiPromptDriver
 from griptape.loaders import SqlLoader
 from griptape.rules import Ruleset, Rule
 from griptape.structures import Agent
-from griptape.tools import SqlClient, FileManager, ToolOutputProcessor
+from griptape.tools import SqlClient, FileManager
 from griptape.utils import Chat
 
 prompt_driver = OpenAiPromptDriver(
@@ -34,7 +34,7 @@ sql_tool = SqlClient(
 
 agent = Agent(
     prompt_driver=prompt_driver,
-    tools=[sql_tool, FileManager(), ToolOutputProcessor()],
+    tools=[sql_tool, FileManager())],
     rulesets=[
         Ruleset(
             name="HumansOrg Agent",

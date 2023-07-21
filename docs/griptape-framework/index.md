@@ -113,7 +113,7 @@ Let's define a simple two-task pipeline that uses tools and memory:
 from griptape.memory.structure import ConversationMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask, PromptTask
-from griptape.tools import WebScraper, FileManager, ToolOutputProcessor
+from griptape.tools import WebScraper, FileManager
 
 
 # Pipelines represent sequences of tasks.
@@ -125,9 +125,8 @@ pipeline.add_tasks(
     # Load up the first argument from `pipeline.run`.
     ToolkitTask(
         "{{ args[0] }}",
-        # Add tools for web scraping, file management, and
-        # tool output processing
-        tools=[WebScraper(), FileManager(), ToolOutputProcessor()]
+        # Add tools for web scraping, and file management
+        tools=[WebScraper(), FileManager()]
     ),
     # Augment `input` from the previous task.
     PromptTask(

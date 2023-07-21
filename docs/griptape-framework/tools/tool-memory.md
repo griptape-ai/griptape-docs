@@ -11,13 +11,17 @@ Here is an end-to-end example of how memory can be used in unison with multiple 
 ```python
 from griptape.memory.tool import TextToolMemory, BlobToolMemory
 from griptape.structures import Agent
-from griptape.tools import WebScraper, FileManager, TextBrowserTool
+from griptape.tools import WebScraper, FileManager, ToolOutputProcessor
 
 """
 Define tool memory for storing textual and
 non-textual content.
 """
-text_memory = TextToolMemory()
+text_memory = TextToolMemory(
+    # Disable all memory activities, so we can use
+    # ToolOutputProcessor as a tool later.
+    allowlist=[]
+)
 blob_memory = BlobToolMemory()
 
 """

@@ -11,10 +11,6 @@ from griptape.structures import Agent
 from griptape.tools import SqlClient, FileManager
 from griptape.utils import Chat
 
-prompt_driver = OpenAiPromptDriver(
-    model="gpt-4"
-)
-
 session = boto3.Session(region_name="REGION_NAME")
 
 sql_loader = SqlLoader(
@@ -33,7 +29,6 @@ sql_tool = SqlClient(
 )
 
 agent = Agent(
-    prompt_driver=prompt_driver,
     tools=[sql_tool, FileManager())],
     rulesets=[
         Ruleset(

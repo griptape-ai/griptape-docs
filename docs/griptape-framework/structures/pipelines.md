@@ -55,12 +55,12 @@ In `Pipeline` structures:
 
 ## Prompt Drivers
 
-Griptape uses OpenAI's `gpt-3.5-turbo` model by default. If you want to use a different model, set a custom OpenAI prompt driver:
+Griptape uses OpenAI's `gpt-4` model by default. If you want to use a different model, set a custom OpenAI prompt driver:
 
 ```python
 Pipeline(
     prompt_driver=OpenAiPromptDriver(
-        model="gpt-4"
+        model="gpt-3.5-turbo"
     )
 )
 ```

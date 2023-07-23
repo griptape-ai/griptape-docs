@@ -7,7 +7,7 @@ You can instantiate drivers and pass them to structures:
 ```python
 Pipeline(
     prompt_driver=OpenAiPromptDriver(
-        model="gpt-4"
+        temperature=0.3
     )
 )
 ```
@@ -16,7 +16,7 @@ Or use them independently:
 
 ```python
 OpenAiPromptDriver(
-    model="gpt-4"
+    temperature=1
 ).run("Q: give me some ideas for writing a fantasy book\nA:")
 ```
 
@@ -35,7 +35,7 @@ The **OpenAiPromptDriver** uses the following parameters:
 | api_version  | API version.                                                                          | NO       |
 | api_base     | API URL.                                                                              | NO       |
 | api_key      | API key to pass directly; by default uses `OPENAI_API_KEY_PATH` environment variable. | NO       |
-| model        | OpenAI model name. Uses `gpt-3.5.turbo` by default.                                   | NO       |
+| model        | OpenAI model name. Uses `gpt-4` by default.                                           | NO       |
 | organization | OpenAI organization.                                                                  | NO       |
 | tokenizer    | Custom `TiktokenTokenizer`                                                            | NO       |
 | user         | OpenAI user.                                                                          | NO       |

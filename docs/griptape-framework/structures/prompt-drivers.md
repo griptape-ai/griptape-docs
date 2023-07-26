@@ -124,3 +124,16 @@ The **TextGenPromptDriver** uses the following parameters:
 | model_url    | URL of the running model.                     | NO       |
 | generate_uri | API URI of the generate call.                 | NO       |
 | tokenizer    | Custom `TextGenTokenizer`.                    | YES      |
+
+## Amazon Sagemaker 
+
+This driver uses [Amazon Sagemaker Realtime Endpoints](https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html) to run LLM models on AWS.
+
+The **AmazonSagemakerPromptDriver** uses the following parameters:
+
+| Parameter    | Description                                                                                                        | Required |
+|--------------|--------------------------------------------------------------------------------------------------------------------|----------|
+| model        | Amazon Sagemaker model name.                                                                                       | YES      |
+| endpoint_name| Amazon SageMaker endpoint name.                                                                                    | YES      |
+| tokenizer    | Tokenizer compatible with provided `model`.                                                                        | YES      |
+| session      | boto3 [session reference](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/core/session.html)     | NO       |

@@ -114,7 +114,7 @@ The **HuggingFacePipelinePromptDriver** uses the following parameters:
 
 ## Text Generation Web UI
 
-This driver uses [Text Generation Web UI API](https://github.com/oobabooga/text-generation-webui) ro run LLM models locally.
+This driver uses [Text Generation Web UI API](https://github.com/oobabooga/text-generation-webui) to run LLM models locally.
 
 The **TextGenPromptDriver** uses the following parameters:
 

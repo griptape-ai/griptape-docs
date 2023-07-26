@@ -124,3 +124,15 @@ The **TextGenPromptDriver** uses the following parameters:
 | model_url    | URL of the running model.                     | NO       |
 | generate_uri | API URI of the generate call.                 | NO       |
 | tokenizer    | Custom `TextGenTokenizer`.                    | YES      |
+
+## Ai21
+
+This driver connects to Ai21 [J2 Complete API](https://docs.ai21.com/reference/j2-complete-api-ref).
+
+The **AnthropicPromptDriver** uses the following parameters:
+
+| Parameter | Description                              | Required |
+|-----------|------------------------------------------|----------|
+| api_key   | Ai21 API key.                            | YES      |
+| model     | Ai21 model name. Defaults to `j2-ultra`. | NO       |
+| tokenizer | Custom `Ai21Tokenizer`.                  | NO       |

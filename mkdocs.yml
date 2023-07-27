@@ -115,3 +115,4 @@ nav:
     - Misc:
         - Count Tokens: "examples/count-tokens.md"
         - Using Text Generation Web UI: "examples/using-text-generation-web-ui.md"
+        - Using Text Generation Web UI: "examples/dynamodb-conversation.md"

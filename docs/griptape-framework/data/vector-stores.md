@@ -153,3 +153,61 @@ The following methods are available in the `MarqoVectorStoreDriver` class:
 9. `delete_index(self, name: str)`: Deletes an index in the Marqo client with the given name.
 10. `get_indexes(self)`: Returns a list of all indexes in the Marqo client.
 11. `upsert_vector(self, vector: list[float], vector_id: Optional[str] = None, namespace: Optional[str] = None, meta: Optional[dict] = None)`: Inserts a vector into the Marqo index. If a vector with the given vector ID already exists, it is updated; otherwise, a new vector is inserted. Currently, this function is not implemented and raises an Exception.
+
+
+## MongoDBAtlasVectorStoreDriver
+This driver supports the MongoDB Atlas vector database. In addition to standard vector driver methods, it also provides easy document management with MongoDB's powerful NoSQL document store.
+
+Here is a complete example of how the driver can be used to load and query information from MongoDB Atlas:
+
+```python
+from griptape import utils
+from griptape.drivers import MongoDBAtlasVectorStoreDriver
+from griptape.engines import VectorQueryEngine
+from griptape.loaders import WebLoader
+from griptape.structures import Agent
+from griptape.tools import KnowledgeBaseClient
+import openai
+
+# Set the OpenAI API key
+openai.api_key_path = "../openai_api_key.txt"
+
+# Define the namespace
+namespace = "griptape-ai"
+
+# Initialize the vector store driver
+vector_store = MongoDBAtlasVectorStoreDriver(
+    connection_string="mongodb+srv://<username>:<password>@cluster0.mongodb.net/test",
+    database_name="mydatabase",
+    collection_name="mycollection"
+)
+
+# Initialize the query engine
+query_engine = VectorQueryEngine(vector_store_driver=vector_store)
+
+# Initialize the knowledge base tool
+kb_tool = KnowledgeBaseClient(
+    description="Contains information about the Griptape Framework from www.griptape.ai",
+    query_engine=query_engine,
+    namespace=namespace
+)
+
+# Load artifacts from the web
+artifacts = WebLoader(max_tokens=200).load("https://www.griptape.ai")
+
+# Upsert the artifacts into the vector store
+vector_store.upsert_text_artifacts({namespace: artifacts,})
+result = vector_store.query(query="What is griptape?")
+print(result)
+```
+
+## Key Methods
+The following methods are available in the MongoDBAtlasVectorStoreDriver class:
+
+1. `__init__(self, connection_string: str, database_name: str, collection_name: str)`: This method initializes the MongoDB client with the given connection string, database name, and collection name.
+2. `upsert_text(self, string: str, vector_id: Optional[str] = None, namespace: Optional[str] = None, meta: Optional[dict] = None)`: Inserts a text document into the MongoDB Atlas database. If a document with the given vector ID already exists, it is updated; otherwise, a new document is inserted.
+3. `upsert_text_artifact(self, artifact: TextArtifact, namespace: Optional[str] = None, meta: Optional[dict] = None)`: Inserts a text artifact into the MongoDB Atlas database. If an artifact with the given vector ID already exists, it is updated; otherwise, a new artifact is inserted.
+4. `load_entry(self, vector_id: str, namespace: Optional[str] = None)`: Loads a document entry from the MongoDB Atlas database based on the vector ID. Returns the loaded Entry if found; otherwise, None is returned.
+5. `load_entries(self, namespace: Optional[str] = None)`: Loads all document entries from the MongoDB Atlas database. Entries can optionally be filtered by namespace.
+6. `query(self, query: str, count: Optional[int] = None, namespace: Optional[str] = None, include_vectors: bool = False, include_metadata=True)`: Queries the MongoDB Atlas database for documents that match the provided query string. The number of results returned can be limited and entries can optionally be filtered by namespace.
+7. `upsert_vector(self, vector: list[float], vector_id: Optional[str] = None, namespace: Optional[str] = None, meta: Optional[dict] = None)`: Inserts a vector into the MongoDB Atlas database. If a vector with the given vector ID already exists, it is updated; otherwise, a new vector is inserted. Currently, this function is not implemented and raises an Exception.

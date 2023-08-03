@@ -153,3 +153,48 @@ The following methods are available in the `MarqoVectorStoreDriver` class:
 9. `delete_index(self, name: str)`: Deletes an index in the Marqo client with the given name.
 10. `get_indexes(self)`: Returns a list of all indexes in the Marqo client.
 11. `upsert_vector(self, vector: list[float], vector_id: Optional[str] = None, namespace: Optional[str] = None, meta: Optional[dict] = None)`: Inserts a vector into the Marqo index. If a vector with the given vector ID already exists, it is updated; otherwise, a new vector is inserted. Currently, this function is not implemented and raises an Exception.
+
+## MongoDbAtlasVectorStoreDriver
+This driver provides support for storing vector data in a MongoDB Atlas database. The driver includes methods for performing standard vector operations such as inserting, updating, querying, and loading vectors.
+
+Below is a detailed example of how the MongoDbAtlasVectorStoreDriver can be used to interact with a MongoDB Atlas instance:
+
+```python
+from griptape.drivers import MongoDbAtlasVectorStoreDriver
+
+# Initialize the vector store driver
+vector_store = MongoDbAtlasVectorStoreDriver(
+    connection_string="mongodb+srv://<username>:<password>@cluster.mongodb.net/<dbname>",
+    database_name="myDatabase",
+    collection_name="myCollection"
+)
+
+# Upsert a vector
+vector_id = vector_store.upsert_vector(
+    vector=[0.1, 0.2, 0.3],
+    namespace="myNamespace",
+    meta={"info": "sample"}
+)
+
+# Load a specific entry by vector ID
+entry = vector_store.load_entry(vector_id=vector_id)
+print(entry)
+
+# Query the collection
+results = vector_store.query(
+    query="What is griptape?",
+    count=5
+)
+print(results)
+```
+
+## Key Methods
+The following methods are available in the MongoDbAtlasVectorStoreDriver class:
+
+1. `__init__(self, connection_string: str, database_name: str, collection_name: str)`: Initializes the MongoClient with the given connection string, database name, and collection name.
+2. `get_collection(self) -> Collection`: Returns the MongoDB Collection instance for the specified database and collection name.
+3. `upsert_vector(self, vector: list[float], vector_id: Optional[str] = None, namespace: Optional[str] = None, meta: Optional[dict] = None) -> str`: Inserts or updates a vector in the collection. If a vector with the given vector ID already exists, it is updated; otherwise, a new vector is inserted.
+4. `load_entry(self, vector_id: str, namespace: Optional[str] = None) -> Optional[BaseVectorStoreDriver.Entry]`: Loads a document entry from the MongoDB collection based on the vector ID. Returns the loaded Entry if found; otherwise, None is returned.
+5. `load_entries(self, namespace: Optional[str] = None) -> list[BaseVectorStoreDriver.Entry]`: Loads all document entries from the MongoDB collection. Entries can optionally be filtered by namespace.
+6. `query(self, query: str, count: Optional[int] = None, namespace: Optional[str] = None, include_vectors: bool = False, offset: Optional[int] = 0, index: Optional[str] = None) -> list[BaseVectorStoreDriver.QueryResult]`: Queries the MongoDB collection for documents that match the provided query string. Results can be customized based on parameters like count, namespace, inclusion of vectors, offset, and index.
+Note: The implementation details such as the structure of the query method can be tailored according to specific use cases and the nature of the stored vectors. In this example, it's assumed that the driver uses an embedding driver to convert query strings into vectors and leverages specific MongoDB features for nearest neighbor search.

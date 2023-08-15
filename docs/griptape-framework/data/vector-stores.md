@@ -188,7 +188,7 @@ results = vector_store.query(
 print(results)
 ```
 
-## Key Methods
+### Key Methods
 The following methods are available in the MongoDbAtlasVectorStoreDriver class:
 
 1. `__init__(self, connection_string: str, database_name: str, collection_name: str)`: Initializes the MongoClient with the given connection string, database name, and collection name.
@@ -198,3 +198,71 @@ The following methods are available in the MongoDbAtlasVectorStoreDriver class:
 5. `load_entries(self, namespace: Optional[str] = None) -> list[BaseVectorStoreDriver.Entry]`: Loads all document entries from the MongoDB collection. Entries can optionally be filtered by namespace.
 6. `query(self, query: str, count: Optional[int] = None, namespace: Optional[str] = None, include_vectors: bool = False, offset: Optional[int] = 0, index: Optional[str] = None) -> list[BaseVectorStoreDriver.QueryResult]`: Queries the MongoDB collection for documents that match the provided query string. Results can be customized based on parameters like count, namespace, inclusion of vectors, offset, and index.
 Note: The implementation details such as the structure of the query method can be tailored according to specific use cases and the nature of the stored vectors. In this example, it's assumed that the driver uses an embedding driver to convert query strings into vectors and leverages specific MongoDB features for nearest neighbor search.
+
+## RedisVectorStoreDriver
+This driver integrates with the Redis vector storage system. Redis, known for its high-speed data store, has the ability to also handle vector storage. With the RedisVectorStoreDriver, you can communicate with the Redis database to manage and query your vector data.
+
+Below is an in-depth example showcasing how this driver can be used:
+
+```python
+import hashlib
+import json
+from urllib.request import urlopen
+from decouple import config
+from griptape.drivers import RedisVectorStoreDriver
+import numpy as np  # Assuming you'd use numpy to create a dummy vector for the sake of example.
+
+
+def load_data(driver: RedisVectorStoreDriver) -> None:
+    response = urlopen(
+        "https://raw.githubusercontent.com/wedeploy-examples/"
+        "supermarket-web-example/master/products.json"
+    )
+
+    for product in json.loads(response.read()):
+        dummy_vector = np.random.rand(100).tolist()  # Creating a dummy vector, you'd need to replace this with actual embeddings.
+        driver.upsert_vector(
+            dummy_vector,
+            vector_id=hashlib.md5(product["title"].encode()).hexdigest(),
+            meta={
+                "title": product["title"],
+                "description": product["description"],
+                "type": product["type"],
+                "price": product["price"],
+                "rating": product["rating"]
+            },
+            namespace="supermarket-products"
+        )
+
+
+vector_store_driver = RedisVectorStoreDriver(
+    host='localhost',
+    port=6379,
+    db=0,
+    password=None,
+    index='my_vector_index'
+)
+
+load_data(vector_store_driver)
+
+# To mimic the query "fruit", you'd convert the word "fruit" to its equivalent vector.
+query_vector = np.random.rand(100).tolist()  # This is just a dummy example. You'd need actual embeddings for your data.
+results = vector_store_driver.query(
+    vector=query_vector,
+    count=3,
+    namespace="supermarket-products"
+)
+print(results)
+
+```
+
+### Key Methods
+The following methods are available in the RedisVectorStoreDriver class:
+
+1. `__init__(self, host: str, port: int, db: int, password: Optional[str], index: str)`: Initializes the Redis client with the given host, port, database, optional password, and index name.
+2. `_generate_key(self, vector_id: str, namespace: Optional[str] = None) -> str`: Generates a Redis key using the provided vector ID and optionally a namespace. This is a helper method primarily used internally.
+3. `upsert_vector(self, vector: list[float], vector_id: Optional[str] = None, namespace: Optional[str] = None, meta: Optional[dict] = None) -> str`: Inserts or updates a vector in Redis. If a vector with the given vector ID already exists, it is updated; otherwise, a new vector is inserted. Metadata associated with the vector can also be provided.
+4. `load_entry(self, vector_id: str, namespace: Optional[str] = None) -> Optional[BaseVectorStoreDriver.Entry]`: Retrieves a specific vector entry from Redis based on its identifier and optional namespace. If the entry is found, it returns an instance of BaseVectorStoreDriver.Entry; otherwise, None is returned.
+5. `load_entries(self, namespace: Optional[str] = None) -> list[BaseVectorStoreDriver.Entry]`: Retrieves all vector entries from Redis that match the optional namespace. Returns a list of BaseVectorStoreDriver.Entry objects.
+6. `query(self, vector: list[float], count: Optional[int] = None, namespace: Optional[str] = None) -> list[BaseVectorStoreDriver.QueryResult]`: Performs a nearest neighbor search on Redis to find vectors similar to the provided input vector. Results can be limited using the count parameter and optionally filtered by a namespace. Returns a list of BaseVectorStoreDriver.QueryResult objects, each encapsulating the retrieved vector, its similarity score, metadata, and namespace.
+Note: This driver interfaces with a Redis instance and utilizes the Redis hashes and RediSearch module to store, retrieve, and query vectors in a structured manner. Proper setup of the Redis instance and RediSearch is necessary for the driver to function correctly.

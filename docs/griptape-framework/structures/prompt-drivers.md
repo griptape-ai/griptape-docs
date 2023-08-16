@@ -1,12 +1,12 @@
 # Prompt Drivers
 
-Prompt drivers are used by Griptape structures to make calls to the underlying foundation models. **OpenAiPromptDriver** is the default prompt driver used in all structures.
+Prompt drivers are used by Griptape structures to make calls to the underlying foundation models. **OpenAiChatPromptDriver** is the default prompt driver used in all structures.
 
 You can instantiate drivers and pass them to structures:
 
 ```python
 Pipeline(
-    prompt_driver=OpenAiPromptDriver(
+    prompt_driver=OpenAiChatPromptDriver(
         temperature=0.3
     )
 )
@@ -15,19 +15,41 @@ Pipeline(
 Or use them independently:
 
 ```python
-OpenAiPromptDriver(
+stack = PromptStack()
+
+stack.add_user_input("What's the word, bird?")
+
+OpenAiChatPromptDriver(
     temperature=1
-).run("Q: give me some ideas for writing a fantasy book\nA:")
+).run(stack)
 ```
 
 !!! info
     More prompt drivers are coming soon.
 
-## OpenAI
+## OpenAI Chat
 
-This driver connects to OpenAI [Text Completion](https://platform.openai.com/docs/guides/completion) and [Chat Completion](https://platform.openai.com/docs/guides/chat) APIs.
+This driver connects to the [OpenAI Chat](https://platform.openai.com/docs/guides/chat) API.
 
-The **OpenAiPromptDriver** uses the following parameters:
+The **OpenAiChatPromptDriver** uses the following parameters:
+
+| Parameter    | Description                                                                                                         | Required |
+|--------------|---------------------------------------------------------------------------------------------------------------------|----------|
+| api_type     | Can be changed to use OpenAI models on Azure.                                                                       | NO       |
+| api_version  | API version.                                                                                                        | NO       |
+| api_base     | API URL.                                                                                                            | NO       |
+| api_key      | API key to pass directly; by default uses `OPENAI_API_KEY_PATH` environment variable.                               | NO       |
+| max_tokens   | Optional maximum return tokens. If not specified, the value will be automatically generated based by the tokenizer. | NO       |
+| model        | OpenAI model name. Uses `gpt-4` by default.                                                                         | NO       |
+| organization | OpenAI organization.                                                                                                | NO       |
+| tokenizer    | Custom `TiktokenTokenizer`                                                                                          | NO       |
+| user         | OpenAI user.                                                                                                        | NO       |
+
+## OpenAI Completion
+
+This driver connects to the [OpenAI Completion](https://platform.openai.com/docs/guides/completion) API.
+
+The **OpenAiCompletionPromptDriver** uses the following parameters:
 
 | Parameter    | Description                                                                                                         | Required |
 |--------------|---------------------------------------------------------------------------------------------------------------------|----------|

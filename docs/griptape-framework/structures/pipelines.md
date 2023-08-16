@@ -59,7 +59,7 @@ Griptape uses OpenAI's `gpt-4` model by default. If you want to use a different 
 
 ```python
 Pipeline(
-    prompt_driver=OpenAiPromptDriver(
+    prompt_driver=OpenAiChatPromptDriver(
         model="gpt-3.5-turbo"
     )
 )

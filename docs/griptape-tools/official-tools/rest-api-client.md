@@ -19,7 +19,7 @@ The following example is built using [https://jsonplaceholder.typicode.com/guide
   
 ```python
 from json import dumps
-from griptape.drivers import OpenAiPromptDriver
+from griptape.drivers import OpenAiChatPromptDriver
 from griptape.memory.structure import ConversationMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask
@@ -132,7 +132,7 @@ posts_client = RestApiClient(
 
 pipeline = Pipeline(
     memory=ConversationMemory(),
-    prompt_driver=OpenAiPromptDriver(
+    prompt_driver=OpenAiChatPromptDriver(
         temperature=0.1
     ),
 

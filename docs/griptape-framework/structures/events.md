@@ -14,7 +14,7 @@ from griptape.events import (
     FinishPromptEvent,
 )
 
-def handler(e: BaseEvent):
+def handler(event: BaseEvent):
     print(event)
 
 agent = Agent(

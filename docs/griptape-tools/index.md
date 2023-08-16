@@ -2,7 +2,7 @@ Tools give the LLM abilities to invoke outside APIs, reference data sets, and ge
 
 Agents (or any other structure for that matter) can be used to connect your pre-processed data to LLMs via tools. Griptape tools are Python classes with activities. Activities are Python methods decorated with the @activity decorator. Each activity has a description (used to provide context to the LLM) and the input schema that the LLM must follow in order to use the tool. Griptape validates LLM outputs against the schema to ensure each tool activity is used correctly.
 
-We provide a repository of [official Griptape Tools](https://github.com/griptape-ai/griptape-tools) for accessing and processing data. You can also build tools yourself. For example, here is a simple tool for generating random numbers:
+We provide a set of official Griptape Tools for accessing and processing data. You can also build tools yourself. For example, here is a simple tool for generating random numbers:
 
 ```python
 import random

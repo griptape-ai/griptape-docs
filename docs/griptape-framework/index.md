@@ -17,10 +17,10 @@ First, configure an OpenAI client by [getting an API key](https://beta.openai.co
 
 ### Using pip
 
-Install **griptape** and **griptape-tools**:
+Install **griptape**:
 
 ```
-pip install griptape griptape-tools -U
+pip install griptape -U
 ```
 
 ### Using Poetry
@@ -35,7 +35,6 @@ Change your working directory to the new `griptape-quickstart` directory created
 
 ```
 poetry add griptape
-poetry add griptape-tools
 ```
 ## Build a Simple Agent 
 With Griptape, you can create *structures*, such as `Agents`, `Pipelines`, and `Workflows`, that are composed of different types of tasks. First, let's build a simple Agent that we can interact with through a chat based interface. 

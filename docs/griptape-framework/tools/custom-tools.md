@@ -78,4 +78,4 @@ print(
 
 That's it! You can start using this tool with any converter or directly via Griptape.
 
-Check out other [Griptape tools](https://github.com/griptape-ai/griptape-tools/tree/main/griptape/tools) to learn more about tool implementation details.
+Check out other [Griptape Tools](https://github.com/griptape-ai/griptape/tree/main/griptape/tools) to learn more about tool implementation details.

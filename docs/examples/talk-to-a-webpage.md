@@ -5,7 +5,7 @@ from griptape.engines import VectorQueryEngine
 from griptape.loaders import WebLoader
 from griptape.rules import Ruleset, Rule
 from griptape.structures import Agent
-from griptape.tools import KnowledgeBaseClient
+from griptape.tools import VectorStoreClient
 from griptape.utils import Chat
 
 
@@ -22,7 +22,7 @@ engine.vector_store_driver.upsert_text_artifacts(
 )
 
 
-kb_client = KnowledgeBaseClient(
+vector_store_tool = VectorStoreClient(
     description="Contains information about physics. "
                 "Use it to answer any physics-related questions.",
     query_engine=engine,
@@ -43,7 +43,7 @@ agent = Agent(
             ]
         )
     ],
-    tools=[kb_client]
+    tools=[vector_store_tool]
 )
 
 Chat(agent).start()

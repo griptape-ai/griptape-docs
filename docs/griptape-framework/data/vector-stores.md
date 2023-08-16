@@ -102,7 +102,7 @@ from griptape.drivers import MarqoVectorStoreDriver
 from griptape.engines import VectorQueryEngine
 from griptape.loaders import WebLoader
 from griptape.structures import Agent
-from griptape.tools import KnowledgeBaseClient
+from griptape.tools import VectorStoreClient
 import openai
 from marqo import Client
 
@@ -124,7 +124,7 @@ vector_store = MarqoVectorStoreDriver(
 query_engine = VectorQueryEngine(vector_store_driver=vector_store)
 
 # Initialize the knowledge base tool
-kb_tool = KnowledgeBaseClient(
+vector_store_tool = VectorStoreClient(
     description="Contains information about the Griptape Framework from www.griptape.ai",
     query_engine=query_engine,
     namespace=namespace

@@ -6,7 +6,7 @@ import requests
 from griptape.engines import VectorQueryEngine
 from griptape.loaders import PdfLoader
 from griptape.structures import Agent
-from griptape.tools import KnowledgeBaseClient
+from griptape.tools import VectorStoreClient
 from griptape.utils import Chat
 
 namespace = "attention"
@@ -22,7 +22,7 @@ engine.vector_store_driver.upsert_text_artifacts(
     }
 )
 
-kb_client = KnowledgeBaseClient(
+vector_store_tool = VectorStoreClient(
     description="Contains information about the Attention Is All You Need paper. "
                 "Use it to answer any related questions.",
     query_engine=engine,
@@ -30,7 +30,7 @@ kb_client = KnowledgeBaseClient(
 )
 
 agent = Agent(
-    tools=[kb_client]
+    tools=[vector_store_tool]
 )
 
 Chat(agent).start()

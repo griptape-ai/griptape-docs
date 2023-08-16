@@ -1,6 +1,6 @@
 This tool enables LLMs to dynamically query tool memory.
 
-The `KnowledgeBaseClient` tool uses the following parameters:
+The `VectorStoreClient` tool uses the following parameters:
 
 | Parameter    | Description                                               | Required |
 |--------------|-----------------------------------------------------------|----------|
@@ -13,7 +13,7 @@ Here is an end-to-end example of how it can be used with the Pincone storage dri
 
 ```python
 from griptape.structures import Agent
-from griptape.tools import KnowledgeBaseClient
+from griptape.tools import VectorStoreClient
 from griptape.loaders import WebLoader
 from griptape.engines import VectorQueryEngine
 
@@ -25,7 +25,7 @@ engine.insert(
     namespace="griptape"
 )
     
-vector_db = KnowledgeBaseClient(
+vector_db = VectorStoreClient(
     description="This DB has information about the Griptape Python framework",
     query_engine=engine,
     namespace="griptape"

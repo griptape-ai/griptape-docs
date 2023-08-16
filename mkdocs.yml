@@ -99,7 +99,7 @@ nav:
       - RestApiClient: "griptape-tools/official-tools/rest-api-client.md"
       - SqlClient: "griptape-tools/official-tools/sql-client.md"
       - ToolOutputProcessor: "griptape-tools/official-tools/tool-output-processor.md"
-      - KnowledgeBaseClient: "griptape-tools/official-tools/knowledge-base-client.md"
+      - VectorStoreClient: "griptape-tools/official-tools/vector-store-client.md"
       - WebScraper: "griptape-tools/official-tools/web-scraper.md"
       - WebSearch: "griptape-tools/official-tools/web-search.md"
 - Examples:

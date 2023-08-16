@@ -35,14 +35,14 @@ from griptape.drivers import LocalVectorStoreDriver
 from griptape.engines import VectorQueryEngine
 from griptape.loaders import WebLoader
 from griptape.structures import Agent
-from griptape.tools import KnowledgeBaseClient
+from griptape.tools import VectorStoreClient
 
 namespace = "griptape-ai"
 vector_store = LocalVectorStoreDriver()
 query_engine = VectorQueryEngine(
     vector_store_driver=vector_store
 )
-kb_tool = KnowledgeBaseClient(
+vector_store_tool = VectorStoreClient(
     description="Contains information about the Griptape Framework "
                 "from www.griptape.ai",
     query_engine=query_engine,
@@ -54,11 +54,11 @@ vector_store.upsert_text_artifacts({
     namespace: artifacts,
 })
 
-agent = Agent(tools=[kb_tool])
+agent = Agent(tools=[vector_store_tool])
 
 utils.Chat(agent).start()
 ```
-Here we instantiate the KnowledgeBaseClient tool that wraps the query engine and enables the LLM to search knowledge bases. We then initialize an agent with that tool and start a CLI chat.
+Here we instantiate the VectorStoreClient tool that wraps the query engine and enables the LLM to search knowledge bases. We then initialize an agent with that tool and start a CLI chat.
 
 Upon initialization, agents instantiate conversation memory[](../griptape-framework/structures/conversation-memory.md) used to preserve the conversation flow. Griptape supports different types of conversation memory, such as **BufferConversationMemory** and **SummaryConversationMemory**, which are useful in different scenarios.
 

@@ -36,6 +36,25 @@ SqlLoader().load_collection(
 )
 ```
 
+## CsvLoader
+
+Can be used to load CSV files into `CsvRowArtifact`s:
+
+```python
+CsvLoader().load(
+    "path/to/file.csv"
+)
+
+CsvLoader(delimiter=';').load(
+    "path/to/file-with-special-delimiter.csv"
+)
+
+CsvLoader().load_collection(
+    "path/to/file_1.csv",
+    "path/to/file_2.csv"
+)
+```
+
 ## TextLoader
 
 Used to load arbitrary text and text files:

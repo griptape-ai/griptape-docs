@@ -13,6 +13,9 @@ Tasks in the workflow have access to the following `context` variables:
 Let's build a simple workflow. Let's say, we want to write a story in a fantasy world with some unique characters. We could setup a workflow that generates a world based on some keywords. Then we pass the world description to any number of child tasks that create characters. Finally, the last task pulls in information from all parent tasks and writes up a short story.
 
 ```python
+from griptape.tasks import PromptTask
+from griptape.structures import Workflow
+
 def character_task(task_id, character_name) -> PromptTask:
     return PromptTask(
         "Based on the following world description create a character named {{ name }}:\n{{ parent_outputs['world'] }}",

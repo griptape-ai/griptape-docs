@@ -5,6 +5,9 @@ Prompt drivers are used by Griptape structures to make calls to the underlying f
 You can instantiate drivers and pass them to structures:
 
 ```python
+from griptape.structures import Pipeline
+from griptape.drivers import OpenAiChatPromptDriver
+
 Pipeline(
     prompt_driver=OpenAiChatPromptDriver(
         temperature=0.3
@@ -15,6 +18,9 @@ Pipeline(
 Or use them independently:
 
 ```python
+from griptape.utils import PromptStack
+from griptape.drivers import OpenAiChatPromptDriver
+
 stack = PromptStack()
 
 stack.add_user_input("What's the word, bird?")

@@ -7,6 +7,9 @@ Chunkers are used to split arbitrarily long text into chunks of certain token le
 Here is how to use a chunker:
 
 ```python
+from griptape.chunkers import TextChunker
+from griptape.tokenizers import TiktokenTokenizer
+
 TextChunker(
     # set an optional custom tokenizer 
     tokenizer=TiktokenTokenizer(),

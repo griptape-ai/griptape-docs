@@ -7,11 +7,13 @@ Used to query vector storages. You can set a custom `prompt_driver` and `vector_
 Use the `insert` method to insert `TextArtifact`s into vector storage with an optional `namespace`.
 
 ```python
+from griptape.engines import VectorQueryEngine
+from griptape.loaders import WebLoader
+
 engine = VectorQueryEngine()
 
-engine.insert(
-    WebLoader().load("https://www.griptape.ai"),
-    namespace="griptape"
+engine.upsert_text_artifacts(
+    WebLoader().load("https://www.griptape.ai"), namespace="griptape"
 )
 ```
 

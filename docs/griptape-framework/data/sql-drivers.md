@@ -46,6 +46,7 @@ driver.execute_query("select * from users;")
 This is a SQL driver based on the [Snowflake SQLAlchemy Toolkit](https://docs.snowflake.com/en/developer-guide/python-connector/sqlalchemy) which runs on top of the Snowflake Connector for Python. Here is an example of how to use it:
 
 ```python
+import os
 import snowflake.connector
 from snowflake.connector import SnowflakeConnection
 from griptape.drivers import SnowflakeSqlDriver

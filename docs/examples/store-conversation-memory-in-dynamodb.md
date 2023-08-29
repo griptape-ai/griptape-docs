@@ -1,47 +1,37 @@
 To store your conversation on DynamoDB you can use DynamoDbConversationMemoryDriver.
 ```python
-from griptape.memory.structure import ConversationMemory
-from griptape.memory.structure import ConversationMemoryElement, Turn, Message
 from griptape.drivers import DynamoDbConversationMemoryDriver
+from griptape.memory.structure import ConversationMemory
 
-# Instantiate DynamoDbConversationMemoryDriver
-dynamo_driver = DynamoDbConversationMemoryDriver(
-    aws_region="us-east-1",
-    table_name="conversations",
-    partition_key="convo_id",
-    value_attribute_key="convo_data",
-    partition_key_value="convo1"
+# Initialize the DynamoDB driver
+driver = DynamoDbConversationMemoryDriver(
+    table_name='conversation_memory',
+    partition_key='user_id',
+    value_attribute_key='conversation_data',
+    partition_key_value='12345'  # This could be a user_id or session_id
 )
 
-# Create a ConversationMemory structure
-conv_mem = ConversationMemory(
-    turns=[
-        Turn(
-            turn_index=0,
-            system=Message("Hello"),
-            user=Message("Hi")
-        ),
-        Turn(
-            turn_index=1,
-            system=Message("How can I assist you today?"),
-            user=Message("I need some information")
-        )
-    ],
-    latest_turn=Turn(
-        turn_index=2,
-        system=Message("Sure, what information do you need?"),
-        user=None  # user has not yet responded
-    ),
-    driver=dynamo_driver  # set the driver
+# Create a sample conversation memory object
+conversation_memory = ConversationMemory(
+    id="12345",
+    history=[
+        {
+            "user": "Hello, how are you?",
+            "bot": "I'm good, thanks for asking!"
+        }
+    ]
 )
 
-# Store the conversation in DynamoDB
-dynamo_driver.store(conv_mem)
+# Store the memory
+driver.store(conversation_memory)
 
-# Load the conversation from DynamoDB
-loaded_conv_mem = dynamo_driver.load()
+# Load the memory back
+loaded_memory = driver.load()
+if loaded_memory:
+    for entry in loaded_memory.history:
+        print(f"User: {entry['user']}")
+        print(f"Bot: {entry['bot']}")
 
-# Display the loaded conversation
-print(loaded_conv_mem.to_json())
-
+else:
+    print("No conversation found for the given partition_key_value.")
 ```

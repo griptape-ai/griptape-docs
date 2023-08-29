@@ -33,8 +33,8 @@ Next, create a `tool.py` file with the following code:
 ```python
 import random
 from griptape.artifacts import TextArtifact
-from griptape.core import BaseTool
-from griptape.core.decorators import activity
+from griptape.tools import BaseTool
+from griptape.utils.decorators import activity
 from schema import Schema, Literal, Optional
 
 

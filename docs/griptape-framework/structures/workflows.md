@@ -5,7 +5,7 @@ Workflows are non-sequential DAGs that can be used for complex concurrent scenar
 Tasks in the workflow have access to the following `context` variables:
 
 * `args`: arguments passed to the `Construct.run()` method.
-* `inputs`: inputs into the current task referencable by parent task IDs.
+* `parent_outputs`: outputs into the current task referencable by parent task IDs.
 * `structure`: the structure that the task belongs to.
 * `parents`: parent tasks referencable by IDs.
 * `children`: child tasks referencable by IDs.
@@ -15,7 +15,7 @@ Let's build a simple workflow. Let's say, we want to write a story in a fantasy 
 ```python
 def character_task(task_id, character_name) -> PromptTask:
     return PromptTask(
-        "Based on the following world description create a character named {{ name }}:\n{{ inputs['world'] }}",
+        "Based on the following world description create a character named {{ name }}:\n{{ parent_outputs['world'] }}",
         context={
             "name": character_name
         },
@@ -34,7 +34,7 @@ character_task_1 = character_task("scotty", "Scotty")
 character_task_2 = character_task("annie", "Annie")
 
 story_task = PromptTask(
-    "Based on the following description of the world and characters, write a short story:\n{{ inputs['world'] }}\n{{ inputs['scotty'] }}\n{{ inputs['annie'] }}",
+    "Based on the following description of the world and characters, write a short story:\n{{ parent_outputs['world'] }}\n{{ parent_outputs['scotty'] }}\n{{ parent_outputs['annie'] }}",
     id="story"
 )
 

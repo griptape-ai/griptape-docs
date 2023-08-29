@@ -7,8 +7,8 @@ We provide a set of official Griptape Tools for accessing and processing data. Y
 ```python
 import random
 from griptape.artifacts import TextArtifact
-from griptape.core import BaseTool
-from griptape.core.decorators import activity
+from griptape.tools import BaseTool
+from griptape.utils.decorators import activity
 from schema import Schema, Literal, Optional
 
 

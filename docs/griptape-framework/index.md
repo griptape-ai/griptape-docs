@@ -129,7 +129,7 @@ pipeline.add_tasks(
     ),
     # Augment `input` from the previous task.
     PromptTask(
-        "Say the following in spanish: {{ input }}"
+        "Say the following in spanish: {{ parent_output }}"
     )
 )
 

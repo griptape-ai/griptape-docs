@@ -17,8 +17,8 @@ pipeline = Pipeline(
 pipeline.add_tasks(
     # take the first argument from the pipeline `run` method
     PromptTask("{{ args[0] }}"),
-    # take the input from the previous task and insert it into the prompt
-    PromptTask("Say the following like a pirate: {{ input }}")
+    # take the output from the previous task and insert it into the prompt
+    PromptTask("Say the following like a pirate: {{ parent_output }}")
 )
 
 pipeline.run("I am Scotty, who are you?")

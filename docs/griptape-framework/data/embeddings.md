@@ -31,7 +31,6 @@ Here is how you can use it:
 ```python
 from griptape.drivers import OpenAiEmbeddingDriver
 
-
 OpenAiEmbeddingDriver().embed_string("Hello Griptape!")
 ```
 

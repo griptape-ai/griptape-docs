@@ -18,7 +18,7 @@ Code snippet using a pre defined 'preset'.
 
 'max_tokens' argument here need to be set with the same value as in the preset in text gen.
 
-```shell
+```python
 from griptape.structures import Agent
 from griptape.drivers import TextGenPromptDriver
 from griptape.tokenizers import TextGenTokenizer
@@ -44,7 +44,7 @@ Code snippet example using params, if params and preset is defined, preset will 
 
 this params are overriding the current preset set in text gen, not all of them must be used.
 
-```shell
+```python
 from griptape.structures import Agent
 from griptape.drivers import TextGenPromptDriver
 from griptape.tokenizers import TextGenTokenizer

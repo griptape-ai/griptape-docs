@@ -324,3 +324,55 @@ The following methods are available in the OpenSearchVectorStoreDriver class:
 4. `load_entries(self, namespace: Optional[str] = None) -> list[BaseVectorStoreDriver.Entry]`: Retrieves all vector entries from OpenSearch that match the optional namespace. Returns a list of BaseVectorStoreDriver.Entry objects.
 5. `query(self, query: str, count: Optional[int] = None, field_name: str = "vector", namespace: Optional[str] = None, include_vectors: bool = False, include_metadata=True, **kwargs) -> list[BaseVectorStoreDriver.QueryResult]`: Performs a nearest neighbor search on OpenSearch to find vectors similar to the provided query string. Results can be limited using the count parameter and optionally filtered by a namespace. Returns a list of BaseVectorStoreDriver.QueryResult objects, each encapsulating the retrieved vector, its similarity score, metadata, and namespace.
 6. `create_index(self, vector_dimension: int) -> None`: Creates a new vector index in OpenSearch. The method expects the dimension of the vectors (vector_dimension) that will be stored in this index. The index is structured to support k-NN (k-nearest neighbors) queries.
+
+## AmazonOpenSearchVectorStoreDriver
+This driver offers integration with Amazon's managed OpenSearch service. It's designed to seamlessly authenticate using AWS authentication mechanisms and communicate with Amazon OpenSearch for the storage, retrieval, and querying of vector data.
+
+Below is a detailed guide and example showcasing how to utilize this driver:
+
+```python
+import boto3
+from griptape.drivers import AmazonOpenSearchVectorStoreDriver
+import numpy as np
+
+# Set up AWS session
+session = boto3.session.Session()
+
+# Initialize the Amazon driver
+driver = AmazonOpenSearchVectorStoreDriver(
+    session=session,
+    region_name='us-west-1',
+    host='your-amazon-opensearch-endpoint',
+    index_name='vector_data'
+)
+
+# Create an index
+driver.create_index(vector_dimension=100)
+
+# Upsert a sample vector
+dummy_vector = np.random.rand(100).tolist()
+driver.upsert_vector(
+    vector=dummy_vector,
+    vector_id="sample_vector",
+    namespace="sample_namespace",
+    meta={"description": "A sample vector"}
+)
+
+# Load the vector
+entry = driver.load_entry("sample_vector", namespace="sample_namespace")
+print(entry.id, entry.vector, entry.meta, entry.namespace)
+
+# Query a vector
+query_vector = np.random.rand(100).tolist()
+results = driver.query(query=query_vector, count=1, namespace="sample_namespace")
+for r in results:
+    print(r.score, r.vector, r.meta)
+```
+
+### Key Features
+1. AWS Authentication: This driver incorporates AWS's signature version 4 signing process (via the AWS4Auth class) to authenticate requests to Amazon OpenSearch.
+2. Client Initialization: It initializes the OpenSearch client with AWS-specific configurations, such as region, host, and port.
+3. Customizable Connection Settings: The driver allows flexibility in specifying whether to use SSL, verify SSL certificates, and custom port configurations.
+
+### Extended Functionality
+While this driver extends OpenSearchVectorStoreDriver, it specifically tailors the authentication mechanism to work seamlessly with Amazon OpenSearch. All other functionalities, like vector storage, retrieval, and querying, remain consistent with the base driver.

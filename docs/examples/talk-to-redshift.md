@@ -4,7 +4,7 @@ Let's build a support agent that uses GPT-4:
 
 ```python
 import boto3
-from griptape.drivers import AmazonRedshiftSqlDriver, OpenAiChatPromptDriver
+from griptape.drivers import AmazonRedshiftSqlDriver
 from griptape.loaders import SqlLoader
 from griptape.rules import Ruleset, Rule
 from griptape.structures import Agent
@@ -29,7 +29,7 @@ sql_tool = SqlClient(
 )
 
 agent = Agent(
-    tools=[sql_tool, FileManager())],
+    tools=[sql_tool, FileManager()],
     rulesets=[
         Ruleset(
             name="HumansOrg Agent",

@@ -5,6 +5,9 @@ This tool enables LLMs to execute Python code and run shell commands inside a Do
 You can specify a local working directory and environment variables during tool initialization:
 
 ```python
+import os
+from griptape.tools import Computer
+
 Computer(
     local_workdir=os.path.abspath(os.path.join(os.getcwd(), "workdir")),
     env_vars={

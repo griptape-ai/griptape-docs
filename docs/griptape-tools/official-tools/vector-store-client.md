@@ -20,7 +20,7 @@ from griptape.engines import VectorQueryEngine
 
 engine = VectorQueryEngine()
 
-engine.insert(
+engine.upsert_text_artifacts(
     WebLoader().load("https://www.griptape.ai"),
     namespace="griptape"
 )

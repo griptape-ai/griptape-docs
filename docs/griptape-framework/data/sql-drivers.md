@@ -52,20 +52,16 @@ import snowflake.connector
 from snowflake.connector import SnowflakeConnection
 from griptape.drivers import SnowflakeSqlDriver
 
-PWD = os.environ.get('PWD')
-
 def get_snowflake_connection() -> SnowflakeConnection:
     return snowflake.connector.connect(
-        account = 'account',
-        user = 'user',
-        password = PWD,
-        database = 'database',
-        schema = 'schema',
+        account=os.getenv('SNOWFLAKE_ACCOUNT'),
+        user=os.getenv('SNOWFLAKE_USER'),
+        password=os.getenv('SNOWFLAKE_PASSWORD'),
+        database=os.getenv('SNOWFLAKE_DATABASE'),
+        schema=os.getenv('SNOWFLAKE_SCHEMA'),
+        warehouse=os.getenv('SNOWFLAKE_WAREHOUSE')
     )
 
-driver=SnowflakeSqlDriver(
-    connection_func=get_snowflake_connection
-)
+driver = SnowflakeSqlDriver(connection_func=get_snowflake_connection)
 
-driver.execute_query("select * from users;")
-```
+driver.execute_query("select * from people;")

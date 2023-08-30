@@ -14,10 +14,6 @@ Let's say you using [TheBloke/WizardLM-13B-V1-1-SuperHOT-8K-GPTQ](https://huggin
 
 ## Code Snippets
 
-Code snippet using a pre defined 'preset'.
-
-'max_tokens' argument here need to be set with the same value as in the preset in text gen.
-
 ```python
 from griptape.structures import Agent
 from griptape.drivers import TextGenPromptDriver
@@ -28,7 +24,7 @@ fast_tokenizer = PreTrainedTokenizerFast(tokenizer_file="tokenizer.json")
 
 prompt_driver = TextGenPromptDriver(
     preset="griptape",
-    tokenizer=TextGenTokenizer(max_tokens=300, tokenizer=fast_tokenizer)
+    tokenizer=TextGenTokenizer(tokenizer=fast_tokenizer)
 )
 
 agent = Agent(
@@ -84,7 +80,7 @@ fast_tokenizer = PreTrainedTokenizerFast(tokenizer_file="tokenizer.json")
 
 prompt_driver = TextGenPromptDriver(
     params=params,
-    tokenizer=TextGenTokenizer(max_tokens=params['max_new_tokens'], tokenizer=fast_tokenizer)
+    tokenizer=TextGenTokenizer(tokenizer=fast_tokenizer)
 )
 
 agent = Agent(

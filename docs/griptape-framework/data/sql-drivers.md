@@ -31,12 +31,12 @@ import boto3
 import os
 from griptape.drivers import AmazonRedshiftSqlDriver
 
-session = boto3.Session(region_name=os.environ['AWS_DEFAULT_REGION'])
+session = boto3.Session(region_name=os.getenv('AWS_DEFAULT_REGION'))
 
 driver = AmazonRedshiftSqlDriver(
-    database=os.environ["REDSHIFT_DATABASE"],
+    database=os.getenv("REDSHIFT_DATABASE"),
     session=session,
-    cluster_identifier=os.environ['REDSHIFT_CLUSTER_IDENTIFIER'],
+    cluster_identifier=os.getenv('REDSHIFT_CLUSTER_IDENTIFIER'),
 )
 
 driver.execute_query("select * from people;")

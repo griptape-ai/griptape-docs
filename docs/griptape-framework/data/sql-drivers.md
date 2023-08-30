@@ -28,17 +28,18 @@ to execute statements. Here is an example of how to use it for Redshift Serverle
 
 ```python
 import boto3
+import os
 from griptape.drivers import AmazonRedshiftSqlDriver
 
-session = boto3.Session(region_name="us-east-1")
+session = boto3.Session(region_name=os.environ['AWS_DEFAULT_REGION'])
 
-driver=AmazonRedshiftSqlDriver(
-    database="dev",
+driver = AmazonRedshiftSqlDriver(
+    database=os.environ["REDSHIFT_DATABASE"],
     session=session,
-    workgroup_name="dev"
+    cluster_identifier=os.environ['REDSHIFT_CLUSTER_IDENTIFIER'],
 )
 
-driver.execute_query("select * from users;")
+driver.execute_query("select * from people;")
 ```
 
 ## SnowflakeSqlDriver

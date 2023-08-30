@@ -71,9 +71,9 @@ def load_data(driver: PineconeVectorStoreDriver) -> None:
         )
 
 vector_store_driver = PineconeVectorStoreDriver(
-    api_key=os.environ["PINECONE_API_KEY"],
-    environment=os.environ["PINECONE_ENVIRONMENT"],
-    index_name=os.environ['PINECONE_INDEX_NAME'],
+    api_key=os.getenv("PINECONE_API_KEY"),
+    environment=os.getenv("PINECONE_ENVIRONMENT"),
+    index_name=os.getenv('PINECONE_INDEX_NAME'),
 )
 
 load_data(vector_store_driver)
@@ -104,9 +104,9 @@ namespace = 'griptape-ai'
 
 # Initialize the vector store driver
 vector_store = MarqoVectorStoreDriver(
-    api_key=os.environ["MARQO_API_KEY"],
-    url=os.environ["MARQO_URL"],
-    index=os.environ["MARQO_INDEX_NAME"],
+    api_key=os.getenv("MARQO_API_KEY"),
+    url=os.getenv("MARQO_URL"),
+    index=os.getenv("MARQO_INDEX_NAME"),
 )
 
 # Initialize the query engine

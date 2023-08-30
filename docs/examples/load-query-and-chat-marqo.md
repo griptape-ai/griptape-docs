@@ -12,9 +12,9 @@ namespace = "griptape-ai"
 
 # Initialize the vector store driver
 vector_store = MarqoVectorStoreDriver(
-    api_key=os.environ["MARQO_API_KEY"],
-    url=os.environ["MARQO_URL"],
-    index=os.environ["MARQO_INDEX_NAME"],
+    api_key=os.getenv("MARQO_API_KEY"),
+    url=os.getenv("MARQO_URL"),
+    index=os.getenv("MARQO_INDEX_NAME"),
 )
 
 # Initialize the query engine

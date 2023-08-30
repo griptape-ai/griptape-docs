@@ -8,7 +8,7 @@ from griptape.structures import Agent
 
 conversation_id = uuid.uuid4().hex
 dynamodb_driver = DynamoDbConversationMemoryDriver(
-    table_name=os.environ["DYNAMODB_TABLE_NAME"],
+    table_name=os.getenv("DYNAMODB_TABLE_NAME"),
     partition_key="id",
     value_attribute_key="memory",
     partition_key_value=conversation_id,

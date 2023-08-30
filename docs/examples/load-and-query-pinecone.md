@@ -26,9 +26,9 @@ def load_data(driver: PineconeVectorStoreDriver) -> None:
         )
 
 vector_driver = PineconeVectorStoreDriver(
-    api_key=os.environ["PINECONE_API_KEY"],
-    environment=os.environ["PINECONE_ENVIRONMENT"],
-    index_name=os.environ["PINECONE_INDEX_NAME"],
+    api_key=os.getenv("PINECONE_API_KEY"),
+    environment=os.getenv("PINECONE_ENVIRONMENT"),
+    index_name=os.getenv("PINECONE_INDEX_NAME"),
 )
 
 load_data(vector_driver)

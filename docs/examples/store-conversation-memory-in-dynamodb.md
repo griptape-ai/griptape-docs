@@ -1,37 +1,22 @@
 To store your conversation on DynamoDB you can use DynamoDbConversationMemoryDriver.
 ```python
+import os
+import uuid
 from griptape.drivers import DynamoDbConversationMemoryDriver
 from griptape.memory.structure import ConversationMemory
+from griptape.structures import Agent
 
-# Initialize the DynamoDB driver
-driver = DynamoDbConversationMemoryDriver(
-    table_name='conversation_memory',
-    partition_key='user_id',
-    value_attribute_key='conversation_data',
-    partition_key_value='12345'  # This could be a user_id or session_id
+conversation_id = uuid.uuid4().hex
+dynamodb_driver = DynamoDbConversationMemoryDriver(
+    table_name=os.environ["DYNAMODB_TABLE_NAME"],
+    partition_key="id",
+    value_attribute_key="memory",
+    partition_key_value=conversation_id,
 )
 
-# Create a sample conversation memory object
-conversation_memory = ConversationMemory(
-    id="12345",
-    history=[
-        {
-            "user": "Hello, how are you?",
-            "bot": "I'm good, thanks for asking!"
-        }
-    ]
-)
+agent = Agent(memory=ConversationMemory(driver=dynamodb_driver))
 
-# Store the memory
-driver.store(conversation_memory)
+agent.run("My name is Jeff.")
+agent.run("What is my name?")
 
-# Load the memory back
-loaded_memory = driver.load()
-if loaded_memory:
-    for entry in loaded_memory.history:
-        print(f"User: {entry['user']}")
-        print(f"Bot: {entry['bot']}")
-
-else:
-    print("No conversation found for the given partition_key_value.")
 ```

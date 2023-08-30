@@ -53,12 +53,12 @@ from griptape.drivers import SnowflakeSqlDriver
 
 def get_snowflake_connection() -> SnowflakeConnection:
     return snowflake.connector.connect(
-        account=os.environ['SNOWFLAKE_ACCOUNT'],
-        user=os.environ['SNOWFLAKE_USER'],
-        password=os.environ['SNOWFLAKE_PASSWORD'],
-        database=os.environ['SNOWFLAKE_DATABASE'],
-        schema=os.environ['SNOWFLAKE_SCHEMA'],
-        warehouse=os.environ['SNOWFLAKE_WAREHOUSE']
+        account=os.getenv('SNOWFLAKE_ACCOUNT'),
+        user=os.getenv('SNOWFLAKE_USER'),
+        password=os.getenv('SNOWFLAKE_PASSWORD'),
+        database=os.getenv('SNOWFLAKE_DATABASE'),
+        schema=os.getenv('SNOWFLAKE_SCHEMA'),
+        warehouse=os.getenv('SNOWFLAKE_WAREHOUSE')
     )
 
 driver = SnowflakeSqlDriver(connection_func=get_snowflake_connection)

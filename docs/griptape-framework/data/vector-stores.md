@@ -44,12 +44,11 @@ This driver supports the [Pinecone vector database](https://www.pinecone.io/). I
 Here is a complete example of how the driver can be used to load and query information from Pinecone:
 
 ```python
+import os
 import hashlib
 import json
 from urllib.request import urlopen
-from decouple import config
 from griptape.drivers import PineconeVectorStoreDriver
-
 
 def load_data(driver: PineconeVectorStoreDriver) -> None:
     response = urlopen(
@@ -66,27 +65,24 @@ def load_data(driver: PineconeVectorStoreDriver) -> None:
                 "description": product["description"],
                 "type": product["type"],
                 "price": product["price"],
-                "rating": product["rating"]
+                "rating": product["rating"],
             },
-            namespace="supermarket-products"
+            namespace="supermarket-products",
         )
 
 vector_store_driver = PineconeVectorStoreDriver(
-    api_key=config("PINECONE_API_KEY"),
-    environment=config("PINECONE_ENVIRONMENT"),
-    index_name="griptape-dev"
+    api_key=os.environ["PINECONE_API_KEY"],
+    environment=os.environ["PINECONE_ENVIRONMENT"],
+    index_name=os.environ['PINECONE_INDEX_NAME'],
 )
 
 load_data(vector_store_driver)
 
-vector_store_driver.query(
+result = vector_store_driver.query(
     "fruit",
     count=3,
-    filter={
-        "price": {"$lte": 15},
-        "rating": {"$gte": 4}
-    },
-    namespace="supermarket-products"
+    filter={"price": {"$lte": 15}, "rating": {"$gte": 4}},
+    namespace="supermarket-products",
 )
 ```
 
@@ -97,44 +93,41 @@ This driver supports the Marqo vector database. In addition to standard vector d
 Here is a complete example of how the driver can be used to load and query information from Marqo:
 
 ```python
-from griptape import utils
+import os
 from griptape.drivers import MarqoVectorStoreDriver
 from griptape.engines import VectorQueryEngine
 from griptape.loaders import WebLoader
-from griptape.structures import Agent
 from griptape.tools import VectorStoreClient
-import openai
-from marqo import Client
-
-# Set the OpenAI API key
-openai.api_key_path = "../openai_api_key.txt"
 
 # Define the namespace
-namespace = "griptape-ai"
+namespace = 'griptape-ai'
 
 # Initialize the vector store driver
 vector_store = MarqoVectorStoreDriver(
-    api_key=openai.api_key_path,
-    url="http://localhost:8882",
-    index="chat2",
-    mq=Client(api_key="foobar", url="http://localhost:8882")
+    api_key=os.environ["MARQO_API_KEY"],
+    url=os.environ["MARQO_URL"],
+    index=os.environ["MARQO_INDEX_NAME"],
 )
 
 # Initialize the query engine
 query_engine = VectorQueryEngine(vector_store_driver=vector_store)
 
 # Initialize the knowledge base tool
-vector_store_tool = VectorStoreClient(
+VectorStoreClient(
     description="Contains information about the Griptape Framework from www.griptape.ai",
     query_engine=query_engine,
-    namespace=namespace
+    namespace=namespace,
 )
 
 # Load artifacts from the web
 artifacts = WebLoader(max_tokens=200).load("https://www.griptape.ai")
 
 # Upsert the artifacts into the vector store
-vector_store.upsert_text_artifacts({namespace: artifacts,})
+vector_store.upsert_text_artifacts(
+    {
+        namespace: artifacts,
+    }
+)
 result = vector_store.query(query="What is griptape?")
 print(result)
 ```
@@ -208,7 +201,6 @@ Below is an in-depth example showcasing how this driver can be used:
 import hashlib
 import json
 from urllib.request import urlopen
-from decouple import config
 from griptape.drivers import RedisVectorStoreDriver
 import numpy as np  # Assuming you'd use numpy to create a dummy vector for the sake of example.
 

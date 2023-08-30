@@ -335,34 +335,33 @@ import boto3
 from griptape.drivers import AmazonOpenSearchVectorStoreDriver
 import numpy as np
 
-# Set up AWS session
+# Establish an AWS session
 session = boto3.session.Session()
 
 # Initialize the Amazon driver
 driver = AmazonOpenSearchVectorStoreDriver(
     session=session,
-    region_name='us-west-1',
     host='your-amazon-opensearch-endpoint',
     index_name='vector_data'
 )
 
-# Create an index
+# Define an index
 driver.create_index(vector_dimension=100)
 
-# Upsert a sample vector
+# Insert a sample vector
 dummy_vector = np.random.rand(100).tolist()
 driver.upsert_vector(
     vector=dummy_vector,
     vector_id="sample_vector",
     namespace="sample_namespace",
-    meta={"description": "A sample vector"}
+    meta={"description": "A representative vector"}
 )
 
-# Load the vector
+# Retrieve the vector
 entry = driver.load_entry("sample_vector", namespace="sample_namespace")
 print(entry.id, entry.vector, entry.meta, entry.namespace)
 
-# Query a vector
+# Execute a vector query
 query_vector = np.random.rand(100).tolist()
 results = driver.query(query=query_vector, count=1, namespace="sample_namespace")
 for r in results:
@@ -370,9 +369,8 @@ for r in results:
 ```
 
 ### Key Features
-1. AWS Authentication: This driver incorporates AWS's signature version 4 signing process (via the AWS4Auth class) to authenticate requests to Amazon OpenSearch.
-2. Client Initialization: It initializes the OpenSearch client with AWS-specific configurations, such as region, host, and port.
-3. Customizable Connection Settings: The driver allows flexibility in specifying whether to use SSL, verify SSL certificates, and custom port configurations.
+1. AWS Authentication: By leveraging the AWS4Auth class, the driver authenticates requests made to Amazon OpenSearch using AWS's signature version 4 process.
+2. Client Initialization: This driver initializes the OpenSearch client with AWS-centric settings, including the region, host, and port.
+3. Flexible Connection Settings: Users have the freedom to determine the use of SSL, the verification of SSL certificates, and other port settings.
 
-### Extended Functionality
-While this driver extends OpenSearchVectorStoreDriver, it specifically tailors the authentication mechanism to work seamlessly with Amazon OpenSearch. All other functionalities, like vector storage, retrieval, and querying, remain consistent with the base driver.
+Note: Although the AmazonOpenSearchVectorStoreDriver is an extension of the OpenSearchVectorStoreDriver, it's specifically engineered to enhance the authentication process for Amazon OpenSearch. Standard features, such as vector storage, retrieval, and querying, mirror those of the base driver.

@@ -1,47 +1,22 @@
 To store your conversation on DynamoDB you can use DynamoDbConversationMemoryDriver.
 ```python
-from griptape.memory.structure import ConversationMemory
-from griptape.memory.structure import ConversationMemoryElement, Turn, Message
+import os
+import uuid
 from griptape.drivers import DynamoDbConversationMemoryDriver
+from griptape.memory.structure import ConversationMemory
+from griptape.structures import Agent
 
-# Instantiate DynamoDbConversationMemoryDriver
-dynamo_driver = DynamoDbConversationMemoryDriver(
-    aws_region="us-east-1",
-    table_name="conversations",
-    partition_key="convo_id",
-    value_attribute_key="convo_data",
-    partition_key_value="convo1"
+conversation_id = uuid.uuid4().hex
+dynamodb_driver = DynamoDbConversationMemoryDriver(
+    table_name=os.environ["DYNAMODB_TABLE_NAME"],
+    partition_key="id",
+    value_attribute_key="memory",
+    partition_key_value=conversation_id,
 )
 
-# Create a ConversationMemory structure
-conv_mem = ConversationMemory(
-    turns=[
-        Turn(
-            turn_index=0,
-            system=Message("Hello"),
-            user=Message("Hi")
-        ),
-        Turn(
-            turn_index=1,
-            system=Message("How can I assist you today?"),
-            user=Message("I need some information")
-        )
-    ],
-    latest_turn=Turn(
-        turn_index=2,
-        system=Message("Sure, what information do you need?"),
-        user=None  # user has not yet responded
-    ),
-    driver=dynamo_driver  # set the driver
-)
+agent = Agent(memory=ConversationMemory(driver=dynamodb_driver))
 
-# Store the conversation in DynamoDB
-dynamo_driver.store(conv_mem)
-
-# Load the conversation from DynamoDB
-loaded_conv_mem = dynamo_driver.load()
-
-# Display the loaded conversation
-print(loaded_conv_mem.to_json())
+agent.run("My name is Jeff.")
+agent.run("What is my name?")
 
 ```

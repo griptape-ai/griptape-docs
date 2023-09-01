@@ -1,3 +1,5 @@
+## Overview
+
 Loaders are used to load textual data from different sources and chunk it into `TextArtifact`s. Each loader can be used to load a single "document" with `load()` or multiple documents with `'load_collection()`.
 
 ## PdfLoader
@@ -6,12 +8,18 @@ Inherits from the `TextLoader` and can be used to load PDFs from a path or from 
 
 ```python
 from griptape.loaders import PdfLoader
+import urllib.request
+
+urllib.request.urlretrieve("https://arxiv.org/pdf/1706.03762.pdf", "attention.pdf")
+
 
 PdfLoader().load(
-    "path/to/file.pdf"
+    "attention.pdf"
 )
 
-PdfLoader().load_collection(["path/to/file_1.pdf", "path/to/file_2.pdf"])
+urllib.request.urlretrieve("https://arxiv.org/pdf/1706.03762.pdf", "CoT.pdf")
+
+PdfLoader().load_collection(["attention.pdf", "CoT.pdf"])
 ```
 
 ## SqlLoader
@@ -23,12 +31,16 @@ from griptape.loaders import SqlLoader
 from griptape.drivers import SqlDriver
 
 SqlLoader(
-    sql_driver=SqlDriver(engine_url="..."),
-).load("SELECT * FROM users;")
+    sql_driver = SqlDriver(
+        engine_url="sqlite:///:memory:"
+    )
+).load("SELECT 'foo', 'bar'")
 
 SqlLoader(
-    sql_driver=SqlDriver(engine_url="..."),
-).load_collection(["SELECT * FROM users;", "SELECT * FROM products;"])
+    sql_driver = SqlDriver(
+        engine_url="sqlite:///:memory:"
+    )
+).load_collection(["SELECT 'foo', 'bar';", "SELECT 'fizz', 'buzz';"])
 ```
 
 ## CsvLoader
@@ -36,17 +48,17 @@ SqlLoader(
 Can be used to load CSV files into `CsvRowArtifact`s:
 
 ```python
-CsvLoader().load(
-    "path/to/file.csv"
-)
+import urllib
+from griptape.loaders import CsvLoader
 
-CsvLoader(delimiter=';').load(
-    "path/to/file-with-special-delimiter.csv"
+urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv", "cities.csv")
+CsvLoader().load(
+    "cities.csv"
 )
+urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/addresses.csv", "addresses.csv")
 
 CsvLoader().load_collection(
-    "path/to/file_1.csv",
-    "path/to/file_2.csv"
+    ["cities.csv", "addresses.csv"]
 )
 ```
 
@@ -56,18 +68,21 @@ Used to load arbitrary text and text files:
 
 ```python
 from pathlib import Path
+import urllib
 from griptape.loaders import TextLoader
 
 TextLoader().load(
     "my text"
 )
 
+urllib.request.urlretrieve("https://example-files.online-convert.com/document/txt/example.txt", "example.txt")
+
 TextLoader().load(
-    Path("path/to/file.txt")
+    Path("example.txt")
 )
 
 TextLoader().load_collection(
-    ["my text", "my other text", Path("path/to/file.txt")]
+    ["my text", "my other text", Path("example.txt")]
 )
 ```
 

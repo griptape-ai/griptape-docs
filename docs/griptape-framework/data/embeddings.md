@@ -1,3 +1,4 @@
+## Overview
 Embeddings in Griptape are multidimensional representations of text data. Embeddings carry semantic information, which makes them useful for extracting relevant chunks from large bodies of text for search and querying.
 
 Griptape provides a way to build embedding drivers that are reused in downstream framework components. Every embedding driver has two basic methods that can be used to generate embeddings:

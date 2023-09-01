@@ -1,3 +1,4 @@
+## Overview
 SQL drivers can be used to make SQL queries and load table schemas. They are used by the `SqlLoader` to process data. All loaders implement the following methods:
 
 * `execute_query()` executes a query and returns `RowResult`s.
@@ -18,7 +19,7 @@ driver = SqlDriver(
     engine_url="sqlite:///:memory:"
 )
 
-driver.execute_query("select * from users;")
+driver.execute_query("select 'foo', 'bar';")
 ```
 
 ## AmazonRedshiftSqlDriver

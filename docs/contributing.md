@@ -7,17 +7,17 @@ The easiest way to contribute to our docs is through our public [issue tracker](
 
 ## Pull Requests
 
-Griptape docs are built using [MkDocs](https://squidfunk.github.io/mkdocs-material/getting-started/). 
+Griptape docs are built using [MkDocs](https://squidfunk.github.io/mkdocs-material/getting-started/). Dependencies are managed using [Poetry](https://python-poetry.org/).
 
 To directly contribute to Griptape documentation, first fork the [griptape-docs](https://github.com/griptape-ai/griptape-docs) repository to your GitHub account. Then clone your repository to your local machine.
 
 From inside the directory run: 
 
-```pip install -r requirements.txt```
+```poetry install --with docs```
 
 To run `griptape-docs` locally run: 
 
-```mkdocs serve```
+```peotry run mkdocs serve```
 
 You should see something similar to the following: 
 

@@ -3,6 +3,7 @@ This example demonstrates how to build an agent that can dynamically query Amazo
 Let's build a support agent that uses GPT-4:
 
 ```python
+import os
 import boto3
 from griptape.drivers import AmazonRedshiftSqlDriver
 from griptape.loaders import SqlLoader
@@ -11,13 +12,13 @@ from griptape.structures import Agent
 from griptape.tools import SqlClient, FileManager
 from griptape.utils import Chat
 
-session = boto3.Session(region_name="REGION_NAME")
+session = boto3.Session(region_name=os.getenv("AWS_DEFAULT_REGION"))
 
 sql_loader = SqlLoader(
     sql_driver=AmazonRedshiftSqlDriver(
-        database="DATABASE",
+        database=os.getenv("REDSHIFT_DATABASE"),
         session=session,
-        workgroup_name="WORKGROUP_NAME"
+        cluster_identifier=os.getenv('REDSHIFT_CLUSTER_IDENTIFIER'),
     )
 )
 

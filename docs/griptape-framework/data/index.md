@@ -1,13 +1,21 @@
+## Overview
 Griptape provides several abstractions for working with data.
+
+![Data Architecture](../../assets/img/data-architecture.png)
+
 
 **Artifacts** are used for passing different types of data, such as text, lists, and blobs, between Griptape components.
 
-**Embedding drivers** are used to generate vector embeddings from text.
-
-**Chunkers** are used to split arbitrarily long text into chunks of certain token length.
+**Embedding Drivers** are used to generate vector embeddings from text.
 
 **Loaders** are used to load textual data from different sources.
 
-**Query engines** are used to search text storages.
+**Chunkers** are used to split arbitrarily long text into chunks of certain token length.
 
-**Vector drivers** are used to store and query vector databases.
+**Tokenizers** are used to tokenize and detokenize text in order to track LLM token limits.
+
+**Query Engines** are used to search text storages.
+
+**Vector Store Drivers** are used to store and query vector databases.
+
+**Prompt Drivers** are used to call LLM APIs.

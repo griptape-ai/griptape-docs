@@ -1,3 +1,5 @@
+## Overview
+
 **Artifacts** are used for passing different types of data between Griptape components. All tools return artifacts that are later consumed by tasks and tool memory. Artifacts make sure framework components enforce contracts when passing and consuming data.
 
 ## TextArtifact

@@ -1,18 +1,22 @@
-# Pipelines
+## Overview 
+Pipelines are similar to Agents, but allow for multiple tasks.
 
-Pipelines are lists of tasks that are executed sequentially. Pipelines can have `Memory`, which makes them ideal for storing LLM conversations.
+## Context
+`Pipeline` structures have access to the following context variables in addition to the base [context](./tasks.md#context):
 
-Here is an example of a pipeline:
+* `parent_output`: output from the parent.
+* `parent`: parent task.
+* `child`: child task.
+
+
+## Pipeline
 
 ```python
-from griptape.memory.structure import ConversationMemory
 from griptape.tasks import PromptTask
 from griptape.structures import Pipeline
 
 
-pipeline = Pipeline(
-    memory=ConversationMemory()
-)
+pipeline = Pipeline()
 
 pipeline.add_tasks(
     # take the first argument from the pipeline `run` method
@@ -21,46 +25,22 @@ pipeline.add_tasks(
     PromptTask("Say the following like a pirate: {{ parent_output }}")
 )
 
-pipeline.run("I am Scotty, who are you?")
-pipeline.run("Who am I?")
+pipeline.run("Write me a haiku about sailing.")
 ```
 
-Boom! Our first conversation, à la ChatGPT, is here:
-
-> Q: I am Scotty, who are you?  
-> A: Arrr, I be an AI language model designed to assist and answer yer questions, matey!  
-> Q: Who am I?  
-> A: Yarrr, ye just introduced yerself as Scotty, so ye be Scotty, matey!
-
-## Prompt Context
-
-You can dynamically pass arguments to the prompt by using Jinja templates:
-
-```python
-PromptTask(
-    "tell me about {{ topic }}",
-    context={"topic": "the lord of the rings"}
-)
 ```
-
-In addition to user-defined fields, the `context` object contains the following:
-
-In `Pipeline` structures:
-
-* `args`: arguments passed to the `Construct.run()` method.
-* `input`: input from the parent.
-* `structure`: the structure that the task belongs to.
-* `parent`: parent task.
-* `child`: child task.
-
-## Prompt Drivers
-
-Griptape uses OpenAI's `gpt-4` model by default. If you want to use a different model, set a custom OpenAI prompt driver:
-
-```python
-Pipeline(
-    prompt_driver=OpenAiChatPromptDriver(
-        model="gpt-3.5-turbo"
-    )
-)
+[09/08/23 10:18:46] INFO     PromptTask b2d35331b8e5455abbb9567d10044001
+                             Input: Write me a haiku about sailing.
+[09/08/23 10:18:50] INFO     PromptTask b2d35331b8e5455abbb9567d10044001
+                             Output: Sails catch morning breeze,
+                             Sea whispers secrets to hull,
+                             Horizon awaits.
+                    INFO     PromptTask 28e36610063e4d728228a814b48296ef
+                             Input: Say the following like a pirate: Sails catch morning breeze,
+                             Sea whispers secrets to hull,
+                             Horizon awaits.
+[09/08/23 10:19:21] INFO     PromptTask 28e36610063e4d728228a814b48296ef
+                             Output: Yarr! Th' sails snag th' mornin' zephyr,
+                             Th' sea be whisperin' secrets to th' hull,
+                             Th' horizon be awaitin', matey.
 ```

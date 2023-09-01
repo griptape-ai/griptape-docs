@@ -1,25 +1,27 @@
 # Griptape Docs
 
-Welcome to Griptape Docs!
+Welcome to Griptape Docs! This documentation is organized into the following sections: 
 
-This documentation covers the fundamentals of the **Griptape** framework and describes how to use **Griptape Tools**.
+## Griptape Topic Guides
 
-## Griptape
+Griptape Topic Guides discuss key topics at a high level and provide useful background information and explanation.
 
-The Griptape framework provides developers with the ability to create AI systems that operate across two dimensions: predictability and creativity. For predictability, Griptape enforces structures like sequential pipelines, DAG-based workflows, and long-term memory. To facilitate creativity, Griptape safely prompts LLMs with tools (keeping output data off prompt by using short-term memory), which connects them to external APIs and data stores. The framework allows developers to transition between those two dimensions effortlessly based on their use case.
+### Griptape Framework
 
-Griptape not only helps developers harness the potential of LLMs but also enforces trust boundaries, schema validation, and tool activity-level permissions. By doing so, Griptape maximizes LLMs’ reasoning while adhering to strict policies regarding their capabilities.
+[Griptape Framework](griptape-framework/index.md) provides an overview of the key topics within Griptape, and how you can get started building agents.
 
-[Learn more about griptape →](griptape-framework/)
+### Griptape Tools
 
-## Griptape Tools
+[Griptape Tools](griptape-tools/index.md) provides and overview of the tools available within Griptape, and how you can use them to extend the capability of LLMs.
 
-Griptape Tools a great way to start using Griptape to see how easy it can be to build applications that extend LLMs' creative capabilities. Agents (or any other structure for that matter) can be used to connect your pre-processed data to LLMs via tools. Griptape tools are Python classes with activities. Activities are Python methods decorated with the @activity decorator. Each activity has a description (used to provide context to the LLM) and the input schema that the LLM must follow in order to use the tool. Griptape validates LLM outputs against the schema to ensure each tool activity is used correctly.
+## Griptape Recipes
 
-[Learn more about griptape tools →](griptape-tools/)
+[Griptape Recipes](examples/index.md) are ready-to-go examples built around common use-cases like data retrieval and more. They are more advanced than Griptape Trade School, and require some understanding of how Griptape works.
 
-## Examples
+## Griptape Reference Guide
 
-Check out Griptape examples for building agents, data retrieval, and more.
+[Griptape Reference Guide](reference/griptape/index.md) contains low level technical reference of Griptape's APIs.
 
-[Checkout Griptape examples →](examples/)
+## Griptape Trade School
+
+[Griptape Trade School](https://learn.griptape.ai) takes you through the steps of building a variety of projects with Griptape. Start here if you are new to Griptape or programming.

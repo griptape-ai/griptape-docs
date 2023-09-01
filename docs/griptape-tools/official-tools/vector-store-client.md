@@ -9,7 +9,7 @@ The `VectorStoreClient` tool uses the following parameters:
 | query_engine | `BaseQueryEngine`                                         | YES      |
 | top_n        | Max number of results returned for the query engine query | NO       |
 
-Here is an end-to-end example of how it can be used with the Pincone storage driver:
+Here is an example of how it can be used with the Pincone storage driver:
 
 ```python
 from griptape.structures import Agent

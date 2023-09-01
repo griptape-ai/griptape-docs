@@ -11,9 +11,11 @@ Griptape’s design philosophy is based on the following tenets:
 3. **Keep data off prompt by default**: When working with data through loaders and tools, Griptape aims to keep it off prompt by default, making it easy to work with big data securely and with low latency.
 4. **Minimal prompt engineering**: It’s much easier to reason about code written in Python, not natural languages. Griptape aims to default to Python in most cases unless absolutely necessary.
 
-## Quick Starts
+## Quick Start
 
-First, configure an OpenAI client by [getting an API key](https://beta.openai.com/account/api-keys) and adding it to your environment as `OPENAI_API_KEY`. If no specific [PromptDriver](structures/prompt-drivers.md) is defined, Griptape uses [OpenAI Completions API](https://platform.openai.com/docs/guides/completion) to execute LLM prompts. 
+### OpenAI API Key
+First, configure an OpenAI client by [getting an API key](https://platform.openai.com/account/api-keys) and adding it to your environment as `OPENAI_API_KEY`. 
+By default, Griptape uses [OpenAI Completions API](https://platform.openai.com/docs/guides/completion) to execute LLM prompts, but other LLMs can be configured with the use of [Prompt Drivers](./structures/prompt-drivers.md).
 
 ### Using pip
 
@@ -48,22 +50,26 @@ Chat(agent).start()
 ```
 Run this script in your IDE and you'll be presented with a `Q:` prompt where you can interact with your model. 
 ```
-Q: write me a haiku about griptape 
+Q: Write me a haiku about griptape
 processing...
-[06/28/23 10:31:34] INFO     Task de1da665296c4a3799a0f280aff59610              
-                             Input: write me a haiku about griptape             
-[06/28/23 10:31:37] INFO     Task de1da665296c4a3799a0f280aff59610              
-                             Output: Griptape on my board,                      
-                             Keeps me steady, never slips,                      
-                             Skateboarding bliss.                               
-A: Griptape on my board,
-Keeps me steady, never slips,
-Skateboarding bliss.
-Q: 
+[09/08/23 09:52:45] INFO     PromptTask d4302227570e4a978ed79e7e0444337b
+                             Input: Write me a haiku about griptape
+[09/08/23 09:52:48] INFO     PromptTask d4302227570e4a978ed79e7e0444337b
+                             Output: Griptape rough and true,
+                             Skateboard's trusty, silent guide,
+                             In each ride, we're glued.
+A: Griptape rough and true,
+Skateboard's trusty, silent guide,
+In each ride, we're glued.
+Q:
 ```
 If you want to skip the chat interface and load an initial prompt, you can do so using the `.run()` method: 
 
 ```python
+from griptape.structures import Agent
+from griptape.utils import Chat
+
+agent = Agent()
 agent.run("write me a haiku about griptape")
 ```
 Agents on their own are fun, but let's add some capabilities to them using Griptape Tools. 
@@ -84,29 +90,26 @@ agent.run(
 )
 ```
 Here is the chain of thought from the Agent. Notice where it realizes it can use the tool you just injected to do the calculation.[^1] 
-[^1]: In some cases a model might be capable of basic arithmatic. For example, gpt-3.5 returns the correct numeric answer but in an odd format.
+[^1]: In some cases a model might be capable of basic arithmetic. For example, gpt-3.5 returns the correct numeric answer but in an odd format.
 
 ```
-[06/28/23 10:36:59] INFO     Task 891c17132d9f4f3e88c6281aadc1daeb              
-                             Input: what is 7^12                                
-[06/28/23 10:37:04] INFO     Subtask 26c4612c351c407db6fa974db3654d13           
-                             Thought: I can use the Calculator tool to calculate
-                             the value of 7 raised to the power of 12.          
-                                                                                
-                             Action:                                            
-                             {"type": "tool", "name": "Calculator", "activity": 
-                             "calculate", "input": {"values": {"expression":    
-                             "7**12"}}}                                         
-                    INFO     Subtask 26c4612c351c407db6fa974db3654d13           
-                             Observation: 13841287201                           
-[06/28/23 10:37:07] INFO     Task 891c17132d9f4f3e88c6281aadc1daeb              
-                             Output: The value of 7 raised to the power of 12 is
-                             13,841,287,201.   
+[09/08/23 09:53:42] INFO     ToolkitTask c87320c5ab1b4988acf25c107b46dffa
+                             Input: what is 7^12
+[09/08/23 09:53:49] INFO     Subtask f3f41104a2234a69832c7eacb64e7324
+                             Thought: The user is asking for the value of 7 raised to the power of 12. I can use the Calculator tool to
+                             perform this calculation.
+
+                             Action: {"type": "tool", "name": "Calculator", "activity": "calculate", "input": {"values": {"expression":
+                             "7**12"}}}
+                    INFO     Subtask f3f41104a2234a69832c7eacb64e7324
+                             Observation: 13841287201
+[09/08/23 09:53:51] INFO     ToolkitTask c87320c5ab1b4988acf25c107b46dffa
+                             Output: The value of 7 raised to the power of 12 is 13841287201.
 ```
 
 ## Build a Simple Pipeline
 
-Let's define a simple two-task pipeline that uses tools and memory:
+Agents are great for getting started, but they are intentionally limited to a single task. Pipelines, however, allow us to define any number of tasks to run in sequence. Let's define a simple two-task Pipeline that uses tools and memory:
 
 ```python
 from griptape.memory.structure import ConversationMemory
@@ -138,7 +141,46 @@ pipeline.run(
 )
 ```
 
-Boom! Our first LLM pipeline with two sequential tasks generated the following exchange:
+```
+[09/08/23 10:02:34] INFO     ToolkitTask 3c1d2f4a49384873820a9a8cd8acc983
+                             Input: Load https://www.griptape.ai, summarize it, and store it in griptape.txt
+[09/08/23 10:02:44] INFO     Subtask 42fd56ba100e45688401c5ce32b79a33
+                             Thought: To complete this task, I need to first load the webpage using the WebScraper tool's get_content
+                             activity. Then, I will summarize the content using the TextToolMemory tool's summarize activity. Finally, I will
+                             store the summarized content in a file named griptape.txt using the FileManager tool's save_file_to_disk
+                             activity.
 
-> Q: Load https://griptape.readthedocs.io, summarize it, and store it in griptape.txt  
-> A: El contenido de https://griptape.readthedocs.io ha sido resumido y almacenado en griptape.txt.
+                             Action: {"type": "tool", "name": "WebScraper", "activity": "get_content", "input": {"values": {"url":
+                             "https://www.griptape.ai"}}}
+[09/08/23 10:02:45] INFO     Subtask 42fd56ba100e45688401c5ce32b79a33
+                             Observation: Output of "WebScraper.get_content" was stored in memory with memory_name "TextToolMemory" and
+                             artifact_namespace "39ca67bbe26b4e1584193b87ed82170d"
+[09/08/23 10:02:53] INFO     Subtask 8023e3d257274df29065b22e736faca8
+                             Thought: Now that the webpage content is stored in memory, I can use the TextToolMemory tool's summarize activity
+                             to summarize the content.
+                             Action: {"type": "memory", "name": "TextToolMemory", "activity": "summarize", "input": {"values": {"memory_name":
+                             "TextToolMemory", "artifact_namespace": "39ca67bbe26b4e1584193b87ed82170d"}}}
+[09/08/23 10:02:57] INFO     Subtask 8023e3d257274df29065b22e736faca8
+                             Observation: Griptape is an open source framework that allows developers to build and deploy AI applications
+                             using large language models (LLMs). It provides the ability to create conversational and event-driven apps that
+                             can securely access and manipulate data. The framework enforces structures for predictability and creativity,
+                             allowing developers to easily transition between the two. Griptape Cloud is a managed platform for deploying and
+                             managing AI apps.
+[09/08/23 10:03:06] INFO     Subtask 7baae700239943c18b5b6b21873f0e13
+                             Thought: Now that I have the summarized content, I can store it in a file named griptape.txt using the
+                             FileManager tool's save_file_to_disk activity.
+                             Action: {"type": "tool", "name": "FileManager", "activity": "save_file_to_disk", "input": {"values":
+                             {"memory_name": "TextToolMemory", "artifact_namespace": "39ca67bbe26b4e1584193b87ed82170d", "path":
+                             "griptape.txt"}}}
+                    INFO     Subtask 7baae700239943c18b5b6b21873f0e13
+                             Observation: saved successfully
+[09/08/23 10:03:14] INFO     ToolkitTask 3c1d2f4a49384873820a9a8cd8acc983
+                             Output: The summarized content of the webpage https://www.griptape.ai has been successfully stored in the file
+                             named griptape.txt.
+                    INFO     PromptTask 8635925ff23b46f28a740105bd11ca8f
+                             Input: Say the following in spanish: The summarized content of the webpage https://www.griptape.ai has been
+                             successfully stored in the file named griptape.txt.
+[09/08/23 10:03:18] INFO     PromptTask 8635925ff23b46f28a740105bd11ca8f
+                             Output: El contenido resumido de la página web https://www.griptape.ai se ha almacenado con éxito en el archivo
+                             llamado griptape.txt.
+```

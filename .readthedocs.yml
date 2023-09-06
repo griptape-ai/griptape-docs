@@ -4,6 +4,8 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.11"
+  pre_create_environment:
+    - 'git clone https://github.com/griptape-ai/griptape.git src'
 
 mkdocs:
   configuration: mkdocs.yml

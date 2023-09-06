@@ -23,3 +23,7 @@ Griptape Tools a great way to start using Griptape to see how easy it can be to 
 Check out Griptape examples for building agents, data retrieval, and more.
 
 [Checkout Griptape examples →](examples/)
+
+## Reference
+
+[Griptape Reference→](reference/)

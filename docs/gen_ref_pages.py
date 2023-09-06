@@ -36,7 +36,7 @@ def build_reference_docs():
                 """
                 ---
                 search:
-                exclude: true
+                    exclude: true
                 ---
                 """
             )

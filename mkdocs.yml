@@ -2,9 +2,23 @@ site_name: Griptape Docs
 plugins:
   - glightbox
   - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_if_no_docstring: true
+            heading_level: 4
+  - gen-files:
+      scripts:
+        - docs/gen_ref_pages.py
+  - literate-nav:
+      nav_file: SUMMARY.md
+  - section-index
 copyright: "&copy; Griptape, Inc."
 extra_css:
   - assets/css/extra.css
+  - assets/css/code_select.css
 extra:
   analytics:
     provider: google
@@ -115,3 +129,4 @@ nav:
     - Misc:
         - Count Tokens: "examples/count-tokens.md"
         - Storing Conversation Memory in DynamoDB: "examples/store-conversation-memory-in-dynamodb.md"
+- Reference: "reference/"

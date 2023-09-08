@@ -1,6 +1,6 @@
 ## Overview
 
-Griptape event listeners can be used to listen for events during a structure's execution. This can be useful when [counting tokens](../../examples/count-tokens.md) being sent to the LLM.
+Griptape Event Listeners can be used to listen for events during a structure's execution. This can be useful when [counting tokens](../../examples/count-tokens.md) being sent to the LLM.
 
 ## Specific Event Types
 

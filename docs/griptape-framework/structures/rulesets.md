@@ -1,6 +1,6 @@
 ## Overview
 
-Griptape rulesets can be used to define rules for structures. This is useful if you need a structure to have certain behaviors across all tasks.
+A [Ruleset](../../reference/griptape/rules/ruleset.md) can be used to define rules for structures. This is useful if you need a structure to have certain behaviors across all tasks.
 
 Here is an example of how to use rulesets:
 

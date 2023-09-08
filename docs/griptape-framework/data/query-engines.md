@@ -3,11 +3,11 @@ Query engines are used to search collections of text.
 
 ## VectorQueryEngine
 
-Used to query vector storages. You can set a custom `prompt_driver` and `vector_store_driver`. Uses `LocalVectorStoreDriver` by default.
+Used to query vector storages. You can set a custom [prompt_driver](../../reference/griptape/engines/query/vector_query_engine.md#griptape.engines.query.vector_query_engine.VectorQueryEngine.prompt_driver.md) and [vector_store_driver](../../reference/griptape/engines/query/vector_query_engine.md#griptape.engines.query.vector_query_engine.VectorQueryEngine.vector_store_driver.md). Uses [LocalVectorStoreDriver](../../reference/griptape/drivers/vector/local_vector_store_driver.md) by default.
 
-Use the `insert` method to insert `TextArtifact`s into vector storage with an optional `namespace`.
+Use the [upsert_text_artifact](../../reference/griptape/engines/query/vector_query_engine.md#griptape.engines.query.vector_query_engine.VectorQueryEngine.upsert_text_artifact.md) method to insert [TextArtifact](../../reference/griptape/artifacts/text_artifact.md)s into vector storage with an optional `namespace`.
 
-Use the `query` method to query the vector storage.
+Use the [VectorQueryEngine](../../reference/griptape/engines/query/vector_query_engine.md#griptape.engines.query.vector_query_engine.VectorQueryEngine.query.md) method to query the vector storage.
 
 ```python
 from griptape.engines import VectorQueryEngine

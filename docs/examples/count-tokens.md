@@ -1,4 +1,4 @@
-To count tokens you can use Griptape events and the `TokenCounter` util:
+To count tokens you can use Griptape events and the [TokenCounter](../reference/griptape/utils/token_counter.md) util:
 
 ```python
 from griptape import utils

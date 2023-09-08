@@ -39,7 +39,7 @@ Change your working directory to the new `griptape-quickstart` directory created
 poetry add griptape
 ```
 ## Build a Simple Agent 
-With Griptape, you can create *structures*, such as `Agents`, `Pipelines`, and `Workflows`, that are composed of different types of tasks. First, let's build a simple Agent that we can interact with through a chat based interface. 
+With Griptape, you can create *structures*, such as [Agents](./structures/agents.md), [Pipelines](./structures/pipelines.md), and [Workflows](./structures/workflows.md), that are composed of different types of tasks. First, let's build a simple Agent that we can interact with through a chat based interface. 
 
 ```python
 from griptape.structures import Agent

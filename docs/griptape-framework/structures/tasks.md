@@ -1,15 +1,16 @@
 ## Overview
 
-Tasks are purpose-built objectives that can be given to the LLM. Griptape provides several types of tasks that can be used depending on the use-case. 
+A [Task](../../reference/griptape/tasks/index.md) is a purpose-built objective that can be given to the LLM. Griptape provides several types of Tasks that can be used depending on the use-case. 
 
 ## Context
-Tasks take in a field `input_template` which lets you define the task objective. Within the `input_template`, you can access the following context variables:
+Tasks that take input have a field [input_template](../../reference/griptape/tasks/base_text_input_task.md#griptape.tasks.base_text_input_task.BaseTextInputTask.input_template) which lets you define the Task objective. 
+Within the [input_template](../../reference/griptape/tasks/base_text_input_task.md#griptape.tasks.base_text_input_task.BaseTextInputTask.input_template), you can access the following [context](../../reference/griptape/structures/structure.md#griptape.structures.structure.Structure.context) variables:
 
 * `args`: an array of arguments passed to the `.run()` method.
 * `structure`: the structure that the task belongs to.
 * user defined context variables
 
-Depending on the structure that is running the task, additional context variables will be added.
+Depending on the Structure that is running the task, additional [context](../../reference/griptape/structures/structure.md#griptape.structures.structure.Structure.context) variables will be added.
 ```python
 from griptape.structures import Agent
 from griptape.tasks import PromptTask
@@ -60,7 +61,7 @@ agent.run("How do I bake a cake?")
 
 
 
-## PromptTask
+## Prompt Task
 
 For general purpose prompting, you can use the [PromptTask](../../reference/griptape/tasks/prompt_task.md):
 
@@ -87,9 +88,9 @@ agent.run("Write me a haiku")
                              Nature's peace bestowed.
 ```
 
-## ToolkitTask
+## Toolkit Task
 
-To use [Griptape Tools](../../griptape-framework/tools/index.md), you can use the [ToolkitTask](../../reference/griptape/tasks/toolkit_task.md).
+To use [Griptape Tools](../../griptape-framework/tools/index.md), you can use a [Toolkit Task](../../reference/griptape/tasks/toolkit_task.md).
 This task allows us to pass in one or more tools, and the LLM will use Chain of Thought (CoT) to reason through which tools it should use given the prompt.
 
 ```python

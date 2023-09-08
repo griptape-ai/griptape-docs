@@ -1,11 +1,11 @@
 ## Overview 
 
-Workflows are non-sequential DAGs that can be used for complex concurrent scenarios with tasks having multiple inputs.
+A [Workflow](../../reference/griptape/structures/workflow.md) is a non-sequential DAG that can be used for complex concurrent scenarios with tasks having multiple inputs.
 
 
 ## Context
 
-`Workflow` structures have access to the following context variables in addition to the base [context](./tasks.md#context):
+Workflows have access to the following [context](../../reference/griptape/structures/workflow.md#griptape.structures.workflow.Workflow.context) variables in addition to the [base context](./tasks.md#context):
 
 * `parent_outputs`: outputs into the current task referenceable by parent task IDs.
 * `parents`: parent tasks referenceable by IDs.

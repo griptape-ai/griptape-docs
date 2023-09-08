@@ -1,4 +1,4 @@
-This example demonstrates how to vectorize a webpage and setup a Griptape agent with rules and the `KnowledgeBase` tool to use it during conversations.
+This example demonstrates how to vectorize a webpage and setup a Griptape agent with rules and the [VectorStoreClient](../reference/griptape/tools/vector_store_client/tool.md) tool to use it during conversations.
 
 ```python
 from griptape.engines import VectorQueryEngine

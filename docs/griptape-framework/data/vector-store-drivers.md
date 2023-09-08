@@ -2,13 +2,13 @@
 
 Griptape provides a way to build drivers for vector DBs where embeddings can be stored and queried. Every vector store driver implements the following methods:
 
-- `upsert_text_artifact()` for updating or inserting a new `TextArtifact` into vector DBs. The method will automatically generate embeddings for a given value.
-- `upsert_text_artifacts()` for updating or inserting multiple `TextArtifact`s into vector DBs. The method will automatically generate embeddings for given values.
+- `upsert_text_artifact()` for updating or inserting a new [TextArtifact](../../reference/griptape/artifacts/text_artifact.md) into vector DBs. The method will automatically generate embeddings for a given value.
+- `upsert_text_artifacts()` for updating or inserting multiple [TextArtifact](../../reference/griptape/artifacts/text_artifact.md)s into vector DBs. The method will automatically generate embeddings for given values.
 - `upsert_text()` for updating and inserting new arbitrary strings into vector DBs. The method will automatically generate embeddings for a given value.
 - `upsert_vector()` for updating and inserting new vectors directly.
 - `query()` for querying vector DBs.
 
-Each vector driver takes a `BaseEmbeddingDriver` used to dynamically generate embeddings for strings.
+Each vector driver takes a [BaseEmbeddingDriver](../../reference/griptape/drivers/embedding/base_embedding_driver.md) used to dynamically generate embeddings for strings.
 
 !!! info
 More vector drivers are coming soon.
@@ -136,7 +136,7 @@ print(result)
 
 ### Key Methods
 
-The following methods are available in the `MarqoVectorStoreDriver` class:
+The following methods are available in the [MarqoVectorStoreDriver](../../reference/griptape/drivers/vector/marqo_vector_store_driver.md) class:
 
 1. `__init__(self, api_key: str, url: str, mq: marqo.Client, index: str)`: This method initializes the Marqo client with the given API key, url, and index.
 2. `set_index(self, index: str)`: Sets the index for the Marqo client. If the index does not exist, it is created.

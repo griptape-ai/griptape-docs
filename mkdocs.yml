@@ -86,12 +86,12 @@ nav:
       - Data:
           - Overview: "griptape-framework/data/index.md"
           - Artifacts: "griptape-framework/data/artifacts.md"
-          - Embeddings: "griptape-framework/data/embeddings.md"
+          - Embedding Drivers: "griptape-framework/data/embedding-drivers.md"
           - Chunkers: "griptape-framework/data/chunkers.md"
           - Loaders: "griptape-framework/data/loaders.md"
           - Query Engines: "griptape-framework/data/query-engines.md"
           - Summary Engines: "griptape-framework/data/summary-engines.md"
-          - Vector Store Drivers: "griptape-framework/data/vector-stores.md"
+          - Vector Store Drivers: "griptape-framework/data/vector-store-drivers.md"
           - SQL Drivers: "griptape-framework/data/sql-drivers.md"
   - Griptape Tools:
       - Overview: "griptape-tools/index.md"

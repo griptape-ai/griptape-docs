@@ -1,8 +1,9 @@
 ## Overview 
-Pipelines are similar to Agents, but allow for multiple tasks.
+A [Pipeline](../../reference/griptape/structures/pipeline.md) is very similar to an [Agent](../../reference/griptape/structures/agent.md), but allows for multiple tasks.
 
 ## Context
-`Pipeline` structures have access to the following context variables in addition to the base [context](./tasks.md#context):
+
+Pipelines have access to the following [context](../../reference/griptape/structures/pipeline.md#griptape.structures.pipeline.Pipeline.context) variables in addition to the [base context](./tasks.md#context).
 
 * `parent_output`: output from the parent.
 * `parent`: parent task.

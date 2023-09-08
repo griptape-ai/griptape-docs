@@ -1,7 +1,7 @@
 ## Overview
-SQL drivers can be used to make SQL queries and load table schemas. They are used by the `SqlLoader` to process data. All loaders implement the following methods:
+SQL drivers can be used to make SQL queries and load table schemas. They are used by the [SqlLoader](../../reference/griptape/loaders/sql_loader.md) to process data. All loaders implement the following methods:
 
-* `execute_query()` executes a query and returns `RowResult`s.
+* `execute_query()` executes a query and returns [RowResult](../../reference/griptape/drivers/sql/base_sql_driver.md#griptape.drivers.sql.base_sql_driver.BaseSqlDriver.RowResult.md)s.
 * `execute_query_row()` executes a query and returns a raw result from SQL.
 * `get_table_schema()` returns a table schema.
 

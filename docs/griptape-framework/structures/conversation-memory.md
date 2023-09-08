@@ -1,13 +1,13 @@
 ## Overview
 
-Conversation memory can be used to give Griptape structures memory of the conversation.
+You can use Conversation Memory to give Griptape Structures the ability to keep track of the conversation across runs.
 
 !!! Warning
-    [Workflows](./workflows.md) do not currently support conversation memory.
+    [Workflows](./workflows.md) do not currently support Conversation Memory.
 
-## ConversationMemory
+## Conversation Memory
 
-By default, Griptape structures don't initialize memory, so you have to explicitly pass it to them:
+[ConversationMemory](../../reference/griptape/memory/structure/conversation_memory.md) will keep track of all the tasks input and output.
 
 ```python
 from griptape.structures import Agent
@@ -18,9 +18,9 @@ Agent(
 )
 ```
 
-## BufferConversationMemory
+## Buffer Conversation Memory
 
-`BufferConversationMemory` will keep a sliding window of tasks that are used to construct a prompt:
+[BufferConversationMemory](../../reference/griptape/memory/structure/buffer_conversation_memory.md) will keep a sliding window of tasks that are used to construct a prompt:
 
 ```python
 from griptape.structures import Agent
@@ -31,9 +31,9 @@ Agent(
 )
 ```
 
-## SummaryConversationMemory
+## Summary Conversation Memory
 
-`SummaryConversationMemory` will progressively summarize the whole pipeline except for the last two tasks:
+[SummaryConversationMemory](../../reference/griptape/memory/structure/summary_conversation_memory.md) will progressively summarize the whole pipeline except for the last two tasks:
 
 ```python
 from griptape.structures import Agent
@@ -48,7 +48,7 @@ Agent(
 
 ## Conversation Memory Drivers
 
-You can persist memory by using memory drivers. Here is how you can initialize memory with a driver:
+You can persist memory by using Conversation Memory Drivers. Here is how you can initialize memory with a driver:
 
 ```python
 from griptape.structures import Agent
@@ -80,4 +80,4 @@ Griptape comes with the following drivers:
 - [LocalConversationMemoryDriver](../../reference/griptape/drivers/memory/conversation/local_conversation_memory_driver.md)
 - [DynamoDbConversationMemoryDriver](../../reference/griptape/drivers/memory/conversation/dynamodb_conversation_memory_driver.md)
 
-You can build drivers for your own data stores by extending [BaseConversationMemoryDriver](../../reference/griptape/drivers/memory/conversation/dynamodb_conversation_memory_driver.md).
+You can build drivers for your own data stores by extending [BaseConversationMemoryDriver](../../reference/griptape/drivers/memory/conversation/base_conversation_memory_driver.md).

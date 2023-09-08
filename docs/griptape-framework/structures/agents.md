@@ -1,8 +1,11 @@
 ## Overview
 
-Agents are the quickest way to get started with Griptape. They take in `tools` and `input_template` directly, which the agent uses to dynamically determine whether to use [PromptTask](./tasks.md#prompttask) or [ToolkitTask](./tasks.md#toolkittask).
+An [Agent](../../reference/griptape/structures/agent.md) is the quickest way to get started with Griptape. 
+Agents take in [tools](../../reference/griptape/structures/agent.md#griptape.structures.agent.Agent.tools) and [input_template](../../reference/griptape/structures/agent.md#griptape.structures.agent.Agent.input_template)
+directly, which the agent uses to dynamically determine whether to use a [Prompt Task](./tasks.md#prompt-task) or [Toolkit Task](./tasks.md#toolkit-task).
 
-If `tools` are passed provided to the Agent, a [ToolkitTask](./tasks.md#toolkittask) will be used. If no `tools` are provided, a [PromptTask](./tasks.md#prompttask) will be used.
+If [tools](../../reference/griptape/structures/agent.md#griptape.structures.agent.Agent.tools) are passed provided to the Agent, a [Toolkit Task](./tasks.md#toolkit-task) will be used. If no [tools](../../reference/griptape/structures/agent.md#griptape.structures.agent.Agent.tools)
+are provided, a [Prompt Task](./tasks.md#prompt-task) will be used.
 
 ## Toolkit Task Agent
 ```python

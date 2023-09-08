@@ -20,6 +20,5 @@ responses = agent.run(
     "List all users in AWS IAM"
 )
 
-for resp in responses:
-    print(resp)
+print(responses)
 ```

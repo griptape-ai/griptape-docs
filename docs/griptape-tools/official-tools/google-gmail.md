@@ -5,6 +5,7 @@ The `GoogleGmailClient` tool provides a way to interact with the GMail API. It c
 ```python
 from griptape.tools import GoogleGmailClient
 from griptape.structures import Agent
+from griptape.artifacts import ErrorArtifact
 
 # Create the GoogleGmailClient tool
 gmail_tool = GoogleGmailClient(
@@ -44,5 +45,5 @@ create_draft_result = agent.run({
 if isinstance(create_draft_result, ErrorArtifact):
     print(f"Error occurred: {create_draft_result}")
 else:
-    print(f"Success: {create_draft_result.data}")
+    print(create_draft_result)
 ```

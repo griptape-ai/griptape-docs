@@ -5,6 +5,7 @@ The GoogleCalendarClient tool allows you to interact with Google Calendar.
 ```python
 from griptape.tools import GoogleCalendarClient
 from griptape.structures import Agent
+from griptape.artifacts import ErrorArtifact
 
 # Create the GoogleCalendarClient tool
 google_calendar_tool = GoogleCalendarClient(
@@ -42,6 +43,5 @@ get_events_result = agent.run({
 if isinstance(get_events_result, ErrorArtifact):
     print(f"Error occurred: {get_events_result}")
 else:
-    for event in get_events_result:
-        print(f"Event: {event.data}")
+    print(get_events_result)
 ```

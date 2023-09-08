@@ -18,10 +18,6 @@ agent = Agent(
 # Run the agent with a specific task to list all the AWS S3 buckets
 buckets_response = agent.run("list all AWS S3 buckets")
 
-# Print out all listed buckets
-for bucket in buckets_response:
-    print(bucket)
-
 # Get ACL for a specific bucket, let's assume the bucket's name is 'my-sample-bucket'
 acl_response = agent.run({
     "bucket_name": "my-sample-bucket",

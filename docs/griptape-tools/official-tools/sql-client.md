@@ -6,6 +6,7 @@ This tool enables LLMs to execute SQL statements via [SQLAlchemy](https://www.sq
 from griptape.tools import SqlClient
 from griptape.structures import Agent
 from griptape.loaders import SqlLoader
+from griptape.artifacts import InfoArtifact
 
 # Define the SqlLoader. This is just a basic example, and in practice, you'd initialize it based on your DBMS.
 sql_loader = SqlLoader(driver_name="YOUR_DB_DRIVER", connection_string="YOUR_CONNECTION_STRING")
@@ -37,6 +38,5 @@ query_result = agent.run({
 if isinstance(query_result, InfoArtifact):
     print(f"Message: {query_result}")
 else:
-    for row in query_result:
-        print(row.data)  # or however you wish to process each CsvRowArtifact
+    print(query_result)
 ```

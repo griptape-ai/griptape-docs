@@ -139,17 +139,3 @@ The **HuggingFacePipelinePromptDriver** uses the following parameters:
 | model     | Hugging Face model name.       | YES      |
 | params    | Custom model run parameters.   | NO       |
 | tokenizer | Custom `HuggingFaceTokenizer`. | NO       |
-
-## Text Generation Web UI
-
-This driver uses [Text Generation Web UI API](https://github.com/oobabooga/text-generation-webui) to run LLM models locally.
-
-The **TextGenPromptDriver** uses the following parameters:
-
-| Parameter    | Description                                   | Required |
-|--------------|-----------------------------------------------|----------|
-| preset       | Text Generation Web UI preset.                | NO       |
-| params       | Custom params dict to use in place of preset. | NO       |
-| model_url    | URL of the running model.                     | NO       |
-| generate_uri | API URI of the generate call.                 | NO       |
-| tokenizer    | Custom `TextGenTokenizer`.                    | YES      |

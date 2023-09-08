@@ -28,17 +28,18 @@ to execute statements. Here is an example of how to use it for Redshift Serverle
 
 ```python
 import boto3
+import os
 from griptape.drivers import AmazonRedshiftSqlDriver
 
-session = boto3.Session(region_name="us-east-1")
+session = boto3.Session(region_name=os.getenv('AWS_DEFAULT_REGION'))
 
-driver=AmazonRedshiftSqlDriver(
-    database="dev",
+driver = AmazonRedshiftSqlDriver(
+    database=os.getenv("REDSHIFT_DATABASE"),
     session=session,
-    workgroup_name="dev"
+    cluster_identifier=os.getenv('REDSHIFT_CLUSTER_IDENTIFIER'),
 )
 
-driver.execute_query("select * from users;")
+driver.execute_query("select * from people;")
 ```
 
 ## SnowflakeSqlDriver
@@ -51,20 +52,16 @@ import snowflake.connector
 from snowflake.connector import SnowflakeConnection
 from griptape.drivers import SnowflakeSqlDriver
 
-PWD = os.environ.get('PWD')
-
 def get_snowflake_connection() -> SnowflakeConnection:
     return snowflake.connector.connect(
-        account = 'account',
-        user = 'user',
-        password = PWD,
-        database = 'database',
-        schema = 'schema',
+        account=os.getenv('SNOWFLAKE_ACCOUNT'),
+        user=os.getenv('SNOWFLAKE_USER'),
+        password=os.getenv('SNOWFLAKE_PASSWORD'),
+        database=os.getenv('SNOWFLAKE_DATABASE'),
+        schema=os.getenv('SNOWFLAKE_SCHEMA'),
+        warehouse=os.getenv('SNOWFLAKE_WAREHOUSE')
     )
 
-driver=SnowflakeSqlDriver(
-    connection_func=get_snowflake_connection
-)
+driver = SnowflakeSqlDriver(connection_func=get_snowflake_connection)
 
-driver.execute_query("select * from users;")
-```
+driver.execute_query("select * from people;")

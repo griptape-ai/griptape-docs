@@ -17,7 +17,6 @@ vector_store = MarqoVectorStoreDriver(
     url=os.getenv("MARQO_URL"),
     index=os.getenv("MARQO_INDEX_NAME"),
 )
-# vector_store = LocalVectorStoreDriver()
 # Initialize the query engine
 query_engine = VectorQueryEngine(vector_store_driver=vector_store)
 

@@ -32,107 +32,34 @@ OpenAiChatPromptDriver(
 
 ## OpenAI Chat
 
-This driver connects to the [OpenAI Chat](https://platform.openai.com/docs/guides/chat) API.
-
-The **OpenAiChatPromptDriver** uses the following parameters:
-
-| Parameter    | Description                                                                                                         | Required |
-|--------------|---------------------------------------------------------------------------------------------------------------------|----------|
-| api_type     | Can be changed to use OpenAI models on Azure.                                                                       | NO       |
-| api_version  | API version.                                                                                                        | NO       |
-| api_base     | API URL.                                                                                                            | NO       |
-| api_key      | API key to pass directly; by default uses `OPENAI_API_KEY_PATH` environment variable.                               | NO       |
-| max_tokens   | Optional maximum return tokens. If not specified, the value will be automatically generated based by the tokenizer. | NO       |
-| model        | OpenAI model name. Uses `gpt-4` by default.                                                                         | NO       |
-| organization | OpenAI organization.                                                                                                | NO       |
-| tokenizer    | Custom `TiktokenTokenizer`                                                                                          | NO       |
-| user         | OpenAI user.                                                                                                        | NO       |
+The [OpenAiChatPromptDriver](../../reference/griptape/drivers/prompt/openai_chat_prompt_driver.md) connects to the [OpenAI Chat](https://platform.openai.com/docs/guides/chat) API.
 
 ## OpenAI Completion
 
-This driver connects to the [OpenAI Completion](https://platform.openai.com/docs/guides/completion) API.
-
-The **OpenAiCompletionPromptDriver** uses the following parameters:
-
-| Parameter    | Description                                                                                                         | Required |
-|--------------|---------------------------------------------------------------------------------------------------------------------|----------|
-| api_type     | Can be changed to use OpenAI models on Azure.                                                                       | NO       |
-| api_version  | API version.                                                                                                        | NO       |
-| api_base     | API URL.                                                                                                            | NO       |
-| api_key      | API key to pass directly; by default uses `OPENAI_API_KEY_PATH` environment variable.                               | NO       |
-| max_tokens   | Optional maximum return tokens. If not specified, the value will be automatically generated based by the tokenizer. | NO       |
-| model        | OpenAI model name. Uses `gpt-4` by default.                                                                         | NO       |
-| organization | OpenAI organization.                                                                                                | NO       |
-| tokenizer    | Custom `TiktokenTokenizer`                                                                                          | NO       |
-| user         | OpenAI user.                                                                                                        | NO       |
+The [OpenAiCompletionPromptDriver](../../reference/griptape/drivers/prompt/openai_completion_prompt_driver.md) connects to the [OpenAI Completion](https://platform.openai.com/docs/guides/completion) API.
 
 ## Azure OpenAI
 
-This driver connects to Azure OpenAI [Text Completion](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference) and [Chat Completion](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference) APIs.
-
-The **AzureOpenAiPromptDriver** uses the same parameters as **OpenAiPromptDriver** with updated defaults. In addition to those parameters, **AzureOpenAiPromptDriver** has the following additional and modified parameters:
-
-| Parameter     | Description                 | Required |
-|---------------|-----------------------------|----------|
-| api_base      | API URL.                    | YES      |
-| deployment_id | Azure OpenAI deployment ID. | YES      |
-| model         | OpenAI model name.          | YES      |
+The [AzureOpenAiPromptDriver](../../reference/griptape/drivers/prompt/azure_openai_completion_prompt_driver.md) connects to Azure OpenAI [Text Completion](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference) and [Chat Completion](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference) APIs.
 
 ## Cohere
 
-This driver connects to the Cohere [Generate](https://docs.cohere.ai/reference/generate) API.
-
-The **CoherePromptDriver** uses the following parameters:
-
-| Parameter | Description                              | Required |
-|-----------|------------------------------------------|----------|
-| api_key   | Cohere API key.                          | YES      |
-| model     | Cohere model name. Defaults to `xlarge`. | NO       |
-| client    | Custom `cohere.Client`.                  | NO       |
-| tokenizer | Custom `CohereTokenizer`.                | NO       |
+The [CoherePromptDriver](../../reference/griptape/drivers/prompt/cohere_prompt_driver.md) connects to the Cohere [Generate](https://docs.cohere.ai/reference/generate) API.
 
 ## Anthropic
 
-This driver connects to the Anthropic [Completions](https://docs.anthropic.com/claude/reference/complete_post) API..
-
-The **AnthropicPromptDriver** uses the following parameters:
-
-| Parameter | Description                              | Required |
-|-----------|------------------------------------------|----------|
-| api_key   | Cohere API key.                          | YES      |
-| model     | Cohere model name. Defaults to `xlarge`. | NO       |
-| tokenizer | Custom `AnthropicTokenizer`.             | NO       |
+The [AnthropicPromptDriver](../../reference/griptape/drivers/prompt/anthropic_prompt_driver.md) connects to the Anthropic [Completions](https://docs.anthropic.com/claude/reference/complete_post) API.
 
 ## Hugging Face Hub
 
-This driver connects to the [Hugging Face API](https://huggingface.co/docs/hub/api). It supports models with the following tasks:
+The [HuggingFaceHubPromptDriver](../../reference/griptape/drivers/prompt/hugging_face_hub_prompt_driver.md) connects to the [Hugging Face API](https://huggingface.co/docs/hub/api). It supports models with the following tasks:
 
 * text2text-generation
 * text-generation
-
-The **HuggingFaceHubPromptDriver** uses the following parameters:
-
-| Parameter | Description                    | Required |
-|-----------|--------------------------------|----------|
-| repo_id   | Repository ID on Hugging Face. | YES      |
-| api_token | Hugging Face Hub API token     | YES      |
-| use_gpu   | Use GPU during model run.      | NO       |
-| params    | Custom model run parameters.   | NO       |
-| model     | Custom `CohereTokenizer`.      | NO       |
-| client    | Custom `InferenceApi`.         | NO       |
-| tokenizer | Custom `HuggingFaceTokenizer`. | NO       |
 
 ## Hugging Face Pipeline
 
-This driver uses [Hugging Face Pipelines](https://huggingface.co/docs/transformers/main_classes/pipelines) for inference locally. It supports models with the following tasks:
+The [HuggingFaceHubPromptDriver](../../reference/griptape/drivers/prompt/hugging_face_pipeline_prompt_driver.md) uses [Hugging Face Pipelines](https://huggingface.co/docs/transformers/main_classes/pipelines) for inference locally. It supports models with the following tasks:
 
 * text2text-generation
 * text-generation
-
-The **HuggingFacePipelinePromptDriver** uses the following parameters:
-
-| Parameter | Description                    | Required |
-|-----------|--------------------------------|----------|
-| model     | Hugging Face model name.       | YES      |
-| params    | Custom model run parameters.   | NO       |
-| tokenizer | Custom `HuggingFaceTokenizer`. | NO       |

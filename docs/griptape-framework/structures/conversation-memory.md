@@ -1,61 +1,83 @@
-# Conversation Memory
+## Overview
 
-Griptape supports different types of conversation memory for pipelines and agents.
+You can use Conversation Memory to give Griptape Structures the ability to keep track of the conversation across runs.
 
-By default, pipelines don't initialize memory, so you have to explicitly pass it to them:
+!!! Warning
+    [Workflows](./workflows.md) do not currently support Conversation Memory.
+
+## Conversation Memory
+
+[ConversationMemory](../../reference/griptape/memory/structure/conversation_memory.md) will keep track of all the tasks input and output.
 
 ```python
-from griptape.structures import Pipeline
+from griptape.structures import Agent
 from griptape.memory.structure import ConversationMemory
 
-Pipeline(
+Agent(
     memory=ConversationMemory()
 )
 ```
 
-There are two other types of memory: `BufferConversationMemory` and `SummaryConversationMemory`. `BufferConversationMemory` will keep a sliding window of tasks that are used to construct a prompt:
+## Buffer Conversation Memory
+
+[BufferConversationMemory](../../reference/griptape/memory/structure/buffer_conversation_memory.md) will keep a sliding window of tasks that are used to construct a prompt:
 
 ```python
-from griptape.structures import Pipeline
+from griptape.structures import Agent
 from griptape.memory.structure import BufferConversationMemory
 
-Pipeline(
+Agent(
     memory=BufferConversationMemory(buffer_size=3)
 )
 ```
 
-This works great for shorter pipelines but fails if the whole workflow context needs to be present. You can use `SummaryConversationMemory` to address that:
+## Summary Conversation Memory
+
+[SummaryConversationMemory](../../reference/griptape/memory/structure/summary_conversation_memory.md) will progressively summarize the whole pipeline except for the last two tasks:
 
 ```python
-from griptape.structures import Pipeline
+from griptape.structures import Agent
 from griptape.memory.structure import SummaryConversationMemory
 
-Pipeline(
+Agent(
     memory=SummaryConversationMemory(
         offset=2
     )
 )
 ```
 
-This will progressively summarize the whole pipeline except for the last two tasks.
+## Conversation Memory Drivers
 
-Finally, you can persist memory by using memory drivers. Griptape comes with one memory driver for automatically storing memory on disk. Here is how you can initialize memory with a driver:
+You can persist memory by using Conversation Memory Drivers. Here is how you can initialize memory with a driver:
 
 ```python
+from griptape.structures import Agent
 from griptape.drivers import LocalConversationMemoryDriver
 from griptape.memory.structure import ConversationMemory
 
-ConversationMemory(
-    driver=LocalConversationMemoryDriver(file_path="memory.json")
+Agent(
+    memory=ConversationMemory(
+        driver=LocalConversationMemoryDriver(file_path="memory.json")
+    )
 )
+
 ```
 
 To load memory:
 
 ```python
 from griptape.drivers import LocalConversationMemoryDriver
+from griptape.structures import Agent
+from griptape.memory.structure import ConversationMemory
 
-LocalConversationMemoryDriver(file_path="memory.json").load()
+Agent(
+    memory=LocalConversationMemoryDriver(file_path="memory.json").load()
+)
 ```
 
-You can easily build drivers for your own data stores by extending `BaseConversationMemoryDriver`. You only need to implement `store` and `load` methods.
+Griptape comes with the following drivers:
+
+- [LocalConversationMemoryDriver](../../reference/griptape/drivers/memory/conversation/local_conversation_memory_driver.md)
+- [DynamoDbConversationMemoryDriver](../../reference/griptape/drivers/memory/conversation/dynamodb_conversation_memory_driver.md)
+
+You can build drivers for your own data stores by extending [BaseConversationMemoryDriver](../../reference/griptape/drivers/memory/conversation/base_conversation_memory_driver.md).

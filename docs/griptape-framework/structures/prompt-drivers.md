@@ -1,6 +1,6 @@
-# Prompt Drivers
+## Overview
 
-Prompt drivers are used by Griptape structures to make calls to the underlying foundation models. **OpenAiChatPromptDriver** is the default prompt driver used in all structures.
+Prompt Drivers are used by Griptape Structures to make API calls to the underlying LLMs. [OpenAiChatPromptDriver](../../reference/griptape/drivers/prompt/openai_chat_prompt_driver.md) is the default prompt driver used in all structures.
 
 You can instantiate drivers and pass them to structures:
 
@@ -29,9 +29,6 @@ OpenAiChatPromptDriver(
     temperature=1
 ).run(stack)
 ```
-
-!!! info
-    More prompt drivers are coming soon.
 
 ## OpenAI Chat
 

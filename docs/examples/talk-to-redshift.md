@@ -12,7 +12,7 @@ from griptape.structures import Agent
 from griptape.tools import SqlClient, FileManager
 from griptape.utils import Chat
 
-session = boto3.Session(region_name=os.getenv("AWS_DEFAULT_REGION"))
+session = boto3.Session()
 
 sql_loader = SqlLoader(
     sql_driver=AmazonRedshiftSqlDriver(

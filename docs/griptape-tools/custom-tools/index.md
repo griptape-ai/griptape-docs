@@ -68,10 +68,8 @@ agent = Agent(
     tools=[rng_tool]
 )
 
-print(
-    agent.run(
-        "generate a random number rounded to 5 decimal places"
-    ).output.value
+agent.run(
+    "generate a random number rounded to 5 decimal places"
 )
 
 ```

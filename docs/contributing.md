@@ -30,6 +30,20 @@ INFO     -  [09:28:33] Serving on http://127.0.0.1:8000/
 INFO     -  [09:28:37] Browser connected: http://127.0.0.1:8000/
 ```
 
+You may see many `WARNING` messages in the console output. This is because the [reference docs](./reference/griptape/index.md) are not built.
+Fixing this is not necessary to contribute to the documentation, but it helps to reduce noise in the console output.
+
+First, clone the Griptape repository to a separate directory:
+
+`git clone git@github.com:griptape-ai/griptape.git ~/some/other/directory/`
+
+Then, create a symlink called `griptape` in the `griptape-docs` repository:
+
+`ln -s ~/some/other/directory/griptape griptape`
+
+The `WARNING` messages should now be resolved. 
+
+
 Follow the typical PR process to contribute changes. 
 
 * Create a feature branch.

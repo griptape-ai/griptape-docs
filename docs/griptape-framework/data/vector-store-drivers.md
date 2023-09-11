@@ -197,7 +197,8 @@ The following methods are available in the MongoDbAtlasVectorStoreDriver class:
 4. `load_entry(self, vector_id: str, namespace: Optional[str] = None) -> Optional[BaseVectorStoreDriver.Entry]`: Loads a document entry from the MongoDB collection based on the vector ID. Returns the loaded Entry if found; otherwise, None is returned.
 5. `load_entries(self, namespace: Optional[str] = None) -> list[BaseVectorStoreDriver.Entry]`: Loads all document entries from the MongoDB collection. Entries can optionally be filtered by namespace.
 6. `query(self, query: str, count: Optional[int] = None, namespace: Optional[str] = None, include_vectors: bool = False, offset: Optional[int] = 0, index: Optional[str] = None) -> list[BaseVectorStoreDriver.QueryResult]`: Queries the MongoDB collection for documents that match the provided query string. Results can be customized based on parameters like count, namespace, inclusion of vectors, offset, and index.
-   Note: The implementation details such as the structure of the query method can be tailored according to specific use cases and the nature of the stored vectors. In this example, it's assumed that the driver uses an embedding driver to convert query strings into vectors and leverages specific MongoDB features for nearest neighbor search.
+!!! note: 
+    The implementation details such as the structure of the query method can be tailored according to specific use cases and the nature of the stored vectors. In this example, it's assumed that the driver uses an embedding driver to convert query strings into vectors and leverages specific MongoDB features for nearest neighbor search.
 
 ## RedisVectorStoreDriver
 
@@ -244,7 +245,8 @@ The following methods are available in the RedisVectorStoreDriver class:
 6. `query(self, vector: list[float], count: Optional[int] = None, namespace: Optional[str] = None) -> list[BaseVectorStoreDriver.QueryResult]`: Performs a nearest neighbor search on Redis to find vectors similar to the provided input vector. Results can be limited using the count parameter and optionally filtered by a namespace. Returns a list of BaseVectorStoreDriver.QueryResult objects, each encapsulating the retrieved vector, its similarity score, metadata, and namespace.
 7. `create_index(self, namespace: Optional[str] = None, vector_dimension: Optional[int] = None) -> None`: This method creates a new index in Redis with the specified properties. If an index with the given name already exists, a warning is logged and the method does not proceed. The method expects the dimension of the vectors (i.e., vector_dimension) that will be stored in this index. Optionally, a namespace can be provided which will determine the prefix for document keys. The index is constructed with a TagField named "tag" and a VectorField that utilizes the cosine distance metric on FLOAT32 type vectors.
 
-Note: This driver interfaces with a Redis instance and utilizes the Redis hashes and RediSearch module to store, retrieve, and query vectors in a structured manner. Proper setup of the Redis instance and RediSearch is necessary for the driver to function correctly.
+!!! note
+    This driver interfaces with a Redis instance and utilizes the Redis hashes and RediSearch module to store, retrieve, and query vectors in a structured manner. Proper setup of the Redis instance and RediSearch is necessary for the driver to function correctly.
 
 ## OpenSearchVectorStoreDriver
 
@@ -263,9 +265,6 @@ vector_store_driver = AmazonOpenSearchVectorStoreDriver(
     index_name=os.getenv("AMAZON_OPENSEARCH_INDEX_NAME"),
     session=boto3.Session(),
 )
-
-# Create index
-# vector_store_driver.create_index(vector_dimension=1536)
 
 # Load artifacts from the web
 artifacts = WebLoader(max_tokens=200).load("https://www.griptape.ai")

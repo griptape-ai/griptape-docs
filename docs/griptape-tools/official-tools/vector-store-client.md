@@ -1,15 +1,6 @@
-This tool enables LLMs to dynamically query tool memory.
+The [VectorStoreClient](../../reference/griptape/tools/vector_store_client/tool.md) enables LLMs to dynamically query tool memory.
 
-The `VectorStoreClient` tool uses the following parameters:
-
-| Parameter    | Description                                               | Required |
-|--------------|-----------------------------------------------------------|----------|
-| description  | LLM-friendly vector DB description                        | YES      |
-| namespace    | Vector storage namespace                                  | NO       |
-| query_engine | `BaseQueryEngine`                                         | YES      |
-| top_n        | Max number of results returned for the query engine query | NO       |
-
-Here is an end-to-end example of how it can be used with the Pincone storage driver:
+Here is an example of how it can be used with the Pincone storage driver:
 
 ```python
 from griptape.structures import Agent

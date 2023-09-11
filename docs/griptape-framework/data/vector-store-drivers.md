@@ -1,15 +1,17 @@
+## Overview
+
 Griptape provides a way to build drivers for vector DBs where embeddings can be stored and queried. Every vector store driver implements the following methods:
 
-* `upsert_text_artifact()` for updating or inserting a new `TextArtifact` into vector DBs. The method will automatically generate embeddings for a given value.
-* `upsert_text_artifacts()` for updating or inserting multiple `TextArtifact`s into vector DBs. The method will automatically generate embeddings for given values.
-* `upsert_text()` for updating and inserting new arbitrary strings into vector DBs. The method will automatically generate embeddings for a given value.
-* `upsert_vector()` for updating and inserting new vectors directly.
-* `query()` for querying vector DBs.
+- `upsert_text_artifact()` for updating or inserting a new [TextArtifact](../../reference/griptape/artifacts/text_artifact.md) into vector DBs. The method will automatically generate embeddings for a given value.
+- `upsert_text_artifacts()` for updating or inserting multiple [TextArtifact](../../reference/griptape/artifacts/text_artifact.md)s into vector DBs. The method will automatically generate embeddings for given values.
+- `upsert_text()` for updating and inserting new arbitrary strings into vector DBs. The method will automatically generate embeddings for a given value.
+- `upsert_vector()` for updating and inserting new vectors directly.
+- `query()` for querying vector DBs.
 
-Each vector driver takes a `BaseEmbeddingDriver` used to dynamically generate embeddings for strings.
+Each vector driver takes a [BaseEmbeddingDriver](../../reference/griptape/drivers/embedding/base_embedding_driver.md) used to dynamically generate embeddings for strings.
 
 !!! info
-    More vector drivers are coming soon.
+More vector drivers are coming soon.
 
 ## LocalVectorStoreDriver
 
@@ -133,7 +135,8 @@ print(result)
 ```
 
 ### Key Methods
-The following methods are available in the `MarqoVectorStoreDriver` class:
+
+The following methods are available in the [MarqoVectorStoreDriver](../../reference/griptape/drivers/vector/marqo_vector_store_driver.md) class:
 
 1. `__init__(self, api_key: str, url: str, mq: marqo.Client, index: str)`: This method initializes the Marqo client with the given API key, url, and index.
 2. `set_index(self, index: str)`: Sets the index for the Marqo client. If the index does not exist, it is created.
@@ -148,40 +151,44 @@ The following methods are available in the `MarqoVectorStoreDriver` class:
 11. `upsert_vector(self, vector: list[float], vector_id: Optional[str] = None, namespace: Optional[str] = None, meta: Optional[dict] = None)`: Inserts a vector into the Marqo index. If a vector with the given vector ID already exists, it is updated; otherwise, a new vector is inserted. Currently, this function is not implemented and raises an Exception.
 
 ## MongoDbAtlasVectorStoreDriver
+
 This driver provides support for storing vector data in a MongoDB Atlas database. The driver includes methods for performing standard vector operations such as inserting, updating, querying, and loading vectors.
 
 Below is a detailed example of how the MongoDbAtlasVectorStoreDriver can be used to interact with a MongoDB Atlas instance:
 
 ```python
 from griptape.drivers import MongoDbAtlasVectorStoreDriver
+from griptape.loaders import WebLoader
+import os
 
+host = os.getenv("MONGODB_HOST")
+username = os.getenv("MONGODB_USERNAME")
+password = os.getenv("MONGODB_PASSWORD")
+database_name = os.getenv("MONGODB_DATABASE_NAME")
+collection_name = os.getenv("MONGODB_COLLECTION_NAME")
 # Initialize the vector store driver
 vector_store = MongoDbAtlasVectorStoreDriver(
-    connection_string="mongodb+srv://<username>:<password>@cluster.mongodb.net/<dbname>",
-    database_name="myDatabase",
-    collection_name="myCollection"
+    connection_string=f"mongodb+srv://{username}:{password}@{host}/{database_name}",
+    database_name=database_name,
+    collection_name=collection_name,
 )
 
-# Upsert a vector
-vector_id = vector_store.upsert_vector(
-    vector=[0.1, 0.2, 0.3],
-    namespace="myNamespace",
-    meta={"info": "sample"}
+# Load artifacts from the web
+artifacts = WebLoader(max_tokens=200).load("https://www.griptape.ai")
+
+# Upsert the artifacts into the vector store
+vector_store.upsert_text_artifacts(
+    {
+        "griptape": artifacts,
+    }
 )
 
-# Load a specific entry by vector ID
-entry = vector_store.load_entry(vector_id=vector_id)
-print(entry)
-
-# Query the collection
-results = vector_store.query(
-    query="What is griptape?",
-    count=5
-)
-print(results)
+result = vector_store.query(query="What is griptape?")
+print(result)
 ```
 
 ### Key Methods
+
 The following methods are available in the MongoDbAtlasVectorStoreDriver class:
 
 1. `__init__(self, connection_string: str, database_name: str, collection_name: str)`: Initializes the MongoClient with the given connection string, database name, and collection name.
@@ -190,62 +197,44 @@ The following methods are available in the MongoDbAtlasVectorStoreDriver class:
 4. `load_entry(self, vector_id: str, namespace: Optional[str] = None) -> Optional[BaseVectorStoreDriver.Entry]`: Loads a document entry from the MongoDB collection based on the vector ID. Returns the loaded Entry if found; otherwise, None is returned.
 5. `load_entries(self, namespace: Optional[str] = None) -> list[BaseVectorStoreDriver.Entry]`: Loads all document entries from the MongoDB collection. Entries can optionally be filtered by namespace.
 6. `query(self, query: str, count: Optional[int] = None, namespace: Optional[str] = None, include_vectors: bool = False, offset: Optional[int] = 0, index: Optional[str] = None) -> list[BaseVectorStoreDriver.QueryResult]`: Queries the MongoDB collection for documents that match the provided query string. Results can be customized based on parameters like count, namespace, inclusion of vectors, offset, and index.
-Note: The implementation details such as the structure of the query method can be tailored according to specific use cases and the nature of the stored vectors. In this example, it's assumed that the driver uses an embedding driver to convert query strings into vectors and leverages specific MongoDB features for nearest neighbor search.
+!!! note: 
+    The implementation details such as the structure of the query method can be tailored according to specific use cases and the nature of the stored vectors. In this example, it's assumed that the driver uses an embedding driver to convert query strings into vectors and leverages specific MongoDB features for nearest neighbor search.
 
 ## RedisVectorStoreDriver
+
 This driver integrates with the Redis vector storage system. Redis, known for its high-speed data store, has the ability to also handle vector storage. With the RedisVectorStoreDriver, you can communicate with the Redis database to manage and query your vector data.
 
 Below is an in-depth example showcasing how this driver can be used:
 
 ```python
-import hashlib
-import json
-from urllib.request import urlopen
+import os
 from griptape.drivers import RedisVectorStoreDriver
+from griptape.loaders import WebLoader
 import numpy as np  # Assuming you'd use numpy to create a dummy vector for the sake of example.
 
-def load_data(driver: RedisVectorStoreDriver) -> None:
-    response = urlopen(
-        "https://raw.githubusercontent.com/wedeploy-examples/"
-        "supermarket-web-example/master/products.json"
-    )
-
-    for product in json.loads(response.read()):
-        dummy_vector = np.random.rand(100).tolist()  # Creating a dummy vector, you'd need to replace this with actual embeddings.
-        driver.upsert_vector(
-            dummy_vector,
-            vector_id=hashlib.md5(product["title"].encode()).hexdigest(),
-            meta={
-                "title": product["title"],
-                "description": product["description"],
-                "type": product["type"],
-                "price": product["price"],
-                "rating": product["rating"]
-            },
-            namespace="supermarket-products"
-        )
-
 vector_store_driver = RedisVectorStoreDriver(
-    host='localhost',
-    port=6379,
-    db=0,
-    password=None,
-    index='my_vector_index'
+    host=os.getenv("REDIS_HOST"),
+    port=os.getenv("REDIS_PORT"),
+    password=os.getenv("REDIS_PASSWORD"),
+    index=os.getenv("REDIS_INDEX"),
 )
 
-load_data(vector_store_driver)
+# Load artifacts from the web
+artifacts = WebLoader(max_tokens=200).load("https://www.griptape.ai")
 
-# To mimic the query "fruit", you'd convert the word "fruit" to its equivalent vector.
-query_vector = np.random.rand(100).tolist()  # This is just a dummy example. You'd need actual embeddings for your data.
-results = vector_store_driver.query(
-    query_vector,
-    count=3,
-    namespace="supermarket-products"
+# Upsert the artifacts into the vector store
+vector_store_driver.upsert_text_artifacts(
+    {
+        "griptape": artifacts,
+    }
 )
-print(results)
+
+result = vector_store_driver.query(query="What is griptape?")
+print(result)
 ```
 
 ### Key Methods
+
 The following methods are available in the RedisVectorStoreDriver class:
 
 1. `__init__(self, host: str, port: int, db: int, password: Optional[str], index: str)`: Initializes the Redis client with the given host, port, database, optional password, and index name.
@@ -256,58 +245,43 @@ The following methods are available in the RedisVectorStoreDriver class:
 6. `query(self, vector: list[float], count: Optional[int] = None, namespace: Optional[str] = None) -> list[BaseVectorStoreDriver.QueryResult]`: Performs a nearest neighbor search on Redis to find vectors similar to the provided input vector. Results can be limited using the count parameter and optionally filtered by a namespace. Returns a list of BaseVectorStoreDriver.QueryResult objects, each encapsulating the retrieved vector, its similarity score, metadata, and namespace.
 7. `create_index(self, namespace: Optional[str] = None, vector_dimension: Optional[int] = None) -> None`: This method creates a new index in Redis with the specified properties. If an index with the given name already exists, a warning is logged and the method does not proceed. The method expects the dimension of the vectors (i.e., vector_dimension) that will be stored in this index. Optionally, a namespace can be provided which will determine the prefix for document keys. The index is constructed with a TagField named "tag" and a VectorField that utilizes the cosine distance metric on FLOAT32 type vectors.
 
-Note: This driver interfaces with a Redis instance and utilizes the Redis hashes and RediSearch module to store, retrieve, and query vectors in a structured manner. Proper setup of the Redis instance and RediSearch is necessary for the driver to function correctly.
+!!! note
+    This driver interfaces with a Redis instance and utilizes the Redis hashes and RediSearch module to store, retrieve, and query vectors in a structured manner. Proper setup of the Redis instance and RediSearch is necessary for the driver to function correctly.
 
 ## OpenSearchVectorStoreDriver
+
 This driver integrates with the OpenSearch platform, allowing for storage, retrieval, and querying of vector data. OpenSearch is a distributed search and analytics suite derived from Elasticsearch, and with the OpenSearchVectorStoreDriver, you can effectively manage vector data in an OpenSearch cluster.
 
 Below is an in-depth example showcasing how this driver can be used:
 
 ```python
-from griptape.drivers import OpenSearchVectorStoreDriver
-import numpy as np
+import os
+import boto3
+from griptape.drivers import AmazonOpenSearchVectorStoreDriver
+from griptape.loaders import WebLoader
 
-# Initialize the driver
-driver = OpenSearchVectorStoreDriver(
-    host='localhost',
-    port=9200,
-    index_name='vector_data'
+vector_store_driver = AmazonOpenSearchVectorStoreDriver(
+    host=os.getenv("AMAZON_OPENSEARCH_HOST"),
+    index_name=os.getenv("AMAZON_OPENSEARCH_INDEX_NAME"),
+    session=boto3.Session(),
 )
 
-# Create an index with a vector dimension of 100
-driver.create_index(vector_dimension=100)
+# Load artifacts from the web
+artifacts = WebLoader(max_tokens=200).load("https://www.griptape.ai")
 
-# Upsert some sample vector data
-for i in range(10):
-    dummy_vector = np.random.rand(100).tolist()
-    driver.upsert_vector(
-        vector=dummy_vector,
-        vector_id=f"vector_{i}",
-        namespace="sample_namespace",
-        meta={
-            "description": f"This is vector number {i}"
-        }
-    )
+# Upsert the artifacts into the vector store
+vector_store_driver.upsert_text_artifacts(
+    {
+        "griptape": artifacts,
+    }
+)
 
-# Load a specific vector entry
-entry = driver.load_entry("vector_5", namespace="sample_namespace")
-print(entry.id, entry.vector, entry.meta, entry.namespace)
+result = vector_store_driver.query(query="What is griptape?")
 
-# Load all vector entries from the namespace
-entries = driver.load_entries(namespace="sample_namespace")
-for e in entries:
-    print(e.id, e.meta)
-
-# Perform a vector similarity query
-query_vector = np.random.rand(100).tolist()
-# Since the driver's query method expects a string, we need to modify it to accept vectors or implement a way to convert vectors to string queries.
-# For demonstration purposes, we'll assume the query method accepts a list as a query.
-results = driver.query(query=query_vector, count=3, namespace="sample_namespace")
-for r in results:
-    print(r.score, r.vector, r.meta)
+print(result)
 ```
-
 ### Key Methods
+
 The following methods are available in the OpenSearchVectorStoreDriver class:
 
 1. `__init__(self, host: str, port: int = 443, http_auth: Optional[Union[str, Tuple[str, str]]] = None, use_ssl: bool = True, verify_certs: bool = True, index_name: str)`: Initializes the OpenSearch client with the given host, port, and other client configuration details, and sets the index name for vector storage.

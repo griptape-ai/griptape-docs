@@ -2,17 +2,7 @@
 
 This tool enables LLMs to call REST APIs.
 
-The **RestApiClient** tool uses the following parameters: 
-
-| Parameter      | Description                          | Required |
-| ----------- | ------------------------------------ |----------|
-| `base_url`  | The base url that will be used for the request. | YES |
-| `path`       | The resource path that will be appended to `base_url`. | YES |
-| `description`    | A description of what the REST API does.  | YES |
-| `request_body_schema` | A JSON schema string describing the request body. Recommended for PUT, POST, and PATCH requests. | NO |
-| `request_query_params_schema` | A JSON schema string describing the available query parameters. | NO |
-| `request_path_params_schema` | A JSON schema string describing the available path parameters. The schema must describe an array of string values. | NO |
-| `response_body_schema` | A JSON schema string describing the response body. | NO |
+The [RestApiClient](../../reference/griptape/tools/rest_api_client/tool.md) tool uses the following parameters: 
 
 ### Example
 The following example is built using [https://jsonplaceholder.typicode.com/guide/](https://jsonplaceholder.typicode.com/guide/).
@@ -24,17 +14,11 @@ from griptape.memory.structure import ConversationMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask
 from griptape.tools import RestApiClient
-from griptape.memory.tool import TextToolMemory
 
-text_memory = TextToolMemory()
 posts_client = RestApiClient(
     base_url="https://jsonplaceholder.typicode.com",
     path="posts",
     description="Allows for creating, updating, deleting, patching, and getting posts.",
-    output_memory={
-        "get": [text_memory]
-    },
-    input_memory=[text_memory],
     request_body_schema=dumps(
         {
             "$schema": "https://json-schema.org/draft/2019-09/schema",
@@ -141,10 +125,6 @@ pipeline = Pipeline(
 pipeline.add_tasks(
     ToolkitTask(
         "Output the title of post 1.",
-        tools=[posts_client],
-    ),
-    ToolkitTask(
-        "Output the titles of all posts.",
         tools=[posts_client],
     ),
     ToolkitTask(

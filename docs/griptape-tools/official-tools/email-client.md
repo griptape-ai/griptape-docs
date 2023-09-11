@@ -1,32 +1,6 @@
 # EmailClient
 
-This tool enables LLMs to send emails.
-
-The **EmailClient** tool uses the following parameters: 
-
-| Parameter      | Description                                                            | Required |
-| ----------- |------------------------------------------------------------------------|----------|
-| `username`  | Used by default for both SMTP and IMAP activities. Will be used as the from email when sending emails.                      | NO |
-| `password`       | Used by default for both SMTP and IMAP activities                         | NO |
-| `email_max_retrieve_count`    | Used to limit the number of messages retrieved during any given activities | NO |
-
-When sending (SMTP) emails the **EmailClient** uses the following parameters:
-
-| Parameter      | Description                          | Required |
-| ----------- | ------------------------------------ |----------|
-| `smtp_host`  | The hostname or url of the SMTP server (smtp.gmail.com)  | YES |
-| `smtp_port`       | The port name of the SMTP server (465) | YES |
-| `smtp_use_ssl` | Should **EmailClient** use SSL when sending | NO |
-| `smtp_user`       | Setting this will override whatever is set as the username parameter for SMTP activities | NO |
-| `smtp_password`    | Setting this will override whatever is set as the username parameter for SMTP activities | NO |
-
-When retrieving emails (IMAP) the **EmailClient** uses the following parameters: 
-
-| Parameter      | Description                          | Required |
-| ----------- | ------------------------------------ |----------|
-| `imap_url`  | The hostname or url of the SMTP server (imap.gmail.com)  | YES |
-| `imap_user`       | Setting this will override whatever is set as the username parameter for IMAP activities | NO |
-| `imap_password`    | Setting this will override whatever is set as the username parameter for IMAP activities | NO |
+The [EmailClient](../../reference/griptape/tools/email_client/tool.md) enables LLMs to send emails.
 
 ```python
 import os

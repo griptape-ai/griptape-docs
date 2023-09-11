@@ -31,16 +31,7 @@ def build_reference_docs():
         mkdocs_gen_files.set_edit_path(full_doc_path, Path("..") / path)
 
     with mkdocs_gen_files.open("reference/SUMMARY.md", "w") as nav_file:
-        nav_file.write(
-            dedent(
-                """
-                ---
-                search:
-                    exclude: true
-                ---
-                """
-            )
-        )
+        nav_file.writelines(["---", "search:", "\texclude: true", "---\n"])
         nav_file.writelines(nav.build_literate_nav())
     with mkdocs_gen_files.open("reference/griptape/index.md", "w") as index_file:
         index_file.write(

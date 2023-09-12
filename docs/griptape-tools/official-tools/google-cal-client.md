@@ -11,16 +11,16 @@ from griptape.structures import Agent
 # Create the GoogleCalendarClient tool
 google_calendar_tool = GoogleCalendarClient(
     service_account_credentials={
-        "type": os.environ["YOUR_ACCOUNT_TYPE"],
-        "project_id": os.environ["YOUR_PROJECT_ID"],
-        "private_key_id": os.environ["YOUR_PRIVATE_KEY_ID"],
-        "private_key": os.environ["YOUR_PRIVATE_KEY"],
-        "client_email": os.environ["YOUR_CLIENT_EMAIL"],
-        "client_id": os.environ["YOUR_CLIENT_ID"],
+        "type": os.environ["GOOGLE_ACCOUNT_TYPE"],
+        "project_id": os.environ["GOOGLE_PROJECT_ID"],
+        "private_key_id": os.environ["GOOGLE_PRIVATE_KEY_ID"],
+        "private_key": os.environ["GOOGLE_PRIVATE_KEY"],
+        "client_email": os.environ["GOOGLE_CLIENT_EMAIL"],
+        "client_id": os.environ["GOOGLE_CLIENT_ID"],
         "auth_uri": "https://accounts.google.com/o/oauth2/auth",
         "token_uri": "https://oauth2.googleapis.com/token",
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-        "client_x509_cert_url": os.environ["YOUR_CERT_URL"]
+        "client_x509_cert_url": os.environ["GOOGLE_CERT_URL"]
     }
 )
 

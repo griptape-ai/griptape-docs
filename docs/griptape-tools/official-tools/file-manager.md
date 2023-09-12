@@ -6,60 +6,43 @@ This tool enables LLMs to save and load files.
 from griptape.structures import Agent
 from griptape.tools import FileManager
 
-# Set up an agent using the FileManager tool
-file_manager_tool = FileManager(dir='/path/to/files')
+# Initialize the FileManager tool with the current directory as its base
+file_manager_tool = FileManager(dir='.')
+
+# Add the tool to the Agent
 agent = Agent(
     tools=[file_manager_tool]
 )
 
-# Load files from disk
+# Directly create a file named 'sample1.txt' with some content
+filename = "sample1.txt"
+content = "This is the content of sample1.txt"
+
+with open(filename, "w") as f:
+    f.write(content)
+
+# Now, read content from the file 'sample1.txt' using the agent's command
 agent.run("Can you get me the sample1.txt file?")
 ```
 ```
-[09/08/23 15:43:19] INFO     Task e93f7ba59d15491f814280324d46eaa3              
+[09/12/23 12:07:56] INFO     Task 16a1ce1847284ae3805485bad7d99116              
                              Input: Can you get me the sample1.txt file?        
-[09/08/23 15:43:26] INFO     Subtask 8779d4c533eb4ea99cd0415aebaf6ab6           
+[09/12/23 12:08:04] INFO     Subtask ddcf48d970ce4edbbc22a46b2f83ec4f           
                              Thought: The user wants the content of the file    
                              named "sample1.txt". I can use the FileManager tool
-                             with the "load_files_from_disk" activity to load   
+                             with the activity "load_files_from_disk" to load   
                              the file from the disk.                            
                                                                                 
                              Action: {"type": "tool", "name": "FileManager",    
                              "activity": "load_files_from_disk", "input":       
                              {"values": {"paths": ["sample1.txt"]}}}            
-                    INFO     Subtask 8779d4c533eb4ea99cd0415aebaf6ab6           
+                    INFO     Subtask ddcf48d970ce4edbbc22a46b2f83ec4f           
                              Observation:                                       
-                             [BlobArtifact(id='0ebc80c707634a51af04cb9535f22aac'
+                             [BlobArtifact(id='a715cc1bc6724bf28566a5b3c343b6ed'
                              , name='sample1.txt', type='BlobArtifact',         
-                             value=b'Utilitatis causa amicitia est              
-                             quaesita.\nLorem ipsum dolor sit amet, consectetur 
-                             adipiscing elit. Collatio igitur ista te nihil     
-                             iuvat. Honesta oratio, Socratica, Platonis etiam.  
-                             Primum in nostrane potestate est, quid meminerimus?
-                             Duo Reges: constructio interrete. Quid, si etiam   
-                             iucunda memoria est praeteritorum malorum? Si      
-                             quidem, inquit, tollerem, sed relinquo. An nisi    
-                             populari fama?\n\nQuamquam id quidem licebit iis   
-                             existimare, qui legerint. Summum a vobis bonum     
-                             voluptas dicitur. At hoc in eo M. Refert tamen, quo
-                             modo. Quid sequatur, quid repugnet, vident. Iam id 
-                             ipsum absurdum, maximum malum neglegi.', dir='')]  
-[09/08/23 15:43:45] INFO     Task e93f7ba59d15491f814280324d46eaa3              
-                             Output: The content of the file "sample1.txt" is:  
-                                                                                
-                             "Utilitatis causa amicitia est quaesita.           
-                             Lorem ipsum dolor sit amet, consectetur adipiscing 
-                             elit. Collatio igitur ista te nihil iuvat. Honesta 
-                             oratio, Socratica, Platonis etiam. Primum in       
-                             nostrane potestate est, quid meminerimus? Duo      
-                             Reges: constructio interrete. Quid, si etiam       
-                             iucunda memoria est praeteritorum malorum? Si      
-                             quidem, inquit, tollerem, sed relinquo. An nisi    
-                             populari fama?                                     
-                                                                                
-                             Quamquam id quidem licebit iis existimare, qui     
-                             legerint. Summum a vobis bonum voluptas dicitur. At
-                             hoc in eo M. Refert tamen, quo modo. Quid sequatur,
-                             quid repugnet, vident. Iam id ipsum absurdum,      
-                             maximum malum neglegi."  
+                             value=b'This is the content of sample1.txt',       
+                             dir='')]                                           
+[09/12/23 12:08:10] INFO     Task 16a1ce1847284ae3805485bad7d99116              
+                             Output: The content of the file "sample1.txt" is   
+                             "This is the content of sample1.txt". 
 ```

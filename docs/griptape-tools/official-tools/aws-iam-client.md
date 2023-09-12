@@ -46,9 +46,9 @@ agent.run("List all my IAM users")
 [09/11/23 16:46:03] INFO     Subtask 8e0e918571544eeebf46de898466c48c           
                              Observation: The text provides information about   
                              two different users in an AWS IAM system. The first
-                             user is named "griptape-cloud-django-app" and has a
+                             user is named "example-user-1" and has a
                              user ID of "AIDASHBEHWJLQV2IOYDHM". The second user
-                             is named "griptape-integration-tests-runner" and   
+                             is named "example-user-2" and   
                              has a user ID of "AIDASHBEHWJLWHVS76C6X". Both     
                              users have a path of "/", and their ARNs (Amazon   
                              Resource Names) indicate their location in the IAM 
@@ -59,10 +59,10 @@ agent.run("List all my IAM users")
                              Output: There are two IAM users in your AWS        
                              account:                                           
                                                                                 
-                             1. User "griptape-cloud-django-app" with user ID   
+                             1. User "example-user-1" with user ID   
                              "AIDASHBEHWJLQV2IOYDHM", created on July 18, 2023, 
                              at 20:29:27 UTC.                                   
-                             2. User "griptape-integration-tests-runner" with   
+                             2. User "example-user-2" with   
                              user ID "AIDASHBEHWJLWHVS76C6X", created on August 
                              29, 2023, at 20:56:37 UTC.   
 

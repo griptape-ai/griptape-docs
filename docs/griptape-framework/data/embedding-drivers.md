@@ -16,10 +16,10 @@ The [OpenAiEmbeddingDriver](../../reference/griptape/drivers/embedding/openai_em
 Here is how you can use it:
 
 ```python
->>> from griptape.drivers import OpenAiEmbeddingDriver
+from griptape.drivers import OpenAiEmbeddingDriver
 
->>> OpenAiEmbeddingDriver().embed_string("Hello Griptape!")
-[0.0018212645081803203, 0.006074181292206049, -0.005777235608547926, ...]
+OpenAiEmbeddingDriver().embed_string("Hello Griptape!")
+
 
 ```
 

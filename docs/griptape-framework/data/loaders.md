@@ -81,7 +81,6 @@ urllib.request.urlretrieve("https://example-files.online-convert.com/document/tx
 TextLoader().load(
     Path("example.txt")
 )
-[TextArtifact(id='...', name='...', type='TextArtifact', value='...', _TextArtifact__embedding=[])]
 
 TextLoader().load_collection(
     ["my text", "my other text", Path("example.txt")]
@@ -100,7 +99,6 @@ from griptape.loaders import WebLoader
 WebLoader().load(
     "https://www.griptape.ai"
 )
-[TextArtifact(id='...', name='...', type='TextArtifact', value='...', _TextArtifact__embedding=[])]
 
 WebLoader().load_collection(
     ["https://www.griptape.ai", "https://docs.griptape.ai"]

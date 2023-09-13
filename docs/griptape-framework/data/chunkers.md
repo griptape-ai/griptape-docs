@@ -11,14 +11,12 @@ Different types of chunkers provide lists of separators for specific text shapes
 Here is how to use a chunker:
 
 ```python
->>> from griptape.chunkers import TextChunker
->>> from griptape.tokenizers import TiktokenTokenizer
->>> TextChunker(
-...     # set an optional custom tokenizer
-...     tokenizer=TiktokenTokenizer(),
-...     # optionally modify default number of tokens
-...     max_tokens=100
-... ).chunk("long text")
-[TextArtifact(id='...', name='...', type='TextArtifact', value='long text', _TextArtifact__embedding=[])]
-
+from griptape.chunkers import TextChunker
+from griptape.tokenizers import TiktokenTokenizer
+TextChunker(
+     # set an optional custom tokenizer
+     tokenizer=TiktokenTokenizer(),
+     # optionally modify default number of tokens
+     max_tokens=100
+).chunk("long text")
 ```

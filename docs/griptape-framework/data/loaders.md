@@ -9,21 +9,16 @@ multiple documents with ['load_collection()](../../reference/griptape/loaders/ba
 Inherits from the [TextLoader](../../reference/griptape/loaders/text_loader.md) and can be used to load PDFs from a path or from an IO stream:
 
 ```python
->>> from griptape.loaders import PdfLoader
->>> import urllib.request
+from griptape.loaders import PdfLoader
+import urllib.request
 
->>> urllib.request.urlretrieve("https://arxiv.org/pdf/1706.03762.pdf", "attention.pdf")
-('attention.pdf', <http.client.HTTPMessage object at ...>)
+urllib.request.urlretrieve("https://arxiv.org/pdf/1706.03762.pdf", "attention.pdf")
 
->>> PdfLoader().load("attention.pdf")
-[TextArtifact(id='...', name='...', type='TextArtifact', value='...', _TextArtifact__embedding=[])]
+PdfLoader().load("attention.pdf")
 
->>> urllib.request.urlretrieve("https://arxiv.org/pdf/1706.03762.pdf", "CoT.pdf")
-('CoT.pdf', <http.client.HTTPMessage object at ...>)
+urllib.request.urlretrieve("https://arxiv.org/pdf/1706.03762.pdf", "CoT.pdf")
 
->>> PdfLoader().load_collection(["attention.pdf", "CoT.pdf"])
-{'...': [TextArtifact(id='...', name='...', type='TextArtifact', value='...', _TextArtifact__embedding=[])], '...': [TextArtifact(id='...', name='...', type='TextArtifact', value='...', _TextArtifact__embedding=[])]}
-
+PdfLoader().load_collection(["attention.pdf", "CoT.pdf"])
 ```
 
 ## SqlLoader
@@ -31,23 +26,20 @@ Inherits from the [TextLoader](../../reference/griptape/loaders/text_loader.md) 
 Can be used to load data from a SQL database into [CsvRowArtifact](../../reference/griptape/artifacts/csv_row_artifact.md)s:
 
 ```python
->>> from griptape.loaders import SqlLoader
->>> from griptape.drivers import SqlDriver
+from griptape.loaders import SqlLoader
+from griptape.drivers import SqlDriver
 
->>> SqlLoader(
-...     sql_driver = SqlDriver(
-...        engine_url="sqlite:///:memory:"
-...     )
-... ).load("SELECT 'foo', 'bar'")
-[CsvRowArtifact(id='...', name='...', type='CsvRowArtifact', _TextArtifact__embedding=[], value={"'foo'": 'foo', "'bar'": 'bar'}, delimiter=',')]
+SqlLoader(
+    sql_driver = SqlDriver(
+        engine_url="sqlite:///:memory:"
+    )
+).load("SELECT 'foo', 'bar'")
 
->>> SqlLoader(
-...    sql_driver = SqlDriver(
-...        engine_url="sqlite:///:memory:"
-...    )
-... ).load_collection(["SELECT 'foo', 'bar';", "SELECT 'fizz', 'buzz';"])
-{'...': [CsvRowArtifact(id='...', name='...', type='CsvRowArtifact', _TextArtifact__embedding=[], value={"'foo'": 'foo', "'bar'": 'bar'}, delimiter=',')], '...': [CsvRowArtifact(id='...', name='...', type='CsvRowArtifact', _TextArtifact__embedding=[], value={"'fizz'": 'fizz', "'buzz'": 'buzz'}, delimiter=',')]}
-
+SqlLoader(
+    sql_driver = SqlDriver(
+        engine_url="sqlite:///:memory:"
+    )
+).load_collection(["SELECT 'foo', 'bar';", "SELECT 'fizz', 'buzz';"])
 ```
 
 ## CsvLoader
@@ -55,25 +47,20 @@ Can be used to load data from a SQL database into [CsvRowArtifact](../../referen
 Can be used to load CSV files into [CsvRowArtifact](../../reference/griptape/artifacts/csv_row_artifact.md)s:
 
 ```python
->>> import urllib
->>> from griptape.loaders import CsvLoader
+import urllib
+from griptape.loaders import CsvLoader
 
->>> urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv", "cities.csv")
-('cities.csv', <http.client.HTTPMessage object at ...>)
+urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv", "cities.csv")
 
->>> CsvLoader().load(
-...    "cities.csv"
-... )
-[CsvRowArtifact(id='...', name='...', type='CsvRowArtifact', _TextArtifact__embedding=[], value={...}, delimiter=','), ...]
+CsvLoader().load(
+    "cities.csv"
+)
 
->>> urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/addresses.csv", "addresses.csv")
-('addresses.csv', <http.client.HTTPMessage object at ...>)
+urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/addresses.csv", "addresses.csv")
 
->>> CsvLoader().load_collection(
-...     ["cities.csv", "addresses.csv"]
-... )
-{'...': [CsvRowArtifact(id='...', name='...', type='CsvRowArtifact', _TextArtifact__embedding=[], value={...}, delimiter=','), ...], '...': [CsvRowArtifact(id='...', name='...', type='CsvRowArtifact', _TextArtifact__embedding=[], value={...}, delimiter=','), ...]}
- 
+CsvLoader().load_collection(
+    ["cities.csv", "addresses.csv"]
+)
 ```
 
 ## TextLoader
@@ -81,28 +68,23 @@ Can be used to load CSV files into [CsvRowArtifact](../../reference/griptape/art
 Used to load arbitrary text and text files:
 
 ```python
->>> from pathlib import Path
->>> import urllib
->>> from griptape.loaders import TextLoader
+from pathlib import Path
+import urllib
+from griptape.loaders import TextLoader
 
->>> TextLoader().load(
-...    "my text"
-... )
-[TextArtifact(id='...', name='...', type='TextArtifact', value='my text', _TextArtifact__embedding=[])]
+TextLoader().load(
+    "my text"
+)
 
->>> urllib.request.urlretrieve("https://example-files.online-convert.com/document/txt/example.txt", "example.txt")
-('example.txt', <http.client.HTTPMessage object at ...>)
+urllib.request.urlretrieve("https://example-files.online-convert.com/document/txt/example.txt", "example.txt")
 
->>> TextLoader().load(
-...    Path("example.txt")
-... )
-[TextArtifact(id='...', name='...', type='TextArtifact', value='...', _TextArtifact__embedding=[])]
+TextLoader().load(
+    Path("example.txt")
+)
 
->>> TextLoader().load_collection(
-...     ["my text", "my other text", Path("example.txt")]
-... )
-{'...': [TextArtifact(id='...', name='...', type='TextArtifact', value='my text', _TextArtifact__embedding=[])], '...': [TextArtifact(id='...', name='...', type='TextArtifact', value='my other text', _TextArtifact__embedding=[])], '...': [TextArtifact(id='...', name='...', type='TextArtifact', value='...', _TextArtifact__embedding=[])]}
-    
+TextLoader().load_collection(
+    ["my text", "my other text", Path("example.txt")]
+)
 ```
 
 You can set a custom [tokenizer](../../reference/griptape/loaders/text_loader.md#griptape.loaders.text_loader.TextLoader.tokenizer.md), [max_tokens](../../reference/griptape/loaders/text_loader.md#griptape.loaders.text_loader.TextLoader.max_tokens.md) parameter, and [chunker](../../reference/griptape/loaders/text_loader.md#griptape.loaders.text_loader.TextLoader.chunker.md).
@@ -112,16 +94,13 @@ You can set a custom [tokenizer](../../reference/griptape/loaders/text_loader.md
 Inherits from the [TextLoader](../../reference/griptape/loaders/text_loader.md) and can be used to load web pages:
 
 ```python
->>> from griptape.loaders import WebLoader
+from griptape.loaders import WebLoader
 
->>> WebLoader().load(
-...     "https://www.griptape.ai"
-... )
-[TextArtifact(id='...', name='...', type='TextArtifact', value='...', _TextArtifact__embedding=[])]
+WebLoader().load(
+    "https://www.griptape.ai"
+)
 
->>> WebLoader().load_collection(
-...    ["https://www.griptape.ai", "https://docs.griptape.ai"]
-... )
-{'...': [TextArtifact(id='...', name='...', type='TextArtifact', value='...', _TextArtifact__embedding=[])], '...': [TextArtifact(id='...', name='...', type='TextArtifact', value="...", _TextArtifact__embedding=[])]}
-
+WebLoader().load_collection(
+    ["https://www.griptape.ai", "https://docs.griptape.ai"]
+)
 ```

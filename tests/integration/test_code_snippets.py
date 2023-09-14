@@ -14,10 +14,5 @@ def test_code_snippets(fpath, monkeypatch):
     if str(fpath) == 'docs/griptape-tools/custom-tools/index.md':
         with pytest.raises(ModuleNotFoundError):
             check_md_file(fpath=fpath)
-    # This example requres docker running 
-    elif str(fpath) == 'docs/griptape-tools/official-tools/computer.md':
-        with pytest.raises(ValueError):
-            check_md_file(fpath=fpath)
-        
     else:
         check_md_file(fpath=fpath)

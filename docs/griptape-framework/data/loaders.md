@@ -2,9 +2,9 @@
 
 Loaders are used to load textual data from different sources and chunk it into [TextArtifact](../../reference/griptape/artifacts/text_artifact.md)s.
 Each loader can be used to load a single "document" with [load()](../../reference/griptape/loaders/base_loader.md#griptape.loaders.base_loader.BaseLoader.load) or
-multiple documents with ['load_collection()](../../reference/griptape/loaders/base_loader.md#griptape.loaders.base_loader.BaseLoader.load_collection).
+multiple documents with [load_collection()](../../reference/griptape/loaders/base_loader.md#griptape.loaders.base_loader.BaseLoader.load_collection).
 
-## PdfLoader
+## Pdf Loader
 
 Inherits from the [TextLoader](../../reference/griptape/loaders/text_loader.md) and can be used to load PDFs from a path or from an IO stream:
 
@@ -21,7 +21,7 @@ urllib.request.urlretrieve("https://arxiv.org/pdf/1706.03762.pdf", "CoT.pdf")
 PdfLoader().load_collection(["attention.pdf", "CoT.pdf"])
 ```
 
-## SqlLoader
+## Sql Loader
 
 Can be used to load data from a SQL database into [CsvRowArtifact](../../reference/griptape/artifacts/csv_row_artifact.md)s:
 
@@ -42,7 +42,7 @@ SqlLoader(
 ).load_collection(["SELECT 'foo', 'bar';", "SELECT 'fizz', 'buzz';"])
 ```
 
-## CsvLoader
+## Csv Loader
 
 Can be used to load CSV files into [CsvRowArtifact](../../reference/griptape/artifacts/csv_row_artifact.md)s:
 
@@ -63,7 +63,7 @@ CsvLoader().load_collection(
 )
 ```
 
-## TextLoader
+## Text Loader
 
 Used to load arbitrary text and text files:
 
@@ -89,7 +89,7 @@ TextLoader().load_collection(
 
 You can set a custom [tokenizer](../../reference/griptape/loaders/text_loader.md#griptape.loaders.text_loader.TextLoader.tokenizer.md), [max_tokens](../../reference/griptape/loaders/text_loader.md#griptape.loaders.text_loader.TextLoader.max_tokens.md) parameter, and [chunker](../../reference/griptape/loaders/text_loader.md#griptape.loaders.text_loader.TextLoader.chunker.md).
 
-## WebLoader
+## Web Loader
 
 Inherits from the [TextLoader](../../reference/griptape/loaders/text_loader.md) and can be used to load web pages:
 

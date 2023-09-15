@@ -7,15 +7,16 @@ Griptape provides a way to build drivers for vector DBs where embeddings can be 
 - `upsert_text()` for updating and inserting new arbitrary strings into vector DBs. The method will automatically generate embeddings for a given value.
 - `upsert_vector()` for updating and inserting new vectors directly.
 - `query()` for querying vector DBs.
+- `create_index()`: For easy index creation.
 
 Each vector driver takes a [BaseEmbeddingDriver](../../reference/griptape/drivers/embedding/base_embedding_driver.md) used to dynamically generate embeddings for strings.
 
 !!! info
-More vector drivers are coming soon.
+    More vector drivers are coming soon.
 
-## LocalVectorStoreDriver
+## Local Vector Store Driver
 
-This driver can be used to load and query data from memory. Here is a complete example of how the driver can be used to load a webpage into the driver and query it later:
+The [LocalVectorStoreDriver](../../reference/griptape/drivers/vector/local_vector_store_driver.md) can be used to load and query data from memory. Here is a complete example of how the driver can be used to load a webpage into the driver and query it later:
 
 ```python
 from griptape.artifacts import BaseArtifact
@@ -39,11 +40,11 @@ values = [BaseArtifact.from_json(r.meta["artifact"]).value for r in results]
 print("\n\n".join(values))
 ```
 
-## PineconeVectorStoreDriver
+## Pinecone Vector Store Driver
 
-This driver supports the [Pinecone vector database](https://www.pinecone.io/). In addition to standard vector driver methods it provides the `create_index()` for easy index creation.
+The [PineconeVectorStoreDriver](../../reference/griptape/drivers/vector/pinecone_vector_store_driver.md) supports the [Pinecone vector database](https://www.pinecone.io/).
 
-Here is a complete example of how the driver can be used to load and query information from Pinecone:
+Here is an of how the driver can be used to load and query information in a Pinecone cluster:
 
 ```python
 import os
@@ -88,11 +89,11 @@ result = vector_store_driver.query(
 )
 ```
 
-## MarqoVectorStoreDriver
+## Marqo Vector Store Driver
 
-This driver supports the Marqo vector database. In addition to standard vector driver methods, it also provides the `create_index()`, `delete_index()`, `set_index()`, and `get_indexes()` methods for easy index management.
+The [MarqoVectorStoreDriver](../../reference/griptape/drivers/vector/marqo_vector_store_driver.md) supports the Marqo vector database.
 
-Here is a complete example of how the driver can be used to load and query information from Marqo:
+Here is an of how the driver can be used to load and query information in a Marqo cluster:
 
 ```python
 import os
@@ -134,27 +135,11 @@ result = vector_store.query(query="What is griptape?")
 print(result)
 ```
 
-### Key Methods
+## Mongodb Atlas Vector Store Driver
 
-The following methods are available in the [MarqoVectorStoreDriver](../../reference/griptape/drivers/vector/marqo_vector_store_driver.md) class:
+The [MongodbAtlasVectorStoreDriver](../../reference/griptape/drivers/vector/mongodb_vector_store_driver.md) provides support for storing vector data in a MongoDB Atlas database.
 
-1. `__init__(self, api_key: str, url: str, mq: marqo.Client, index: str)`: This method initializes the Marqo client with the given API key, url, and index.
-2. `set_index(self, index: str)`: Sets the index for the Marqo client. If the index does not exist, it is created.
-3. `upsert_text(self, string: str, vector_id: Optional[str] = None, namespace: Optional[str] = None, meta: Optional[dict] = None)`: Inserts a text document into the Marqo index. If a document with the given vector ID already exists, it is updated; otherwise, a new document is inserted.
-4. `upsert_text_artifact(self, artifact: TextArtifact, namespace: Optional[str] = None, meta: Optional[dict] = None)`: Inserts a text artifact into the Marqo index. If an artifact with the given vector ID already exists, it is updated; otherwise, a new artifact is inserted.
-5. `load_entry(self, vector_id: str, namespace: Optional[str] = None)`: Loads a document entry from the Marqo index based on the vector ID. Returns the loaded Entry if found; otherwise, None is returned.
-6. `load_entries(self, namespace: Optional[str] = None)`: Loads all document entries from the Marqo index. Entries can optionally be filtered by namespace.
-7. `query(self, query: str, count: Optional[int] = None, namespace: Optional[str] = None, include_vectors: bool = False, include_metadata=True)`: Queries the Marqo index for documents that match the provided query string. The number of results returned can be limited and entries can optionally be filtered by namespace.
-8. `create_index(self, name: str)`: Creates a new index in the Marqo client with the given name.
-9. `delete_index(self, name: str)`: Deletes an index in the Marqo client with the given name.
-10. `get_indexes(self)`: Returns a list of all indexes in the Marqo client.
-11. `upsert_vector(self, vector: list[float], vector_id: Optional[str] = None, namespace: Optional[str] = None, meta: Optional[dict] = None)`: Inserts a vector into the Marqo index. If a vector with the given vector ID already exists, it is updated; otherwise, a new vector is inserted. Currently, this function is not implemented and raises an Exception.
-
-## MongoDbAtlasVectorStoreDriver
-
-This driver provides support for storing vector data in a MongoDB Atlas database. The driver includes methods for performing standard vector operations such as inserting, updating, querying, and loading vectors.
-
-Below is a detailed example of how the MongoDbAtlasVectorStoreDriver can be used to interact with a MongoDB Atlas instance:
+Here is an of how the driver can be used to load and query information in a MongoDb Atlas Cluster:
 
 ```python
 from griptape.drivers import MongoDbAtlasVectorStoreDriver
@@ -187,24 +172,11 @@ result = vector_store.query(query="What is griptape?")
 print(result)
 ```
 
-### Key Methods
+## Redis Vector Store Driver
 
-The following methods are available in the MongoDbAtlasVectorStoreDriver class:
+The [RedisVectorStoreDriver](../../reference/griptape/drivers/vector/redis_vector_store_driver.md) integrates with the Redis vector storage system.
 
-1. `__init__(self, connection_string: str, database_name: str, collection_name: str)`: Initializes the MongoClient with the given connection string, database name, and collection name.
-2. `get_collection(self) -> Collection`: Returns the MongoDB Collection instance for the specified database and collection name.
-3. `upsert_vector(self, vector: list[float], vector_id: Optional[str] = None, namespace: Optional[str] = None, meta: Optional[dict] = None) -> str`: Inserts or updates a vector in the collection. If a vector with the given vector ID already exists, it is updated; otherwise, a new vector is inserted.
-4. `load_entry(self, vector_id: str, namespace: Optional[str] = None) -> Optional[BaseVectorStoreDriver.Entry]`: Loads a document entry from the MongoDB collection based on the vector ID. Returns the loaded Entry if found; otherwise, None is returned.
-5. `load_entries(self, namespace: Optional[str] = None) -> list[BaseVectorStoreDriver.Entry]`: Loads all document entries from the MongoDB collection. Entries can optionally be filtered by namespace.
-6. `query(self, query: str, count: Optional[int] = None, namespace: Optional[str] = None, include_vectors: bool = False, offset: Optional[int] = 0, index: Optional[str] = None) -> list[BaseVectorStoreDriver.QueryResult]`: Queries the MongoDB collection for documents that match the provided query string. Results can be customized based on parameters like count, namespace, inclusion of vectors, offset, and index.
-!!! note: 
-    The implementation details such as the structure of the query method can be tailored according to specific use cases and the nature of the stored vectors. In this example, it's assumed that the driver uses an embedding driver to convert query strings into vectors and leverages specific MongoDB features for nearest neighbor search.
-
-## RedisVectorStoreDriver
-
-This driver integrates with the Redis vector storage system. Redis, known for its high-speed data store, has the ability to also handle vector storage. With the RedisVectorStoreDriver, you can communicate with the Redis database to manage and query your vector data.
-
-Below is an in-depth example showcasing how this driver can be used:
+Here is an of how the driver can be used to load and query information in a Redis Cluster:
 
 ```python
 import os
@@ -233,26 +205,11 @@ result = vector_store_driver.query(query="What is griptape?")
 print(result)
 ```
 
-### Key Methods
+## OpenSearch Vector Store Driver
 
-The following methods are available in the RedisVectorStoreDriver class:
+The [OpenSearchVectorStoreDriver](../../reference/griptape/drivers/vector/opensearch_vector_store_driver.md) integrates with the OpenSearch platform, allowing for storage, retrieval, and querying of vector data.
 
-1. `__init__(self, host: str, port: int, db: int, password: Optional[str], index: str)`: Initializes the Redis client with the given host, port, database, optional password, and index name.
-2. `_generate_key(self, vector_id: str, namespace: Optional[str] = None) -> str`: Generates a Redis key using the provided vector ID and optionally a namespace. This is a helper method primarily used internally.
-3. `upsert_vector(self, vector: list[float], vector_id: Optional[str] = None, namespace: Optional[str] = None, meta: Optional[dict] = None) -> str`: Inserts or updates a vector in Redis. If a vector with the given vector ID already exists, it is updated; otherwise, a new vector is inserted. Metadata associated with the vector can also be provided.
-4. `load_entry(self, vector_id: str, namespace: Optional[str] = None) -> Optional[BaseVectorStoreDriver.Entry]`: Retrieves a specific vector entry from Redis based on its identifier and optional namespace. If the entry is found, it returns an instance of BaseVectorStoreDriver.Entry; otherwise, None is returned.
-5. `load_entries(self, namespace: Optional[str] = None) -> list[BaseVectorStoreDriver.Entry]`: Retrieves all vector entries from Redis that match the optional namespace. Returns a list of BaseVectorStoreDriver.Entry objects.
-6. `query(self, vector: list[float], count: Optional[int] = None, namespace: Optional[str] = None) -> list[BaseVectorStoreDriver.QueryResult]`: Performs a nearest neighbor search on Redis to find vectors similar to the provided input vector. Results can be limited using the count parameter and optionally filtered by a namespace. Returns a list of BaseVectorStoreDriver.QueryResult objects, each encapsulating the retrieved vector, its similarity score, metadata, and namespace.
-7. `create_index(self, namespace: Optional[str] = None, vector_dimension: Optional[int] = None) -> None`: This method creates a new index in Redis with the specified properties. If an index with the given name already exists, a warning is logged and the method does not proceed. The method expects the dimension of the vectors (i.e., vector_dimension) that will be stored in this index. Optionally, a namespace can be provided which will determine the prefix for document keys. The index is constructed with a TagField named "tag" and a VectorField that utilizes the cosine distance metric on FLOAT32 type vectors.
-
-!!! note
-    This driver interfaces with a Redis instance and utilizes the Redis hashes and RediSearch module to store, retrieve, and query vectors in a structured manner. Proper setup of the Redis instance and RediSearch is necessary for the driver to function correctly.
-
-## OpenSearchVectorStoreDriver
-
-This driver integrates with the OpenSearch platform, allowing for storage, retrieval, and querying of vector data. OpenSearch is a distributed search and analytics suite derived from Elasticsearch, and with the OpenSearchVectorStoreDriver, you can effectively manage vector data in an OpenSearch cluster.
-
-Below is an in-depth example showcasing how this driver can be used:
+Here is an of how the driver can be used to load and query information in an OpenSearch Cluster:
 
 ```python
 import os
@@ -280,13 +237,3 @@ result = vector_store_driver.query(query="What is griptape?")
 
 print(result)
 ```
-### Key Methods
-
-The following methods are available in the OpenSearchVectorStoreDriver class:
-
-1. `__init__(self, host: str, port: int = 443, http_auth: Optional[Union[str, Tuple[str, str]]] = None, use_ssl: bool = True, verify_certs: bool = True, index_name: str)`: Initializes the OpenSearch client with the given host, port, and other client configuration details, and sets the index name for vector storage.
-2. `upsert_vector(self, vector: list[float], vector_id: Optional[str] = None, namespace: Optional[str] = None, meta: Optional[dict] = None, **kwargs) -> str`: Inserts or updates a vector in OpenSearch. If a vector with the given vector ID already exists, it is updated; otherwise, a new vector is inserted. Metadata associated with the vector can also be provided.
-3. `load_entry(self, vector_id: str, namespace: Optional[str] = None) -> Optional[BaseVectorStoreDriver.Entry]`: Retrieves a specific vector entry from OpenSearch based on its identifier and optional namespace. If the entry is found, it returns an instance of BaseVectorStoreDriver.Entry; otherwise, None is returned.
-4. `load_entries(self, namespace: Optional[str] = None) -> list[BaseVectorStoreDriver.Entry]`: Retrieves all vector entries from OpenSearch that match the optional namespace. Returns a list of BaseVectorStoreDriver.Entry objects.
-5. `query(self, query: str, count: Optional[int] = None, field_name: str = "vector", namespace: Optional[str] = None, include_vectors: bool = False, include_metadata=True, **kwargs) -> list[BaseVectorStoreDriver.QueryResult]`: Performs a nearest neighbor search on OpenSearch to find vectors similar to the provided query string. Results can be limited using the count parameter and optionally filtered by a namespace. Returns a list of BaseVectorStoreDriver.QueryResult objects, each encapsulating the retrieved vector, its similarity score, metadata, and namespace.
-6. `create_index(self, vector_dimension: int) -> None`: Creates a new vector index in OpenSearch. The method expects the dimension of the vectors (vector_dimension) that will be stored in this index. The index is structured to support k-NN (k-nearest neighbors) queries.

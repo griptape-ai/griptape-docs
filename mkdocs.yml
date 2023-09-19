@@ -125,6 +125,5 @@ nav:
           - Query a Webpage: "examples/query-webpage.md"
       - Misc:
           - Count Tokens: "examples/count-tokens.md"
-          - Storing Conversation Memory in DynamoDB: "examples/store-conversation-memory-in-dynamodb.md"
   - Griptape Reference Guide: "reference/"
   - Griptape Trade School: "https://learn.griptape.ai"

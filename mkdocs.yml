@@ -67,7 +67,6 @@ nav:
   - Home:
       - Overview: "index.md"
       - Contributing: "contributing.md"
-      - FAQ: "faq.md"
   - Griptape Framework:
       - Overview: "griptape-framework/index.md"
       - Structures:

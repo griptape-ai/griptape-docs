@@ -157,10 +157,10 @@ from griptape.memory.structure import ConversationMemory
 memory_driver = LocalConversationMemoryDriver(file_path="memory.json")
 
 agent_1 = Agent(memory=ConversationMemory(driver=memory_driver))
-agent_1.run("I can ride the unicycle.")
+agent_1.run("Skateboarding is my favorite activity.")
 
 agent_2 = Agent(memory=memory_driver.load())
-agent_2.run("What is my favorite sport?")
+agent_2.run("What is my favorite activity?")
 ```
 
 ### Local Conversation Memory Driver

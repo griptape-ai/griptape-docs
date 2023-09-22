@@ -1,6 +1,7 @@
 This example demonstrates how to vectorize a PDF of the [Attention Is All You Need](https://arxiv.org/pdf/1706.03762.pdf) paper and setup a Griptape agent with rules and the [VectorStoreClient](../reference/griptape/tools/vector_store_client/tool.md) tool to use it during conversations.
 
 ```python
+import os 
 import io
 import requests
 from griptape.engines import VectorQueryEngine
@@ -8,11 +9,20 @@ from griptape.loaders import PdfLoader
 from griptape.structures import Agent
 from griptape.tools import VectorStoreClient
 from griptape.utils import Chat
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
+
 
 namespace = "attention"
 
 response = requests.get("https://arxiv.org/pdf/1706.03762.pdf")
-engine = VectorQueryEngine()
+
+engine = VectorQueryEngine(
+    vector_store_driver=LocalVectorStoreDriver(
+        embedding_driver=OpenAiEmbeddingDriver(
+            api_key=os.getenv("OPENAI_API_KEY")
+        )
+    )
+)
 
 engine.vector_store_driver.upsert_text_artifacts(
     {

@@ -1,17 +1,25 @@
 This example demonstrates how to vectorize a webpage and setup a Griptape agent with rules and the [VectorStoreClient](../reference/griptape/tools/vector_store_client/tool.md) tool to use it during conversations.
 
 ```python
+import os 
 from griptape.engines import VectorQueryEngine
 from griptape.loaders import WebLoader
 from griptape.rules import Ruleset, Rule
 from griptape.structures import Agent
 from griptape.tools import VectorStoreClient
 from griptape.utils import Chat
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 
 
 namespace = "physics-wiki"
 
-engine = VectorQueryEngine()
+engine = VectorQueryEngine(
+    vector_store_driver=LocalVectorStoreDriver(
+        embedding_driver=OpenAiEmbeddingDriver(
+            api_key=os.getenv("OPENAI_API_KEY")
+        )
+    )
+)
 
 artifacts = WebLoader().load(
     "https://en.wikipedia.org/wiki/Physics"

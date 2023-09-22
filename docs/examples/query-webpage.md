@@ -1,10 +1,15 @@
 ```python
+import os 
 from griptape.artifacts import BaseArtifact
-from griptape.drivers import LocalVectorStoreDriver
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 from griptape.loaders import WebLoader
 
 
-vector_store = LocalVectorStoreDriver()
+vector_store = LocalVectorStoreDriver(
+    embedding_driver=OpenAiEmbeddingDriver(
+        api_key=os.getenv("OPENAI_API_KEY")
+    )
+)
 
 [
     vector_store.upsert_text_artifact(a, namespace="griptape")

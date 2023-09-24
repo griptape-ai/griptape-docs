@@ -314,6 +314,8 @@ through the [prompt_model_driver](../../reference/griptape/drivers/prompt/base_m
 
 The [AmazonSageMakerPromptDriver](../../reference/griptape/drivers/prompt/amazon_sagemaker_prompt_driver.md) uses [Amazon SageMaker Endpoints](https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html) for inference on AWS.
 
+##### LLaMA
+
 ```python
 import os
 from griptape.structures import Agent

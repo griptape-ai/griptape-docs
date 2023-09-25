@@ -123,7 +123,5 @@ nav:
           - Load and Query Pinecone: "examples/load-and-query-pinecone.md"
           - Load and Query Marqo: "examples/load-query-and-chat-marqo.md"
           - Query a Webpage: "examples/query-webpage.md"
-      - Misc:
-          - Count Tokens: "examples/count-tokens.md"
   - Griptape Reference Guide: "reference/"
   - Griptape Trade School: "https://learn.griptape.ai"

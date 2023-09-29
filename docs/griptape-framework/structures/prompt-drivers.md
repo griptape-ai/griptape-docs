@@ -11,9 +11,10 @@ from griptape.rules import Rule
 
 agent = Agent(
     prompt_driver=OpenAiChatPromptDriver(temperature=0.3),
+    input_template="You will be provided with a tweet, and your task is to classify its sentiment as positive, neutral, or negative. Tweet: {{ args[0] }}",
     rules=[
         Rule(
-            value="You will be provided with a tweet, and your task is to classify its sentiment as positive, neutral, or negative. Output only the sentiment."
+            value="Output only the sentiment."
         )
     ],
 )
@@ -68,10 +69,10 @@ agent = Agent(
         temperature=0.1,
         model="gpt-3.5-turbo-16k"
     ),
+    input_template="You will be provided with a description of a mood, and your task is to generate the CSS code for a color that matches it. Description: {{ args[0] }}",
     rules=[
         Rule(
-            value="You will be provided with a description of a mood, and your task is to generate the CSS code for a color that matches it."
-            'Write your output in json with a single key called "css_code".'
+            value='Write your output in json with a single key called "css_code".'
         )
     ],
 )
@@ -408,7 +409,7 @@ agent = Agent(
     ),
     rules=[
         Rule(
-            value="You are a customer service agent that is classifying emails by type. I want you to give your answer and then explain it. "
+            value="You are a customer service agent that is classifying emails by type. I want you to give your answer and then explain it."
         )
     ],
 )

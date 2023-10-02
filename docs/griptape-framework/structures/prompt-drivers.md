@@ -255,7 +255,7 @@ The [HuggingFaceHubPromptDriver](../../reference/griptape/drivers/prompt/hugging
 - text-generation
 
 !!! warning
-Running a model locally can be a computationally expensive process.
+    Running a model locally can be a computationally expensive process.
 
 ```python
 import os

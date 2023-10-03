@@ -27,7 +27,7 @@ optional = true
 [tool.poetry.group.test.dependencies]
 mktestdocs = "^0.2.1"
 pytest = "^7.4.1"
-griptape = "^0.16.0"
+griptape = "^0.17.1"
 
 [build-system]
 requires = ["poetry-core"]

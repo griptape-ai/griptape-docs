@@ -44,7 +44,7 @@ print("\n\n".join(values))
 
 The [PineconeVectorStoreDriver](../../reference/griptape/drivers/vector/pinecone_vector_store_driver.md) supports the [Pinecone vector database](https://www.pinecone.io/).
 
-Here is an of how the driver can be used to load and query information in a Pinecone cluster:
+Here is an example of how the driver can be used to load and query information in a Pinecone cluster:
 
 ```python
 import os
@@ -93,7 +93,7 @@ result = vector_store_driver.query(
 
 The [MarqoVectorStoreDriver](../../reference/griptape/drivers/vector/marqo_vector_store_driver.md) supports the Marqo vector database.
 
-Here is an of how the driver can be used to load and query information in a Marqo cluster:
+Here is an example of how the driver can be used to load and query information in a Marqo cluster:
 
 ```python
 import os
@@ -139,7 +139,7 @@ print(result)
 
 The [MongodbAtlasVectorStoreDriver](../../reference/griptape/drivers/vector/mongodb_vector_store_driver.md) provides support for storing vector data in a MongoDB Atlas database.
 
-Here is an of how the driver can be used to load and query information in a MongoDb Atlas Cluster:
+Here is an example of how the driver can be used to load and query information in a MongoDb Atlas Cluster:
 
 ```python
 from griptape.drivers import MongoDbAtlasVectorStoreDriver
@@ -176,7 +176,7 @@ print(result)
 
 The [RedisVectorStoreDriver](../../reference/griptape/drivers/vector/redis_vector_store_driver.md) integrates with the Redis vector storage system.
 
-Here is an of how the driver can be used to load and query information in a Redis Cluster:
+Here is an example of how the driver can be used to load and query information in a Redis Cluster:
 
 ```python
 import os
@@ -209,7 +209,7 @@ print(result)
 
 The [OpenSearchVectorStoreDriver](../../reference/griptape/drivers/vector/opensearch_vector_store_driver.md) integrates with the OpenSearch platform, allowing for storage, retrieval, and querying of vector data.
 
-Here is an of how the driver can be used to load and query information in an OpenSearch Cluster:
+Here is an example of how the driver can be used to load and query information in an OpenSearch Cluster:
 
 ```python
 import os
@@ -235,5 +235,43 @@ vector_store_driver.upsert_text_artifacts(
 
 result = vector_store_driver.query(query="What is griptape?")
 
+print(result)
+```
+
+## PGVector Vector Store Driver
+
+The [PGVectorVectorStoreDriver](../../reference/griptape/drivers/vector/pgvector_vector_store_driver.md) integrates with PGVector, a vector storage and search extension for Postgres. While Griptape will handle enabling the extension, PGVector must be installed and ready for use in your Postgres instance before using this vector store driver.
+
+Here is an example of how the driver can be used to load and query information in a Postgres database:
+
+```python 
+import os 
+from griptape.drivers import PgVectorVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.loaders import WebLoader
+
+openai_api_key = os.getenv("OPENAI_API_KEY")
+embedding_driver = OpenAiEmbeddingDriver(api_key=openai_api_key)
+
+db_user = os.getenv("DB_USER")
+db_pass = os.getenv("DB_PASSWORD")
+db_host = os.getenv("DB_HOST")
+db_port = os.getenv("DB_PORT")
+db_name = os.getenv("DB_NAME")
+db_connection_string = f"postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
+vector_store_driver = PgVectorVectorStoreDriver(
+    connection_string=db_connection_string,
+    embedding_driver=embedding_driver,
+)
+
+# Install required Postgres extensions and create vector schema.
+vector_store_driver.initialize()
+
+web_loader = WebLoader()
+artifacts = web_loader.load("https://www.griptape.ai")
+for artifact in artifacts:
+    vector = embedding_driver.embed_text_artifact(artifact)
+    vector_store_driver.upsert_vector(vector)
+
+result = vector_store_driver.query("What is griptape?")
 print(result)
 ```

@@ -140,7 +140,7 @@ from griptape.drivers import AzureOpenAiCompletionPromptDriver
 agent = Agent(
     prompt_driver=AzureOpenAiCompletionPromptDriver(
         api_key=os.environ["AZURE_OPENAI_API_KEY"],
-        model="gpt-3.5-turbo",
+        model="text-davinci-003",
         deployment_id=os.environ["AZURE_OPENAI_DEPLOYMENT_ID"],
         api_base=os.environ["AZURE_OPENAI_API_BASE"],
         temperature=1

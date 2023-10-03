@@ -1,6 +1,6 @@
 ## Overview
 
-Griptape Event Listeners can be used to listen for events during a structure's execution. This can be useful when [counting tokens](../../examples/count-tokens.md) being sent to the LLM.
+Griptape Event Listeners can be used to listen for events during a structure's execution.
 
 ## Specific Event Types
 
@@ -96,4 +96,59 @@ Handler 2 <class 'griptape.events.finish_prompt_event.FinishPromptEvent'>
                              In addition to skateboarding, griptape is also used in other board sports such as longboarding and snowboarding.
 Handler 1 <class 'griptape.events.finish_task_event.FinishTaskEvent'>
 Handler 2 <class 'griptape.events.finish_task_event.FinishTaskEvent'>
+```
+
+## Counting Tokens
+
+To count tokens you can use Event Listeners and the [TokenCounter](../../reference/griptape/utils/token_counter.md) util:
+
+```python
+from griptape import utils
+from griptape.events import (
+    StartPromptEvent, FinishPromptEvent,
+)
+from griptape.structures import Agent
+
+
+token_counter = utils.TokenCounter()
+
+agent = Agent(
+    event_listeners={
+        StartPromptEvent: [
+            lambda e: token_counter.add_tokens(e.token_count)
+        ],
+        FinishPromptEvent: [
+            lambda e: token_counter.add_tokens(e.token_count)
+        ],
+    }
+)
+
+agent.run("tell me about large language models")
+
+print(f"total tokens: {token_counter.tokens}")
+```
+
+```
+[09/25/23 16:32:41] INFO     PromptTask c93569eb1d264675b52bef184b269621
+                             Input: tell me about large language models
+[09/25/23 16:33:01] INFO     PromptTask c93569eb1d264675b52bef184b269621
+                             Output: Large language models are a type of artificial intelligence model that are trained on
+                             a vast amount of text data. They are designed to generate human-like text based on the input
+                             they are given. These models can answer questions, write essays, summarize texts, translate
+                             languages, and even generate creative content like poetry or stories.
+
+                             One of the most well-known large language models is GPT-3, developed by OpenAI. It has 175
+                             billion machine learning parameters and was trained on hundreds of gigabytes of text.
+
+                             These models work by predicting the probability of a word given the previous words used in
+                             the text. They don't understand text in the way humans do, but they can generate coherent and
+                             contextually relevant sentences by learning patterns in the data they were trained on.
+
+                             However, they also have limitations. For instance, they can sometimes generate incorrect or
+                             nonsensical responses. They can also be sensitive to slight changes in input phrasing, and
+                             they don't have the ability to fact-check information or access real-time data, so they can't
+                             provide up-to-date information or verify the truthfulness of their outputs. They also don't
+                             have a sense of ethics or morality, so they rely on guidelines and safety measures put in
+                             place by their developers.
+total tokens: 273
 ```

@@ -1,6 +1,6 @@
 ## Overview
 
-An [Agent](../../reference/griptape/structures/agent.md) is the quickest way to get started with Griptape. 
+An [Agent](../../reference/griptape/structures/agent.md) is the quickest way to get started with Griptape.
 Agents take in [tools](../../reference/griptape/structures/agent.md#griptape.structures.agent.Agent.tools) and [input_template](../../reference/griptape/structures/agent.md#griptape.structures.agent.Agent.input_template)
 directly, which the agent uses to dynamically determine whether to use a [Prompt Task](./tasks.md#prompt-task) or [Toolkit Task](./tasks.md#toolkit-task).
 
@@ -8,6 +8,7 @@ If [tools](../../reference/griptape/structures/agent.md#griptape.structures.agen
 are provided, a [Prompt Task](./tasks.md#prompt-task) will be used.
 
 ## Toolkit Task Agent
+
 ```python
 from griptape.tools import Calculator
 from griptape.structures import Agent
@@ -47,7 +48,9 @@ agent.run("what's 123^312?")
                              47848517605515539611362917584666826953065776743002119105282582194109888263281423789852046556346579319777145449509
                              5671672325351081760983520684046903739998382099007883142337182654942065184263509761170721.
 ```
+
 ## Prompt Task Agent
+
 ```python
 from griptape.structures import Agent
 from griptape.tasks import PromptTask
@@ -56,7 +59,7 @@ from griptape.tasks import PromptTask
 agent = Agent()
 agent.add_task(
     PromptTask(
-        "Write me a {{ creative_medium }} about {{ args[0] }} and {{ args[1] }}", 
+        "Write me a {{ creative_medium }} about {{ args[0] }} and {{ args[1] }}",
         context={
             'creative_medium': 'haiku'
         }

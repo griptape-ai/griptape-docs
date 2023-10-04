@@ -104,6 +104,7 @@ nav:
           - FileManager: "griptape-tools/official-tools/file-manager.md"
           - GoogleCalendarClient: "griptape-tools/official-tools/google-cal-client.md"
           - GoogleGmailClient: "griptape-tools/official-tools/google-gmail-client.md"
+          - GoogleDriveClient: "griptape-tools/official-tools/google-drive-client.md"
           - ProxycurlClient: "griptape-tools/official-tools/proxycurl-client.md"
           - RestApiClient: "griptape-tools/official-tools/rest-api-client.md"
           - SqlClient: "griptape-tools/official-tools/sql-client.md"

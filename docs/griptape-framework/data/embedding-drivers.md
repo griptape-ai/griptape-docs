@@ -13,17 +13,34 @@ Griptape provides a way to build Embedding Drivers that are reused in downstream
 
 The [OpenAiEmbeddingDriver](../../reference/griptape/drivers/embedding/openai_embedding_driver.md) uses [OpenAI Embeddings API](https://platform.openai.com/docs/guides/embeddings) to generate embeddings for texts of arbitrary length. This driver automatically chunks the input text to fit into the token limit.
 
-Here is how you can use it:
-
 ```python
 from griptape.drivers import OpenAiEmbeddingDriver
 
-OpenAiEmbeddingDriver().embed_string("Hello Griptape!")
+embeddings = OpenAiEmbeddingDriver().embed_string("Hello Griptape!")
 
-
+# display the first 3 embeddings
+print(embeddings[:3])
+```
+```
+[0.0017853748286142945, 0.006118456833064556, -0.005811543669551611]
 ```
 
 ## Azure OpenAI Embeddings
 
 The [AzureOpenAiEmbeddingDriver](../../reference/griptape/drivers/embedding/azure_openai_embedding_driver.md) uses the same parameters as [OpenAiEmbeddingDriver](../../reference/griptape/drivers/embedding/openai_embedding_driver.md)
 with updated defaults.
+
+## Bedrock Titan Embeddings
+The [BedrockTitanEmbeddingDriver](../../reference/griptape/drivers/embedding/bedrock_titan_embedding_driver.md) uses the [Amazon Bedrock Embeddings API](https://docs.aws.amazon.com/bedrock/latest/userguide/embeddings.html).
+
+```python
+from griptape.drivers import BedrockTitanEmbeddingDriver
+
+embeddings = BedrockTitanEmbeddingDriver().embed_string("Hello world!")
+
+# display the first 3 embeddings
+print(embeddings[:3])
+```
+```
+[-0.234375, -0.024902344, -0.14941406]
+```

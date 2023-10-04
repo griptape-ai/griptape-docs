@@ -24,6 +24,9 @@ driver.execute_query("select 'foo', 'bar';")
 
 ## AmazonRedshiftSqlDriver
 
+!!! info
+    This driver requires the `drivers-sql-redshift` [extra](../index.md#extras).
+
 This is a SQL driver for interacting with the [Amazon Redshift Data API](https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html) 
 to execute statements. Here is an example of how to use it for Redshift Serverless:
 
@@ -44,6 +47,9 @@ driver.execute_query("select * from people;")
 ```
 
 ## SnowflakeSqlDriver
+
+!!! info
+    This driver requires the `drivers-sql-snowflake` [extra](../index.md#extras).
 
 This is a SQL driver based on the [Snowflake SQLAlchemy Toolkit](https://docs.snowflake.com/en/developer-guide/python-connector/sqlalchemy) which runs on top of the Snowflake Connector for Python. Here is an example of how to use it:
 

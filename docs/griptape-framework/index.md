@@ -22,7 +22,7 @@ By default, Griptape uses [OpenAI Completions API](https://platform.openai.com/d
 Install **griptape**:
 
 ```
-pip install griptape -U
+pip install griptape[all] -U
 ```
 
 ### Using Poetry
@@ -33,11 +33,32 @@ To get started with Griptape using Poetry first create a new poetry project from
 poetry new griptape-quickstart
 ```
 
-Change your working directory to the new `griptape-quickstart` directory created by Poetry and add the dependencies. 
+Change your working directory to the new `griptape-quickstart` directory created by Poetry and add the the `griptape` dependency. 
 
+```
+poetry add griptape[all]
+```
+
+### Extras
+
+The `[all]` [extra](https://peps.python.org/pep-0508/#extras) ensures that you have access to the entire range of functionalities that Griptape offers. 
+This comprehensive installation is recommended for newcomers to get the complete Griptape experience.
+
+However, if you wish to optimize the installation size or only require specific functionalities, you have two main options:
+
+1. Core Dependencies: These are the foundational dependencies that enable Griptape to function with most of its default settings.
+2. Extras: These are additional, vendor-specific drivers integrated within the Griptape framework. If a particular Driver mandates an extra, it will be explicitly highlighted in the documentation.
+
+To install just the core dependencies:
 ```
 poetry add griptape
 ```
+
+To install specific extras (e.g., drivers for [AnthropicPromptDriver](./structures/prompt-drivers.md#anthropic) and [PineconeVectorStoreDriver](./data/vector-store-drivers.md#pinecone)):
+```
+poetry add griptape[drivers-prompt-anthropic,drivers-vector-pinecone]
+```
+
 ## Build a Simple Agent 
 With Griptape, you can create *structures*, such as [Agents](./structures/agents.md), [Pipelines](./structures/pipelines.md), and [Workflows](./structures/workflows.md), that are composed of different types of tasks. First, let's build a simple Agent that we can interact with through a chat based interface. 
 

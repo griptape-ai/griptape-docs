@@ -191,9 +191,12 @@ agent.run("Surfing is my favorite sport.")
 agent.run("What is my favorite sport?")
 ```
 
-### DynamoDb Conversation Memory Driver
+### Amazon DynamoDb Conversation Memory Driver
 
-The [DynamoDbConversationMemoryDriver](../../reference/griptape/drivers/memory/conversation/dynamodb_conversation_memory_driver.md) allows you to persist Conversation Memory in [Amazon DynamoDb](https://aws.amazon.com/dynamodb/).
+!!! info
+    This driver requires the `drivers-memory-conversation-amazon-dynamodb` [extra](../index.md#extras).
+
+The [AmazonDynamoDbConversationMemoryDriver](../../reference/griptape/drivers/memory/conversation/amazon_dynamodb_conversation_memory_driver.md) allows you to persist Conversation Memory in [Amazon DynamoDb](https://aws.amazon.com/dynamodb/).
 
 ```python
 import os

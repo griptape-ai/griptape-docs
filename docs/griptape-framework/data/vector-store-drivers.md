@@ -285,10 +285,11 @@ db_connection_string = f"postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{d
 vector_store_driver = PgVectorVectorStoreDriver(
     connection_string=db_connection_string,
     embedding_driver=embedding_driver,
+    table_name="griptape_vectors",
 )
 
-# Install required Postgres extensions and create vector schema.
-vector_store_driver.initialize()
+# Install required Postgres extensions and create database schema.
+vector_store_driver.setup()
 
 web_loader = WebLoader()
 artifacts = web_loader.load("https://www.griptape.ai")

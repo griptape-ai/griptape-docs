@@ -6,8 +6,19 @@ This tool enables LLMs to query, extract, and summarize tool outputs via shared 
 from griptape.structures import Agent
 from griptape.tools import ToolOutputProcessor
 from griptape.memory.tool import TextToolMemory
+from griptape.engines import VectorQueryEngine
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 
-text_memory = TextToolMemory(allowlist=[])
+text_memory = TextToolMemory(
+    # Disable all memory activities, so we can use
+    # ToolOutputProcessor as a tool later.
+    allowlist=[],
+    query_engine=VectorQueryEngine(
+        vector_store_driver=LocalVectorStoreDriver(
+            embedding_driver=OpenAiEmbeddingDriver()
+        )
+    ),
+)
 
 Agent(tool_memory=text_memory, tools=[ToolOutputProcessor()])
 ```

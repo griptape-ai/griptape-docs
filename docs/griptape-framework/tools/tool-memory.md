@@ -15,6 +15,8 @@ Here is an example of how memory can be used in unison with multiple tools to st
 from griptape.memory.tool import TextToolMemory, BlobToolMemory
 from griptape.structures import Agent
 from griptape.tools import WebScraper, FileManager, ToolOutputProcessor
+from griptape.engines import VectorQueryEngine
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 
 """
 Define tool memory for storing textual and
@@ -23,7 +25,12 @@ non-textual content.
 text_memory = TextToolMemory(
     # Disable all memory activities, so we can use
     # ToolOutputProcessor as a tool later.
-    allowlist=[]
+    allowlist=[],
+    query_engine=VectorQueryEngine(
+        vector_store_driver=LocalVectorStoreDriver(
+            embedding_driver=OpenAiEmbeddingDriver()
+        )
+    ),
 )
 blob_memory = BlobToolMemory()
 
@@ -69,6 +76,7 @@ agent.run(
     "Load https://www.griptape.ai, summarize it, "
     "and store it in griptape.txt"
 )
+
 ```
 
 ```

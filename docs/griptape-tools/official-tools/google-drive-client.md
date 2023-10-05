@@ -31,29 +31,29 @@ agent = Agent(
 
 # Task: Save content to my Google Drive (default directory is root)
 agent.run(
-    "Can you save the content 'Hi this is Tony' in a filed named 'hello.txt' to my Drive?",
+    "Save the content 'Hi this is Tony' in a filed named 'hello.txt' to my Drive.",
 )
 ```
 ```
-[10/04/23 11:30:27] INFO     ToolkitTask 711e0e0b786e4dc9ab3cebc0c95a8272       
-                             Input: Can you save the content 'Hi this is Tony'  
-                             in a filed named 'hello.txt' to my Drive?          
-[10/04/23 11:30:36] INFO     Subtask 0c80e79710ca466d95f2ec12f085843c           
+[10/05/23 10:49:14] INFO     ToolkitTask 2ae3bb7e828744f3a2631c29c6fce001       
+                             Input: Save the content 'Hi this is Tony' in a file
+                             named 'hello.txt' to my Drive.                     
+[10/05/23 10:49:24] INFO     Subtask 381430d881354184ace65af39e0b292b           
                              Thought: The user wants to save the content 'Hi    
-                             this is Tony' in a file named 'hello.txt' on Google
+                             this is Tony' in a file named 'hello.txt' to Google
                              Drive. I can use the 'save_content_to_drive'       
-                             activity of the GoogleDriveClient tool to achieve  
-                             this.                                              
+                             activity of the GoogleDriveClient tool to          
+                             accomplish this.                                   
                                                                                 
                              Action: {"type": "tool", "name":                   
                              "GoogleDriveClient", "activity":                   
                              "save_content_to_drive", "input": {"values":       
                              {"path": "hello.txt", "content": "Hi this is       
                              Tony"}}}                                           
-[10/04/23 11:30:38] INFO     Subtask 0c80e79710ca466d95f2ec12f085843c           
+[10/05/23 10:49:26] INFO     Subtask 381430d881354184ace65af39e0b292b           
                              Observation: saved successfully                    
-[10/04/23 11:30:41] INFO     ToolkitTask 711e0e0b786e4dc9ab3cebc0c95a8272       
+[10/05/23 10:49:29] INFO     ToolkitTask 2ae3bb7e828744f3a2631c29c6fce001       
                              Output: The content 'Hi this is Tony' has been     
                              successfully saved in a file named 'hello.txt' on  
-                             your Google Drive.    
+                             your Google Drive.      
 ```

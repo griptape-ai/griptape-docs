@@ -15,7 +15,7 @@ Here is an example of how memory can be used in unison with multiple tools to st
 from griptape.memory.tool import TextToolMemory, BlobToolMemory
 from griptape.structures import Agent
 from griptape.tools import WebScraper, FileManager, ToolOutputProcessor
-from griptape.engines import VectorQueryEngine
+from griptape.engines import VectorQueryEngine, PromptSummaryEngine, CsvExtractionEngine, JsonExtractionEngine
 from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 
 """
@@ -31,6 +31,9 @@ text_memory = TextToolMemory(
             embedding_driver=OpenAiEmbeddingDriver()
         )
     ),
+    summary_engine=PromptSummaryEngine(),
+    csv_extraction_engine=CsvExtractionEngine(),
+    json_extraction_engine=JsonExtractionEngine()
 )
 blob_memory = BlobToolMemory()
 

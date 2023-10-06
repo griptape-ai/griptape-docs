@@ -47,26 +47,17 @@ print(embeddings[:3])
 [-0.234375, -0.024902344, -0.14941406]
 ```
 
-### Use With Tool Memory 
-Here is how you can override the Embedding Driver that is used with Tool Memory. 
+### Override Default Structure Embedding Driver
+Here is how you can override the Embedding Driver that is used by default in agents. 
 
 ```python
 from griptape.structures import Agent
 from griptape.tools import WebScraper
-from griptape.memory.tool import TextToolMemory
-from griptape.engines import VectorQueryEngine
 from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 
-tool_memory = TextToolMemory(
-    query_engine=VectorQueryEngine(
-        vector_store_driver=LocalVectorStoreDriver(
-            embedding_driver=OpenAiEmbeddingDriver()
-        )
-    ),
-)
 agent = Agent(
     tools=[WebScraper()],
-    tool_memory=tool_memory,
+    embedding_driver=OpenAiEmbeddingDriver()
 )
 
 agent.run("based on https://www.griptape.ai/, tell me what Griptape is")

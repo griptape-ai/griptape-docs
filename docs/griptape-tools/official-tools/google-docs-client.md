@@ -29,7 +29,7 @@ agent = Agent(
     tools=[google_docs_tool]
 )
 
-# Task: Create new google Doc and save content to it
+# Task: Create a new Google Doc and save content to it
 agent.run(
     "Create doc with name 'test_creation' in test folder with content 'Hey, Tony.",
 )

@@ -20,11 +20,13 @@ The [LocalVectorStoreDriver](../../reference/griptape/drivers/vector/local_vecto
 
 ```python
 from griptape.artifacts import BaseArtifact
-from griptape.drivers import LocalVectorStoreDriver
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 from griptape.loaders import WebLoader
 
 
-vector_store_driver = LocalVectorStoreDriver()
+vector_store_driver = LocalVectorStoreDriver(
+    embedding_driver=OpenAiEmbeddingDriver()
+)
 artifacts = WebLoader(max_tokens=100).load("https://www.griptape.ai")
 
 [vector_store_driver.upsert_text_artifact(a, namespace="griptape") for a in artifacts]
@@ -38,6 +40,7 @@ results = vector_store_driver.query(
 values = [BaseArtifact.from_json(r.meta["artifact"]).value for r in results]
 
 print("\n\n".join(values))
+
 ```
 
 ## Pinecone Vector Store Driver
@@ -51,7 +54,7 @@ import os
 import hashlib
 import json
 from urllib.request import urlopen
-from griptape.drivers import PineconeVectorStoreDriver
+from griptape.drivers import PineconeVectorStoreDriver, OpenAiEmbeddingDriver
 
 def load_data(driver: PineconeVectorStoreDriver) -> None:
     response = urlopen(
@@ -77,6 +80,7 @@ vector_store_driver = PineconeVectorStoreDriver(
     api_key=os.getenv("PINECONE_API_KEY"),
     environment=os.getenv("PINECONE_ENVIRONMENT"),
     index_name=os.getenv('PINECONE_INDEX_NAME'),
+    embedding_driver=OpenAiEmbeddingDriver()
 )
 
 load_data(vector_store_driver)
@@ -97,7 +101,7 @@ Here is an of how the driver can be used to load and query information in a Marq
 
 ```python
 import os
-from griptape.drivers import MarqoVectorStoreDriver
+from griptape.drivers import MarqoVectorStoreDriver, OpenAiEmbeddingDriver
 from griptape.engines import VectorQueryEngine
 from griptape.loaders import WebLoader
 from griptape.tools import VectorStoreClient
@@ -110,6 +114,7 @@ vector_store = MarqoVectorStoreDriver(
     api_key=os.getenv("MARQO_API_KEY"),
     url=os.getenv("MARQO_URL"),
     index=os.getenv("MARQO_INDEX_NAME"),
+    embedding_driver=OpenAiEmbeddingDriver()
 )
 
 # Initialize the query engine
@@ -142,7 +147,7 @@ The [MongodbAtlasVectorStoreDriver](../../reference/griptape/drivers/vector/mong
 Here is an of how the driver can be used to load and query information in a MongoDb Atlas Cluster:
 
 ```python
-from griptape.drivers import MongoDbAtlasVectorStoreDriver
+from griptape.drivers import MongoDbAtlasVectorStoreDriver, OpenAiEmbeddingDriver
 from griptape.loaders import WebLoader
 import os
 
@@ -156,6 +161,7 @@ vector_store = MongoDbAtlasVectorStoreDriver(
     connection_string=f"mongodb+srv://{username}:{password}@{host}/{database_name}",
     database_name=database_name,
     collection_name=collection_name,
+    embedding_driver=OpenAiEmbeddingDriver()
 )
 
 # Load artifacts from the web
@@ -180,7 +186,7 @@ Here is an of how the driver can be used to load and query information in a Redi
 
 ```python
 import os
-from griptape.drivers import RedisVectorStoreDriver
+from griptape.drivers import RedisVectorStoreDriver, OpenAiEmbeddingDriver
 from griptape.loaders import WebLoader
 import numpy as np  # Assuming you'd use numpy to create a dummy vector for the sake of example.
 
@@ -189,6 +195,7 @@ vector_store_driver = RedisVectorStoreDriver(
     port=os.getenv("REDIS_PORT"),
     password=os.getenv("REDIS_PASSWORD"),
     index=os.getenv("REDIS_INDEX"),
+    embedding_driver=OpenAiEmbeddingDriver()
 )
 
 # Load artifacts from the web
@@ -214,13 +221,14 @@ Here is an of how the driver can be used to load and query information in an Ope
 ```python
 import os
 import boto3
-from griptape.drivers import AmazonOpenSearchVectorStoreDriver
+from griptape.drivers import AmazonOpenSearchVectorStoreDriver, OpenAiEmbeddingDriver
 from griptape.loaders import WebLoader
 
 vector_store_driver = AmazonOpenSearchVectorStoreDriver(
     host=os.getenv("AMAZON_OPENSEARCH_HOST"),
     index_name=os.getenv("AMAZON_OPENSEARCH_INDEX_NAME"),
     session=boto3.Session(),
+    embedding_driver=OpenAiEmbeddingDriver()
 )
 
 # Load artifacts from the web

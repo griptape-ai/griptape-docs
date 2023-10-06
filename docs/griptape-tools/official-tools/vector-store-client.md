@@ -7,9 +7,12 @@ from griptape.structures import Agent
 from griptape.tools import VectorStoreClient
 from griptape.loaders import WebLoader
 from griptape.engines import VectorQueryEngine
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 
 
-engine = VectorQueryEngine()
+engine = VectorQueryEngine(
+    vector_store_driver=LocalVectorStoreDriver(embedding_driver=OpenAiEmbeddingDriver())
+)
 
 engine.upsert_text_artifacts(
     WebLoader().load("https://www.griptape.ai"),

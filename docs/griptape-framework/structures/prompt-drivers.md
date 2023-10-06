@@ -380,7 +380,7 @@ from griptape.drivers import AmazonBedrockPromptDriver, BedrockTitanPromptModelD
 
 agent = Agent(
     prompt_driver=AmazonBedrockPromptDriver(
-        model="amazon.titan-tg1-large",
+        model="amazon.titan-text-express-v1",
         prompt_model_driver=BedrockTitanPromptModelDriver(
             top_p=1,
         ),
@@ -439,7 +439,7 @@ from griptape.drivers import AmazonBedrockPromptDriver, BedrockJurassicPromptMod
 
 agent = Agent(
     prompt_driver=AmazonBedrockPromptDriver(
-        model="ai21.j2-ultra",
+        model="ai21.j2-ultra-v1",
         prompt_model_driver=BedrockJurassicPromptModelDriver(top_p=0.95),
         temperature=0.7,
     ),

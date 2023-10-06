@@ -12,10 +12,10 @@ Here is how to use a chunker:
 
 ```python
 from griptape.chunkers import TextChunker
-from griptape.tokenizers import TiktokenTokenizer
+from griptape.tokenizers import OpenAiTokenizer
 TextChunker(
      # set an optional custom tokenizer
-     tokenizer=TiktokenTokenizer(),
+     tokenizer=OpenAiTokenizer(),
      # optionally modify default number of tokens
      max_tokens=100
 ).chunk("long text")

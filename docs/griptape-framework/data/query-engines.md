@@ -10,17 +10,17 @@ Use the [upsert_text_artifact](../../reference/griptape/engines/query/vector_que
 Use the [VectorQueryEngine](../../reference/griptape/engines/query/vector_query_engine.md#griptape.engines.query.vector_query_engine.VectorQueryEngine.query.md) method to query the vector storage.
 
 ```python
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 from griptape.engines import VectorQueryEngine
 from griptape.loaders import WebLoader
 
-engine = VectorQueryEngine()
+engine = VectorQueryEngine(
+    vector_store_driver=LocalVectorStoreDriver(embedding_driver=OpenAiEmbeddingDriver())
+)
 
 engine.upsert_text_artifacts(
     WebLoader().load("https://www.griptape.ai"), namespace="griptape"
 )
 
-engine.query(
-    "what is griptape?",
-    namespace="griptape"
-)
+engine.query("what is griptape?", namespace="griptape")
 ```

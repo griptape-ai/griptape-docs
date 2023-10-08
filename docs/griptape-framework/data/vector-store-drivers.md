@@ -42,6 +42,7 @@ results = vector_store_driver.query(
 values = [BaseArtifact.from_json(r.meta["artifact"]).value for r in results]
 
 print("\n\n".join(values))
+
 ```
 
 ## Pinecone Vector Store Driver

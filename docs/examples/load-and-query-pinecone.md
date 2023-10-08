@@ -3,7 +3,7 @@ import hashlib
 import os
 import json
 from urllib.request import urlopen
-from griptape.drivers import PineconeVectorStoreDriver
+from griptape.drivers import PineconeVectorStoreDriver, OpenAiEmbeddingDriver
 
 def load_data(driver: PineconeVectorStoreDriver) -> None:
     response = urlopen(
@@ -29,6 +29,7 @@ vector_driver = PineconeVectorStoreDriver(
     api_key=os.getenv("PINECONE_API_KEY"),
     environment=os.getenv("PINECONE_ENVIRONMENT"),
     index_name=os.getenv("PINECONE_INDEX_NAME"),
+    embedding_driver=OpenAiEmbeddingDriver()
 )
 
 load_data(vector_driver)

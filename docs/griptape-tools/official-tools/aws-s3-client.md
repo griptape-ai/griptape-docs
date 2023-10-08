@@ -6,13 +6,11 @@ This tool enables LLMs to make AWS S3 API requests.
 import boto3
 from griptape.structures import Agent
 from griptape.tools import AwsS3Client
-from griptape.memory.tool import TextToolMemory
 
-memory = TextToolMemory()
 # Initialize the AWS S3 client
 aws_s3_client = AwsS3Client(
-    session=boto3.Session(),
-    input_memory=[memory])
+    session=boto3.Session()
+)
 
 # Create an agent with the AWS S3 client tool
 agent = Agent(

@@ -20,7 +20,8 @@ gmail_tool = GoogleGmailClient(
         "token_uri": "https://oauth2.googleapis.com/token",
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
         "client_x509_cert_url": os.environ["GOOGLE_CERT_URL"]
-    }
+    },
+     owner_email=os.environ["GOOGLE_OWNER_EMAIL"]
 )
 
 # Set up an agent using the GoogleGmailClient tool
@@ -29,31 +30,32 @@ agent = Agent(
 )
 
 # Task: Create a draft email in GMail
-agent.run("Create a draft email in Gmail to recipient@email.com with the subject 'Test Draft', the body "
-          "'This is a test draft email.', and send from my email sender@email.com.")
+agent.run(
+    "Create a draft email in Gmail to example@email.com with the subject 'Test Draft', the body "
+    "'This is a test draft email.'",
+)
 ```
 ```
-[09/08/23 15:06:58] INFO     Task a1da500e0a4142b4bb1087691cc20996              
+[10/05/23 13:24:05] INFO     ToolkitTask 1f190f823d584053bfe9942f41b6cb2d       
                              Input: Create a draft email in Gmail to            
-                             recipient@email.com with the subject 'Test Draft', the
-                             body 'This is a test draft email.', and send from  
-                             my email sender@email.com.                         
-[09/08/23 15:07:08] INFO     Subtask 73afdc313058480e8a66d7596ab954d3           
-                             Thought: I need to use the GoogleGmailClient tool  
-                             with the create_draft_email activity to create the 
-                             draft email. The input for this action will be the 
-                             details provided in the request.                   
+                             example@email.com with the subject 'Test Draft',   
+                             the body 'This is a test draft email.'             
+[10/05/23 13:24:15] INFO     Subtask 7f2cce7e5b0e425ba696531561697b96           
+                             Thought: The user wants to create a draft email in 
+                             Gmail. I can use the GoogleGmailClient tool with   
+                             the create_draft_email activity to accomplish this.
+                             I will need to provide the 'to', 'subject', and    
+                             'body' values as input.                            
                                                                                 
                              Action: {"type": "tool", "name":                   
                              "GoogleGmailClient", "activity":                   
                              "create_draft_email", "input": {"values": {"to":   
-                             "recipient@email.com", "subject": "Test Draft",       
-                             "from": "sender@email.com", "body": "This is a test
-                             draft email.", "inbox_owner": "sender@email.com"}}}
-[09/08/23 15:07:09] INFO     Subtask 73afdc313058480e8a66d7596ab954d3           
+                             "example@email.com", "subject": "Test Draft",      
+                             "body": "This is a test draft email."}}}           
+[10/05/23 13:24:16] INFO     Subtask 7f2cce7e5b0e425ba696531561697b96           
                              Observation: An email draft was successfully       
-                             created (ID: r5939573931587083399)                 
-[09/08/23 15:07:12] INFO     Task a1da500e0a4142b4bb1087691cc20996              
+                             created (ID: r6322867913697829111)                 
+[10/05/23 13:24:19] INFO     ToolkitTask 1f190f823d584053bfe9942f41b6cb2d       
                              Output: The draft email has been successfully      
-                             created in Gmail with the ID: r5939573931587083399.
+                             created in Gmail with the ID: r6322867913697829111.
 ```

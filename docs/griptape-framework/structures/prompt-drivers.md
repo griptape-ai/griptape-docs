@@ -10,7 +10,7 @@ from griptape.drivers import OpenAiChatPromptDriver
 from griptape.rules import Rule
 
 agent = Agent(
-    prompt_driver=OpenAiChatPromptDriver(temperature=0.3),
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-4", temperature=0.3),
     input_template="You will be provided with a tweet, and your task is to classify its sentiment as positive, neutral, or negative. Tweet: {{ args[0] }}",
     rules=[
         Rule(
@@ -44,7 +44,7 @@ def foo(n, k):
 """
 )
 
-result = OpenAiChatPromptDriver(temperature=0).run(stack)
+result = OpenAiChatPromptDriver(model="gpt-3.5-turbo-16k", temperature=0).run(stack)
 
 print(result.value)
 ```
@@ -112,10 +112,10 @@ from griptape.drivers import AzureOpenAiChatPromptDriver
 
 agent = Agent(
     prompt_driver=AzureOpenAiChatPromptDriver(
-        api_key=os.environ["AZURE_OPENAI_API_KEY"],
-        model="gpt-3.5-turbo",
-        deployment_id=os.environ["AZURE_OPENAI_DEPLOYMENT_ID"],
-        api_base=os.environ["AZURE_OPENAI_API_BASE"],
+        api_key=os.environ["AZURE_OPENAI_API_KEY_1"],
+        model="gpt-3.5-turbo-16k",
+        deployment_id=os.environ["AZURE_OPENAI_35_16k_DEPLOYMENT_ID"],
+        api_base=os.environ["AZURE_OPENAI_API_BASE_1"],
     ),
     rules=[
         Rule(
@@ -139,10 +139,10 @@ from griptape.drivers import AzureOpenAiCompletionPromptDriver
 
 agent = Agent(
     prompt_driver=AzureOpenAiCompletionPromptDriver(
-        api_key=os.environ["AZURE_OPENAI_API_KEY"],
+        api_key=os.environ["AZURE_OPENAI_API_KEY_1"],
         model="text-davinci-003",
-        deployment_id=os.environ["AZURE_OPENAI_DEPLOYMENT_ID"],
-        api_base=os.environ["AZURE_OPENAI_API_BASE"],
+        deployment_id=os.environ["AZURE_OPENAI_DAVINCI_DEPLOYMENT_ID"],
+        api_base=os.environ["AZURE_OPENAI_API_BASE_1"],
         temperature=1
     ),
 )
@@ -168,6 +168,7 @@ from griptape.drivers import CoherePromptDriver
 
 agent = Agent(
     prompt_driver=CoherePromptDriver(
+        model="command",
         api_key=os.environ['COHERE_API_KEY'],
     )
 )
@@ -186,6 +187,7 @@ from griptape.drivers import AnthropicPromptDriver
 
 agent = Agent(
     prompt_driver=AnthropicPromptDriver(
+        model="claude-2",
         api_key=os.environ['ANTHROPIC_API_KEY'],
     )
 )
@@ -227,7 +229,7 @@ def prompt_stack_to_string_converter(prompt_stack: PromptStack) -> str:
 
 agent = Agent(
     prompt_driver=HuggingFaceHubPromptDriver(
-        repo_id="tiiuae/falcon-7b-instruct",
+        model="tiiuae/falcon-7b-instruct",
         api_token=os.environ["HUGGING_FACE_API_TOKEN"],
         prompt_stack_to_string=prompt_stack_to_string_converter,
     ),
@@ -284,7 +286,7 @@ def prompt_stack_to_string_converter(prompt_stack: PromptStack) -> str:
 
 agent = Agent(
     prompt_driver=HuggingFaceHubPromptDriver(
-        repo_id="tiiuae/falcon-7b-instruct",
+        model="tiiuae/falcon-7b-instruct",
         api_token=os.environ["HUGGING_FACE_API_TOKEN"],
         prompt_stack_to_string=prompt_stack_to_string_converter,
     ),
@@ -378,7 +380,7 @@ from griptape.drivers import AmazonBedrockPromptDriver, BedrockTitanPromptModelD
 
 agent = Agent(
     prompt_driver=AmazonBedrockPromptDriver(
-        model="amazon.titan-tg1-large",
+        model="amazon.titan-text-express-v1",
         prompt_model_driver=BedrockTitanPromptModelDriver(
             top_p=1,
         ),
@@ -437,7 +439,7 @@ from griptape.drivers import AmazonBedrockPromptDriver, BedrockJurassicPromptMod
 
 agent = Agent(
     prompt_driver=AmazonBedrockPromptDriver(
-        model="ai21.j2-ultra",
+        model="ai21.j2-ultra-v1",
         prompt_model_driver=BedrockJurassicPromptModelDriver(top_p=0.95),
         temperature=0.7,
     ),

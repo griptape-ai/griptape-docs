@@ -5,9 +5,9 @@ This tool enables LLMs to query, extract, and summarize tool outputs via shared 
 ```python
 from griptape.structures import Agent
 from griptape.tools import ToolOutputProcessor
-from griptape.memory.tool import TextToolMemory
 
-text_memory = TextToolMemory(allowlist=[])
 
-Agent(tool_memory=text_memory, tools=[ToolOutputProcessor()])
+agent = Agent(tools=[ToolOutputProcessor()])
+
+agent.tool_memory.disable_activities()
 ```

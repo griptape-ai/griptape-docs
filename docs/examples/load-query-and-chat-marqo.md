@@ -6,7 +6,7 @@ from griptape.engines import VectorQueryEngine
 from griptape.loaders import WebLoader
 from griptape.structures import Agent
 from griptape.tools import VectorStoreClient
-from griptape.drivers import LocalVectorStoreDriver
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 
 # Define the namespace
 namespace = "griptape-ai"
@@ -16,6 +16,7 @@ vector_store = MarqoVectorStoreDriver(
     api_key=os.getenv("MARQO_API_KEY"),
     url=os.getenv("MARQO_URL"),
     index=os.getenv("MARQO_INDEX_NAME"),
+    embedding_driver=OpenAiEmbeddingDriver()
 )
 # Initialize the query engine
 query_engine = VectorQueryEngine(vector_store_driver=vector_store)

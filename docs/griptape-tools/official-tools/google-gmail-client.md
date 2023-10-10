@@ -1,6 +1,6 @@
 # GoogleGmailClient
 
-The GoogleGmailClient tool provides a way to interact with the Gmail API. It can be used to create draft emails, send emails, and more.
+The GoogleGmailClient tool provides a way to interact with the Gmail API. It can be used to create draft emails and optionally attach files to them.
 
 ```python
 from griptape.tools import GoogleGmailClient
@@ -32,30 +32,36 @@ agent = Agent(
 # Task: Create a draft email in GMail
 agent.run(
     "Create a draft email in Gmail to example@email.com with the subject 'Test Draft', the body "
-    "'This is a test draft email.'",
+    "'This is a test draft email.' and also add an attachment from my local machine with path "
+    "'/test/foo/bar.txt'.",
 )
 ```
 ```
-[10/05/23 13:24:05] INFO     ToolkitTask 1f190f823d584053bfe9942f41b6cb2d       
+[10/10/23 11:59:01] INFO     ToolkitTask 22754ca0dc3c4e7eb40510114f332abd       
                              Input: Create a draft email in Gmail to            
                              example@email.com with the subject 'Test Draft',   
-                             the body 'This is a test draft email.'             
-[10/05/23 13:24:15] INFO     Subtask 7f2cce7e5b0e425ba696531561697b96           
+                             the body 'This is a test draft email.' and also add
+                             an attachment from my local machine with path      
+                             '/test/foo/bar.txt'.       
+[10/10/23 11:59:13] INFO     Subtask 5b43de545f4f4308bdcc85a1c0c14b08           
                              Thought: The user wants to create a draft email in 
                              Gmail. I can use the GoogleGmailClient tool with   
-                             the create_draft_email activity to accomplish this.
-                             I will need to provide the 'to', 'subject', and    
-                             'body' values as input.                            
+                             the create_draft_email activity for this. The user 
+                             has provided all the necessary information: the    
+                             recipient's email address, the subject, the body of
+                             the email, and the path to the attachment.         
                                                                                 
                              Action: {"type": "tool", "name":                   
                              "GoogleGmailClient", "activity":                   
                              "create_draft_email", "input": {"values": {"to":   
                              "example@email.com", "subject": "Test Draft",      
-                             "body": "This is a test draft email."}}}           
-[10/05/23 13:24:16] INFO     Subtask 7f2cce7e5b0e425ba696531561697b96           
+                             "body": "This is a test draft email.",             
+                             "attachments":                                     
+                             ["/test/foo/bar.txt"]}}}   
+[10/10/23 11:59:14] INFO     Subtask 5b43de545f4f4308bdcc85a1c0c14b08           
                              Observation: An email draft was successfully       
-                             created (ID: r6322867913697829111)                 
-[10/05/23 13:24:19] INFO     ToolkitTask 1f190f823d584053bfe9942f41b6cb2d       
+                             created (ID: r-865141263174207477)                 
+[10/10/23 11:59:18] INFO     ToolkitTask 22754ca0dc3c4e7eb40510114f332abd       
                              Output: The draft email has been successfully      
-                             created in Gmail with the ID: r6322867913697829111.
+                             created in Gmail.    
 ```

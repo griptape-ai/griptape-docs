@@ -100,18 +100,17 @@ Handler 2 <class 'griptape.events.finish_task_event.FinishTaskEvent'>
 
 ## Streaming
 
+
 You can use the [CompletionChunkEvent](../../reference/griptape/events/completion_chunk_event.md) to stream the completion results from Prompt Drivers.
 
 ```python
 from griptape.events import CompletionChunkEvent
 from griptape.tasks import ToolkitTask
 from griptape.structures import Pipeline
-from griptape.drivers import OpenAiChatPromptDriver
 from griptape.tools import WebScraper
 
 
 pipeline = Pipeline(
-    prompt_driver=OpenAiChatPromptDriver(model="gpt-4", temperature=0.1, stream=True),
     event_listeners={
         CompletionChunkEvent: [
             lambda e: print(e.token, end="", flush=True),
@@ -127,6 +126,28 @@ pipeline.add_tasks(
 )
 
 pipeline.run()
+```
+
+You can also use the [Stream](../../reference/griptape/utils/stream.md) utility to automatically wrap
+[CompletionChunkEvent](../../reference/griptape/events/completion_chunk_event.md)s in a Python iterator.
+
+```python
+from griptape.utils import Stream
+from griptape.tasks import ToolkitTask
+from griptape.structures import Pipeline
+from griptape.tools import WebScraper
+
+
+pipeline = Pipeline()
+pipeline.add_tasks(
+    ToolkitTask(
+        "Based on https://griptape.ai, tell me what griptape is.",
+        tools=[WebScraper()],
+    ),
+)
+
+for artifact in Stream(pipeline).run():
+    print(artifact.value, end="", flush=True),
 ```
 
 

@@ -150,8 +150,7 @@ agent.run()
 
 ## Extraction Task
 
-To extract information from a text, you can use the [ExtractionTask](../../reference/griptape/tasks/extraction_task.md).
-This task allows us to pass in an [Extraction Engine](../../reference/griptape/engines/extraction_engine.md) and a set of arguments to the engine.
+To extract information from a text, you can use the ExtractionTask. This task allows us to pass in an Extraction Engine and a set of arguments to the engine.
 
 ```python
 from griptape.tasks import ExtractionTask

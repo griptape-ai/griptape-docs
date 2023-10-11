@@ -146,3 +146,51 @@ agent.run()
                              Output: The summary of the webpage https://www.griptape.ai has been successfully stored in a file named
                              griptape.txt.
 ```
+
+
+## Extraction Task
+
+To extract information from a text, you can use the [ExtractionTask](../../reference/griptape/tasks/extraction_task.md).
+This task allows us to pass in an [Extraction Engine](../../reference/griptape/engines/extraction_engine.md) and a set of arguments to the engine.
+
+```python
+from griptape.tasks import ExtractionTask
+from griptape.structures import Agent
+from griptape.engines import CsvExtractionEngine
+
+# Instantiate the CSV extraction engine
+csv_extraction_engine = CsvExtractionEngine()
+
+# Define some CSV data and columns
+csv_data = """
+Name, Age, Address
+John, 25, 123 Main St
+Jane, 30, 456 Elm St
+"""
+
+columns = ["Name", "Age", "Address"]
+
+
+# Create an agent and add the ExtractionTask to it
+agent = Agent()
+agent.add_task(ExtractionTask(
+    input_template="{{ csv_data }}",
+    context={"csv_data": csv_data},
+    extraction_engine=csv_extraction_engine,
+    args={"column_names": columns}
+))
+
+# Run the agent
+results = agent.run()
+```
+```
+[10/11/23 14:31:57] INFO     ExtractionTask 19ac1772363a4bd09abbea1ce5119d97    
+                             Input:                                             
+                             Name, Age, Address                                 
+                             John, 25, 123 Main St                              
+                             Jane, 30, 456 Elm St                               
+                                                                                
+[10/11/23 14:31:58] INFO     ExtractionTask 19ac1772363a4bd09abbea1ce5119d97    
+                             Output: John,"""25""","""123 Main St"""            
+                             Jane,"""30""","""456 Elm St"""  
+```

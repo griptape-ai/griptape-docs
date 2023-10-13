@@ -155,7 +155,7 @@ To extract information from a text, you can use the ExtractionTask. This task al
 ```python
 from griptape.tasks import ExtractionTask
 from griptape.structures import Agent
-from griptape.engines import CsvExtractionEngine
+from griptape.engines import CsvExtractionEngine, JsonExtractionEngine
 
 # Instantiate the CSV extraction engine
 csv_extraction_engine = CsvExtractionEngine()
@@ -172,24 +172,65 @@ columns = ["Name", "Age", "Address"]
 
 # Create an agent and add the ExtractionTask to it
 agent = Agent()
-agent.add_task(ExtractionTask(
-    input_template="{{ csv_data }}",
-    context={"csv_data": csv_data},
-    extraction_engine=csv_extraction_engine,
-    args={"column_names": columns}
-))
+agent.add_task(
+    ExtractionTask(
+        input_template="{{ csv_data }}",
+        context={"csv_data": csv_data},
+        extraction_engine=csv_extraction_engine,
+        args={"column_names": columns},
+    )
+)
 
+print("CSV extraction task.")
 # Run the agent
-results = agent.run()
+agent.run()
+
+json_extraction_engine = JsonExtractionEngine()
+
+# Define some JSON data
+json_data = """
+[
+  {"Name": "John", "Age": "25", "Address": "123 Main St"},
+  {"Name": "Jane", "Age": "30", "Address": "456 Elm St"}
+]
+"""
+
+# Add the JsonExtraction task to the same agent
+agent.add_task(
+    ExtractionTask(
+        input_template="{{ json_data }}",
+        context={"json_data": json_data},
+        extraction_engine=json_extraction_engine,
+        args={"template_schema": {"Name": "{{ name }}", "Age": "{{ age }}"}},
+    )
+)
+
+print("JSON extraction task.")
+# Run the agent
+agent.run()
 ```
 ```
-[10/11/23 14:31:57] INFO     ExtractionTask 19ac1772363a4bd09abbea1ce5119d97    
+CSV extraction task.
+[10/12/23 17:13:54] INFO     ExtractionTask d7a03ff4f7944bad8755dfd43fd3bd66    
                              Input:                                             
                              Name, Age, Address                                 
                              John, 25, 123 Main St                              
                              Jane, 30, 456 Elm St                               
                                                                                 
-[10/11/23 14:31:58] INFO     ExtractionTask 19ac1772363a4bd09abbea1ce5119d97    
+[10/12/23 17:13:55] INFO     ExtractionTask d7a03ff4f7944bad8755dfd43fd3bd66    
                              Output: John,"""25""","""123 Main St"""            
-                             Jane,"""30""","""456 Elm St"""  
+                             Jane,"""30""","""456 Elm St"""                     
+JSON extraction task.
+                    INFO     ExtractionTask eee005faa0f043bea738a29cb413036d    
+                             Input:                                             
+                             [                                                  
+                               {"Name": "John", "Age": "25", "Address": "123    
+                             Main St"},                                         
+                               {"Name": "Jane", "Age": "30", "Address": "456 Elm
+                             St"}                                               
+                             ]                                                  
+                                                                                
+[10/12/23 17:13:56] INFO     ExtractionTask eee005faa0f043bea738a29cb413036d    
+                             Output: {'name': 'John', 'age': '25'}              
+                             {'name': 'Jane', 'age': '30'}     
 ```

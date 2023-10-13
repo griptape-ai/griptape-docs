@@ -234,3 +234,71 @@ JSON extraction task.
                              Output: {'name': 'John', 'age': '25'}              
                              {'name': 'Jane', 'age': '30'}     
 ```
+
+
+# Text Summary Task
+
+To summarize a text, you can use the TextSummaryTask. This task allows us to pass in a Summarization Engine and a set of arguments to the engine.
+
+```python
+from griptape.structures import Agent
+from griptape.tasks import TextSummaryTask
+
+# Create a new agent
+agent = Agent()
+
+# Add the TextSummaryTask to the agent
+agent.add_task(
+    TextSummaryTask(
+        input_template="Artificial Intelligence (AI) is a branch of computer science that deals with "
+        "creating machines capable of thinking and learning. It encompasses various fields "
+        "such as machine learning, neural networks, and deep learning. AI has the potential "
+        "to revolutionize many sectors, including healthcare, finance, and transportation. "
+        "Our life in this modern age depends largely on computers. It is almost impossible "
+        "to think about life without computers. We need computers in everything that we use "
+        "in our daily lives. So it becomes very important to make computers intelligent so "
+        "that our lives become easy. Artificial Intelligence is the theory and development "
+        "of computers, which imitates the human intelligence and senses, such as visual "
+        "perception, speech recognition, decision-making, and translation between languages."
+        " Artificial Intelligence has brought a revolution in the world of technology. "
+    )
+)
+
+
+# Run the agent
+agent.run()
+```
+
+```
+[10/12/23 17:43:04] INFO     TextSummaryTask ffba7012a1fb4711b8f33a67c08ad677   
+                             Input: Artificial Intelligence (AI) is a branch of 
+                             computer science that deals with creating machines 
+                             capable of thinking and learning. It encompasses   
+                             various fields such as machine learning, neural    
+                             networks, and deep learning. AI has the potential  
+                             to revolutionize many sectors, including           
+                             healthcare, finance, and transportation. Our life  
+                             in this modern age depends largely on computers. It
+                             is almost impossible to think about life without   
+                             computers. We need computers in everything that we 
+                             use in our daily lives. So it becomes very         
+                             important to make computers intelligent so that our
+                             lives become easy. Artificial Intelligence is the  
+                             theory and development of computers, which imitates
+                             the human intelligence and senses, such as visual  
+                             perception, speech recognition, decision-making,   
+                             and translation between languages. Artificial      
+                             Intelligence has brought a revolution in the world 
+                             of technology.                                     
+[10/12/23 17:43:07] INFO     TextSummaryTask ffba7012a1fb4711b8f33a67c08ad677   
+                             Output: Artificial Intelligence (AI) is a branch of
+                             computer science that focuses on creating machines 
+                             capable of thinking and learning. It encompasses   
+                             various fields such as machine learning, neural    
+                             networks, and deep learning. AI has the potential  
+                             to revolutionize sectors like healthcare, finance, 
+                             and transportation. It is important to make        
+                             computers intelligent to make our lives easier. AI 
+                             imitates human intelligence and senses, bringing a 
+                             revolution in technology. 
+```

@@ -33,17 +33,17 @@ agent.run("List all my S3 buckets.")
 [09/11/23 16:49:42] INFO     Subtask 9fc44f5c8e73447ba737283cb2ef7f5d           
                              Observation: Output of                             
                              "AwsS3Client.list_s3_buckets" was stored in memory 
-                             with memory_name "TextToolMemory" and              
+                             with memory_name "ToolMemory" and              
                              artifact_namespace                                 
                              "f2592085fd4a430286a46770ea508cc9"                 
 [09/11/23 16:49:50] INFO     Subtask 0e9bb639a432431a92ef40a8c085ca0f           
                              Thought: The output of the "list_s3_buckets"       
                              activity is stored in memory. I can retrieve this  
                              information using the "summarize" activity of the  
-                             "TextToolMemory" tool.                             
+                             "ToolMemory" tool.                             
                              Action: {"type": "memory", "name":                 
-                             "TextToolMemory", "activity": "summarize", "input":
-                             {"values": {"memory_name": "TextToolMemory",       
+                             "ToolMemory", "activity": "summarize", "input":
+                             {"values": {"memory_name": "ToolMemory",       
                              "artifact_namespace":                              
                              "f2592085fd4a430286a46770ea508cc9"}}}              
 [09/11/23 16:49:52] INFO     Subtask 0e9bb639a432431a92ef40a8c085ca0f           

@@ -31,16 +31,16 @@ agent.run("List all my IAM users")
 [09/11/23 16:45:52] INFO     Subtask f2f0809ee10d4538972ed01fdd6a2fb8           
                              Observation: Output of "AwsIamClient.list_users"   
                              was stored in memory with memory_name              
-                             "TextToolMemory" and artifact_namespace            
+                             "ToolMemory" and artifact_namespace            
                              "51d22a018a434904a5da3bb8d4f763f7"                 
 [09/11/23 16:45:59] INFO     Subtask 8e0e918571544eeebf46de898466c48c           
                              Thought: The output of the list_users activity is  
                              stored in memory. I can retrieve this information  
-                             using the TextToolMemory tool with the summarize   
+                             using the ToolMemory tool with the summarize   
                              activity.                                          
                              Action: {"type": "memory", "name":                 
-                             "TextToolMemory", "activity": "summarize", "input":
-                             {"values": {"memory_name": "TextToolMemory",       
+                             "ToolMemory", "activity": "summarize", "input":
+                             {"values": {"memory_name": "ToolMemory",       
                              "artifact_namespace":                              
                              "51d22a018a434904a5da3bb8d4f763f7"}}}              
 [09/11/23 16:46:03] INFO     Subtask 8e0e918571544eeebf46de898466c48c           

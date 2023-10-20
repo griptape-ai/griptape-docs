@@ -358,3 +358,42 @@ agent.run("Give me information about Griptape")
                              flexibility when working with large language       
                              models.    
 ```
+
+# Tool Task
+
+To use [Griptape Tools](../../griptape-framework/tools/index.md), you can use a Tool Task. This task allows us to pass in one tool to give the LLM a specific objective without any CoT reasoning.
+
+```python
+from griptape.structures import Agent
+from griptape.tasks import ToolTask
+from griptape.tools import Calculator
+
+# Initialize the agent and add a task
+agent = Agent()
+agent.add_task(ToolTask(tool=Calculator()))
+
+# Run the agent with a prompt
+agent.run("Give me the answer for 5*4.")
+```
+
+```
+[10/20/23 14:20:25] INFO     ToolTask df1604b417a84ee781dbd1f2b904ed30          
+                             Input: Give me the answer for 5*4.                 
+[10/20/23 14:20:29] INFO     Subtask a9a9ad7be2bf465fa82bd350116fabe4           
+                             Action: {                                          
+                               "type": "tool",                                  
+                               "name": "Calculator",                            
+                               "activity": "calculate",                         
+                               "input": {                                       
+                                 "values": {                                    
+                                   "expression": "5*4"                          
+                                 }                                              
+                               }                                                
+                             }                                                  
+[10/20/23 14:20:30] INFO     Subtask a9a9ad7be2bf465fa82bd350116fabe4           
+                             Observation: 20                                    
+                    INFO     ToolTask df1604b417a84ee781dbd1f2b904ed30          
+                             Output: 20       
+```
+
+

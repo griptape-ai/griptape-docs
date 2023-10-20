@@ -63,7 +63,7 @@ agent.run("How do I bake a cake?")
 
 ## Prompt Task
 
-For general purpose prompting, you can use the [PromptTask](../../reference/griptape/tasks/prompt_task.md):
+For general purpose prompting, you can use the [PromptTask](../../griptape-framework/structures/tasks.md):
 
 ```python
 from griptape.tasks import PromptTask
@@ -72,26 +72,27 @@ from griptape.structures import Agent
 
 agent = Agent()
 agent.add_task(
-    # take the first argument from the pipeline `run` method
-    PromptTask("{{ args[0] }}"),
+    # take the first argument from the agent `run` method
+    PromptTask("Respond to the users following request: {{ args[0] }}"),
 )
 
 agent.run("Write me a haiku")
 ```
 
 ```
-[09/08/23 11:14:05] INFO     PromptTask 6fea76df25d246e9b15fb5878156034e
-                             Input: Write me a haiku
-[09/08/23 11:14:07] INFO     PromptTask 6fea76df25d246e9b15fb5878156034e
-                             Output: Golden sunsets glow,
-                             Whispers of the wind echo,
-                             Nature's peace bestowed.
+[10/20/23 15:27:26] INFO     PromptTask f5025c6352914e9f80ef730e5269985a        
+                             Input: Respond to the users following request:     
+                             Write me a haiku                                   
+[10/20/23 15:27:28] INFO     PromptTask f5025c6352914e9f80ef730e5269985a        
+                             Output: Gentle morning dew,                        
+                             Kisses the waking flowers,                         
+                             Day begins anew.
 ```
 
 ## Toolkit Task
 
-To use [Griptape Tools](../../griptape-framework/tools/index.md), you can use a [Toolkit Task](../../reference/griptape/tasks/toolkit_task.md).
-This task allows us to pass in one or more tools, and the LLM will use Chain of Thought (CoT) to reason through which tools it should use given the prompt.
+To use [Griptape Tools](../../griptape-framework/tools/index.md), you can use a [Toolkit Task](../../griptape-framework/structures/tasks.md).
+This Task takes in one or more tools which the LLM will decide to use using Chain of Thought (CoT) reasoning. Because this Task uses CoT, it is recommended to only use with very capable models.
 
 ```python
 from griptape.tasks import ToolkitTask
@@ -150,12 +151,12 @@ agent.run()
 
 ## Extraction Task
 
-To extract information from a text, you can use the ExtractionTask. This task allows us to pass in an Extraction Engine and a set of arguments to the engine.
+To extract information from a text, you can use the [ExtractionTask](../../griptape-framework/structures/tasks.md). This task allows us to pass in an [Extraction Engine](../../griptape-framework/data/extraction-engines.md) and a set of arguments to the engine.
 
 ```python
 from griptape.tasks import ExtractionTask
 from griptape.structures import Agent
-from griptape.engines import CsvExtractionEngine, JsonExtractionEngine
+from griptape.engines import CsvExtractionEngine
 
 # Instantiate the CSV extraction engine
 csv_extraction_engine = CsvExtractionEngine()
@@ -174,17 +175,31 @@ columns = ["Name", "Age", "Address"]
 agent = Agent()
 agent.add_task(
     ExtractionTask(
-        input_template="{{ csv_data }}",
-        context={"csv_data": csv_data},
         extraction_engine=csv_extraction_engine,
         args={"column_names": columns},
     )
 )
 
-print("CSV extraction task.")
 # Run the agent
-agent.run()
+agent.run(csv_data)
+```
+```
+[10/20/23 15:06:08] INFO     ExtractionTask 75377d524c1a4b2dad5d08dca43a5ea2    
+                             Input:                                             
+                             Name, Age, Address                                 
+                             John, 25, 123 Main St                              
+                             Jane, 30, 456 Elm St                               
+                                                                                
+[10/20/23 15:06:10] INFO     ExtractionTask 75377d524c1a4b2dad5d08dca43a5ea2    
+                             Output: John,"""25""","""123 Main St"""            
+                             Jane,"""30""","""456 Elm St"""   
+```
+```python
+from griptape.tasks import ExtractionTask
+from griptape.structures import Agent
+from griptape.engines import JsonExtractionEngine
 
+# Instantiate the JSON extraction engine
 json_extraction_engine = JsonExtractionEngine()
 
 # Define some JSON data
@@ -195,33 +210,21 @@ json_data = """
 ]
 """
 
+agent = Agent()
 # Add the JsonExtraction task to the same agent
 agent.add_task(
     ExtractionTask(
-        input_template="{{ json_data }}",
-        context={"json_data": json_data},
         extraction_engine=json_extraction_engine,
         args={"template_schema": {"Name": "{{ name }}", "Age": "{{ age }}"}},
     )
 )
 
-print("JSON extraction task.")
 # Run the agent
-agent.run()
+agent.run(json_data)
 ```
+
 ```
-CSV extraction task.
-[10/12/23 17:13:54] INFO     ExtractionTask d7a03ff4f7944bad8755dfd43fd3bd66    
-                             Input:                                             
-                             Name, Age, Address                                 
-                             John, 25, 123 Main St                              
-                             Jane, 30, 456 Elm St                               
-                                                                                
-[10/12/23 17:13:55] INFO     ExtractionTask d7a03ff4f7944bad8755dfd43fd3bd66    
-                             Output: John,"""25""","""123 Main St"""            
-                             Jane,"""30""","""456 Elm St"""                     
-JSON extraction task.
-                    INFO     ExtractionTask eee005faa0f043bea738a29cb413036d    
+[10/20/23 15:13:01] INFO     ExtractionTask 4fa14a4aa25643faa792e672e10fc36a    
                              Input:                                             
                              [                                                  
                                {"Name": "John", "Age": "25", "Address": "123    
@@ -230,15 +233,14 @@ JSON extraction task.
                              St"}                                               
                              ]                                                  
                                                                                 
-[10/12/23 17:13:56] INFO     ExtractionTask eee005faa0f043bea738a29cb413036d    
+[10/20/23 15:13:05] INFO     ExtractionTask 4fa14a4aa25643faa792e672e10fc36a    
                              Output: {'name': 'John', 'age': '25'}              
-                             {'name': 'Jane', 'age': '30'}     
+                             {'name': 'Jane', 'age': '30'} 
 ```
 
+## Text Summary Task
 
-# Text Summary Task
-
-To summarize a text, you can use the TextSummaryTask. This task allows us to pass in a Summarization Engine and a set of arguments to the engine.
+To summarize a text, you can use the [TextSummaryTask](../../griptape-framework/structures/tasks.md). This task allows us to pass in a [Summarization Engine](../../griptape-framework/data/summarization-engines.md) and a set of arguments to the engine.
 
 ```python
 from griptape.structures import Agent
@@ -248,29 +250,27 @@ from griptape.tasks import TextSummaryTask
 agent = Agent()
 
 # Add the TextSummaryTask to the agent
-agent.add_task(
-    TextSummaryTask(
-        input_template="Artificial Intelligence (AI) is a branch of computer science that deals with "
-        "creating machines capable of thinking and learning. It encompasses various fields "
-        "such as machine learning, neural networks, and deep learning. AI has the potential "
-        "to revolutionize many sectors, including healthcare, finance, and transportation. "
-        "Our life in this modern age depends largely on computers. It is almost impossible "
-        "to think about life without computers. We need computers in everything that we use "
-        "in our daily lives. So it becomes very important to make computers intelligent so "
-        "that our lives become easy. Artificial Intelligence is the theory and development "
-        "of computers, which imitates the human intelligence and senses, such as visual "
-        "perception, speech recognition, decision-making, and translation between languages."
-        " Artificial Intelligence has brought a revolution in the world of technology. "
-    )
-)
+agent.add_task(TextSummaryTask())
 
 
 # Run the agent
-agent.run()
+agent.run(
+    "Artificial Intelligence (AI) is a branch of computer science that deals with "
+    "creating machines capable of thinking and learning. It encompasses various fields "
+    "such as machine learning, neural networks, and deep learning. AI has the potential "
+    "to revolutionize many sectors, including healthcare, finance, and transportation. "
+    "Our life in this modern age depends largely on computers. It is almost impossible "
+    "to think about life without computers. We need computers in everything that we use "
+    "in our daily lives. So it becomes very important to make computers intelligent so "
+    "that our lives become easy. Artificial Intelligence is the theory and development "
+    "of computers, which imitates the human intelligence and senses, such as visual "
+    "perception, speech recognition, decision-making, and translation between languages."
+    " Artificial Intelligence has brought a revolution in the world of technology. "
+)
 ```
 
 ```
-[10/12/23 17:43:04] INFO     TextSummaryTask ffba7012a1fb4711b8f33a67c08ad677   
+[10/20/23 15:37:46] INFO     TextSummaryTask e870f2a6226f43fcb89f93b1c0c85b10   
                              Input: Artificial Intelligence (AI) is a branch of 
                              computer science that deals with creating machines 
                              capable of thinking and learning. It encompasses   
@@ -290,39 +290,33 @@ agent.run()
                              and translation between languages. Artificial      
                              Intelligence has brought a revolution in the world 
                              of technology.                                     
-[10/12/23 17:43:07] INFO     TextSummaryTask ffba7012a1fb4711b8f33a67c08ad677   
+[10/20/23 15:37:49] INFO     TextSummaryTask e870f2a6226f43fcb89f93b1c0c85b10   
                              Output: Artificial Intelligence (AI) is a branch of
-                             computer science that focuses on creating machines 
-                             capable of thinking and learning. It encompasses   
-                             various fields such as machine learning, neural    
-                             networks, and deep learning. AI has the potential  
-                             to revolutionize sectors like healthcare, finance, 
-                             and transportation. It is important to make        
-                             computers intelligent to make our lives easier. AI 
-                             imitates human intelligence and senses, bringing a 
-                             revolution in technology. 
+                             computer science that focuses on creating          
+                             intelligent machines. It encompasses various fields
+                             such as machine learning and neural networks. AI   
+                             has the potential to revolutionize sectors like    
+                             healthcare, finance, and transportation. It is     
+                             essential to make computers intelligent to simplify
+                             our daily lives. AI imitates human intelligence and
+                             senses, bringing a revolution in technology.   
 ```
 
-# Text Query Task
+## Text Query Task
 
-To query a text, you can use the TextQueryTask. This task allows us to pass in a Query Engine and a set of arguments to the engine.
+To query a text, you can use the [TextQueryTask](../../griptape-framework/structures/tasks.md). This task allows us to pass in a [Query Engine](../../griptape-framework/data/query-engines.md) and a set of arguments to the engine.
 
 ```python
 import os
 from griptape.structures import Agent
 from griptape.tasks import TextQueryTask
-from griptape.drivers import PineconeVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 from griptape.engines import VectorQueryEngine
 from griptape.artifacts import TextArtifact
 
 # Initiate Embedding Driver and Vector Store Driver
 embedding_driver = OpenAiEmbeddingDriver()
-vector_store_driver = PineconeVectorStoreDriver(
-            api_key=os.environ["PINECONE_API_KEY"],
-            index_name=os.environ["PINECONE_INDEX_NAME"],
-            environment=os.environ["PINECONE_ENVIRONMENT"],
-            embedding_driver=embedding_driver
-        )
+vector_store_driver = LocalVectorStoreDriver(embedding_driver=embedding_driver)
 
 st1 = TextArtifact("Griptape builds AI-powered applications that connect securely to your enterprise data and APIs.")
 st2 = TextArtifact("Griptape Agents provide incredible power and flexibility when working with large language models.")
@@ -339,7 +333,7 @@ vector_query_engine.upsert_text_artifact(artifact=st2)
 agent = Agent()
 agent.add_task(
     TextQueryTask(
-        "{{ args[0] }}",
+        "Respond to the users following request: {{ args[0] }}",
         query_engine=vector_query_engine
     )
 )
@@ -349,19 +343,20 @@ agent.run("Give me information about Griptape")
 ```
 
 ```
-[10/20/23 11:10:41] INFO     TextQueryTask 852e30c61c174ab9bd62fd23d530b392     
-                             Input: Give me information about Griptape          
-[10/20/23 11:10:43] INFO     TextQueryTask 852e30c61c174ab9bd62fd23d530b392     
+[10/20/23 15:32:39] INFO     TextQueryTask a1d2eceab9204679b3f701f6ea821606     
+                             Input: Respond to the users following request: Give
+                             me information about Griptape                      
+[10/20/23 15:32:41] INFO     TextQueryTask a1d2eceab9204679b3f701f6ea821606     
                              Output: Griptape builds AI-powered applications    
                              that connect securely to your enterprise data and  
                              APIs. Griptape Agents provide incredible power and 
                              flexibility when working with large language       
-                             models.    
+                             models.  
 ```
 
-# Tool Task
+## Tool Task
 
-To use [Griptape Tools](../../griptape-framework/tools/index.md), you can use a Tool Task. This task allows us to pass in one tool to give the LLM a specific objective without any CoT reasoning.
+Another way to use [Griptape Tools](../../griptape-framework/tools/index.md), is with a [Tool Task](../../griptape-framework/structures/tasks.md). This Task takes in a single Tool which the LLM will use without Chain of Thought (CoT) reasoning. Because this Task does not use CoT, it is better suited for less capable models.
 
 ```python
 from griptape.structures import Agent

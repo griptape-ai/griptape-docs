@@ -54,21 +54,21 @@ agent.run(
 [10/04/23 14:02:24] INFO     Subtask 88b3934bae504a1792cce04a25cdceef           
                              Observation: Output of                             
                              "GoogleCalendarClient.get_upcoming_events" was     
-                             stored in memory with memory_name "TextToolMemory" 
+                             stored in memory with memory_name "ToolMemory" 
                              and artifact_namespace                             
                              "c23b03911b6e46eeb47627fe8ed89466"                 
 [10/04/23 14:02:40] INFO     Subtask 46ed5976c6374ed6a8aa474470432971           
                              Thought: The output of the                         
                              GoogleCalendarClient.get_upcoming_events activity  
                              has been stored in memory. I can use the           
-                             TextToolMemory.extract_json_objects activity to    
+                             ToolMemory.extract_json_objects activity to    
                              extract this information from memory and provide   
                              the details of the next upcoming event.            
                                                                                 
                              Action: {"type": "memory", "name":                 
-                             "TextToolMemory", "activity":                      
+                             "ToolMemory", "activity":                      
                              "extract_json_objects", "input": {"values":        
-                             {"memory_name": "TextToolMemory",                  
+                             {"memory_name": "ToolMemory",                  
                              "artifact_namespace":                              
                              "c23b03911b6e46eeb47627fe8ed89466", "json_schema": 
                              {"type": "object", "properties": {"start_datetime":

@@ -47,15 +47,15 @@ agent.run("SELECT * FROM people;")
 [09/11/23 17:03:03] INFO     Subtask 46c2f8926ce9469e9ca6b1b3364e3e41           
                              Observation: Output of "SqlClient.execute_query"   
                              was stored in memory with memory_name              
-                             "TextToolMemory" and artifact_namespace            
+                             "ToolMemory" and artifact_namespace            
                              "217715ba3e444e4985bee223df5716a8"                 
 [09/11/23 17:03:11] INFO     Subtask e51f05449647482caa3051378ab5cb8c           
                              Thought: The output of the SQL query has been      
                              stored in memory. I can retrieve this data using   
-                             the TextToolMemory's 'summarize' activity.         
+                             the ToolMemory's 'summarize' activity.         
                              Action: {"type": "memory", "name":                 
-                             "TextToolMemory", "activity": "summarize", "input":
-                             {"values": {"memory_name": "TextToolMemory",       
+                             "ToolMemory", "activity": "summarize", "input":
+                             {"values": {"memory_name": "ToolMemory",       
                              "artifact_namespace":                              
                              "217715ba3e444e4985bee223df5716a8"}}}              
 [09/11/23 17:03:12] INFO     Subtask e51f05449647482caa3051378ab5cb8c           

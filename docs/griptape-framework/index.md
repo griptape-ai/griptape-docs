@@ -146,20 +146,20 @@ pipeline.run(
                              Input: Load https://www.griptape.ai, summarize it, and store it in griptape.txt
 [09/08/23 10:02:44] INFO     Subtask 42fd56ba100e45688401c5ce32b79a33
                              Thought: To complete this task, I need to first load the webpage using the WebScraper tool's get_content
-                             activity. Then, I will summarize the content using the TextToolMemory tool's summarize activity. Finally, I will
+                             activity. Then, I will summarize the content using the ToolMemory tool's summarize activity. Finally, I will
                              store the summarized content in a file named griptape.txt using the FileManager tool's save_file_to_disk
                              activity.
 
                              Action: {"type": "tool", "name": "WebScraper", "activity": "get_content", "input": {"values": {"url":
                              "https://www.griptape.ai"}}}
 [09/08/23 10:02:45] INFO     Subtask 42fd56ba100e45688401c5ce32b79a33
-                             Observation: Output of "WebScraper.get_content" was stored in memory with memory_name "TextToolMemory" and
+                             Observation: Output of "WebScraper.get_content" was stored in memory with memory_name "ToolMemory" and
                              artifact_namespace "39ca67bbe26b4e1584193b87ed82170d"
 [09/08/23 10:02:53] INFO     Subtask 8023e3d257274df29065b22e736faca8
-                             Thought: Now that the webpage content is stored in memory, I can use the TextToolMemory tool's summarize activity
+                             Thought: Now that the webpage content is stored in memory, I can use the ToolMemory tool's summarize activity
                              to summarize the content.
-                             Action: {"type": "memory", "name": "TextToolMemory", "activity": "summarize", "input": {"values": {"memory_name":
-                             "TextToolMemory", "artifact_namespace": "39ca67bbe26b4e1584193b87ed82170d"}}}
+                             Action: {"type": "memory", "name": "ToolMemory", "activity": "summarize", "input": {"values": {"memory_name":
+                             "ToolMemory", "artifact_namespace": "39ca67bbe26b4e1584193b87ed82170d"}}}
 [09/08/23 10:02:57] INFO     Subtask 8023e3d257274df29065b22e736faca8
                              Observation: Griptape is an open source framework that allows developers to build and deploy AI applications
                              using large language models (LLMs). It provides the ability to create conversational and event-driven apps that
@@ -170,7 +170,7 @@ pipeline.run(
                              Thought: Now that I have the summarized content, I can store it in a file named griptape.txt using the
                              FileManager tool's save_file_to_disk activity.
                              Action: {"type": "tool", "name": "FileManager", "activity": "save_file_to_disk", "input": {"values":
-                             {"memory_name": "TextToolMemory", "artifact_namespace": "39ca67bbe26b4e1584193b87ed82170d", "path":
+                             {"memory_name": "ToolMemory", "artifact_namespace": "39ca67bbe26b4e1584193b87ed82170d", "path":
                              "griptape.txt"}}}
                     INFO     Subtask 7baae700239943c18b5b6b21873f0e13
                              Observation: saved successfully

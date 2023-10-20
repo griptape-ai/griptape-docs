@@ -302,3 +302,59 @@ agent.run()
                              imitates human intelligence and senses, bringing a 
                              revolution in technology. 
 ```
+
+# Text Query Task
+
+To query a text, you can use the TextQueryTask. This task allows us to pass in a Query Engine and a set of arguments to the engine.
+
+```python
+import os
+from griptape.structures import Agent
+from griptape.tasks import TextQueryTask
+from griptape.drivers import PineconeVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.engines import VectorQueryEngine
+from griptape.artifacts import TextArtifact
+
+# Initiate Embedding Driver and Vector Store Driver
+embedding_driver = OpenAiEmbeddingDriver()
+vector_store_driver = PineconeVectorStoreDriver(
+            api_key=os.environ["PINECONE_API_KEY"],
+            index_name=os.environ["PINECONE_INDEX_NAME"],
+            environment=os.environ["PINECONE_ENVIRONMENT"],
+            embedding_driver=embedding_driver
+        )
+
+st1 = TextArtifact("Griptape builds AI-powered applications that connect securely to your enterprise data and APIs.")
+st2 = TextArtifact("Griptape Agents provide incredible power and flexibility when working with large language models.")
+
+# Create a VectorQueryEngine using the LocalVectorStoreDriver
+vector_query_engine = VectorQueryEngine(
+    vector_store_driver=vector_store_driver
+)
+
+vector_query_engine.upsert_text_artifact(artifact=st1)
+vector_query_engine.upsert_text_artifact(artifact=st2)
+
+# Instantiate the agent and add TextQueryTask with the VectorQueryEngine
+agent = Agent()
+agent.add_task(
+    TextQueryTask(
+        "{{ args[0] }}",
+        query_engine=vector_query_engine
+    )
+)
+
+# Run the agent with a query string
+agent.run("Give me information about Griptape")
+```
+
+```
+[10/20/23 11:10:41] INFO     TextQueryTask 852e30c61c174ab9bd62fd23d530b392     
+                             Input: Give me information about Griptape          
+[10/20/23 11:10:43] INFO     TextQueryTask 852e30c61c174ab9bd62fd23d530b392     
+                             Output: Griptape builds AI-powered applications    
+                             that connect securely to your enterprise data and  
+                             APIs. Griptape Agents provide incredible power and 
+                             flexibility when working with large language       
+                             models.    
+```

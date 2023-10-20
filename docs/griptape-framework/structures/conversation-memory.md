@@ -108,25 +108,33 @@ Griptape provides several types of Conversation Memory to fit various use-cases.
 from griptape.structures import Agent
 from griptape.memory.structure import ConversationMemory
 
-Agent(
+agent = Agent(
     memory=ConversationMemory()
 )
+
+agent.run("Hello!")
+
+print(agent.memory)
 ```
 
-### Buffer Conversation Memory
-
-[BufferConversationMemory](../../reference/griptape/memory/structure/buffer_conversation_memory.md) will keep track of the full task input and output for a sliding window number of runs.
-
-You can control the size of this sliding window with the 
-[buffer_size](../../reference/griptape/memory/structure/buffer_conversation_memory.md#griptape.memory.structure.buffer_conversation_memory.BufferConversationMemory.buffer_size) parameter.
+You can set the [max_runs](../../reference/memory/structure/conversation_memory.md#griptape.memory.structure.conversation_memory.ConversationMemory.max_runs) parameter to limit how many runs are kept in memory.
 
 ```python
 from griptape.structures import Agent
-from griptape.memory.structure import BufferConversationMemory
+from griptape.memory.structure import ConversationMemory
 
-Agent(
-    memory=BufferConversationMemory(buffer_size=3)
+agent = Agent(
+    memory=ConversationMemory(max_runs=2)
 )
+
+agent.run("Run 1")
+agent.run("Run 2")
+agent.run("Run 3")
+agent.run("Run 4")
+agent.run("Run 5")
+
+print(agent.memory.runs[0].input == 'run4')
+print(agent.memory.runs[1].input == 'run5')
 ```
 
 ### Summary Conversation Memory
@@ -140,9 +148,13 @@ You can choose to offset which runs are summarized with the
 from griptape.structures import Agent
 from griptape.memory.structure import SummaryConversationMemory
 
-Agent(
+agent = Agent(
     memory=SummaryConversationMemory(offset=2)
 )
+
+agent.run("Hello!")
+
+print(agent.memory.summary)
 ```
 
 ## Conversation Memory Drivers

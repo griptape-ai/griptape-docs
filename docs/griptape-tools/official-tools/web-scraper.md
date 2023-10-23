@@ -30,17 +30,17 @@ agent.run(
                              {"url": "https://www.griptape.ai/"}}}              
 [09/11/23 15:27:48] INFO     Subtask 4b34be74b06a47ba9cb3a4b62aa35907           
                              Observation: Output of "WebScraper.get_content" was
-                             stored in memory with memory_name "TextToolMemory" 
+                             stored in memory with memory_name "ToolMemory" 
                              and artifact_namespace                             
                              "02da5930b8d74f7ca30aecc3760a3318"                 
 [09/11/23 15:27:59] INFO     Subtask 5b255e3e98aa401295f77532bc779390           
                              Thought: The content of the website has been stored
-                             in memory. I can use the TextToolMemory tool with  
+                             in memory. I can use the ToolMemory tool with  
                              the summarize activity to get a summary of the     
                              content.                                           
                              Action: {"type": "memory", "name":                 
-                             "TextToolMemory", "activity": "summarize", "input":
-                             {"values": {"memory_name": "TextToolMemory",       
+                             "ToolMemory", "activity": "summarize", "input":
+                             {"values": {"memory_name": "ToolMemory",       
                              "artifact_namespace":                              
                              "02da5930b8d74f7ca30aecc3760a3318"}}}              
 [09/11/23 15:28:03] INFO     Subtask 5b255e3e98aa401295f77532bc779390           

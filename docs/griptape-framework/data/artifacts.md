@@ -9,7 +9,7 @@ Used for passing text data of arbitrary size around the framework. It can be use
 It can also be used to generate a text embedding with [generate_embedding()](../../reference/griptape/artifacts/text_artifact.md#griptape.artifacts.text_artifact.TextArtifact.generate_embedding) 
 and access it with [embedding](../../reference/griptape/artifacts/text_artifact.md#griptape.artifacts.text_artifact.TextArtifact.embedding).
 
-[TextToolMemory](../../reference/griptape/memory/tool/text_tool_memory.md) automatically stores [TextArtifact](../../reference/griptape/artifacts/text_artifact.md)s returned by tool activities and returns artifact IDs back to the LLM.
+[ToolMemory](../../reference/griptape/memory/tool/tool_memory.md) automatically stores [TextArtifact](../../reference/griptape/artifacts/text_artifact.md)s returned by tool activities and returns artifact IDs back to the LLM.
 
 ## CsvRowArtifact
 
@@ -31,4 +31,4 @@ Treat it as a way to return unstructured data, such as images, videos, audio, an
 Each blob has a [name](../../reference/griptape/artifacts/base_artifact.md#griptape.artifacts.base_artifact.BaseArtifact.name) and 
 [dir](../../reference/griptape/artifacts/blob_artifact.md#griptape.artifacts.blob_artifact.BlobArtifact.dir) to uniquely identify stored objects.
 
-[BlobToolMemory](../../reference/griptape/memory/tool/blob_tool_memory.md) automatically stores [BlobArtifact](../../reference/griptape/artifacts/blob_artifact.md)s returned by tool activities that can be reused by other tools.
+[ToolMemory](../../reference/griptape/memory/tool/tool_memory.md) automatically stores [BlobArtifact](../../reference/griptape/artifacts/blob_artifact.md)s returned by tool activities that can be reused by other tools.

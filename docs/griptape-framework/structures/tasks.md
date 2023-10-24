@@ -276,7 +276,7 @@ agent.run(json_data)
 
 ## Text Summary Task
 
-To summarize a text, you can use the [TextSummaryTask](../../griptape-framework/structures/tasks.md). This task allows us to pass in a [Summarization Engine](../../griptape-framework/data/summarization-engines.md) and a set of arguments to the engine.
+To summarize a text, you can use the [TextSummaryTask](../../griptape-framework/structures/tasks.md). This task allows us to pass in a [Summarization Engine](../../griptape-framework/data/summary-engines.md) and a set of arguments to the engine.
 
 ```python
 from griptape.structures import Agent

@@ -88,6 +88,7 @@ nav:
           - Embedding Drivers: "griptape-framework/data/embedding-drivers.md"
           - Chunkers: "griptape-framework/data/chunkers.md"
           - Loaders: "griptape-framework/data/loaders.md"
+          - Extraction Engines: "griptape-framework/data/extraction-engines.md"
           - Query Engines: "griptape-framework/data/query-engines.md"
           - Summary Engines: "griptape-framework/data/summary-engines.md"
           - Vector Store Drivers: "griptape-framework/data/vector-store-drivers.md"

@@ -23,61 +23,65 @@ gmail_tool = GoogleGmailClient(
     },
      owner_email=os.environ["GOOGLE_OWNER_EMAIL"]
 )
+file_manager = FileManager()
 
 # Set up an agent using the GoogleGmailClient tool
 agent = Agent(
-    tools=[FileManager(), gmail_tool]
+    tools=[gmail_tool, file_manager]
 )
 
-# Task: Create a draft email in GMail
+# Task: Create a draft email in Gmail
 agent.run(
-    "I want sample1.txt and sample2.txt to be sent as attachments to my email to example@email.com "
-    "with attachment names test1.txt and test2.txt"
+    "Create a draft email in Gmail to example@email.com with the subject 'Test Draft', the body "
+    "'This is a test draft email.' and also attach sample1.txt and sample2.txt to the email with "
+    "attachment names griptape.txt and griptape2.txt."
 )
 ```
 ```
-[10/23/23 17:46:30] INFO     ToolkitTask 8cc11adc42db439b9d04751f1384604f       
-                             Input: I want sample1.txt and sample2.txt to be    
-                             sent as attachments to my email to                 
-                             example@email.com with attachment names           
-                             test1.txt and test2.txt                     
-[10/23/23 17:46:39] INFO     Subtask cf86985113b241a4960e9b3a4bbd40d3           
-                             Thought: The user wants to send two files as       
-                             attachments in an email. The first step is to load 
-                             the files from the disk using the FileManager tool.
+[10/24/23 15:50:24] INFO     ToolkitTask d2a582c6f66648869a18102b81bd92c6       
+                             Input: Create a draft email in Gmail to            
+                             example@email.com with the subject 'Test Draft',   
+                             the body 'This is a test draft email.' and also    
+                             attach sample1.txt and sample2.txt to the email    
+                             with attachment names griptape.txt and             
+                             griptape2.txt.                                     
+[10/24/23 15:50:32] INFO     Subtask 4edc1f3f4e7c46e886dfe2c98b18195f           
+                             Thought: The user wants to create a draft email in 
+                             Gmail with specific details and attachments. The   
+                             attachments need to be loaded from disk first. I   
+                             will start by loading the files from disk using the
+                             FileManager tool.                                  
                                                                                 
                              Action: {"type": "tool", "name": "FileManager",    
                              "activity": "load_files_from_disk", "input":       
                              {"values": {"paths": ["sample1.txt",               
                              "sample2.txt"]}}}                                  
-                    INFO     Subtask cf86985113b241a4960e9b3a4bbd40d3           
+[10/24/23 15:50:33] INFO     Subtask 4edc1f3f4e7c46e886dfe2c98b18195f           
                              Observation: Output of                             
                              "FileManager.load_files_from_disk" was stored in   
                              memory with memory_name "ToolMemory" and           
                              artifact_namespace                                 
-                             "21c2a95aa6a14472bb7dc891092d93d2"                 
-[10/23/23 17:47:01] INFO     Subtask 212be9e2b3cf4970a3c3ce82c04e810e           
-                             Thought: The files have been successfully loaded   
-                             from the disk and stored in memory. Now, I need to 
-                             send these files as attachments in an email using  
-                             the GoogleGmailClient tool. The attachment names   
-                             should be changed to 'test1.txt' and            
-                             'test2.txt'. The email should be sent to       
-                             'example@email.com'.                              
+                             "f01e8347867f427db779ffe1b5e42ce8"                 
+[10/24/23 15:50:47] INFO     Subtask 11567754a2c44ec0a37c01701ed0f811           
+                             Thought: The files have been loaded from disk and  
+                             the output is stored in memory. Now, I will create 
+                             the draft email in Gmail using the                 
+                             GoogleGmailClient tool. I will use the memory_name 
+                             and artifact_namespace from the FileManager tool's 
+                             output to attach the files to the email.           
                              Action: {"type": "tool", "name":                   
                              "GoogleGmailClient", "activity":                   
                              "create_draft_email", "input": {"values": {"to":   
-                             "example@email.com", "subject": "Files Attached", 
-                             "body": "Here are the files you requested.",       
-                             "attachment_names": ["test1.txt",               
-                             "test2.txt"], "memory_name": "ToolMemory",     
+                             "example@email.com", "subject": "Test Draft",      
+                             "body": "This is a test draft email.",             
+                             "attachment_names": ["griptape.txt",               
+                             "griptape2.txt"], "memory_name": "ToolMemory",     
                              "artifact_namespace":                              
-                             "21c2a95aa6a14472bb7dc891092d93d2"}}}              
-[10/23/23 17:47:02] INFO     Subtask 212be9e2b3cf4970a3c3ce82c04e810e           
+                             "f01e8347867f427db779ffe1b5e42ce8"}}}              
+[10/24/23 15:50:48] INFO     Subtask 11567754a2c44ec0a37c01701ed0f811           
                              Observation: An email draft was successfully       
-                             created (ID: r-1255915969065098226)                
-[10/23/23 17:47:04] INFO     ToolkitTask 8cc11adc42db439b9d04751f1384604f       
-                             Output: An email draft with the requested          
-                             attachments has been successfully created. The     
-                             draft ID is r-1255915969065098226.   
+                             created (ID: r1675319497293160921)                 
+[10/24/23 15:50:53] INFO     ToolkitTask d2a582c6f66648869a18102b81bd92c6       
+                             Output: The draft email has been successfully      
+                             created with the ID r1675319497293160921.  
 ```

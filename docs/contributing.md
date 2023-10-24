@@ -17,7 +17,7 @@ From inside the directory run:
 
 To run `griptape-docs` locally run: 
 
-```peotry run mkdocs serve```
+```poetry run mkdocs serve```
 
 You should see something similar to the following: 
 

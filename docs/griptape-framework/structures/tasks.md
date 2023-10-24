@@ -63,7 +63,7 @@ agent.run("How do I bake a cake?")
 
 ## Prompt Task
 
-For general purpose prompting, you can use the [PromptTask](../../griptape-framework/structures/tasks.md):
+For general purpose prompting, you can use the [PromptTask](.../../reference/griptape/tasks/prompt_task.md):
 
 ```python
 from griptape.tasks import PromptTask
@@ -91,7 +91,7 @@ agent.run("Write me a haiku")
 
 ## Toolkit Task
 
-To use [Griptape Tools](../../griptape-framework/tools/index.md), you can use a [Toolkit Task](../../griptape-framework/structures/tasks.md).
+To use [Griptape Tools](../../griptape-framework/tools/index.md), you can use a [Toolkit Task](../../reference/griptape/tasks/toolkit_task.md).
 This Task takes in one or more tools which the LLM will decide to use using Chain of Thought (CoT) reasoning. Because this Task uses CoT, it is recommended to only use with very capable models.
 
 ```python
@@ -148,6 +148,42 @@ agent.run()
                              griptape.txt.
 ```
 
+## Tool Task
+
+Another way to use [Griptape Tools](../../griptape-framework/tools/index.md), is with a [Tool Task](../../griptape-framework/structures/tasks.md). This Task takes in a single Tool which the LLM will use without Chain of Thought (CoT) reasoning. Because this Task does not use CoT, it is better suited for less capable models.
+
+```python
+from griptape.structures import Agent
+from griptape.tasks import ToolTask
+from griptape.tools import Calculator
+
+# Initialize the agent and add a task
+agent = Agent()
+agent.add_task(ToolTask(tool=Calculator()))
+
+# Run the agent with a prompt
+agent.run("Give me the answer for 5*4.")
+```
+
+```
+[10/20/23 14:20:25] INFO     ToolTask df1604b417a84ee781dbd1f2b904ed30          
+                             Input: Give me the answer for 5*4.                 
+[10/20/23 14:20:29] INFO     Subtask a9a9ad7be2bf465fa82bd350116fabe4           
+                             Action: {                                          
+                               "type": "tool",                                  
+                               "name": "Calculator",                            
+                               "activity": "calculate",                         
+                               "input": {                                       
+                                 "values": {                                    
+                                   "expression": "5*4"                          
+                                 }                                              
+                               }                                                
+                             }                                                  
+[10/20/23 14:20:30] INFO     Subtask a9a9ad7be2bf465fa82bd350116fabe4           
+                             Observation: 20                                    
+                    INFO     ToolTask df1604b417a84ee781dbd1f2b904ed30          
+                             Output: 20       
+```
 
 ## Extraction Task
 
@@ -333,7 +369,7 @@ vector_query_engine.upsert_text_artifact(artifact=st2)
 agent = Agent()
 agent.add_task(
     TextQueryTask(
-        "Respond to the users following request: {{ args[0] }}",
+        "Respond to the users following query: {{ args[0] }}",
         query_engine=vector_query_engine
     )
 )
@@ -344,7 +380,7 @@ agent.run("Give me information about Griptape")
 
 ```
 [10/20/23 15:32:39] INFO     TextQueryTask a1d2eceab9204679b3f701f6ea821606     
-                             Input: Respond to the users following request: Give
+                             Input: Respond to the users following query: Give
                              me information about Griptape                      
 [10/20/23 15:32:41] INFO     TextQueryTask a1d2eceab9204679b3f701f6ea821606     
                              Output: Griptape builds AI-powered applications    
@@ -354,41 +390,5 @@ agent.run("Give me information about Griptape")
                              models.  
 ```
 
-## Tool Task
-
-Another way to use [Griptape Tools](../../griptape-framework/tools/index.md), is with a [Tool Task](../../griptape-framework/structures/tasks.md). This Task takes in a single Tool which the LLM will use without Chain of Thought (CoT) reasoning. Because this Task does not use CoT, it is better suited for less capable models.
-
-```python
-from griptape.structures import Agent
-from griptape.tasks import ToolTask
-from griptape.tools import Calculator
-
-# Initialize the agent and add a task
-agent = Agent()
-agent.add_task(ToolTask(tool=Calculator()))
-
-# Run the agent with a prompt
-agent.run("Give me the answer for 5*4.")
-```
-
-```
-[10/20/23 14:20:25] INFO     ToolTask df1604b417a84ee781dbd1f2b904ed30          
-                             Input: Give me the answer for 5*4.                 
-[10/20/23 14:20:29] INFO     Subtask a9a9ad7be2bf465fa82bd350116fabe4           
-                             Action: {                                          
-                               "type": "tool",                                  
-                               "name": "Calculator",                            
-                               "activity": "calculate",                         
-                               "input": {                                       
-                                 "values": {                                    
-                                   "expression": "5*4"                          
-                                 }                                              
-                               }                                                
-                             }                                                  
-[10/20/23 14:20:30] INFO     Subtask a9a9ad7be2bf465fa82bd350116fabe4           
-                             Observation: 20                                    
-                    INFO     ToolTask df1604b417a84ee781dbd1f2b904ed30          
-                             Output: 20       
-```
 
 

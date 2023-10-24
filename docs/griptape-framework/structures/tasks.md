@@ -63,7 +63,7 @@ agent.run("How do I bake a cake?")
 
 ## Prompt Task
 
-For general purpose prompting, you can use the [PromptTask](.../../reference/griptape/tasks/prompt_task.md):
+For general purpose prompting, you can use the [PromptTask](../../reference/griptape/tasks/prompt_task.md):
 
 ```python
 from griptape.tasks import PromptTask

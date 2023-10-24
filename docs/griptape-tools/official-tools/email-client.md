@@ -20,35 +20,52 @@ agent = Agent(
 )
 
 agent.run(
-    "Send an email to example@email.com with the subject 'Test Email', the body "
-    "'Dear Tony, lets have the meeting on Monday.' and also add an attachment "
-    "from my local machine with path '/test/foo/bar.txt'."
+     "Scrape www.griptape.ai and and send it as an attachment in an email to "
+    "example@email.com with attachment name griptape.txt"
 )
 ```
 ```
-[10/10/23 14:06:30] INFO     ToolkitTask 6984198077764105a3455debd9bd9aeb       
-                             Input: Send an email to example@email.com with the
-                             subject 'Test Email', the body 'Dear Tony, lets  
-                             have the meeting on Monday.' and also add an       
-                             attachment from my local machine with path         
-                             '/test/foo/bar.txt'.       
-[10/10/23 14:06:40] INFO     Subtask 0297c2637761408ba9bbb2581ca07908           
-                             Thought: I need to use the EmailClient tool with   
-                             the send activity to send an email. The recipient, 
-                             subject, body, and attachment path are all provided
-                             in the request.                                    
+[10/23/23 18:23:33] INFO     ToolkitTask d04fc3de72f84c5ba66bd54581b75e84       
+                             Input: Scrape www.griptape.ai and and send it as an
+                             attachment in an email to example@email.com with    
+                             attachment name griptape.txt                       
+[10/23/23 18:23:48] INFO     Subtask 4b62c4fbf9be4af1b3f818061a4ff9e6           
+                             Thought: To complete this task, I need to first    
+                             scrape the content of the website www.griptape.ai  
+                             using the WebScraper tool. Then, I will store the  
+                             scraped content in the ToolMemory. Finally, I will 
+                             send an email to example@email.com with the scraped 
+                             content as an attachment.                          
                                                                                 
+                             Action: {"type": "tool", "name": "WebScraper",     
+                             "activity": "get_content", "input": {"values":     
+                             {"url": "www.griptape.ai"}}}                       
+[10/23/23 18:23:49] INFO     Subtask 4b62c4fbf9be4af1b3f818061a4ff9e6           
+                             Observation: Output of "WebScraper.get_content" was
+                             stored in memory with memory_name "ToolMemory" and 
+                             artifact_namespace                                 
+                             "fd42383f3bd24c1bb2da216d91891008"                 
+[10/23/23 18:24:09] INFO     Subtask d23e20dbb89347e5ade501b75d7b410c           
+                             Thought: Now that the website content has been     
+                             scraped and stored in the ToolMemory, I need to    
+                             send an email to example@email.com with the scraped 
+                             content as an attachment. The attachment name      
+                             should be "griptape.txt". I will use the           
+                             EmailClient tool for this.                         
                              Action: {"type": "tool", "name": "EmailClient",    
                              "activity": "send", "input": {"values": {"to":     
-                             "example@email.com", "subject": "Test Email",     
-                             "body": "Dear Tony, lets have the meeting on     
-                             Monday.", "attachments":                           
-                             ["/test/foo/bar.txt"]}}}   
-[10/10/23 14:06:42] INFO     Subtask 0297c2637761408ba9bbb2581ca07908           
+                             "example@email.com", "subject": "Scraped content of 
+                             www.griptape.ai", "body": "Attached is the scraped 
+                             content of www.griptape.ai", "attachment_names":   
+                             ["griptape.txt"], "memory_name": "ToolMemory",     
+                             "artifact_namespace":                              
+                             "fd42383f3bd24c1bb2da216d91891008"}}}              
+[10/23/23 18:24:10] INFO     Subtask d23e20dbb89347e5ade501b75d7b410c           
                              Observation: email was successfully sent           
-[10/10/23 14:06:44] INFO     ToolkitTask 6984198077764105a3455debd9bd9aeb       
-                             Output: The email was successfully sent to         
-                             example@email.com.  
+[10/23/23 18:24:16] INFO     ToolkitTask d04fc3de72f84c5ba66bd54581b75e84       
+                             Output: The scraped content of www.griptape.ai was 
+                             successfully sent as an attachment named           
+                             "griptape.txt" to example@email.com. 
 ```
 
 For debugging purposes, you can run a local SMTP server that the LLM can send emails to:

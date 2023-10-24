@@ -1,9 +1,10 @@
 # Overview 
-Extraction Engines are used to extract data from text. 
+Extraction Engines are used to extract data from text formats like CSV, JSON, etc. They are mainly used for [Extraction Tasks](../../griptape-framework/structures/tasks.md).
+There are two types of extraction engines in Griptape: CSV Extraction Engine and JSON Extraction Engine.
 
 ## CSV Extraction Engine
 
-Used to extract data from text using a CSV file. You can set a custom [prompt driver](../../griptape-framework/structures/prompt-drivers.md) or [chunker](../../griptape-framework/data/chunkers.md). 
+Used to extract data from a CSV file. You can set a custom [Prompt driver](../../griptape-framework/structures/prompt-drivers.md) or [Chunker](../../griptape-framework/data/chunkers.md). 
 You can use it along with [Extraction Tasks](../../griptape-framework/structures/tasks.md)
 
 ```python
@@ -40,7 +41,7 @@ elif isinstance(result, ErrorArtifact):
 
 ## JSON Extraction Engine
 
-Used to extract data from text using a JSON file. You can set a custom [prompt driver](../../griptape-framework/structures/prompt-drivers.md) or [chunker](../../griptape-framework/data/chunkers.md). 
+Used to extract data from a JSON file. You can set a custom [Prompt driver](../../griptape-framework/structures/prompt-drivers.md) or [Chunker](../../griptape-framework/data/chunkers.md). 
 You can use it along with [Extraction Tasks](../../griptape-framework/structures/tasks.md)
 
 ```python

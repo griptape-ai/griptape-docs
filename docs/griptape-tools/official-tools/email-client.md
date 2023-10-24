@@ -5,7 +5,7 @@ The [EmailClient](../../reference/griptape/tools/email_client/tool.md) enables L
 ```python
 import os
 from griptape.structures import Agent
-from griptape.tools import EmailClient
+from griptape.tools import EmailClient, WebScraper
 
 email_tool = EmailClient(
     smtp_host=os.environ.get("SMTP_HOST"),
@@ -16,7 +16,7 @@ email_tool = EmailClient(
 )
 
 agent = Agent(
-    tools=[email_tool]
+    tools=[email_tool, WebScraper()],
 )
 
 agent.run(

@@ -3,7 +3,7 @@
 The GoogleGmailClient tool provides a way to interact with the Gmail API. It can be used to create draft emails and optionally attach files to them.
 
 ```python
-from griptape.tools import GoogleGmailClient
+from griptape.tools import GoogleGmailClient, FileManager
 from griptape.structures import Agent
 import os
 
@@ -26,42 +26,58 @@ gmail_tool = GoogleGmailClient(
 
 # Set up an agent using the GoogleGmailClient tool
 agent = Agent(
-    tools=[gmail_tool]
+    tools=[FileManager(), gmail_tool]
 )
 
 # Task: Create a draft email in GMail
 agent.run(
-    "Create a draft email in Gmail to example@email.com with the subject 'Test Draft', the body "
-    "'This is a test draft email.' and also add an attachment from my local machine with path "
-    "'/test/foo/bar.txt'.",
+    "I want sample1.txt and sample2.txt to be sent as attachments to my email to example@email.com "
+    "with attachment names test1.txt and test2.txt"
 )
 ```
 ```
-[10/10/23 11:59:01] INFO     ToolkitTask 22754ca0dc3c4e7eb40510114f332abd       
-                             Input: Create a draft email in Gmail to            
-                             example@email.com with the subject 'Test Draft',   
-                             the body 'This is a test draft email.' and also add
-                             an attachment from my local machine with path      
-                             '/test/foo/bar.txt'.       
-[10/10/23 11:59:13] INFO     Subtask 5b43de545f4f4308bdcc85a1c0c14b08           
-                             Thought: The user wants to create a draft email in 
-                             Gmail. I can use the GoogleGmailClient tool with   
-                             the create_draft_email activity for this. The user 
-                             has provided all the necessary information: the    
-                             recipient's email address, the subject, the body of
-                             the email, and the path to the attachment.         
+[10/23/23 17:46:30] INFO     ToolkitTask 8cc11adc42db439b9d04751f1384604f       
+                             Input: I want sample1.txt and sample2.txt to be    
+                             sent as attachments to my email to                 
+                             example@email.com with attachment names           
+                             test1.txt and test2.txt                     
+[10/23/23 17:46:39] INFO     Subtask cf86985113b241a4960e9b3a4bbd40d3           
+                             Thought: The user wants to send two files as       
+                             attachments in an email. The first step is to load 
+                             the files from the disk using the FileManager tool.
                                                                                 
+                             Action: {"type": "tool", "name": "FileManager",    
+                             "activity": "load_files_from_disk", "input":       
+                             {"values": {"paths": ["sample1.txt",               
+                             "sample2.txt"]}}}                                  
+                    INFO     Subtask cf86985113b241a4960e9b3a4bbd40d3           
+                             Observation: Output of                             
+                             "FileManager.load_files_from_disk" was stored in   
+                             memory with memory_name "ToolMemory" and           
+                             artifact_namespace                                 
+                             "21c2a95aa6a14472bb7dc891092d93d2"                 
+[10/23/23 17:47:01] INFO     Subtask 212be9e2b3cf4970a3c3ce82c04e810e           
+                             Thought: The files have been successfully loaded   
+                             from the disk and stored in memory. Now, I need to 
+                             send these files as attachments in an email using  
+                             the GoogleGmailClient tool. The attachment names   
+                             should be changed to 'test1.txt' and            
+                             'test2.txt'. The email should be sent to       
+                             'example@email.com'.                              
                              Action: {"type": "tool", "name":                   
                              "GoogleGmailClient", "activity":                   
                              "create_draft_email", "input": {"values": {"to":   
-                             "example@email.com", "subject": "Test Draft",      
-                             "body": "This is a test draft email.",             
-                             "attachments":                                     
-                             ["/test/foo/bar.txt"]}}}   
-[10/10/23 11:59:14] INFO     Subtask 5b43de545f4f4308bdcc85a1c0c14b08           
+                             "example@email.com", "subject": "Files Attached", 
+                             "body": "Here are the files you requested.",       
+                             "attachment_names": ["test1.txt",               
+                             "test2.txt"], "memory_name": "ToolMemory",     
+                             "artifact_namespace":                              
+                             "21c2a95aa6a14472bb7dc891092d93d2"}}}              
+[10/23/23 17:47:02] INFO     Subtask 212be9e2b3cf4970a3c3ce82c04e810e           
                              Observation: An email draft was successfully       
-                             created (ID: r-865141263174207477)                 
-[10/10/23 11:59:18] INFO     ToolkitTask 22754ca0dc3c4e7eb40510114f332abd       
-                             Output: The draft email has been successfully      
-                             created in Gmail.    
+                             created (ID: r-1255915969065098226)                
+[10/23/23 17:47:04] INFO     ToolkitTask 8cc11adc42db439b9d04751f1384604f       
+                             Output: An email draft with the requested          
+                             attachments has been successfully created. The     
+                             draft ID is r-1255915969065098226.   
 ```

@@ -268,7 +268,8 @@ from griptape.rules import Rule, Ruleset
 from griptape.utils import PromptStack
 
 
-# Since we're using a less powerful model, we need to over
+# Override the default Prompt Stack to string converter
+# to format the prompt in a way that is easier for this model to understand.
 def prompt_stack_to_string_converter(prompt_stack: PromptStack) -> str:
     prompt_lines = []
 

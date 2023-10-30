@@ -157,23 +157,19 @@ To count tokens you can use Event Listeners and the [TokenCounter](../../referen
 
 ```python
 from griptape import utils
-from griptape.events import (
-    StartPromptEvent, FinishPromptEvent,
-)
+from griptape.events import StartPromptEvent, FinishPromptEvent, EventListener
 from griptape.structures import Agent
 
 
 token_counter = utils.TokenCounter()
 
 agent = Agent(
-    event_listeners={
-        StartPromptEvent: [
-            lambda e: token_counter.add_tokens(e.token_count)
-        ],
-        FinishPromptEvent: [
-            lambda e: token_counter.add_tokens(e.token_count)
-        ],
-    }
+    event_listeners=[
+        EventListener(
+            lambda e: token_counter.add_tokens(e.token_count),
+            event_types=[StartPromptEvent, FinishPromptEvent],
+        ),
+    ]
 )
 
 agent.run("tell me about large language models")

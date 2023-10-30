@@ -1,6 +1,7 @@
 ## Overview
 
-A [Task](../../reference/griptape/tasks/index.md) is a purpose-built objective that can be given to the LLM. Griptape provides several types of Tasks that can be used depending on the use-case. 
+A [Task](../../reference/griptape/tasks/index.md) is a purpose-built objective for the Large Language Model (LLM). Griptape offers various types of Tasks, each suitable for specific use cases.
+
 
 ## Context
 Tasks that take input have a field [input_template](../../reference/griptape/tasks/base_text_input_task.md#griptape.tasks.base_text_input_task.BaseTextInputTask.input_template) which lets you define the Task objective. 
@@ -10,7 +11,7 @@ Within the [input_template](../../reference/griptape/tasks/base_text_input_task.
 * `structure`: the structure that the task belongs to.
 * user defined context variables
 
-Depending on the Structure that is running the task, additional [context](../../reference/griptape/structures/structure.md#griptape.structures.structure.Structure.context) variables will be added.
+Additional [context](../../reference/griptape/structures/structure.md#griptape.structures.structure.Structure.context) variables may be added based on the Structure running the task.
 ```python
 from griptape.structures import Agent
 from griptape.tasks import PromptTask
@@ -59,11 +60,9 @@ agent.run("How do I bake a cake?")
                              sleeves, and let's get baking! 🍰🎉
 ```
 
-
-
 ## Prompt Task
 
-For general purpose prompting, you can use the [PromptTask](../../reference/griptape/tasks/prompt_task.md):
+For general purpose prompting, use the [PromptTask](../../reference/griptape/tasks/prompt_task.md):
 
 ```python
 from griptape.tasks import PromptTask
@@ -91,8 +90,8 @@ agent.run("Write me a haiku")
 
 ## Toolkit Task
 
-To use [Griptape Tools](../../griptape-framework/tools/index.md), you can use a [Toolkit Task](../../reference/griptape/tasks/toolkit_task.md).
-This Task takes in one or more tools which the LLM will decide to use using Chain of Thought (CoT) reasoning. Because this Task uses CoT, it is recommended to only use with very capable models.
+To use [Griptape Tools](../../griptape-framework/tools/index.md), use a [Toolkit Task](../../reference/griptape/tasks/toolkit_task.md).
+This Task takes in one or more Tools which the LLM will decide to use through Chain of Thought (CoT) reasoning. Because this Task uses CoT, it is recommended to only use with very capable models.
 
 ```python
 from griptape.tasks import ToolkitTask
@@ -150,7 +149,8 @@ agent.run()
 
 ## Tool Task
 
-Another way to use [Griptape Tools](../../griptape-framework/tools/index.md), is with a [Tool Task](../../griptape-framework/structures/tasks.md). This Task takes in a single Tool which the LLM will use without Chain of Thought (CoT) reasoning. Because this Task does not use CoT, it is better suited for less capable models.
+Another way to use [Griptape Tools](../../griptape-framework/tools/index.md), is with a [Tool Task](../../griptape-framework/structures/tasks.md). 
+This Task takes in a single Tool which the LLM will use without Chain of Thought (CoT) reasoning. Because this Task does not use CoT, it is better suited for less capable models.
 
 ```python
 from griptape.structures import Agent
@@ -187,7 +187,11 @@ agent.run("Give me the answer for 5*4.")
 
 ## Extraction Task
 
-To extract information from a text, you can use the [ExtractionTask](../../griptape-framework/structures/tasks.md). This task allows us to pass in an [Extraction Engine](../../griptape-framework/data/extraction-engines.md) and a set of arguments to the engine.
+To extract information from text, use an [ExtractionTask](../../griptape-framework/structures/tasks.md).
+This Task takes an [Extraction Engine](../../griptape-framework/data/extraction-engines.md), and a set of arguments specific to the Engine.
+
+
+### CSV Extraction
 
 ```python
 from griptape.tasks import ExtractionTask
@@ -230,13 +234,14 @@ agent.run(csv_data)
                              Output: John,"""25""","""123 Main St"""            
                              Jane,"""30""","""456 Elm St"""   
 ```
+
+### JSON Extraction
+
 ```python
 from griptape.tasks import ExtractionTask
 from griptape.structures import Agent
 from griptape.engines import JsonExtractionEngine
-
-# Instantiate the JSON extraction engine
-json_extraction_engine = JsonExtractionEngine()
+from schema import Schema
 
 # Define some JSON data
 json_data = """
@@ -245,13 +250,15 @@ json_data = """
   {"Name": "Jane", "Age": "30", "Address": "456 Elm St"}
 ]
 """
+user_schema = Schema(
+    {"users": [{"name": str, "age": int, "location": str}]}
+).json_schema("UserSchema")
 
 agent = Agent()
-# Add the JsonExtraction task to the same agent
 agent.add_task(
     ExtractionTask(
-        extraction_engine=json_extraction_engine,
-        args={"template_schema": {"Name": "{{ name }}", "Age": "{{ age }}"}},
+        extraction_engine=JsonExtractionEngine(),
+        args={"template_schema": user_schema},
     )
 )
 
@@ -276,7 +283,8 @@ agent.run(json_data)
 
 ## Text Summary Task
 
-To summarize a text, you can use the [TextSummaryTask](../../griptape-framework/structures/tasks.md). This task allows us to pass in a [Summarization Engine](../../griptape-framework/data/summary-engines.md) and a set of arguments to the engine.
+To summarize a text, use the [TextSummaryTask](../../griptape-framework/structures/tasks.md).
+This Task takes an [Summarization Engine](../../griptape-framework/data/summary-engines.md), and a set of arguments to the engine.
 
 ```python
 from griptape.structures import Agent
@@ -340,10 +348,10 @@ agent.run(
 
 ## Text Query Task
 
-To query a text, you can use the [TextQueryTask](../../griptape-framework/structures/tasks.md). This task allows us to pass in a [Query Engine](../../griptape-framework/data/query-engines.md) and a set of arguments to the engine.
+To query text, use the [TextQueryTask](../../griptape-framework/structures/tasks.md).
+This Task takes a [Query Engine](../../griptape-framework/data/query-engines.md), and a set of arguments specific to the engine.
 
 ```python
-import os
 from griptape.structures import Agent
 from griptape.tasks import TextQueryTask
 from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
@@ -351,26 +359,23 @@ from griptape.engines import VectorQueryEngine
 from griptape.artifacts import TextArtifact
 
 # Initiate Embedding Driver and Vector Store Driver
-embedding_driver = OpenAiEmbeddingDriver()
-vector_store_driver = LocalVectorStoreDriver(embedding_driver=embedding_driver)
+vector_store_driver = LocalVectorStoreDriver(embedding_driver=OpenAiEmbeddingDriver())
 
-st1 = TextArtifact("Griptape builds AI-powered applications that connect securely to your enterprise data and APIs.")
-st2 = TextArtifact("Griptape Agents provide incredible power and flexibility when working with large language models.")
-
-# Create a VectorQueryEngine using the LocalVectorStoreDriver
-vector_query_engine = VectorQueryEngine(
-    vector_store_driver=vector_store_driver
+artifact = TextArtifact(
+    "Griptape builds AI-powered applications that connect securely to your enterprise data and APIs."
+    "Griptape Agents provide incredible power and flexibility when working with large language models."
 )
 
-vector_query_engine.upsert_text_artifact(artifact=st1)
-vector_query_engine.upsert_text_artifact(artifact=st2)
+# Create a VectorQueryEngine using the LocalVectorStoreDriver
+vector_query_engine = VectorQueryEngine(vector_store_driver=vector_store_driver)
+vector_query_engine.upsert_text_artifact(artifact=artifact)
 
 # Instantiate the agent and add TextQueryTask with the VectorQueryEngine
 agent = Agent()
 agent.add_task(
     TextQueryTask(
         "Respond to the users following query: {{ args[0] }}",
-        query_engine=vector_query_engine
+        query_engine=vector_query_engine,
     )
 )
 
@@ -387,8 +392,5 @@ agent.run("Give me information about Griptape")
                              that connect securely to your enterprise data and  
                              APIs. Griptape Agents provide incredible power and 
                              flexibility when working with large language       
-                             models.  
+                             models.
 ```
-
-
-

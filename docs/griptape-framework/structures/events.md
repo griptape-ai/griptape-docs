@@ -98,29 +98,78 @@ Handler 1 <class 'griptape.events.finish_task_event.FinishTaskEvent'>
 Handler 2 <class 'griptape.events.finish_task_event.FinishTaskEvent'>
 ```
 
+## Streaming
+
+
+You can use the [CompletionChunkEvent](../../reference/griptape/events/completion_chunk_event.md) to stream the completion results from Prompt Drivers.
+
+```python
+from griptape.events import CompletionChunkEvent
+from griptape.tasks import ToolkitTask
+from griptape.structures import Pipeline
+from griptape.tools import WebScraper
+
+
+pipeline = Pipeline(
+    event_listeners={
+        CompletionChunkEvent: [
+            lambda e: print(e.token, end="", flush=True),
+        ],
+    },
+)
+
+pipeline.add_tasks(
+    ToolkitTask(
+        "Based on https://griptape.ai, tell me what griptape is.",
+        tools=[WebScraper()],
+    ),
+)
+
+pipeline.run()
+```
+
+You can also use the [Stream](../../reference/griptape/utils/stream.md) utility to automatically wrap
+[CompletionChunkEvent](../../reference/griptape/events/completion_chunk_event.md)s in a Python iterator.
+
+```python
+from griptape.utils import Stream
+from griptape.tasks import ToolkitTask
+from griptape.structures import Pipeline
+from griptape.tools import WebScraper
+
+
+pipeline = Pipeline()
+pipeline.add_tasks(
+    ToolkitTask(
+        "Based on https://griptape.ai, tell me what griptape is.",
+        tools=[WebScraper()],
+    ),
+)
+
+for artifact in Stream(pipeline).run():
+    print(artifact.value, end="", flush=True),
+```
+
+
 ## Counting Tokens
 
 To count tokens you can use Event Listeners and the [TokenCounter](../../reference/griptape/utils/token_counter.md) util:
 
 ```python
 from griptape import utils
-from griptape.events import (
-    StartPromptEvent, FinishPromptEvent,
-)
+from griptape.events import StartPromptEvent, FinishPromptEvent, EventListener
 from griptape.structures import Agent
 
 
 token_counter = utils.TokenCounter()
 
 agent = Agent(
-    event_listeners={
-        StartPromptEvent: [
-            lambda e: token_counter.add_tokens(e.token_count)
-        ],
-        FinishPromptEvent: [
-            lambda e: token_counter.add_tokens(e.token_count)
-        ],
-    }
+    event_listeners=[
+        EventListener(
+            lambda e: token_counter.add_tokens(e.token_count),
+            event_types=[StartPromptEvent, FinishPromptEvent],
+        ),
+    ]
 )
 
 agent.run("tell me about large language models")

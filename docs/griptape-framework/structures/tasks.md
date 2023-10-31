@@ -149,7 +149,7 @@ agent.run()
 
 ## Tool Task
 
-Another way to use [Griptape Tools](../../griptape-framework/tools/index.md), is with a [Tool Task](../../griptape-framework/structures/tasks.md). 
+Another way to use [Griptape Tools](../../griptape-framework/tools/index.md), is with a [Tool Task](../../reference/griptape/tasks/tool_task.md). 
 This Task takes in a single Tool which the LLM will use without Chain of Thought (CoT) reasoning. Because this Task does not use CoT, it is better suited for less capable models.
 
 ```python
@@ -187,7 +187,7 @@ agent.run("Give me the answer for 5*4.")
 
 ## Extraction Task
 
-To extract information from text, use an [ExtractionTask](../../griptape-framework/structures/tasks.md).
+To extract information from text, use an [ExtractionTask](../../reference/griptape/tasks/extraction_task.md).
 This Task takes an [Extraction Engine](../../griptape-framework/data/extraction-engines.md), and a set of arguments specific to the Engine.
 
 
@@ -283,7 +283,7 @@ agent.run(json_data)
 
 ## Text Summary Task
 
-To summarize a text, use the [TextSummaryTask](../../griptape-framework/structures/tasks.md).
+To summarize a text, use the [TextSummaryTask](../../reference/griptape/tasks/text_summary_task.md).
 This Task takes an [Summarization Engine](../../griptape-framework/data/summary-engines.md), and a set of arguments to the engine.
 
 ```python
@@ -348,7 +348,7 @@ agent.run(
 
 ## Text Query Task
 
-To query text, use the [TextQueryTask](../../griptape-framework/structures/tasks.md).
+To query text, use the [TextQueryTask](../../reference/griptape/tasks/text_query_task.md).
 This Task takes a [Query Engine](../../griptape-framework/data/query-engines.md), and a set of arguments specific to the engine.
 
 ```python

@@ -1,6 +1,6 @@
 ## Overview
 
-Griptape Event Listeners can be used to listen for events during a structure's execution.
+You can use [EventListener](../../reference/griptape/events/event_listener.md)s to listen for events during a Structure's execution.
 
 ## Specific Event Types
 
@@ -16,20 +16,23 @@ from griptape.events import (
     FinishSubtaskEvent,
     StartPromptEvent,
     FinishPromptEvent,
+    EventListener
 )
 
 def handler(event: BaseEvent):
     print(event.__class__)
 
 agent = Agent(
-    event_listeners = {
-        StartTaskEvent: [handler],
-        FinishTaskEvent: [handler],
-        StartSubtaskEvent: [handler],
-        FinishSubtaskEvent: [handler],
-        StartPromptEvent: [handler],
-        FinishPromptEvent: [handler],
-    }
+    event_listeners = [
+        EventListener(handler, event_types=[
+            StartTaskEvent,
+            FinishTaskEvent,
+            StartSubtaskEvent,
+            FinishSubtaskEvent,
+            StartPromptEvent,
+            FinishPromptEvent
+        ])
+    ]
 )
 
 agent.run("tell me about griptape")
@@ -51,11 +54,11 @@ agent.run("tell me about griptape")
 
 ## All Event Types
 
-Or listen to all events with multiple handlers:
+Or listen to all events:
 
 ```python
 from griptape.structures import Agent
-from griptape.events import BaseEvent
+from griptape.events import BaseEvent, EventListener
 
 
 def handler1(event: BaseEvent):
@@ -66,36 +69,44 @@ def handler2(event: BaseEvent):
     print("Handler 2", event.__class__)
 
 
-agent = Agent(event_listeners=[handler1, handler2])
+agent = Agent(event_listeners=[EventListener(handler1), EventListener(handler2)])
 
 agent.run("tell me about griptape")
 ```
 
 ```
+Handler 1 <class 'griptape.events.start_structure_run_event.StartStructureRunEvent'>
+Handler 2 <class 'griptape.events.start_structure_run_event.StartStructureRunEvent'>
 Handler 1 <class 'griptape.events.start_task_event.StartTaskEvent'>
 Handler 2 <class 'griptape.events.start_task_event.StartTaskEvent'>
-[09/08/23 10:52:36] INFO     PromptTask cba4944d74f34b43990d7dc6f7ffe0d1
+[10/26/23 11:49:29] INFO     PromptTask 20e3ef1f8856453ebabc84863ac36784
                              Input: tell me about griptape
 Handler 1 <class 'griptape.events.start_prompt_event.StartPromptEvent'>
 Handler 2 <class 'griptape.events.start_prompt_event.StartPromptEvent'>
 Handler 1 <class 'griptape.events.finish_prompt_event.FinishPromptEvent'>
 Handler 2 <class 'griptape.events.finish_prompt_event.FinishPromptEvent'>
-[09/08/23 10:52:54] INFO     PromptTask cba4944d74f34b43990d7dc6f7ffe0d1
-                             Output: Griptape is a gritty, sandpaper-like material that is applied to the top of a skateboard deck. It
-                             provides traction between the skateboarder's shoes and the board itself, allowing for better control and
-                             stability when performing tricks and maneuvers.
+[10/26/23 11:49:55] INFO     PromptTask 20e3ef1f8856453ebabc84863ac36784
+                             Output: Griptape is a gritty, sandpaper-like material that is applied to the top of
+                             a skateboard, longboard, or scooter deck to provide traction between the rider's
+                             feet and the deck. It is an essential component for performing tricks and
+                             maintaining control of the board or scooter.
 
-                             Griptape comes in a variety of colors and designs, but the most common type is black. It's typically made from a
-                             sheet of paper or fabric with an adhesive back and a layer of crushed silicon carbide or aluminum oxide on the
-                             top.
+                             Griptape is typically black, but it comes in a variety of colors and designs. It is
+                             made by embedding an abrasive material (similar to sand) into a tough,
+                             weather-resistant adhesive. The adhesive side is then applied to the deck, while
+                             the abrasive side faces up to provide grip.
 
-                             To apply griptape, you peel off the backing, stick it to your board, and then cut off the excess. It's important
-                             to replace your griptape regularly to ensure it maintains its grip. Over time, it can become less effective due
-                             to wear and tear.
+                             The grip provided by the griptape allows riders to keep their footing on the board,
+                             especially during tricks where the board is flipped or spun. It also helps riders
+                             control the board better during downhill rides or sharp turns.
 
-                             In addition to skateboarding, griptape is also used in other board sports such as longboarding and snowboarding.
+                             Over time, griptape can wear down and lose its effectiveness, at which point it can
+                             be removed and replaced. It's an essential part of skateboarding equipment and
+                             plays a significant role in the sport's safety and performance.
 Handler 1 <class 'griptape.events.finish_task_event.FinishTaskEvent'>
 Handler 2 <class 'griptape.events.finish_task_event.FinishTaskEvent'>
+Handler 1 <class 'griptape.events.finish_structure_run_event.FinishStructureRunEvent'>
+Handler 2 <class 'griptape.events.finish_structure_run_event.FinishStructureRunEvent'>
 ```
 
 ## Streaming
@@ -153,20 +164,29 @@ for artifact in Stream(pipeline).run():
 
 ## Counting Tokens
 
-To count tokens you can use Event Listeners and the [TokenCounter](../../reference/griptape/utils/token_counter.md) util:
+To count tokens, you can use Event Listeners and the [TokenCounter](../../reference/griptape/utils/token_counter.md) util:
 
 ```python
 from griptape import utils
-from griptape.events import StartPromptEvent, FinishPromptEvent, EventListener
+from griptape.events import (
+    BaseEvent,
+    StartPromptEvent,
+    FinishPromptEvent,
+    EventListener
+)
 from griptape.structures import Agent
 
 
 token_counter = utils.TokenCounter()
 
+def count_tokens(e: BaseEvent):
+    if isinstance(e, StartPromptEvent) or isinstance(e, FinishPromptEvent):
+        token_counter.add_tokens(e.token_count)
+
 agent = Agent(
     event_listeners=[
         EventListener(
-            lambda e: token_counter.add_tokens(e.token_count),
+            lambda e: count_tokens(e),
             event_types=[StartPromptEvent, FinishPromptEvent],
         ),
     ]

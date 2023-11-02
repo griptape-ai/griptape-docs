@@ -1,4 +1,4 @@
-# Overview 
+## Overview
 Extraction Engines in Griptape facilitate the extraction of data from text formats such as CSV and JSON.
 These engines play a crucial role in the functionality of [Extraction Tasks](../../griptape-framework/structures/tasks.md).
 As of now, Griptape supports two types of Extraction Engines: the CSV Extraction Engine and the JSON Extraction Engine.
@@ -8,7 +8,7 @@ As of now, Griptape supports two types of Extraction Engines: the CSV Extraction
 The CSV Extraction Engine is designed specifically for extracting data from CSV-formatted content.
 
 !!! info
-  The CSV Extraction Engine requires the `column_names` parameter for specifying the columns to be extracted.
+    The CSV Extraction Engine requires the `column_names` parameter for specifying the columns to be extracted.
 
 ```python
 from griptape.engines import CsvExtractionEngine
@@ -47,7 +47,7 @@ elif isinstance(result, ErrorArtifact):
 The JSON Extraction Engine is tailored for extracting data from JSON-formatted content. 
 
 !!! info
-  The JSON Extraction Engine requires the `template_schema` parameter for specifying the structure to be extracted.
+    The JSON Extraction Engine requires the `template_schema` parameter for specifying the structure to be extracted.
 
 ```python
 from griptape.engines import JsonExtractionEngine

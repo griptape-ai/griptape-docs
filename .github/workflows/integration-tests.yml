@@ -76,4 +76,4 @@ jobs:
       - name: Init environment 
         uses: ./.github/actions/init-environment 
       - name: Run integration tests
-        run: pytest -vs tests/integration
+        run: pytest -xvs tests/integration

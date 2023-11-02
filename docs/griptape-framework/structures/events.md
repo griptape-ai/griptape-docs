@@ -12,8 +12,8 @@ from griptape.events import (
     BaseEvent,
     StartTaskEvent,
     FinishTaskEvent,
-    StartSubtaskEvent,
-    FinishSubtaskEvent,
+    StartActionSubtaskEvent,
+    FinishActionSubtaskEvent,
     StartPromptEvent,
     FinishPromptEvent,
     EventListener
@@ -27,8 +27,8 @@ agent = Agent(
         EventListener(handler, event_types=[
             StartTaskEvent,
             FinishTaskEvent,
-            StartSubtaskEvent,
-            FinishSubtaskEvent,
+            StartActionSubtaskEvent,
+            FinishActionSubtaskEvent,
             StartPromptEvent,
             FinishPromptEvent
         ])
@@ -149,7 +149,7 @@ from griptape.structures import Pipeline
 from griptape.tools import WebScraper
 
 
-pipeline = Pipeline()
+pipeline = Pipeline(stream=True)
 pipeline.add_tasks(
     ToolkitTask(
         "Based on https://griptape.ai, tell me what griptape is.",

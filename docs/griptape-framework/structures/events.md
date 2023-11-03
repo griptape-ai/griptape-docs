@@ -12,8 +12,8 @@ from griptape.events import (
     BaseEvent,
     StartTaskEvent,
     FinishTaskEvent,
-    StartSubtaskEvent,
-    FinishSubtaskEvent,
+    StartActionSubtaskEvent,
+    FinishActionSubtaskEvent,
     StartPromptEvent,
     FinishPromptEvent,
     EventListener
@@ -27,8 +27,8 @@ agent = Agent(
         EventListener(handler, event_types=[
             StartTaskEvent,
             FinishTaskEvent,
-            StartSubtaskEvent,
-            FinishSubtaskEvent,
+            StartActionSubtaskEvent,
+            FinishActionSubtaskEvent,
             StartPromptEvent,
             FinishPromptEvent
         ])
@@ -115,18 +115,16 @@ Handler 2 <class 'griptape.events.finish_structure_run_event.FinishStructureRunE
 You can use the [CompletionChunkEvent](../../reference/griptape/events/completion_chunk_event.md) to stream the completion results from Prompt Drivers.
 
 ```python
-from griptape.events import CompletionChunkEvent
+from griptape.events import CompletionChunkEvent, EventListener
 from griptape.tasks import ToolkitTask
 from griptape.structures import Pipeline
 from griptape.tools import WebScraper
 
 
 pipeline = Pipeline(
-    event_listeners={
-        CompletionChunkEvent: [
-            lambda e: print(e.token, end="", flush=True),
-        ],
-    },
+    event_listeners=[
+        EventListener(lambda e: print(e.token, end="", flush=True), event_types=[CompletionChunkEvent])
+    ],
 )
 
 pipeline.add_tasks(
@@ -149,7 +147,7 @@ from griptape.structures import Pipeline
 from griptape.tools import WebScraper
 
 
-pipeline = Pipeline()
+pipeline = Pipeline(stream=True)
 pipeline.add_tasks(
     ToolkitTask(
         "Based on https://griptape.ai, tell me what griptape is.",

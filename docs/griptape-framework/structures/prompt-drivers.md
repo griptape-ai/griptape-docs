@@ -70,6 +70,8 @@ agent = Agent(
         model="gpt-3.5-turbo-16k"
     ),
     input_template="You will be provided with a description of a mood, and your task is to generate the CSS code for a color that matches it. Description: {{ args[0] }}",
+    response_format="json_object",
+    seed=42,
     rules=[
         Rule(
             value='Write your output in json with a single key called "css_code".'
@@ -79,6 +81,9 @@ agent = Agent(
 
 agent.run("Blue sky at dusk.")
 ```
+
+!!! info
+    `response_format` and `seed` are unique to the OpenAI Chat Prompt Driver and Azure OpenAi Chat Prompt Driver.
 
 ### OpenAI Completion
 
@@ -114,8 +119,8 @@ agent = Agent(
     prompt_driver=AzureOpenAiChatPromptDriver(
         api_key=os.environ["AZURE_OPENAI_API_KEY_1"],
         model="gpt-3.5-turbo-16k",
-        deployment_id=os.environ["AZURE_OPENAI_35_16k_DEPLOYMENT_ID"],
-        api_base=os.environ["AZURE_OPENAI_API_BASE_1"],
+        azure_deployment=os.environ["AZURE_OPENAI_35_16k_DEPLOYMENT_ID"],
+        azure_endpoint=os.environ["AZURE_OPENAI_API_BASE_1"],
     ),
     rules=[
         Rule(
@@ -141,8 +146,8 @@ agent = Agent(
     prompt_driver=AzureOpenAiCompletionPromptDriver(
         api_key=os.environ["AZURE_OPENAI_API_KEY_1"],
         model="text-davinci-003",
-        deployment_id=os.environ["AZURE_OPENAI_DAVINCI_DEPLOYMENT_ID"],
-        api_base=os.environ["AZURE_OPENAI_API_BASE_1"],
+        azure_deployment=os.environ["AZURE_OPENAI_DAVINCI_DEPLOYMENT_ID"],
+        azure_endpoint=os.environ["AZURE_OPENAI_API_BASE_1"],
         temperature=1
     ),
 )

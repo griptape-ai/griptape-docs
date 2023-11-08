@@ -27,8 +27,8 @@ jobs:
       - name: Trigger Build
         run: |
             curl --request POST \
-            --url "$READTHEDOCS_BUILD_ENDPOINT_DEV" \
+            --url "$READTHEDOCS_ENDPOINT_DEV/versions/$GITHUB_REF/builds/" \
             --header "Authorization: Token $READTHEDOCS_API_TOKEN"
         env:
           READTHEDOCS_API_TOKEN: ${{ secrets.READTHEDOCS_API_TOKEN }}
-          READTHEDOCS_BUILD_ENDPOINT_DEV: ${{ secrets.READTHEDOCS_BUILD_ENDPOINT_DEV }}
+          READTHEDOCS_ENDPOINT_DEV: ${{ secrets.READTHEDOCS_ENDPOINT_DEV }}

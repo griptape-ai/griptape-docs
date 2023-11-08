@@ -1,4 +1,4 @@
-name: Read the Docs Preview
+name: Read the Docs Build
 on:
   pull_request_target:
     types:

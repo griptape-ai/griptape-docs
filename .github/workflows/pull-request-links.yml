@@ -15,6 +15,14 @@ jobs:
   pull-request-links:
     runs-on: ubuntu-latest
     steps:
+      - name: Trigger Build
+        run: |
+            curl \
+            -X POST \
+            -H "Authorization: Token $READTHEDOCS_API_TOKEN" $READTHEDOCS_BUILD_ENDPOINT_PROD
+        env:
+          READTHEDOCS_API_TOKEN: ${{ secrets.READTHEDOCS_API_TOKEN }}
+          READTHEDOCS_BUILD_ENDPOINT_PROD: ${{ secrets.READTHEDOCS_BUILD_ENDPOINT_PROD }}
       - uses: readthedocs/actions/preview@v1
         with:
           project-slug: griptape

@@ -18,6 +18,8 @@ Let's build a simple workflow. Let's say, we want to write a story in a fantasy 
 from griptape.tasks import PromptTask
 from griptape.structures import Workflow
 
+workflow = Workflow()
+
 def character_task(task_id, character_name) -> PromptTask:
     return PromptTask(
         "Based on the following world description create a character named {{ name }}:\n{{ parent_outputs['world'] }}",
@@ -34,25 +36,19 @@ world_task = PromptTask(
     },
     id="world"
 )
-
-character_task_1 = character_task("scotty", "Scotty")
-character_task_2 = character_task("annie", "Annie")
+workflow.add_task(world_task)
 
 story_task = PromptTask(
     "Based on the following description of the world and characters, write a short story:\n{{ parent_outputs['world'] }}\n{{ parent_outputs['scotty'] }}\n{{ parent_outputs['annie'] }}",
     id="story"
 )
+workflow.add_task(story_task)
 
-workflow = Workflow()
+character_task_1 = character_task("scotty", "Scotty")
+workflow.insert_task(world_task, story_task, character_task_1)
 
-workflow.add_task(world_task)
-
-world_task.add_child(character_task_1)
-world_task.add_child(character_task_2)
-world_task.add_child(story_task)
-
-character_task_1.add_child(story_task)
-character_task_2.add_child(story_task)
+character_task_2 = character_task("annie", "Annie")
+workflow.insert_task(world_task, story_task, character_task_2)
 
 workflow.run()
 ```

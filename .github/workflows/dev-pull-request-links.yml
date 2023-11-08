@@ -6,7 +6,7 @@ on:
     paths:
       - "docs/**"
     branches:
-      - 'main'
+      - 'dev'
 
 permissions:
   pull-requests: write
@@ -17,5 +17,5 @@ jobs:
     steps:
       - uses: readthedocs/actions/preview@v1
         with:
-          project-slug: griptape
+          project-slug: dev-griptape-docs
           single-version: 'true'

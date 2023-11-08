@@ -93,9 +93,6 @@ agent.run("What is my favorite food?")
 
 ### Workflows
 
-!!! Warning
-    [Workflows](./workflows.md) do not currently support Conversation Memory.
-
 ## Types of Memory
 
 Griptape provides several types of Conversation Memory to fit various use-cases.

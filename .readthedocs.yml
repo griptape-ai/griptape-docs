@@ -6,7 +6,7 @@ build:
     python: "3.11"
   jobs:
     pre_create_environment:
-      - git clone https://github.com/griptape-ai/griptape.git
+      - git clone -b $(git --show-current) https://github.com/griptape-ai/griptape.git
     post_create_environment:
       - pip install poetry
       - poetry config virtualenvs.create false

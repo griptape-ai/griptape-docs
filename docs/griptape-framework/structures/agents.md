@@ -29,10 +29,10 @@ agent.run("what's 123^312?")
                              Thought: The user wants to calculate the value of 123 raised to the power of 312. I can use the Calculator tool
                              to perform this calculation.
 
-                             Action: {"type": "tool", "name": "Calculator", "activity": "calculate", "input": {"values": {"expression":
+                             Action: {"name": "Calculator", "path": "calculate", "input": {"values": {"expression":
                              "123**312"}}}
                     INFO     Subtask cbd5bb8684ad4fc59958201efbf14743
-                             Observation:
+                             Response:
                              11230388208945295722090491952733133124202871121067044284403441616854053130045246777417573635449877716182202751456
                              62903768337745814236262209544548389555407097435988334710646912635818793342584092805141253230302226219003560706069
                              42457739968799225811781682901969575983855664495472037997890318771511185547708335412624757899597237206373758262442

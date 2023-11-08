@@ -69,11 +69,11 @@ agent.run(
                              to save the summarized content to a file named     
                              griptape.txt.                                      
                                                                                 
-                             Action: {"type": "tool", "name": "WebScraper",     
-                             "activity": "get_content", "input": {"values":     
+                             Action: {"name": "WebScraper",     
+                             "path": "get_content", "input": {"values":     
                              {"url": "https://www.griptape.ai"}}}               
 [10/20/23 13:31:53] INFO     Subtask 17b3d35197eb417b834a7db49039ae4f           
-                             Observation: Output of "WebScraper.get_content" was
+                             Response: Output of "WebScraper.get_content" was
                              stored in memory with memory_name "ToolMemory" and 
                              artifact_namespace                                 
                              "82543abe79984d11bb952bd6036a7a01"                 
@@ -81,13 +81,13 @@ agent.run(
                              Thought: Now that I have the content of the webpage
                              stored in memory, I can use the ToolOutputProcessor
                              tool to summarize this content.                    
-                             Action: {"type": "tool", "name":                   
-                             "ToolOutputProcessor", "activity": "summarize",    
+                             Action: {"name":                   
+                             "ToolOutputProcessor", "path": "summarize",    
                              "input": {"values": {"memory_name": "ToolMemory",  
                              "artifact_namespace":                              
                              "82543abe79984d11bb952bd6036a7a01"}}}              
 [10/20/23 13:32:03] INFO     Subtask 58bac35adda94157ac6f9482e7c41c9f           
-                             Observation: Output of                             
+                             Response: Output of                             
                              "ToolOutputProcessor.summarize" was stored in      
                              memory with memory_name "ToolMemory" and           
                              artifact_namespace                                 
@@ -97,14 +97,14 @@ agent.run(
                              the webpage stored in memory, I can use the        
                              FileManager tool to save this content to a file    
                              named griptape.txt.                                
-                             Action: {"type": "tool", "name": "FileManager",    
-                             "activity": "save_memory_artifacts_to_disk",       
+                             Action: {"name": "FileManager",    
+                             "path": "save_memory_artifacts_to_disk",       
                              "input": {"values": {"dir_name": ".", "file_name": 
                              "griptape.txt", "memory_name": "ToolMemory",       
                              "artifact_namespace":                              
                              "01b8015f8c5647f09e8d103198404db0"}}}              
                     INFO     Subtask a630f649007b4d7fa0b6cf85be6b2f4f           
-                             Observation: saved successfully                    
+                             Response: saved successfully                    
 [10/20/23 13:32:14] INFO     ToolkitTask 82211eeb10374e75ad77135373d816e6       
                              Output: The summarized content of the webpage at   
                              https://www.griptape.ai has been successfully      

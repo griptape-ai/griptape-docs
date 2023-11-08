@@ -21,7 +21,8 @@ google_docs_tool = GoogleDocsClient(
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
         "client_x509_cert_url": os.environ["GOOGLE_CERT_URL"]
     },
-    owner_email=os.environ["GOOGLE_OWNER_EMAIL"]
+    owner_email=os.environ["GOOGLE_OWNER_EMAIL"],
+    off_prompt=False
 )
 
 # Set up an agent using the GoogleDocsClient tool
@@ -45,13 +46,13 @@ agent.run(
                              'save_content_to_google_doc' activity of the       
                              GoogleDocsClient tool to achieve this.             
                                                                                 
-                             Action: {"type": "tool", "name":                   
-                             "GoogleDocsClient", "activity":                    
+                             Action: {"name":                   
+                             "GoogleDocsClient", "path":                    
                              "save_content_to_google_doc", "input": {"values":  
                              {"file_path": "test_creation", "content": "Hey,    
                              Tony.", "folder_path": "test"}}}                  
 [10/05/23 12:56:31] INFO     Subtask 042b7050755f43578bba2c315d124fcb           
-                             Observation: Content has been successfully saved to
+                             Response: Content has been successfully saved to
                              Google Doc with ID:                                
                              1OgKbsPqxOnzkf65kodb1i1_qC1zjX_Bend5XL5bVxpA.      
 [10/05/23 12:56:38] INFO     ToolkitTask 90721b7478a74618a63d852d35be3b18       

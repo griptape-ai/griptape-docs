@@ -21,7 +21,8 @@ gmail_tool = GoogleGmailClient(
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
         "client_x509_cert_url": os.environ["GOOGLE_CERT_URL"]
     },
-     owner_email=os.environ["GOOGLE_OWNER_EMAIL"]
+     owner_email=os.environ["GOOGLE_OWNER_EMAIL"],
+    off_prompt=False
 )
 
 # Set up an agent using the GoogleGmailClient tool
@@ -47,13 +48,13 @@ agent.run(
                              I will need to provide the 'to', 'subject', and    
                              'body' values as input.                            
                                                                                 
-                             Action: {"type": "tool", "name":                   
-                             "GoogleGmailClient", "activity":                   
+                             Action: {"name":                   
+                             "GoogleGmailClient", "path":                   
                              "create_draft_email", "input": {"values": {"to":   
                              "example@email.com", "subject": "Test Draft",      
                              "body": "This is a test draft email."}}}           
 [10/05/23 13:24:16] INFO     Subtask 7f2cce7e5b0e425ba696531561697b96           
-                             Observation: An email draft was successfully       
+                             Response: An email draft was successfully       
                              created (ID: r6322867913697829111)                 
 [10/05/23 13:24:19] INFO     ToolkitTask 1f190f823d584053bfe9942f41b6cb2d       
                              Output: The draft email has been successfully      

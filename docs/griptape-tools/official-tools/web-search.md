@@ -13,7 +13,8 @@ web_search_tool = WebSearch(
     google_api_lang="lang_en",
     google_api_key=os.environ["GOOGLE_API_KEY"],
     google_api_search_id=os.environ["GOOGLE_API_SEARCH_ID"],
-    google_api_country="us"
+    google_api_country="us",
+    off_prompt=False
 )
 
 # Set up an agent using the WebSearch tool
@@ -35,11 +36,11 @@ agent.run("Tell me how photosynthesis works")
                              However, to provide a detailed explanation, I will 
                              need to conduct a web search.                      
                                                                                 
-                             Action: {"type": "tool", "name": "WebSearch",      
-                             "activity": "search", "input": {"values": {"query":
+                             Action: {"name": "WebSearch",      
+                             "path": "search", "input": {"values": {"query":
                              "How does photosynthesis work?"}}}                 
                     INFO     Subtask d023ef9f41d142229513510cf4f47afe           
-                             Observation: {'url':                               
+                             Response: {'url':                               
                              'https://www.nationalgeographic.org/encyclopedia/ph
                              otosynthesis/', 'title': 'Photosynthesis',         
                              'description': 'Jul 15, 2022 ... Photosynthesis is 

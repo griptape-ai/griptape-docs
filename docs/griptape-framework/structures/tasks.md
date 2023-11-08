@@ -96,14 +96,14 @@ This Task takes in one or more Tools which the LLM will decide to use through Ch
 ```python
 from griptape.tasks import ToolkitTask
 from griptape.structures import Agent
-from griptape.tools import WebScraper, FileManager
+from griptape.tools import WebScraper, FileManager, ToolMemoryClient
 
 
 agent = Agent()
 agent.add_task(
     ToolkitTask(
         "Load https://www.griptape.ai, summarize it, and store it in a file called griptape.txt", 
-        tools=[WebScraper(), FileManager()]
+        tools=[WebScraper(), FileManager(), ToolMemoryClient(off_prompt=False)]
     ),
 )
 
@@ -116,18 +116,17 @@ agent.run()
 [09/08/23 11:15:02] INFO     Subtask 7a6356470e6a4b08b61edc5591b37f0c
                              Thought: The first step is to load the webpage using the WebScraper tool's get_content activity.
 
-                             Action: {"type": "tool", "name": "WebScraper", "activity": "get_content", "input": {"values": {"url":
+                             Action: {"name": "WebScraper", "path": "get_content", "input": {"values": {"url":
                              "https://www.griptape.ai"}}}
 [09/08/23 11:15:03] INFO     Subtask 7a6356470e6a4b08b61edc5591b37f0c
-                             Observation: Output of "WebScraper.get_content" was stored in memory with memory_name "ToolMemory" and
+                             Response: Output of "WebScraper.get_content" was stored in memory with memory_name "ToolMemory" and
                              artifact_namespace "2b50373849d140f698ba8071066437ee"
 [09/08/23 11:15:11] INFO     Subtask a22a7e4ebf594b4b895fcbe8a95c1dd3
                              Thought: Now that the webpage content is stored in memory, I can use the ToolMemory tool's summarize activity
                              to summarize it.
-                             Action: {"type": "memory", "name": "ToolMemory", "activity": "summarize", "input": {"values": {"memory_name":
-                             "ToolMemory", "artifact_namespace": "2b50373849d140f698ba8071066437ee"}}}
+                             Action: {"name": "ToolMemoryClient", "path": "summarize", "input": {"values": {"memory_name": "ToolMemory", "artifact_namespace": "2b50373849d140f698ba8071066437ee"}}}
 [09/08/23 11:15:15] INFO     Subtask a22a7e4ebf594b4b895fcbe8a95c1dd3
-                             Observation: Griptape is an open source framework that allows developers to build and deploy AI applications
+                             Response: Griptape is an open source framework that allows developers to build and deploy AI applications
                              using large language models (LLMs). It provides the ability to create conversational and event-driven apps that
                              can access and manipulate data securely. Griptape enforces structures like sequential pipelines and DAG-based
                              workflows for predictability, while also allowing for creativity by safely prompting LLMs with external APIs and
@@ -137,11 +136,11 @@ agent.run()
 [09/08/23 11:15:27] INFO     Subtask 7afb3d44d0114b7f8ef2dac4314a8e90
                              Thought: Now that I have the summary, I can use the FileManager tool's save_file_to_disk activity to store the
                              summary in a file named griptape.txt.
-                             Action: {"type": "tool", "name": "FileManager", "activity": "save_file_to_disk", "input": {"values":
+                             Action: {"name": "FileManager", "path": "save_file_to_disk", "input": {"values":
                              {"memory_name": "ToolMemory", "artifact_namespace": "2b50373849d140f698ba8071066437ee", "path":
                              "griptape.txt"}}}
                     INFO     Subtask 7afb3d44d0114b7f8ef2dac4314a8e90
-                             Observation: saved successfully
+                             Response: saved successfully
 [09/08/23 11:15:31] INFO     ToolkitTask 22af656c6ad643e188fe80f9378dfff9
                              Output: The summary of the webpage https://www.griptape.ai has been successfully stored in a file named
                              griptape.txt.
@@ -170,9 +169,9 @@ agent.run("Give me the answer for 5*4.")
                              Input: Give me the answer for 5*4.                 
 [10/20/23 14:20:29] INFO     Subtask a9a9ad7be2bf465fa82bd350116fabe4           
                              Action: {                                          
-                               "type": "tool",                                  
+                                                                
                                "name": "Calculator",                            
-                               "activity": "calculate",                         
+                               "path": "calculate",                         
                                "input": {                                       
                                  "values": {                                    
                                    "expression": "5*4"                          
@@ -180,7 +179,7 @@ agent.run("Give me the answer for 5*4.")
                                }                                                
                              }                                                  
 [10/20/23 14:20:30] INFO     Subtask a9a9ad7be2bf465fa82bd350116fabe4           
-                             Observation: 20                                    
+                             Response: 20                                    
                     INFO     ToolTask df1604b417a84ee781dbd1f2b904ed30          
                              Output: 20       
 ```

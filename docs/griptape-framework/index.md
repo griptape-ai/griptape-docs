@@ -99,10 +99,10 @@ Here is the chain of thought from the Agent. Notice where it realizes it can use
                              Thought: The user is asking for the value of 7 raised to the power of 12. I can use the Calculator tool to
                              perform this calculation.
 
-                             Action: {"type": "tool", "name": "Calculator", "activity": "calculate", "input": {"values": {"expression":
+                             Action: {"name": "Calculator", "path": "calculate", "input": {"values": {"expression":
                              "7**12"}}}
                     INFO     Subtask f3f41104a2234a69832c7eacb64e7324
-                             Observation: 13841287201
+                             Response: 13841287201
 [09/08/23 09:53:51] INFO     ToolkitTask c87320c5ab1b4988acf25c107b46dffa
                              Output: The value of 7 raised to the power of 12 is 13841287201.
 ```
@@ -115,7 +115,7 @@ Agents are great for getting started, but they are intentionally limited to a si
 from griptape.memory.structure import ConversationMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask, PromptTask
-from griptape.tools import WebScraper, FileManager
+from griptape.tools import WebScraper, FileManager, ToolMemoryClient
 
 
 # Pipelines represent sequences of tasks.
@@ -128,7 +128,7 @@ pipeline.add_tasks(
     ToolkitTask(
         "{{ args[0] }}",
         # Add tools for web scraping, and file management
-        tools=[WebScraper(), FileManager()]
+        tools=[WebScraper(), FileManager(), ToolMemoryClient(off_prompt=False)]
     ),
     # Augment `input` from the previous task.
     PromptTask(
@@ -150,18 +150,17 @@ pipeline.run(
                              store the summarized content in a file named griptape.txt using the FileManager tool's save_file_to_disk
                              activity.
 
-                             Action: {"type": "tool", "name": "WebScraper", "activity": "get_content", "input": {"values": {"url":
+                             Action: {"name": "WebScraper", "path": "get_content", "input": {"values": {"url":
                              "https://www.griptape.ai"}}}
 [09/08/23 10:02:45] INFO     Subtask 42fd56ba100e45688401c5ce32b79a33
-                             Observation: Output of "WebScraper.get_content" was stored in memory with memory_name "ToolMemory" and
+                             Response: Output of "WebScraper.get_content" was stored in memory with memory_name "ToolMemory" and
                              artifact_namespace "39ca67bbe26b4e1584193b87ed82170d"
 [09/08/23 10:02:53] INFO     Subtask 8023e3d257274df29065b22e736faca8
                              Thought: Now that the webpage content is stored in memory, I can use the ToolMemory tool's summarize activity
                              to summarize the content.
-                             Action: {"type": "memory", "name": "ToolMemory", "activity": "summarize", "input": {"values": {"memory_name":
-                             "ToolMemory", "artifact_namespace": "39ca67bbe26b4e1584193b87ed82170d"}}}
+                             Action: {"name": "ToolMemoryClient", "path": "summarize", "input": {"values": {"memory_name": "ToolMemory", "artifact_namespace": "39ca67bbe26b4e1584193b87ed82170d"}}}
 [09/08/23 10:02:57] INFO     Subtask 8023e3d257274df29065b22e736faca8
-                             Observation: Griptape is an open source framework that allows developers to build and deploy AI applications
+                             Response: Griptape is an open source framework that allows developers to build and deploy AI applications
                              using large language models (LLMs). It provides the ability to create conversational and event-driven apps that
                              can securely access and manipulate data. The framework enforces structures for predictability and creativity,
                              allowing developers to easily transition between the two. Griptape Cloud is a managed platform for deploying and
@@ -169,11 +168,11 @@ pipeline.run(
 [09/08/23 10:03:06] INFO     Subtask 7baae700239943c18b5b6b21873f0e13
                              Thought: Now that I have the summarized content, I can store it in a file named griptape.txt using the
                              FileManager tool's save_file_to_disk activity.
-                             Action: {"type": "tool", "name": "FileManager", "activity": "save_file_to_disk", "input": {"values":
+                             Action: {"name": "FileManager", "path": "save_file_to_disk", "input": {"values":
                              {"memory_name": "ToolMemory", "artifact_namespace": "39ca67bbe26b4e1584193b87ed82170d", "path":
                              "griptape.txt"}}}
                     INFO     Subtask 7baae700239943c18b5b6b21873f0e13
-                             Observation: saved successfully
+                             Response: saved successfully
 [09/08/23 10:03:14] INFO     ToolkitTask 3c1d2f4a49384873820a9a8cd8acc983
                              Output: The summarized content of the webpage https://www.griptape.ai has been successfully stored in the file
                              named griptape.txt.

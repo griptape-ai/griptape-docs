@@ -1,5 +1,7 @@
 name: Read the Docs Dev Build 
 on:
+  push:
+    branches: [ "optional-deps" ]
   pull_request_target:
     types:
       - opened

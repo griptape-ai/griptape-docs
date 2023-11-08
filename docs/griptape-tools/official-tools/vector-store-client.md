@@ -4,7 +4,7 @@ Here is an example of how it can be used with the Pincone storage driver:
 
 ```python
 from griptape.structures import Agent
-from griptape.tools import VectorStoreClient
+from griptape.tools import VectorStoreClient, ToolOutputProcessor
 from griptape.loaders import WebLoader
 from griptape.engines import VectorQueryEngine
 from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
@@ -26,7 +26,7 @@ vector_db = VectorStoreClient(
 )
 
 agent = Agent(
-    tools=[vector_db]
+    tools=[vector_db, ToolOutputProcessor(off_prompt=False)]
 )
 
 agent.run(

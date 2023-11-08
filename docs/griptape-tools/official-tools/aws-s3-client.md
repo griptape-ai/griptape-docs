@@ -5,7 +5,7 @@ This tool enables LLMs to make AWS S3 API requests.
 ```python
 import boto3
 from griptape.structures import Agent
-from griptape.tools import AwsS3Client
+from griptape.tools import AwsS3Client, ToolMemoryClient
 
 # Initialize the AWS S3 client
 aws_s3_client = AwsS3Client(
@@ -14,7 +14,7 @@ aws_s3_client = AwsS3Client(
 
 # Create an agent with the AWS S3 client tool
 agent = Agent(
-    tools=[aws_s3_client]
+    tools=[aws_s3_client, ToolMemoryClient(off_prompt=False)]
 )
 
 # Task to list all the AWS S3 buckets
@@ -28,10 +28,10 @@ agent.run("List all my S3 buckets.")
                              "list_s3_buckets" activity of the "AwsS3Client"    
                              tool. This activity doesn't require any input.     
                                                                                 
-                             Action: {"type": "tool", "name": "AwsS3Client",    
-                             "activity": "list_s3_buckets"}                     
+                             Action: {"name": "AwsS3Client",    
+                             "path": "list_s3_buckets"}                     
 [09/11/23 16:49:42] INFO     Subtask 9fc44f5c8e73447ba737283cb2ef7f5d           
-                             Observation: Output of                             
+                             Response: Output of                             
                              "AwsS3Client.list_s3_buckets" was stored in memory 
                              with memory_name "ToolMemory" and              
                              artifact_namespace                                 
@@ -40,14 +40,13 @@ agent.run("List all my S3 buckets.")
                              Thought: The output of the "list_s3_buckets"       
                              activity is stored in memory. I can retrieve this  
                              information using the "summarize" activity of the  
-                             "ToolMemory" tool.                             
-                             Action: {"type": "memory", "name":                 
-                             "ToolMemory", "activity": "summarize", "input":
-                             {"values": {"memory_name": "ToolMemory",       
-                             "artifact_namespace":                              
-                             "f2592085fd4a430286a46770ea508cc9"}}}              
+                             "ToolMemory" tool.
+                             Action: {"name": "ToolMemoryClient", "path":   
+                             "summarize", "input": {"values": {"memory_name":   
+                             "ToolMemory", "artifact_namespace":                
+                             "f2592085fd4a430286a46770ea508cc9"}}}                                       
 [09/11/23 16:49:52] INFO     Subtask 0e9bb639a432431a92ef40a8c085ca0f           
-                             Observation: The text consists of multiple         
+                             Response: The text consists of multiple         
                              dictionaries, each containing a 'Name' and         
                              'CreationDate' key-value pair. The 'Name'          
                              represents the name of a resource or bucket, while 

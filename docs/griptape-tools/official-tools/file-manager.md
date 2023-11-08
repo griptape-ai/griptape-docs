@@ -33,11 +33,11 @@ agent.run("Can you get me the sample1.txt file?")
                              with the activity "load_files_from_disk" to load   
                              the file from the disk.                            
                                                                                 
-                             Action: {"type": "tool", "name": "FileManager",    
-                             "activity": "load_files_from_disk", "input":       
+                             Action: {"name": "FileManager",    
+                             "path": "load_files_from_disk", "input":       
                              {"values": {"paths": ["sample1.txt"]}}}            
                     INFO     Subtask ddcf48d970ce4edbbc22a46b2f83ec4f           
-                             Observation:                                       
+                             Response:                                       
                              [BlobArtifact(id='a715cc1bc6724bf28566a5b3c343b6ed'
                              , name='sample1.txt', type='BlobArtifact',         
                              value=b'This is the content of sample1.txt',       

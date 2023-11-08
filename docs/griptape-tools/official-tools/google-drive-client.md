@@ -21,7 +21,8 @@ google_drive_tool = GoogleDriveClient(
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
         "client_x509_cert_url": os.environ["GOOGLE_CERT_URL"]
     },
-    owner_email=os.environ["GOOGLE_OWNER_EMAIL"]
+    owner_email=os.environ["GOOGLE_OWNER_EMAIL"],
+    off_prompt=False
 )
 
 # Set up an agent using the GoogleDriveClient tool
@@ -45,13 +46,13 @@ agent.run(
                              activity of the GoogleDriveClient tool to          
                              accomplish this.                                   
                                                                                 
-                             Action: {"type": "tool", "name":                   
-                             "GoogleDriveClient", "activity":                   
+                             Action: {"name":                   
+                             "GoogleDriveClient", "path":                   
                              "save_content_to_drive", "input": {"values":       
                              {"path": "hello.txt", "content": "Hi this is       
                              Tony"}}}                                           
 [10/05/23 10:49:26] INFO     Subtask 381430d881354184ace65af39e0b292b           
-                             Observation: saved successfully                    
+                             Response: saved successfully                    
 [10/05/23 10:49:29] INFO     ToolkitTask 2ae3bb7e828744f3a2631c29c6fce001       
                              Output: The content 'Hi this is Tony' has been     
                              successfully saved in a file named 'hello.txt' on  

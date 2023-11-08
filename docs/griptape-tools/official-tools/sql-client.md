@@ -8,7 +8,7 @@ import boto3
 from griptape.drivers import AmazonRedshiftSqlDriver
 from griptape.loaders import SqlLoader
 from griptape.structures import Agent
-from griptape.tools import SqlClient
+from griptape.tools import SqlClient, ToolMemoryClient
 
 
 session = boto3.Session()
@@ -29,7 +29,7 @@ sql_tool = SqlClient(
 )
 
 agent = Agent(
-    tools=[sql_tool]
+    tools=[sql_tool, ToolMemoryClient(off_prompt=False)]
 )
 agent.run("SELECT * FROM people;")
 ```
@@ -41,25 +41,24 @@ agent.run("SELECT * FROM people;")
                              from the 'people' table. I can use the SqlClient   
                              tool to execute this query.                        
                                                                                 
-                             Action: {"type": "tool", "name": "SqlClient",      
-                             "activity": "execute_query", "input": {"values":   
+                             Action: {"name": "SqlClient",      
+                             "path": "execute_query", "input": {"values":   
                              {"sql_query": "SELECT * FROM people;"}}}           
 [09/11/23 17:03:03] INFO     Subtask 46c2f8926ce9469e9ca6b1b3364e3e41           
-                             Observation: Output of "SqlClient.execute_query"   
+                             Response: Output of "SqlClient.execute_query"   
                              was stored in memory with memory_name              
                              "ToolMemory" and artifact_namespace            
                              "217715ba3e444e4985bee223df5716a8"                 
 [09/11/23 17:03:11] INFO     Subtask e51f05449647482caa3051378ab5cb8c           
                              Thought: The output of the SQL query has been      
                              stored in memory. I can retrieve this data using   
-                             the ToolMemory's 'summarize' activity.         
-                             Action: {"type": "memory", "name":                 
-                             "ToolMemory", "activity": "summarize", "input":
-                             {"values": {"memory_name": "ToolMemory",       
-                             "artifact_namespace":                              
-                             "217715ba3e444e4985bee223df5716a8"}}}              
+                             the ToolMemory's 'summarize' activity.
+                             Action: {"name": "ToolMemoryClient", "path":   
+                             "summarize", "input": {"values": {"memory_name":   
+                             "ToolMemory", "artifact_namespace":                
+                             "217715ba3e444e4985bee223df5716a8"}}}                  
 [09/11/23 17:03:12] INFO     Subtask e51f05449647482caa3051378ab5cb8c           
-                             Observation: The text includes a list of employees 
+                             Response: The text includes a list of employees 
                              with their respective IDs, names, positions. There 
                              are two employees named Tanya Cooley who are both  
                              managers, and two employees named John Doe who are 

@@ -1,0 +1,21 @@
+name: Read the Docs Preview Dev
+on:	
+  pull_request_target:	
+    types:	
+      - opened	
+    paths:	
+      - "docs/**"	
+    branches:  
+      - dev
+
+permissions:	
+  pull-requests: write	
+
+jobs:	
+  pull-request-links-dev:	
+    runs-on: ubuntu-latest	
+    steps:	
+      - uses: readthedocs/actions/preview@v1	
+        with:	
+          project-slug: ${{ secrets.READTHEDOCS_PROJECT_SLUG_DEV }} 
+          single-version: 'true'	

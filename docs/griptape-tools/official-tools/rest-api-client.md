@@ -116,7 +116,7 @@ posts_client = RestApiClient(
 )
 
 pipeline = Pipeline(
-    memory=ConversationMemory(),
+    conversation_memory=ConversationMemory(),
     prompt_driver=OpenAiChatPromptDriver(
         model="gpt-4",
         temperature=0.1

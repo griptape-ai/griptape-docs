@@ -70,7 +70,7 @@ from griptape.structures import Pipeline
 from griptape.tasks import PromptTask
 from griptape.memory.structure import ConversationMemory
 
-agent = Pipeline(memory=ConversationMemory())
+agent = Pipeline(conversation_memory=ConversationMemory())
 agent.add_task(
     PromptTask(),
 )
@@ -106,7 +106,7 @@ from griptape.structures import Agent
 from griptape.memory.structure import ConversationMemory
 
 agent = Agent(
-    memory=ConversationMemory()
+    conversation_memory=ConversationMemory()
 )
 
 agent.run("Hello!")
@@ -121,7 +121,7 @@ from griptape.structures import Agent
 from griptape.memory.structure import ConversationMemory
 
 agent = Agent(
-    memory=ConversationMemory(max_runs=2)
+    conversation_memory=ConversationMemory(max_runs=2)
 )
 
 agent.run("Run 1")
@@ -146,7 +146,7 @@ from griptape.structures import Agent
 from griptape.memory.structure import SummaryConversationMemory
 
 agent = Agent(
-    memory=SummaryConversationMemory(offset=2)
+    conversation_memory=SummaryConversationMemory(offset=2)
 )
 
 agent.run("Hello!")
@@ -165,10 +165,10 @@ from griptape.memory.structure import ConversationMemory
 
 memory_driver = LocalConversationMemoryDriver(file_path="memory.json")
 
-agent_1 = Agent(memory=ConversationMemory(driver=memory_driver))
+agent_1 = Agent(conversation_memory=ConversationMemory(driver=memory_driver))
 agent_1.run("Skateboarding is my favorite activity.")
 
-agent_2 = Agent(memory=memory_driver.load())
+agent_2 = Agent(conversation_memory=memory_driver.load())
 agent_2.run("What is my favorite activity?")
 ```
 
@@ -182,7 +182,7 @@ from griptape.drivers import LocalConversationMemoryDriver
 from griptape.memory.structure import ConversationMemory
 
 local_driver = LocalConversationMemoryDriver(file_path="memory.json")
-agent = Agent(memory=ConversationMemory(driver=local_driver))
+agent = Agent(conversation_memory=ConversationMemory(driver=local_driver))
 
 agent.run("Surfing is my favorite sport.")
 agent.run("What is my favorite sport?")
@@ -210,7 +210,7 @@ dynamodb_driver = DynamoDbConversationMemoryDriver(
     partition_key_value=conversation_id,
 )
 
-agent = Agent(memory=ConversationMemory(driver=dynamodb_driver))
+agent = Agent(conversation_memory=ConversationMemory(driver=dynamodb_driver))
 
 agent.run("My name is Jeff.")
 agent.run("What is my name?")

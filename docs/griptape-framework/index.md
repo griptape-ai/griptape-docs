@@ -141,7 +141,7 @@ from griptape.tools import WebScraper, FileManager, ToolMemoryClient
 
 # Pipelines represent sequences of tasks.
 pipeline = Pipeline(
-    memory=ConversationMemory()
+    conversation_memory=ConversationMemory()
 )
 
 pipeline.add_tasks(

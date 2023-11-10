@@ -166,6 +166,9 @@ agent.run(
 
 The [CoherePromptDriver](../../reference/griptape/drivers/prompt/cohere_prompt_driver.md) connects to the Cohere [Generate](https://docs.cohere.ai/reference/generate) API.
 
+!!! info
+    This driver requires the `drivers-prompt-cohere` [extra](../index.md#extras).
+
 ```python
 import os
 from griptape.structures import Agent
@@ -182,6 +185,9 @@ agent.run('What is the sentiment of this review? Review: "I really enjoyed this 
 ```
 
 ### Anthropic
+
+!!! info
+    This driver requires the `drivers-prompt-anthropic` [extra](../index.md#extras).
 
 The [AnthropicPromptDriver](../../reference/griptape/drivers/prompt/anthropic_prompt_driver.md) connects to the Anthropic [Completions](https://docs.anthropic.com/claude/reference/complete_post) API.
 
@@ -201,6 +207,9 @@ agent.run('Where is the best place to see cherry blossums in Japan?')
 ```
 
 ### Hugging Face Hub
+
+!!! info
+    This driver requires the `drivers-prompt-huggingface` [extra](../index.md#extras).
 
 The [HuggingFaceHubPromptDriver](../../reference/griptape/drivers/prompt/hugging_face_hub_prompt_driver.md) connects to the [Hugging Face API](https://huggingface.co/docs/hub/api). It supports models with the following tasks:
 
@@ -256,6 +265,9 @@ agent.run("Hello Girafatron, what is your favorite animal?")
 ```
 
 ### Hugging Face Pipeline
+
+!!! info
+    This driver requires the `drivers-prompt-huggingface` [extra](../index.md#extras).
 
 The [HuggingFaceHubPromptDriver](../../reference/griptape/drivers/prompt/hugging_face_pipeline_prompt_driver.md) uses [Hugging Face Pipelines](https://huggingface.co/docs/transformers/main_classes/pipelines) for inference locally. It supports models with the following tasks:
 
@@ -321,6 +333,9 @@ through the [prompt_model_driver](../../reference/griptape/drivers/prompt/base_m
 
 #### Amazon SageMaker
 
+!!! info
+    This driver requires the `drivers-prompt-amazon-sagemaker` [extra](../index.md#extras).
+
 The [AmazonSageMakerPromptDriver](../../reference/griptape/drivers/prompt/amazon_sagemaker_prompt_driver.md) uses [Amazon SageMaker Endpoints](https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html) for inference on AWS.
 
 ##### LLaMA
@@ -373,6 +388,9 @@ agent.run("What is a good lasagna recipe?")
 ```
 
 #### Amazon Bedrock
+
+!!! info
+    This driver requires the `drivers-prompt-amazon-bedrock` [extra](../index.md#extras).
 
 The [AmazonBedrockPromptDriver](../../reference/griptape/drivers/prompt/amazon_bedrock_prompt_driver.md) uses [Amazon Bedrock](https://aws.amazon.com/bedrock/) for inference on AWS.
 

@@ -47,6 +47,9 @@ print("\n\n".join(values))
 
 ## Pinecone Vector Store Driver
 
+!!! info
+    This driver requires the `drivers-vector-pinecone` [extra](../index.md#extras).
+
 The [PineconeVectorStoreDriver](../../reference/griptape/drivers/vector/pinecone_vector_store_driver.md) supports the [Pinecone vector database](https://www.pinecone.io/).
 
 Here is an example of how the driver can be used to load and query information in a Pinecone cluster:
@@ -100,6 +103,9 @@ result = vector_store_driver.query(
 
 ## Marqo Vector Store Driver
 
+!!! info
+    This driver requires the `drivers-vector-marqo` [extra](../index.md#extras).
+
 The [MarqoVectorStoreDriver](../../reference/griptape/drivers/vector/marqo_vector_store_driver.md) supports the Marqo vector database.
 
 Here is an example of how the driver can be used to load and query information in a Marqo cluster:
@@ -150,6 +156,9 @@ print(result)
 
 ## Mongodb Atlas Vector Store Driver
 
+!!! info
+    This driver requires the `drivers-vector-mongodb` [extra](../index.md#extras).
+
 The [MongodbAtlasVectorStoreDriver](../../reference/griptape/drivers/vector/mongodb_vector_store_driver.md) provides support for storing vector data in a MongoDB Atlas database.
 
 Here is an example of how the driver can be used to load and query information in a MongoDb Atlas Cluster:
@@ -191,6 +200,9 @@ print(result)
 
 ## Redis Vector Store Driver
 
+!!! info
+    This driver requires the `drivers-vector-redis` [extra](../index.md#extras).
+
 The [RedisVectorStoreDriver](../../reference/griptape/drivers/vector/redis_vector_store_driver.md) integrates with the Redis vector storage system.
 
 Here is an example of how the driver can be used to load and query information in a Redis Cluster:
@@ -228,6 +240,9 @@ print(result)
 
 ## OpenSearch Vector Store Driver
 
+!!! info
+    This driver requires the `drivers-vector-opensearch` [extra](../index.md#extras).
+
 The [OpenSearchVectorStoreDriver](../../reference/griptape/drivers/vector/opensearch_vector_store_driver.md) integrates with the OpenSearch platform, allowing for storage, retrieval, and querying of vector data.
 
 Here is an example of how the driver can be used to load and query information in an OpenSearch Cluster:
@@ -264,6 +279,9 @@ print(result)
 ```
 
 ## PGVector Vector Store Driver
+
+!!! info
+    This driver requires the `drivers-vector-postgresql` [extra](../index.md#extras).
 
 The [PGVectorVectorStoreDriver](../../reference/griptape/drivers/vector/pgvector_vector_store_driver.md) integrates with PGVector, a vector storage and search extension for Postgres. While Griptape will handle enabling the extension, PGVector must be installed and ready for use in your Postgres instance before using this vector store driver.
 

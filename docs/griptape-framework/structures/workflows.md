@@ -45,10 +45,8 @@ story_task = PromptTask(
 workflow.add_task(story_task)
 
 character_task_1 = character_task("scotty", "Scotty")
-workflow.insert_task(world_task, story_task, character_task_1)
-
 character_task_2 = character_task("annie", "Annie")
-workflow.insert_task(world_task, story_task, character_task_2)
+workflow.insert_tasks(world_task, [character_task_1, character_task_2], story_task)
 
 workflow.run()
 ```

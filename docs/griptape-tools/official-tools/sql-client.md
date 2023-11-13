@@ -8,7 +8,7 @@ import boto3
 from griptape.drivers import AmazonRedshiftSqlDriver
 from griptape.loaders import SqlLoader
 from griptape.structures import Agent
-from griptape.tools import SqlClient, ToolMemoryClient
+from griptape.tools import SqlClient, TaskMemoryClient
 
 
 session = boto3.Session()
@@ -29,7 +29,7 @@ sql_tool = SqlClient(
 )
 
 agent = Agent(
-    tools=[sql_tool, ToolMemoryClient(off_prompt=False)]
+    tools=[sql_tool, TaskMemoryClient(off_prompt=False)]
 )
 agent.run("SELECT * FROM people;")
 ```
@@ -47,15 +47,15 @@ agent.run("SELECT * FROM people;")
 [09/11/23 17:03:03] INFO     Subtask 46c2f8926ce9469e9ca6b1b3364e3e41           
                              Response: Output of "SqlClient.execute_query"   
                              was stored in memory with memory_name              
-                             "ToolMemory" and artifact_namespace            
+                             "TaskMemory" and artifact_namespace            
                              "217715ba3e444e4985bee223df5716a8"                 
 [09/11/23 17:03:11] INFO     Subtask e51f05449647482caa3051378ab5cb8c           
                              Thought: The output of the SQL query has been      
                              stored in memory. I can retrieve this data using   
-                             the ToolMemory's 'summarize' activity.
-                             Action: {"name": "ToolMemoryClient", "path":   
+                             the TaskMemory's 'summarize' activity.
+                             Action: {"name": "TaskMemoryClient", "path":   
                              "summarize", "input": {"values": {"memory_name":   
-                             "ToolMemory", "artifact_namespace":                
+                             "TaskMemory", "artifact_namespace":                
                              "217715ba3e444e4985bee223df5716a8"}}}                  
 [09/11/23 17:03:12] INFO     Subtask e51f05449647482caa3051378ab5cb8c           
                              Response: The text includes a list of employees 

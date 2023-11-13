@@ -1,10 +1,8 @@
-## Overview
+# Overview
 
-You can use Conversation Memory to give Griptape Structures the ability to keep track of the conversation across runs.
+You can use Conversation Memory to give Griptape Structures the ability to keep track of the conversation across runs. All structures are created with [ConversationMemory](../../reference/griptape/memory/structure/conversation_memory.md) by default.
 
-### Agents
-
-[Agents](../structures/agents.md) are created with [ConversationMemory](../../reference/griptape/memory/structure/conversation_memory.md) by default.
+### Example
 
 ```python
 from griptape.structures import Agent
@@ -29,69 +27,14 @@ agent.run("What is my favorite animal?")
                              Output: Your favorite animal is a Liger, as you previously mentioned.
 ```
 
-### Pipelines
-
-[Pipelines](../structures/pipelines.md), however, must be explicitly configured with memory.
-
-#### Without Conversation Memory
+You can disable conversation memory in any structure by setting it to `None`:
 
 ```python
-from griptape.structures import Pipeline
-from griptape.tasks import PromptTask
-
-agent = Pipeline()
-agent.add_task(
-    PromptTask(),
-)
-
-agent.run("My favorite food is pizza.")
-agent.run("What is my favorite food?")
-```
-
-```
-[09/19/23 14:43:23] INFO     PromptTask f5ba90e6e877420290574e06f6626e17
-                             Input: My favorite food is pizza.
-[09/19/23 14:43:27] INFO     PromptTask f5ba90e6e877420290574e06f6626e17
-                             Output: That's great! Pizza is a popular favorite for many. There are so many varieties and toppings to choose
-                             from. Do you have a specific type or topping that you prefer?
-                    INFO     PromptTask f5ba90e6e877420290574e06f6626e17
-                             Input: What is my favorite food?
-[09/19/23 14:43:33] INFO     PromptTask f5ba90e6e877420290574e06f6626e17
-                             Output: As an artificial intelligence, I don't have access to personal data about individuals unless it has been
-                             shared with me in the course of our conversation. I'm designed to respect user privacy and confidentiality. So,
-                             I'm afraid I don't know what your favorite food is. You're welcome to tell me, though, and I can remember it for
-                             our current conversation!
-```
-
-#### With Conversation Memory
-
-```python
-from griptape.structures import Pipeline
-from griptape.tasks import PromptTask
+from griptape.structures import Agent
 from griptape.memory.structure import ConversationMemory
 
-agent = Pipeline(memory=ConversationMemory())
-agent.add_task(
-    PromptTask(),
-)
-
-agent.run("My favorite food is pizza.")
-agent.run("What is my favorite food?")
+Agent(conversation_memory=None)
 ```
-
-```
-[09/19/23 14:42:53] INFO     PromptTask b943a43973274aa59639904ad0483794
-                             Input: My favorite food is pizza.
-[09/19/23 14:42:56] INFO     PromptTask b943a43973274aa59639904ad0483794
-                             Output: That's great! Pizza is a popular favorite for many. There are so many varieties and toppings to choose
-                             from. Do you have a specific type or topping that you prefer?
-                    INFO     PromptTask b943a43973274aa59639904ad0483794
-                             Input: What is my favorite food?
-[09/19/23 14:42:58] INFO     PromptTask b943a43973274aa59639904ad0483794
-                             Output: Your favorite food is pizza, as you mentioned earlier.
-```
-
-### Workflows
 
 ## Types of Memory
 
@@ -106,7 +49,7 @@ from griptape.structures import Agent
 from griptape.memory.structure import ConversationMemory
 
 agent = Agent(
-    memory=ConversationMemory()
+    conversation_memory=ConversationMemory()
 )
 
 agent.run("Hello!")
@@ -121,7 +64,7 @@ from griptape.structures import Agent
 from griptape.memory.structure import ConversationMemory
 
 agent = Agent(
-    memory=ConversationMemory(max_runs=2)
+    conversation_memory=ConversationMemory(max_runs=2)
 )
 
 agent.run("Run 1")
@@ -146,7 +89,7 @@ from griptape.structures import Agent
 from griptape.memory.structure import SummaryConversationMemory
 
 agent = Agent(
-    memory=SummaryConversationMemory(offset=2)
+    conversation_memory=SummaryConversationMemory(offset=2)
 )
 
 agent.run("Hello!")
@@ -165,10 +108,10 @@ from griptape.memory.structure import ConversationMemory
 
 memory_driver = LocalConversationMemoryDriver(file_path="memory.json")
 
-agent_1 = Agent(memory=ConversationMemory(driver=memory_driver))
+agent_1 = Agent(conversation_memory=ConversationMemory(driver=memory_driver))
 agent_1.run("Skateboarding is my favorite activity.")
 
-agent_2 = Agent(memory=memory_driver.load())
+agent_2 = Agent(conversation_memory=memory_driver.load())
 agent_2.run("What is my favorite activity?")
 ```
 
@@ -182,7 +125,7 @@ from griptape.drivers import LocalConversationMemoryDriver
 from griptape.memory.structure import ConversationMemory
 
 local_driver = LocalConversationMemoryDriver(file_path="memory.json")
-agent = Agent(memory=ConversationMemory(driver=local_driver))
+agent = Agent(conversation_memory=ConversationMemory(driver=local_driver))
 
 agent.run("Surfing is my favorite sport.")
 agent.run("What is my favorite sport?")
@@ -210,7 +153,7 @@ dynamodb_driver = DynamoDbConversationMemoryDriver(
     partition_key_value=conversation_id,
 )
 
-agent = Agent(memory=ConversationMemory(driver=dynamodb_driver))
+agent = Agent(conversation_memory=ConversationMemory(driver=dynamodb_driver))
 
 agent.run("My name is Jeff.")
 agent.run("What is my name?")

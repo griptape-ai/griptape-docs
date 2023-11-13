@@ -5,14 +5,14 @@ This tool enables LLMs to make AWS IAM API requests.
 ```python
 import boto3
 from griptape.structures import Agent
-from griptape.tools import AwsIamClient, ToolMemoryClient
+from griptape.tools import AwsIamClient, TaskMemoryClient
 
 # Initialize the AWS IAM client
 aws_iam_client = AwsIamClient(session=boto3.Session())
 
 # Create an agent with the AWS IAM client tool
 agent = Agent(
-   tools=[aws_iam_client, ToolMemoryClient(off_prompt=False)]
+   tools=[aws_iam_client, TaskMemoryClient(off_prompt=False)]
 )
 
 # Run the agent with a high-level task
@@ -31,16 +31,16 @@ agent.run("List all my IAM users")
 [09/11/23 16:45:52] INFO     Subtask f2f0809ee10d4538972ed01fdd6a2fb8           
                              Response: Output of "AwsIamClient.list_users"   
                              was stored in memory with memory_name              
-                             "ToolMemory" and artifact_namespace            
+                             "TaskMemory" and artifact_namespace            
                              "51d22a018a434904a5da3bb8d4f763f7"                 
 [09/11/23 16:45:59] INFO     Subtask 8e0e918571544eeebf46de898466c48c           
                              Thought: The output of the list_users activity is  
                              stored in memory. I can retrieve this information  
-                             using the ToolMemory tool with the summarize   
+                             using the TaskMemory tool with the summarize   
                              activity.
-                             Action: {"name": "ToolMemoryClient", "path":   
+                             Action: {"name": "TaskMemoryClient", "path":   
                              "summarize", "input": {"values": {"memory_name":   
-                             "ToolMemory", "artifact_namespace":                
+                             "TaskMemory", "artifact_namespace":                
                              "51d22a018a434904a5da3bb8d4f763f7"}}}                                                 
 [09/11/23 16:46:03] INFO     Subtask 8e0e918571544eeebf46de898466c48c           
                              Response: The text provides information about   

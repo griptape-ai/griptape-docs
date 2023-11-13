@@ -136,7 +136,7 @@ Agents are great for getting started, but they are intentionally limited to a si
 from griptape.memory.structure import ConversationMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask, PromptTask
-from griptape.tools import WebScraper, FileManager, ToolMemoryClient
+from griptape.tools import WebScraper, FileManager, TaskMemoryClient
 
 
 # Pipelines represent sequences of tasks.
@@ -149,7 +149,7 @@ pipeline.add_tasks(
     ToolkitTask(
         "{{ args[0] }}",
         # Add tools for web scraping, and file management
-        tools=[WebScraper(), FileManager(), ToolMemoryClient(off_prompt=False)]
+        tools=[WebScraper(), FileManager(), TaskMemoryClient(off_prompt=False)]
     ),
     # Augment `input` from the previous task.
     PromptTask(
@@ -167,19 +167,19 @@ pipeline.run(
                              Input: Load https://www.griptape.ai, summarize it, and store it in griptape.txt
 [09/08/23 10:02:44] INFO     Subtask 42fd56ba100e45688401c5ce32b79a33
                              Thought: To complete this task, I need to first load the webpage using the WebScraper tool's get_content
-                             activity. Then, I will summarize the content using the ToolMemory tool's summarize activity. Finally, I will
+                             activity. Then, I will summarize the content using the TaskMemory tool's summarize activity. Finally, I will
                              store the summarized content in a file named griptape.txt using the FileManager tool's save_file_to_disk
                              activity.
 
                              Action: {"name": "WebScraper", "path": "get_content", "input": {"values": {"url":
                              "https://www.griptape.ai"}}}
 [09/08/23 10:02:45] INFO     Subtask 42fd56ba100e45688401c5ce32b79a33
-                             Response: Output of "WebScraper.get_content" was stored in memory with memory_name "ToolMemory" and
+                             Response: Output of "WebScraper.get_content" was stored in memory with memory_name "TaskMemory" and
                              artifact_namespace "39ca67bbe26b4e1584193b87ed82170d"
 [09/08/23 10:02:53] INFO     Subtask 8023e3d257274df29065b22e736faca8
-                             Thought: Now that the webpage content is stored in memory, I can use the ToolMemory tool's summarize activity
+                             Thought: Now that the webpage content is stored in memory, I can use the TaskMemory tool's summarize activity
                              to summarize the content.
-                             Action: {"name": "ToolMemoryClient", "path": "summarize", "input": {"values": {"memory_name": "ToolMemory", "artifact_namespace": "39ca67bbe26b4e1584193b87ed82170d"}}}
+                             Action: {"name": "TaskMemoryClient", "path": "summarize", "input": {"values": {"memory_name": "TaskMemory", "artifact_namespace": "39ca67bbe26b4e1584193b87ed82170d"}}}
 [09/08/23 10:02:57] INFO     Subtask 8023e3d257274df29065b22e736faca8
                              Response: Griptape is an open source framework that allows developers to build and deploy AI applications
                              using large language models (LLMs). It provides the ability to create conversational and event-driven apps that
@@ -190,7 +190,7 @@ pipeline.run(
                              Thought: Now that I have the summarized content, I can store it in a file named griptape.txt using the
                              FileManager tool's save_file_to_disk activity.
                              Action: {"name": "FileManager", "path": "save_file_to_disk", "input": {"values":
-                             {"memory_name": "ToolMemory", "artifact_namespace": "39ca67bbe26b4e1584193b87ed82170d", "path":
+                             {"memory_name": "TaskMemory", "artifact_namespace": "39ca67bbe26b4e1584193b87ed82170d", "path":
                              "griptape.txt"}}}
                     INFO     Subtask 7baae700239943c18b5b6b21873f0e13
                              Response: saved successfully

@@ -5,7 +5,7 @@ This tool enables LLMs to make AWS S3 API requests.
 ```python
 import boto3
 from griptape.structures import Agent
-from griptape.tools import AwsS3Client, ToolMemoryClient
+from griptape.tools import AwsS3Client, TaskMemoryClient
 
 # Initialize the AWS S3 client
 aws_s3_client = AwsS3Client(
@@ -14,7 +14,7 @@ aws_s3_client = AwsS3Client(
 
 # Create an agent with the AWS S3 client tool
 agent = Agent(
-    tools=[aws_s3_client, ToolMemoryClient(off_prompt=False)]
+    tools=[aws_s3_client, TaskMemoryClient(off_prompt=False)]
 )
 
 # Task to list all the AWS S3 buckets
@@ -33,17 +33,17 @@ agent.run("List all my S3 buckets.")
 [09/11/23 16:49:42] INFO     Subtask 9fc44f5c8e73447ba737283cb2ef7f5d           
                              Response: Output of                             
                              "AwsS3Client.list_s3_buckets" was stored in memory 
-                             with memory_name "ToolMemory" and              
+                             with memory_name "TaskMemory" and              
                              artifact_namespace                                 
                              "f2592085fd4a430286a46770ea508cc9"                 
 [09/11/23 16:49:50] INFO     Subtask 0e9bb639a432431a92ef40a8c085ca0f           
                              Thought: The output of the "list_s3_buckets"       
                              activity is stored in memory. I can retrieve this  
                              information using the "summarize" activity of the  
-                             "ToolMemory" tool.
-                             Action: {"name": "ToolMemoryClient", "path":   
+                             "TaskMemory" tool.
+                             Action: {"name": "TaskMemoryClient", "path":   
                              "summarize", "input": {"values": {"memory_name":   
-                             "ToolMemory", "artifact_namespace":                
+                             "TaskMemory", "artifact_namespace":                
                              "f2592085fd4a430286a46770ea508cc9"}}}                                       
 [09/11/23 16:49:52] INFO     Subtask 0e9bb639a432431a92ef40a8c085ca0f           
                              Response: The text consists of multiple         

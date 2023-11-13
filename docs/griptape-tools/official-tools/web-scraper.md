@@ -4,10 +4,10 @@ This tool enables LLMs to scrape web pages for full text, summaries, authors, ti
 
 ```python
 from griptape.structures import Agent
-from griptape.tools import WebScraper, ToolMemoryClient
+from griptape.tools import WebScraper, TaskMemoryClient
 
 agent = Agent(
-    tools=[WebScraper(), ToolMemoryClient(off_prompt=False)]
+    tools=[WebScraper(), TaskMemoryClient(off_prompt=False)]
 )
 
 agent.run(
@@ -30,17 +30,17 @@ agent.run(
                              {"url": "https://www.griptape.ai/"}}}              
 [09/11/23 15:27:48] INFO     Subtask 4b34be74b06a47ba9cb3a4b62aa35907           
                              Response: Output of "WebScraper.get_content" was
-                             stored in memory with memory_name "ToolMemory" 
+                             stored in memory with memory_name "TaskMemory" 
                              and artifact_namespace                             
                              "02da5930b8d74f7ca30aecc3760a3318"                 
 [09/11/23 15:27:59] INFO     Subtask 5b255e3e98aa401295f77532bc779390           
                              Thought: The content of the website has been stored
-                             in memory. I can use the ToolMemory tool with  
+                             in memory. I can use the TaskMemory tool with  
                              the summarize activity to get a summary of the     
                              content.
-                             Action: {"name": "ToolMemoryClient", "path":   
+                             Action: {"name": "TaskMemoryClient", "path":   
                              "summarize", "input": {"values": {"memory_name":   
-                             "ToolMemory", "artifact_namespace":                
+                             "TaskMemory", "artifact_namespace":                
                              "02da5930b8d74f7ca30aecc3760a3318"}}}                                                    
 [09/11/23 15:28:03] INFO     Subtask 5b255e3e98aa401295f77532bc779390           
                              Response: Griptape is an open source framework  

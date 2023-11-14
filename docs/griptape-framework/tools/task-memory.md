@@ -16,7 +16,7 @@ from griptape.artifacts import TextArtifact, BlobArtifact
 from griptape.memory import TaskMemory
 from griptape.memory.tool.storage import TextArtifactStorage, BlobArtifactStorage
 from griptape.structures import Agent
-from griptape.tools import WebScraper, FileManager, ToolOutputProcessor
+from griptape.tools import WebScraper, FileManager, TaskMemoryClient
 from griptape.engines import VectorQueryEngine, PromptSummaryEngine, CsvExtractionEngine, JsonExtractionEngine
 from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 
@@ -26,7 +26,7 @@ non-textual content.
 """
 task_memory = TaskMemory(
     # Disable all memory activities, so we can use
-    # ToolOutputProcessor as a tool later.
+    # TaskMemoryClient as a tool later.
     allowlist=[],
     artifact_storages={
         TextArtifact: TextArtifactStorage(
@@ -45,7 +45,7 @@ task_memory = TaskMemory(
 
 agent = Agent(
     task_memory=task_memory,
-    tools=[WebScraper(), FileManager(), ToolOutputProcessor()]
+    tools=[WebScraper(), FileManager(), TaskMemoryClient()]
 )
 
 agent.run(
@@ -64,7 +64,7 @@ agent.run(
                              store the summary in a file named griptape.txt. To 
                              achieve this, I need to first use the WebScraper   
                              tool to get the content of the webpage. Then, I    
-                             will use the ToolOutputProcessor to summarize the  
+                             will use the TaskMemoryClient to summarize the  
                              content. Finally, I will use the FileManager tool  
                              to save the summarized content to a file named     
                              griptape.txt.                                      
@@ -79,16 +79,16 @@ agent.run(
                              "82543abe79984d11bb952bd6036a7a01"                 
 [10/20/23 13:32:00] INFO     Subtask 58bac35adda94157ac6f9482e7c41c9f           
                              Thought: Now that I have the content of the webpage
-                             stored in memory, I can use the ToolOutputProcessor
+                             stored in memory, I can use the TaskMemoryClient
                              tool to summarize this content.                    
                              Action: {"name":                   
-                             "ToolOutputProcessor", "path": "summarize",    
+                             "TaskMemoryClient", "path": "summarize",    
                              "input": {"values": {"memory_name": "TaskMemory",  
                              "artifact_namespace":                              
                              "82543abe79984d11bb952bd6036a7a01"}}}              
 [10/20/23 13:32:03] INFO     Subtask 58bac35adda94157ac6f9482e7c41c9f           
                              Response: Output of                             
-                             "ToolOutputProcessor.summarize" was stored in      
+                             "TaskMemoryClient.summarize" was stored in      
                              memory with memory_name "TaskMemory" and           
                              artifact_namespace                                 
                              "01b8015f8c5647f09e8d103198404db0"                 

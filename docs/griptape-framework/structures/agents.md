@@ -1,6 +1,6 @@
 ## Overview
 
-An [Agent](../../reference/griptape/structures/agent.md) is the quickest way to get started with Griptape.
+A [Agent](../../reference/griptape/structures/agent.md) is the quickest way to get started with Griptape.
 Agents take in [tools](../../reference/griptape/structures/agent.md#griptape.structures.agent.Agent.tools) and [input_template](../../reference/griptape/structures/agent.md#griptape.structures.agent.Agent.input_template)
 directly, which the agent uses to dynamically determine whether to use a [Prompt Task](./tasks.md#prompt-task) or [Toolkit Task](./tasks.md#toolkit-task).
 

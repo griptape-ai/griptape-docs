@@ -45,7 +45,7 @@ task_memory = TaskMemory(
 
 agent = Agent(
     task_memory=task_memory,
-    tools=[WebScraper(), FileManager(), TaskMemoryClient()]
+    tools=[WebScraper(), FileManager(), TaskMemoryClient(off_prompt=True)]
 )
 
 agent.run(

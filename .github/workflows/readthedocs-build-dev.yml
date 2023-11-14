@@ -1,4 +1,4 @@
-name: Read the Docs Build Dev1
+name: Read the Docs Build Dev
 on: push
 
 permissions:

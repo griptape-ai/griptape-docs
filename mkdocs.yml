@@ -1,4 +1,6 @@
 site_name: Griptape Docs
+hooks:
+  - docs/plugins/swagger_ui_plugin.py
 plugins:
   - glightbox
   - search
@@ -20,6 +22,10 @@ extra_css:
   - assets/css/extra.css
   - assets/css/code_select.css
   - assets/css/mkdocstrings.css
+  - assets/css/swagger-ui.css
+extra_javascript:
+  - assets/scripts/swagger-ui-bundle.js
+  - assets/scripts/swagger-ui-standalone-preset.js
 extra:
   analytics:
     provider: google
@@ -67,6 +73,8 @@ nav:
   - Home:
       - Overview: "index.md"
       - Contributing: "contributing.md"
+  - Griptape Cloud:
+      - API Reference: api.md
   - Griptape Framework:
       - Overview: "griptape-framework/index.md"
       - Structures:

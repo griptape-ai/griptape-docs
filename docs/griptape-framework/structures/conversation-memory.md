@@ -141,12 +141,12 @@ The [AmazonDynamoDbConversationMemoryDriver](../../reference/griptape/drivers/me
 ```python
 import os
 import uuid
-from griptape.drivers import DynamoDbConversationMemoryDriver
+from griptape.drivers import AmazonDynamoDbConversationMemoryDriver
 from griptape.memory.structure import ConversationMemory
 from griptape.structures import Agent
 
 conversation_id = uuid.uuid4().hex
-dynamodb_driver = DynamoDbConversationMemoryDriver(
+dynamodb_driver = AmazonDynamoDbConversationMemoryDriver(
     table_name=os.getenv("DYNAMODB_TABLE_NAME"),
     partition_key="id",
     value_attribute_key="memory",

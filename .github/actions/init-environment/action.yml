@@ -1,4 +1,5 @@
 name: "Init Environment"
+description: "Initialize environment for tests"
 runs:
   using: "composite"
   steps:
@@ -26,13 +27,9 @@ runs:
 
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction --no-root --with docs --with test
+        run: poetry install --no-interaction --no-root --with test
         shell: bash
 
-      - name: Install project
-        run: poetry install --no-interaction --with docs --with test
-        shell: bash
-      
       - name: Activate venv 
         run: |
           source .venv/bin/activate

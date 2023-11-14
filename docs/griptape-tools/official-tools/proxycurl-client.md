@@ -4,8 +4,8 @@ The ProxycurlClient tool is a tool for interacting with the [Proxycurl API](http
 
 ```python
 import os
-from griptape.tools import ProxycurlClient
-from griptape.structures import Agent, TaskMemoryClient
+from griptape.tools import ProxycurlClient, TaskMemoryClient
+from griptape.structures import Agent
 
 # Create the ProxycurlClient tool
 proxycurl_tool = ProxycurlClient(

@@ -59,6 +59,8 @@ To install specific extras (e.g., drivers for [AnthropicPromptDriver](./structur
 poetry add griptape[drivers-prompt-anthropic,drivers-vector-pinecone]
 ```
 
+For a comprehensive list of extras, please refer to the `[tool.poetry.extras]` section of Griptape's [pyproject.toml](https://github.com/griptape-ai/griptape/blob/main/pyproject.toml).
+
 ## Build a Simple Agent 
 With Griptape, you can create *structures*, such as [Agents](./structures/agents.md), [Pipelines](./structures/pipelines.md), and [Workflows](./structures/workflows.md), that are composed of different types of tasks. First, let's build a simple Agent that we can interact with through a chat based interface. 
 

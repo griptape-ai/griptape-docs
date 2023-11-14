@@ -54,7 +54,7 @@ agent = Agent(
 
 agent.run("Hello!")
 
-print(agent.memory)
+print(agent.conversation_memory)
 ```
 
 You can set the [max_runs](../../reference/griptape/memory/structure/conversation_memory.md#griptape.memory.structure.conversation_memory.ConversationMemory.max_runs) parameter to limit how many runs are kept in memory.
@@ -73,8 +73,8 @@ agent.run("Run 3")
 agent.run("Run 4")
 agent.run("Run 5")
 
-print(agent.memory.runs[0].input == 'run4')
-print(agent.memory.runs[1].input == 'run5')
+print(agent.conversation_memory.runs[0].input == 'run4')
+print(agent.conversation_memory.runs[1].input == 'run5')
 ```
 
 ### Summary Conversation Memory
@@ -94,7 +94,7 @@ agent = Agent(
 
 agent.run("Hello!")
 
-print(agent.memory.summary)
+print(agent.conversation_memory.summary)
 ```
 
 ## Conversation Memory Drivers

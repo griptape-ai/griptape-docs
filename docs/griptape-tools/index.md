@@ -24,12 +24,14 @@ class RandomNumberGenerator(BaseTool):
         return TextArtifact(
             str(round(random.random(), params["values"].get("decimals")))
         )
-
-RandomNumberGenerator(off_prompt=False)
 ```
 
 A tool can have many "activities" as denoted by the `@activity` decorator. Each activity has a description (used to provide context to the LLM), and the input schema that the LLM must follow in order to use the tool.
 
 Output artifacts from all tool activities (except for `InfoArtifact` and `ErrorArtifact`) go to short-term `TaskMemory`. To disable that behavior set the `off_prompt` tool parameter to `False`:
+
+```python
+RandomNumberGenerator(off_prompt=False)
+```
 
 We provide a set of official Griptape Tools for accessing and processing data. You can also [build your own tools](./custom-tools/index.md).

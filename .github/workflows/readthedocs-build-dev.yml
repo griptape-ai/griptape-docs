@@ -13,7 +13,7 @@ jobs:
             curl --silent \
             --request POST \
             --header "Authorization: Token $READTHEDOCS_API_TOKEN" \
-            --url "$READTHEDOCS_API_ENDPOINT/projects/$READTHEDOCS_PROJECT_SLUG/versions/$READTHEDOCS_VERSION/builds/"
+            --url "$READTHEDOCS_API_ENDPOINT/projects/$READTHEDOCS_PROJECT_SLUG/versions/${READTHEDOCS_VERSION/\//-}/builds/"
         env:
           READTHEDOCS_VERSION: ${{ github.ref_name }}
           READTHEDOCS_API_TOKEN: ${{ secrets.READTHEDOCS_API_TOKEN }}

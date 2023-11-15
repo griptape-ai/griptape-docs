@@ -5,14 +5,14 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup
 
 config_scheme = {
-    "spec_url": "/assets/Griptape.openapi.yml",
+    "spec_url": "assets/Griptape.openapi.yml",
     "template": "swagger.md.tmpl",
     "outfile": "griptape-cloud/api.md",
 }
 
 
-def generate_page_contents():
-    spec_url = config_scheme["spec_url"]
+def generate_page_contents(config):
+    spec_url = f"{config.site_url}{config_scheme['spec_url']}"
     tmpl_url = config_scheme["template"]
     env = Environment(
         loader=FileSystemLoader("docs/plugins/tmpl"),
@@ -34,5 +34,5 @@ def on_page_read_source(page, config):
     index_path = os.path.join(config["docs_dir"], config_scheme["outfile"])
     page_path = os.path.join(config["docs_dir"], page.file.src_path)
     if index_path == page_path:
-        contents = generate_page_contents()
+        contents = generate_page_contents(config)
         return contents

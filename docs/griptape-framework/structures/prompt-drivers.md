@@ -67,11 +67,11 @@ agent = Agent(
     prompt_driver=OpenAiChatPromptDriver(
         api_key=os.environ["OPENAI_API_KEY"],
         temperature=0.1,
-        model="gpt-3.5-turbo-16k"
+        model="gpt-3.5-turbo-16k",
+        response_format="json_object",
+        seed=42,
     ),
     input_template="You will be provided with a description of a mood, and your task is to generate the CSS code for a color that matches it. Description: {{ args[0] }}",
-    response_format="json_object",
-    seed=42,
     rules=[
         Rule(
             value='Write your output in json with a single key called "css_code".'

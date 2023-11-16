@@ -108,7 +108,6 @@ nav:
           - GoogleDriveClient: "griptape-tools/official-tools/google-drive-client.md"
           - GoogleDocsClient: "griptape-tools/official-tools/google-docs-client.md"
           - OpenWeatherClient: "griptape-tools/official-tools/openweather-client.md"
-          - ProxycurlClient: "griptape-tools/official-tools/proxycurl-client.md"
           - RestApiClient: "griptape-tools/official-tools/rest-api-client.md"
           - SqlClient: "griptape-tools/official-tools/sql-client.md"
           - TaskMemoryClient: "griptape-tools/official-tools/task-memory-client.md"

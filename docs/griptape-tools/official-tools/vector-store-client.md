@@ -1,4 +1,4 @@
-The [VectorStoreClient](../../reference/griptape/tools/vector_store_client/tool.md) enables LLMs to dynamically query tool memory.
+The [VectorStoreClient](../../reference/griptape/tools/vector_store_client/tool.md) enables LLMs to dynamically query task memory.
 
 Here is an example of how it can be used with the Pincone storage driver:
 

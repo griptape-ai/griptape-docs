@@ -5,7 +5,7 @@ Task Memory augments activity inputs and outputs with storage capabilities. It's
 * **Long textual content**: when textual content returned by tools can't fit in the token limit, it's often useful to perform operations on it in a separate process, not in the main LLM.
 * **Non-textual content**: tools can generate images, videos, PDFs, and other non-textual content that can be stored in memory and acted upon later by other tools.
 
-By default, Griptape augments all tool outputs with [TaskMemory](../../reference/griptape/memory/tool/task_memory.md) but you can override at the structure, task, or tool activity level.
+By default, Griptape augments all tool outputs with [TaskMemory](../../reference/griptape/memory/task/task_memory.md) but you can override at the structure, task, or tool activity level.
 
 
 ## Task Memory
@@ -21,7 +21,7 @@ from griptape.engines import VectorQueryEngine, PromptSummaryEngine, CsvExtracti
 from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 
 """
-Define tool memory for storing textual and
+Define task memory for storing textual and
 non-textual content.
 """
 task_memory = TaskMemory(

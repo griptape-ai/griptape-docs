@@ -7127,6 +7127,18 @@
   padding: 0 20px;
   width: 100%;
 }
+.swagger-ui .wrapper section section.models.is-open {
+  background-color: #272a35;
+}
+.swagger-ui .wrapper section section div {
+  background-color: #272a35;
+}
+.swagger-ui .wrapper section section div.no-margin div {
+  background-color: #1e2129;
+}
+.swagger-ui .wrapper section div {
+  background-color: #1e2129;
+}
 .swagger-ui .opblock-tag-section {
   display: flex;
   flex-direction: column;
@@ -8384,6 +8396,10 @@
   color: #666;
   font-weight: 400;
 }
+.swagger-ui table.model tr.description {
+  color: #666;
+  font-weight: 400;
+}
 .swagger-ui table.model tr.description td:first-child,
 .swagger-ui table.model tr.property-row.required td:first-child {
   font-weight: 700;
@@ -8548,9 +8564,11 @@
   padding-bottom: 10px;
   padding-top: 10px;
   vertical-align: middle;
+  border-top: none;
 }
 .swagger-ui .servers table td:first-of-type {
   padding-right: 1em;
+  padding-left: 1em;
 }
 .swagger-ui .servers table td input {
   height: 100%;

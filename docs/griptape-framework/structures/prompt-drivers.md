@@ -53,6 +53,9 @@ print(result.value)
 
 Griptape offers the following Prompt Drivers for interacting with LLMs.
 
+!!! info
+    When overriding the default Prompt Driver in a Structure (Agent, Pipeline, or Workflow), take care to ensure the configured Embedding Driver is compatible with the Prompt Driver you've selected.
+
 ### OpenAI Chat
 
 The [OpenAiChatPromptDriver](../../reference/griptape/drivers/prompt/openai_chat_prompt_driver.md) connects to the [OpenAI Chat](https://platform.openai.com/docs/guides/chat) API.

@@ -53,8 +53,8 @@ print(result.value)
 
 Griptape offers the following Prompt Drivers for interacting with LLMs.
 
-!!! info
-    When overriding the default Prompt Driver in a Structure (Agent, Pipeline, or Workflow), take care to ensure the configured Embedding Driver is compatible with the Prompt Driver you've selected.
+!!! warning
+    When overriding a default Prompt Driver, take care to ensure the Structure's configured Embedding Driver is compatible with the Prompt Driver you've selected. If Task Memory isn't needed, you can avoid compatability issues by setting `task_memory=None` to disable Task Memory in your Structure.
 
 ### OpenAI Chat
 

@@ -14,7 +14,7 @@ Here is an example of how memory can be used in unison with multiple tools to st
 ```python
 from griptape.artifacts import TextArtifact, BlobArtifact
 from griptape.memory import TaskMemory
-from griptape.memory.tool.storage import TextArtifactStorage, BlobArtifactStorage
+from griptape.memory.task.storage import TextArtifactStorage, BlobArtifactStorage
 from griptape.structures import Agent
 from griptape.tools import WebScraper, FileManager, TaskMemoryClient
 from griptape.engines import VectorQueryEngine, PromptSummaryEngine, CsvExtractionEngine, JsonExtractionEngine

@@ -11,7 +11,7 @@ jobs:
   generate-pdf-docs:
     runs-on: ubuntu-latest
     steps:
-      - name: Create PDF
-        uses: mkrakowitzer/actions-makepdfs@v1.3
+      - name: Markdown to PDF and HTML
+        uses: BaileyJM02/markdown-to-pdf@v1.2.0
         with:
-          markdown_dir: docs
+          input_path: docs

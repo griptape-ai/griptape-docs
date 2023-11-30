@@ -11,6 +11,10 @@ jobs:
   generate-pdf-docs:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout actions
+        uses: actions/checkout@v3
+      - name: Init environment
+        uses: ./.github/actions/init-environment
       - name: Markdown to PDF and HTML
         uses: BaileyJM02/markdown-to-pdf@v1.2.0
         with:

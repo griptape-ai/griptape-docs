@@ -2,10 +2,10 @@ name: Generate PDF Docs
 on:
   push:
     branches: [ "main", "dev" ]
-    paths: [ "docs/**" ]
+#    paths: [ "docs/**" ]
   pull_request:
     branches: [ "main", "dev" ]
-    paths: [ "docs/**" ]
+#    paths: [ "docs/**" ]
 
 jobs:
   generate-pdf-docs:

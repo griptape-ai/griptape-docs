@@ -1,0 +1,17 @@
+name: Generate PDF Docs
+on:
+  push:
+    branches: [ "main", "dev" ]
+    paths: [ "docs/**" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+    paths: [ "docs/**" ]
+
+jobs:
+  generate-pdf-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create PDF
+        uses: mkrakowitzer/actions-makepdfs@v1.3
+        with:
+          markdown_dir: docs

@@ -33,6 +33,10 @@ The [AzureOpenAiEmbeddingDriver](../../reference/griptape/drivers/embedding/azur
 with updated defaults.
 
 ### Bedrock Titan Embeddings
+
+!!! info
+    This driver requires the `drivers-embedding-amazon-bedrock` [extra](../index.md#extras).
+
 The [BedrockTitanEmbeddingDriver](../../reference/griptape/drivers/embedding/bedrock_titan_embedding_driver.md) uses the [Amazon Bedrock Embeddings API](https://docs.aws.amazon.com/bedrock/latest/userguide/embeddings.html).
 
 ```python

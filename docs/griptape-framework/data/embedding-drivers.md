@@ -52,11 +52,11 @@ Here is how you can override the Embedding Driver that is used by default in age
 
 ```python
 from griptape.structures import Agent
-from griptape.tools import WebScraper
+from griptape.tools import WebScraper, TaskMemoryClient
 from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 
 agent = Agent(
-    tools=[WebScraper()],
+    tools=[WebScraper(), TaskMemoryClient(off_prompt=False)],
     embedding_driver=OpenAiEmbeddingDriver()
 )
 

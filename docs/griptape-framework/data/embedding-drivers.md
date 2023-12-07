@@ -56,7 +56,7 @@ print(embeddings[:3])
 !!! info
     This driver requires the `drivers-embedding-huggingface` [extra](../index.md#extras).
 
-The [HuggingFaceHubEmbeddingDriver](../../reference/griptape/drivers/embedding/hugging_face_hub_embedding_driver.md) connects to the [Hugging Face Hub API](https://huggingface.co/docs/hub/api). It supports models with the following tasks:
+The [HuggingFaceHubEmbeddingDriver](../../reference/griptape/drivers/embedding/huggingface_hub_embedding_driver.md) connects to the [Hugging Face Hub API](https://huggingface.co/docs/hub/api). It supports models with the following tasks:
 
 - feature-extraction
 
@@ -67,7 +67,7 @@ from griptape.tokenizers import HuggingFaceTokenizer
 from transformers import AutoTokenizer
 
 driver = HuggingFaceHubEmbeddingDriver(
-    api_token=os.environ["HUGGING_FACE_HUB_ACCESS_TOKEN"],
+    api_token=os.environ["HUGGINGFACE_HUB_ACCESS_TOKEN"],
     model="sentence-transformers/all-MiniLM-L6-v2",
     tokenizer=HuggingFaceTokenizer(
         tokenizer=AutoTokenizer.from_pretrained(

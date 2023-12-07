@@ -33,6 +33,10 @@ The [AzureOpenAiEmbeddingDriver](../../reference/griptape/drivers/embedding/azur
 with updated defaults.
 
 ### Bedrock Titan Embeddings
+
+!!! info
+    This driver requires the `drivers-embedding-amazon-bedrock` [extra](../index.md#extras).
+
 The [BedrockTitanEmbeddingDriver](../../reference/griptape/drivers/embedding/bedrock_titan_embedding_driver.md) uses the [Amazon Bedrock Embeddings API](https://docs.aws.amazon.com/bedrock/latest/userguide/embeddings.html).
 
 ```python
@@ -45,6 +49,37 @@ print(embeddings[:3])
 ```
 ```
 [-0.234375, -0.024902344, -0.14941406]
+```
+
+### Hugging Face Hub Embeddings
+
+!!! info
+    This driver requires the `drivers-embedding-huggingface` [extra](../index.md#extras).
+
+The [HuggingFaceHubEmbeddingDriver](../../reference/griptape/drivers/embedding/huggingface_hub_embedding_driver.md) connects to the [Hugging Face Hub API](https://huggingface.co/docs/hub/api). It supports models with the following tasks:
+
+- feature-extraction
+
+```python
+import os
+from griptape.drivers import HuggingFaceHubEmbeddingDriver
+from griptape.tokenizers import HuggingFaceTokenizer
+from transformers import AutoTokenizer
+
+driver = HuggingFaceHubEmbeddingDriver(
+    api_token=os.environ["HUGGINGFACE_HUB_ACCESS_TOKEN"],
+    model="sentence-transformers/all-MiniLM-L6-v2",
+    tokenizer=HuggingFaceTokenizer(
+        tokenizer=AutoTokenizer.from_pretrained(
+            "sentence-transformers/all-MiniLM-L6-v2"
+        )
+    ),
+)
+
+results = driver.embed_string("Hello world!")
+
+# display the first 3 embeddings
+print(embeddings[:3])
 ```
 
 ### Override Default Structure Embedding Driver

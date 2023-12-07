@@ -247,7 +247,7 @@ def prompt_stack_to_string_converter(prompt_stack: PromptStack) -> str:
 agent = Agent(
     prompt_driver=HuggingFaceHubPromptDriver(
         model="tiiuae/falcon-7b-instruct",
-        api_token=os.environ["HUGGINGFACE_HUB_API_TOKEN"],
+        api_token=os.environ["HUGGINGFACE_HUB_ACCESS_TOKEN"],
         prompt_stack_to_string=prompt_stack_to_string_converter,
     ),
     rulesets=[
@@ -308,7 +308,7 @@ def prompt_stack_to_string_converter(prompt_stack: PromptStack) -> str:
 agent = Agent(
     prompt_driver=HuggingFaceHubPromptDriver(
         model="tiiuae/falcon-7b-instruct",
-        api_token=os.environ["HUGGINGFACE_HUB_API_TOKEN"],
+        api_token=os.environ["HUGGINGFACE_HUB_ACCESS_TOKEN"],
         prompt_stack_to_string=prompt_stack_to_string_converter,
     ),
     rulesets=[

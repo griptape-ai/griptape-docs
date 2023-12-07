@@ -75,6 +75,7 @@ nav:
           - Pipelines: "griptape-framework/structures/pipelines.md"
           - Workflows: "griptape-framework/structures/workflows.md"
           - Prompt Drivers: "griptape-framework/structures/prompt-drivers.md"
+          - Tokenizers: "griptape-framework/structures/tokenizers.md"
           - Conversation Memory: "griptape-framework/structures/conversation-memory.md"
           - Rulesets: "griptape-framework/structures/rulesets.md"
           - Events: "griptape-framework/structures/events.md"

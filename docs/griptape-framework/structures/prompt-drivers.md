@@ -214,7 +214,7 @@ agent.run('Where is the best place to see cherry blossums in Japan?')
 !!! info
     This driver requires the `drivers-prompt-huggingface` [extra](../index.md#extras).
 
-The [HuggingFaceHubPromptDriver](../../reference/griptape/drivers/prompt/hugging_face_hub_prompt_driver.md) connects to the [Hugging Face API](https://huggingface.co/docs/hub/api). It supports models with the following tasks:
+The [HuggingFaceHubPromptDriver](../../reference/griptape/drivers/prompt/huggingface_hub_prompt_driver.md) connects to the [Hugging Face Hub API](https://huggingface.co/docs/hub/api). It supports models with the following tasks:
 
 - text2text-generation
 - text-generation
@@ -247,7 +247,7 @@ def prompt_stack_to_string_converter(prompt_stack: PromptStack) -> str:
 agent = Agent(
     prompt_driver=HuggingFaceHubPromptDriver(
         model="tiiuae/falcon-7b-instruct",
-        api_token=os.environ["HUGGING_FACE_API_TOKEN"],
+        api_token=os.environ["HUGGINGFACE_HUB_ACCESS_TOKEN"],
         prompt_stack_to_string=prompt_stack_to_string_converter,
     ),
     rulesets=[
@@ -272,7 +272,7 @@ agent.run("Hello Girafatron, what is your favorite animal?")
 !!! info
     This driver requires the `drivers-prompt-huggingface` [extra](../index.md#extras).
 
-The [HuggingFaceHubPromptDriver](../../reference/griptape/drivers/prompt/hugging_face_pipeline_prompt_driver.md) uses [Hugging Face Pipelines](https://huggingface.co/docs/transformers/main_classes/pipelines) for inference locally. It supports models with the following tasks:
+The [HuggingFaceHubPromptDriver](../../reference/griptape/drivers/prompt/huggingface_pipeline_prompt_driver.md) uses [Hugging Face Pipelines](https://huggingface.co/docs/transformers/main_classes/pipelines) for inference locally. It supports models with the following tasks:
 
 - text2text-generation
 - text-generation
@@ -308,7 +308,7 @@ def prompt_stack_to_string_converter(prompt_stack: PromptStack) -> str:
 agent = Agent(
     prompt_driver=HuggingFaceHubPromptDriver(
         model="tiiuae/falcon-7b-instruct",
-        api_token=os.environ["HUGGING_FACE_API_TOKEN"],
+        api_token=os.environ["HUGGINGFACE_HUB_ACCESS_TOKEN"],
         prompt_stack_to_string=prompt_stack_to_string_converter,
     ),
     rulesets=[

@@ -46,7 +46,10 @@ workflow.add_task(story_task)
 
 character_task_1 = character_task("scotty", "Scotty")
 character_task_2 = character_task("annie", "Annie")
-workflow.insert_tasks(world_task, [character_task_1, character_task_2], story_task)
+
+# Note the preserve_relationship flag. This ensures that world_task remains a parent of
+# story_task so its output can be referenced in the story_task prompt.
+workflow.insert_tasks(world_task, [character_task_1, character_task_2], story_task, preserve_relationship=True)
 
 workflow.run()
 ```

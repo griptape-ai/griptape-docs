@@ -18,7 +18,8 @@ You can deploy a Griptape Cloud app using the Griptape CLI or the web browser in
 4. Your app is now deploying. When deployment succeeds, the blinking blue light next to the name of your app will turn to solid green. You can also check deployment status by clicking the Deployments tab.
 5. You can now run your app. Try typing a prompt into the chat window.
 
-!!! info 
+
+!!! info
     
     "Your .zip archive file should contain the following files."
 

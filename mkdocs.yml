@@ -147,5 +147,5 @@ nav:
           - Installation: "griptape-cloud/cli/index.md"
       - Cloud API:
           - API Reference: "griptape-cloud/api/api.md"
-  - Reference Guide: "user-guide/"
+  - Reference Guide: "reference/"
   - Trade School: "https://learn.griptape.ai"

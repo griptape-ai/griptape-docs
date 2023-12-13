@@ -55,6 +55,7 @@ theme:
     - navigation.expand
     - navigation.top
     - announce.dismiss
+    - toc.follow
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
@@ -133,6 +134,14 @@ nav:
           - Load and Query Marqo: "examples/load-query-and-chat-marqo.md"
           - Query a Webpage: "examples/query-webpage.md"
   - Cloud:
-      - API Reference: "griptape-cloud/api.md"
+      - Overview: "griptape-cloud/index.md"
+      - Private Preview FAQ: "griptape-cloud/dev-preview-faq.md"
+      - Getting Started:
+          - Quick Start using CLI: "griptape-cloud/getting-started/quickstart-cli.md"
+          - Quick Start using Samples: "griptape-cloud/getting-started/quickstart-samples.md"
+      - Griptape CLI:
+          - Overview: "griptape-cloud/cli/index.md"
+      - Cloud API:
+          - API Reference: "griptape-cloud/api/api.md"
   - Reference Guide: "reference/"
   - Trade School: "https://learn.griptape.ai"

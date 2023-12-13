@@ -51,3 +51,23 @@ Currently, in Private Preview, Griptape Cloud apps use .env files to store API K
 user@machine-name ~ % cd ~/demo_app
 user@machine-name demo_app % echo OPENAI_API_KEY="YOUR OPENAI KEY" > .env
 ``` 
+
+5. Test your application locally
+
+You can use the Griptape CLI to run your application locally. The default project uses OpenAI, so this will require a valid OPENAI_API_KEY variable in a .env file in your project (step 4). 
+
+```
+user@machine-name demo_app % gt app run --directory ~/demo_app --arg "write me a haiku about a skateboard?"
+Running app
+
+[ installation of required packages if necessary ]
+
+Installing collected packages: python-dotenv
+Successfully installed python-dotenv-1.0.0
+[12/12/23 20:33:49] INFO     PromptTask cecaba17b86746e4966a6ae4afbb3b4d
+                             Input: write me a haiku about a skateboard?
+[12/12/23 20:33:52] INFO     PromptTask cecaba17b86746e4966a6ae4afbb3b4d
+                             Output: Wheels glide on pavement,
+                             Freedom beneath the sun's gaze,
+                             Skateboard, my escape.
+```

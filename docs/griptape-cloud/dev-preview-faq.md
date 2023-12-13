@@ -18,6 +18,12 @@ You can deploy a Griptape Cloud app using the Griptape CLI or the web browser in
 4. Your app is now deploying. When deployment succeeds, the blinking blue light next to the name of your app will turn to solid green. You can also check deployment status by clicking the Deployments tab.
 5. You can now run your app. Try typing a prompt into the chat window.
 
+!!! note "Phasellus posuere in sem ut cursus"
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+    massa, nec semper lorem quam in massa.
+    
 !!! info
     Your .zip archive file should contain the following files. Make sure each of these is at the top level of the archive file structure (not inside a folder).
     - An app file named app.py to run the main application. Be sure to define the method in app.py to return a Griptape structure as follows:  def init_structure(*args) -> Structure:

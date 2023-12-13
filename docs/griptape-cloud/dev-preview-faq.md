@@ -20,9 +20,9 @@ You can deploy a Griptape Cloud app using the Griptape CLI or the web browser in
 5. You can now run your app. Try typing a prompt into the chat window.
 
 
-!!! info
+!!! note ""
 
-    "Your .zip archive file should contain the following files."
+    Your .zip archive file should contain the following files.
 
     - An app file named app.py to run the main application. Be sure to define the method in app.py to return a Griptape structure as follows:  def init_structure(*args) -> Structure:
     - A .env file that defines any necessary environment variables, such as API keys/values.

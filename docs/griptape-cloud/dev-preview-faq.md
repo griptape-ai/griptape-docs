@@ -11,6 +11,7 @@ __How do I access Griptape Cloud?__
 3. Sign in with the credentials provided in your invitation email, or Sign in with Google using the same email at which you received the invitation. 
 
 __How do I deploy my first Griptape Cloud app?__
+
 You can deploy a Griptape Cloud app using the Griptape CLI or the web browser interface. To deploy an app from the web interface:
 1. Sign in at https://cloud-preview.griptape.ai.
 2. Click "New App" in the left navigation menu.
@@ -20,7 +21,7 @@ You can deploy a Griptape Cloud app using the Griptape CLI or the web browser in
 
 
 !!! info
-    
+
     "Your .zip archive file should contain the following files."
 
     - An app file named app.py to run the main application. Be sure to define the method in app.py to return a Griptape structure as follows:  def init_structure(*args) -> Structure:

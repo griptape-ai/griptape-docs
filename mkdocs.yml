@@ -138,6 +138,7 @@ nav:
       - Overview: "griptape-cloud/index.md"
       - Private Preview FAQ: "griptape-cloud/dev-preview-faq.md"
       - Getting Started:
+          - Quick Start: "griptape-cloud/getting-started/index.md"
           - Quick Start using CLI: "griptape-cloud/getting-started/quickstart-cli.md"
           - Quick Start using Samples: "griptape-cloud/getting-started/quickstart-samples.md"
       - Griptape CLI:

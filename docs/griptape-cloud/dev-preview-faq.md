@@ -45,10 +45,6 @@ __Are there limits? How many Griptape Cloud apps can I create and run?__
 
 During the preview phase you can have up to 10 apps at a time, and each app can have up to 10 concurrently active runs. Each deployment is limited to 10MB in size.
 
-__I have a friend/colleague who would love to try Griptape Cloud. How can I nominate them to be invited?__
-
-Tell them to apply for early access using the web form, and then drop us a note in Intercom to let us know.
-
 __Will you be charging money for Griptape Cloud?__
 
 During this preview phase, you can use Griptape Cloud free of charge.

@@ -91,6 +91,7 @@ Your requirements.txt file should include any libraries that your app uses. At a
 `griptape==0.21.1`
 
 Alternatively, you can use poetry. It will take care of locking dependencies for you, although it has its own requirements such as needing a pyproject.toml file.
+
 `poetry export --without-hashes --format=requirements.txt > requirements.txt`
 
 __Do I zip up the whole folder (including the .venv) or do I zip just the app.py and requirements.txt? What about the .env file?__

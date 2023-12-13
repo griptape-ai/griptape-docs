@@ -142,7 +142,6 @@ nav:
           - Quick Start using CLI: "griptape-cloud/getting-started/quickstart-cli.md"
           - Quick Start using Samples: "griptape-cloud/getting-started/quickstart-samples.md"
       - User Guide:
-          - Overview: "griptape-cloud/user-guide/index.md"
           - API Keys: "griptape-cloud/user-guide/api-keys.md"
       - Griptape CLI:
           - Installation: "griptape-cloud/cli/index.md"

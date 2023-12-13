@@ -12,7 +12,8 @@ __How do I access Griptape Cloud?__
 
 __How do I deploy my first Griptape Cloud app?__
 
-You can deploy a Griptape Cloud app using the Griptape CLI or the web browser interface. To deploy an app from the web interface:
+You can deploy a Griptape Cloud app using the Griptape CLI or the web browser interface. To deploy an app using the Griptape CLI, follow the [Getting Started using CLI](quickstart-cli.md) tutorial. To deploy an app from the web interface:
+
 1. Sign in at https://cloud-preview.griptape.ai.
 2. Click "New App" in the left navigation menu.
 3. Upload a .zip archive file containing your application files. To upload the .zip file, drag and drop it onto the button labeled “Got an App?”, or click the button to browse for your file.

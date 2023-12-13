@@ -54,4 +54,50 @@ __Will you be charging money for Griptape Cloud?__
 
 During this preview phase, you can use Griptape Cloud free of charge.
 
+__Where to start for an app template? Is there a simple example I can use?__
+
+You can use the following example to deploy a simple chat agent. You'll need three files: `.env`, `app.py`, and `requirements.txt`.
+
+Your `.env` file should look like this, but with your actual OpenAI API key in place of the string _your_openai_api_key_here_.
+
+```py title=".env" hl_lines="3" linenums="1"
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+Your app.py file should look like this.
+
+```py title="app.py" hl_lines="3" linenums="1"
+from dotenv import load_dotenv
+from griptape.structures import Agent, Structure
+
+load_dotenv()
+
+def init_structure(*args) -> Structure:
+    return Agent()
+```
+
+Your requirements.txt file should look like this.
+
+```py title="requirements.txt" hl_lines="3" linenums="1"
+griptape==0.21.1
+python-dotenv
+```
+
+Once you have created those three files, bundle them into a .zip archive file. It’s now ready to deploy to Griptape Cloud.
+
+__What goes in the requirements.txt file?__
+
+Your requirements.txt file should include any libraries that your app uses. At a minimum, you need one line that specifies the griptape package requirement, for example:
+`griptape==0.21.1`
+
+Alternatively, you can use poetry. It will take care of locking dependencies for you, although it has its own requirements such as needing a pyproject.toml file.
+`poetry export --without-hashes --format=requirements.txt > requirements.txt`
+
+__Do I zip up the whole folder (including the .venv) or do I zip just the app.py and requirements.txt? What about the .env file?__
+
+Zip up the app.py, requirements.txt, and .env file. Make sure requirements.txt and .env files are at the top of the directory, rather than inside a folder.
+
+__What versions of griptape are supported?__
+
+Griptape Cloud supports griptape versions 0.21.1 and higher.
 

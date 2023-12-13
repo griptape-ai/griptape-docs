@@ -42,5 +42,16 @@ __How do I provide feedback or request technical assistance?__
 
 When you are signed in to Griptape Cloud in a browser, click the circular pink Intercom button at the lower right corner of the screen, and then send us a message. We look forward to your feedback, bug reports, and feature suggestions. We’d also be happy to help you troubleshoot problems. 
 
+__Are there limits? How many Griptape Cloud apps can I create and run?__
+
+During the preview phase you can have up to 10 apps at a time, and each app can have up to 10 concurrently active runs. Each deployment is limited to 10MB in size.
+
+__I have a friend/colleague who would love to try Griptape Cloud. How can I nominate them to be invited?__
+
+Tell them to apply for early access using the web form, and then drop us a note in Intercom to let us know.
+
+__Will you be charging money for Griptape Cloud?__
+
+During this preview phase, you can use Griptape Cloud free of charge.
 
 

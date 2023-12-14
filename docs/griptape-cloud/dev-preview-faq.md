@@ -11,6 +11,14 @@ If you have already received an invitation:
 2. Go to https://cloud-preview.griptape.ai.
 3. Sign in with the credentials provided in your invitation email, or Sign in with Google using the same email at which you received the invitation. 
 
+__What can I expect during this preview phase?__
+
+Over the coming weeks, you can expect a lot of new features, some bugs, and maybe a few breaking changes. We may also reach out to you for feedback about your experience, or to ask you to try out certain features.
+
+__What do you expect from me, as a preview user?__
+
+We want your feedback! Our goal for this private preview phase is to learn as much as we can about customers’ use cases, needs, and pain points to inform our continued development of Griptape Cloud.
+
 __OK, I've signed in. How do I deploy my first Griptape Cloud app?__
 
 You can deploy a Griptape Cloud app using the Griptape CLI or the web browser interface. To deploy an app using the Griptape CLI, follow the [Getting Started using CLI](quickstart-cli.md) tutorial. To deploy an app from the web interface:
@@ -28,15 +36,6 @@ You can deploy a Griptape Cloud app using the Griptape CLI or the web browser in
     - A requirements.txt file that defines any other requirements, such as which version of the griptape framework your app should use.
         
     Make sure each of these is at the top level of the archive file structure (not inside a folder).
-
-    
-__What can I expect during this preview phase?__
-
-Over the coming weeks, you can expect a lot of new features, some bugs, and maybe a few breaking changes. We may also reach out to you for feedback about your experience, or to ask you to try out certain features.
-
-__What do you expect from me, as a preview user?__
-
-We want your feedback! Our goal for this private preview phase is to learn as much as we can about customers’ use cases, needs, and pain points to inform our continued development of Griptape Cloud.
 
 __How do I provide feedback or request technical assistance?__
 

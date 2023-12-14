@@ -394,17 +394,21 @@ agent.run("Give me information about Griptape")
                              models.
 ```
 
-## Image Generation Task
+## Image Generation Tasks
 
-To generate an image, use the [Image Generation Task](../../reference/tasks/image_generation_task.md). The Image Generation Task accepts an Image Generation Engine configured to use an [Image Generation Driver](./image-generation-drivers.md).
+To generate an image, use one of the following Image Generation Tasks. All Image Generation Tasks accept an Image Generation Engine configured to use an [Image Generation Driver](./image-generation-drivers.md).
 
-A successful Image Generation Task outputs an [Image Artifact](). The task can be configured to also write the generated image to the filesystem by providing either the `output_file` or `output_dir` fields. The `output_file` field supports file names in the current directory (`my_image.png`), relative directory prefixes (`images/my_image.png`), or absolute paths (`/usr/var/my_image.png`). By setting `output_dir`, the task will generate a file name and place the image in the requested directory.
+All successful Image Generation Tasks will always output an [Image Artifact](). Each task can be configured to additionally write the generated image to disk by providing either the `output_file` or `output_dir` field. The `output_file` field supports file names in the current directory (`my_image.png`), relative directory prefixes (`images/my_image.png`), or absolute paths (`/usr/var/my_image.png`). By setting `output_dir`, the task will generate a file name and place the image in the requested directory.
+
+### Text to Image Task
+
+The Text to Image Task generates an image from a text prompt.
 
 ```python
 from griptape.structures import Agent
 from griptape.engines import ImageGenerationEngine
 from griptape.drivers import OpenAiDalleImageGenerationDriver
-from griptape.tasks import ImageGenerationTask
+from griptape.tasks import TextToImageTask
 
 
 # Create an ImageGenerationDriver configured to use OpenAI's DALL-E 3 model.
@@ -419,15 +423,128 @@ engine = ImageGenerationEngine(
     image_generation_driver=driver,
 )
 
-# Create an ImageGenerationTask configured to use the engine.
-generate_image_task = ImageGenerationTask(
+# Create a TextToImageTask configured to use the engine.
+task = TextToImageTask(
     image_generation_engine=engine,
     output_file="mountain.png",
 )
 
 # Create an agent and add the task to it.
 agent = Agent()
-agent.add_task(generate_image_task)
+agent.add_task(task)
 
 agent.run("Generate a beautiful image of a mountain landscape on a summer day.")
+```
+
+### Image Variation Task 
+
+The Image Variation Task generates an image using an input image and a text prompt. The input image is used as a basis for generating a new image as requested by the text prompt.
+
+```python
+from griptape.structures import Agent
+from griptape.engines import ImageGenerationEngine
+from griptape.drivers import AmazonBedrockImageGenerationDriver, \
+    AmazonBedrockStableDiffusionImageGenerationModelDriver
+from griptape.tasks import ImageVariationTask
+
+
+# Create an ImageGenerationDriver configured to use Stable Diffusion via Bedrock.
+driver = AmazonBedrockImageGenerationDriver(
+    image_generation_model_driver=AmazonBedrockStableDiffusionImageGenerationModelDriver(),
+    model="stability.stable-diffusion-xl-v0",
+)
+
+# Create an ImageGenerationEngine configured to use the driver.
+engine = ImageGenerationEngine(
+    image_generation_driver=driver,
+)
+
+# Create an ImageVariationTask configured to use the engine.
+task = ImageVariationTask(
+    image_generation_engine=engine,
+    image_file="mountain.png",
+    output_file="mountian_winter.png",
+)
+
+# Create an agent and add the task to it.
+agent = Agent()
+agent.add_task(task)
+
+agent.run("Generate a beautiful image of a mountain landscape on a snowy winter day.")
+```
+
+### Image Inpainting Task 
+
+The Image Inpainting Task generates an image using an input image, a mask image, and a text prompt. The input image will be modified within the bounds of the mask image as requested by the text prompt.
+
+```python
+from griptape.structures import Agent
+from griptape.engines import ImageGenerationEngine
+from griptape.drivers import AmazonBedrockImageGenerationDriver, \
+    AmazonBedrockStableDiffusionImageGenerationModelDriver
+from griptape.tasks import ImageInpaintingTask
+
+
+# Create an ImageGenerationDriver configured to use Stable Diffusion via Bedrock.
+driver = AmazonBedrockImageGenerationDriver(
+    image_generation_model_driver=AmazonBedrockStableDiffusionImageGenerationModelDriver(),
+    model="stability.stable-diffusion-xl-v0",
+)
+
+# Create an ImageGenerationEngine configured to use the driver.
+engine = ImageGenerationEngine(
+    image_generation_driver=driver,
+)
+
+# Create an ImageInpaintingTask configured to use the engine.
+task = ImageInpaintingTask(
+    image_generation_engine=engine,
+    image_file="mountain.png",
+    mask_file="mask.png",
+    output_file="mountain_lake.png",
+)
+
+# Create an agent and add the task to it.
+agent = Agent()
+agent.add_task(task)
+
+agent.run("Generate a beautiful image of a lake within a mountain landscape on a snowy winter day.")
+```
+
+### Image Outpainting Task 
+
+The Image Outpainting Task generates an image using an input image, a mask image, and a text prompt. The input image will be modified outside the bounds of a mask image as requested by the text prompt.
+
+```python
+from griptape.structures import Agent
+from griptape.engines import ImageGenerationEngine
+from griptape.drivers import AmazonBedrockImageGenerationDriver, \
+    AmazonBedrockStableDiffusionImageGenerationModelDriver
+from griptape.tasks import ImageOutpaintingTask
+
+
+# Create an ImageGenerationDriver configured to use Stable Diffusion via Bedrock.
+driver = AmazonBedrockImageGenerationDriver(
+    image_generation_model_driver=AmazonBedrockStableDiffusionImageGenerationModelDriver(),
+    model="stability.stable-diffusion-xl-v0",
+)
+
+# Create an ImageGenerationEngine configured to use the driver.
+engine = ImageGenerationEngine(
+    image_generation_driver=driver,
+)
+
+# Create an ImageOutpaintingTask configured to use the engine.
+task = ImageOutpaintingTask(
+    image_generation_engine=engine,
+    image_file="mountain.png",
+    mask_file="mask.png",
+    output_file="forest_lake.png",
+)
+
+# Create an agent and add the task to it.
+agent = Agent()
+agent.add_task(task)
+
+agent.run("Generate a beautiful image of a lake within a forest landscape.")
 ```

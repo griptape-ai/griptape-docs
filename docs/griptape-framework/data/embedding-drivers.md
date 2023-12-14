@@ -37,7 +37,7 @@ with updated defaults.
 !!! info
     This driver requires the `drivers-embedding-amazon-bedrock` [extra](../index.md#extras).
 
-The [AmazonBedrockTitanEmbeddingDriver](../../reference/griptape/drivers/embedding/bedrock_titan_embedding_driver.md) uses the [Amazon Bedrock Embeddings API](https://docs.aws.amazon.com/bedrock/latest/userguide/embeddings.html).
+The [AmazonBedrockTitanEmbeddingDriver](../../reference/griptape/drivers/embedding/amazon_bedrock_titan_embedding_driver.md) uses the [Amazon Bedrock Embeddings API](https://docs.aws.amazon.com/bedrock/latest/userguide/embeddings.html).
 
 ```python
 from griptape.drivers import AmazonBedrockTitanEmbeddingDriver

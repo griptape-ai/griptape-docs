@@ -2,15 +2,16 @@ __What is Griptape Cloud?__
 
 Griptape Cloud is a managed web service that you can use to deploy and run AI-enabled python applications. You can write conversational agents, sequential pipelines, or complex workflows using the griptape framework, and then simply upload them to Griptape Cloud when you are ready to test and publish them; we’ll take care of provisioning and managing the underlying infrastructure.
 
-Griptape Cloud is currently in a private preview evaluation phase intended for development and testing purposes.
-
 __How do I access Griptape Cloud?__
 
+Griptape Cloud is currently in a private preview phase intended for development and testing evaluation purposes. If you're interested in trying Griptape Cloud, please [apply for early access](https://webforms.pipedrive.com/f/6k34Wv0Ye9456wvshJGnCrbj9UIEIZ2GJsHIbsif4kN0IaR1OnOXhbstBF0qspJL2j). We have begun sending invitations to a limited number of users, and would love to hear more about your intended use case and needs. We appreciate your patience as we expand the program.
+
+If you have already received an invitation:
 1. Check your email for a message from hello@griptape.ai containing your temporary Griptape Cloud login credentials. 
 2. Go to https://cloud-preview.griptape.ai.
 3. Sign in with the credentials provided in your invitation email, or Sign in with Google using the same email at which you received the invitation. 
 
-__How do I deploy my first Griptape Cloud app?__
+__OK, I've signed in. How do I deploy my first Griptape Cloud app?__
 
 You can deploy a Griptape Cloud app using the Griptape CLI or the web browser interface. To deploy an app using the Griptape CLI, follow the [Getting Started using CLI](quickstart-cli.md) tutorial. To deploy an app from the web interface:
 

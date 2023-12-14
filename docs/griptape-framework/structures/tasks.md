@@ -393,3 +393,41 @@ agent.run("Give me information about Griptape")
                              flexibility when working with large language       
                              models.
 ```
+
+## Image Generation Task
+
+To generate an image, use the [Image Generation Task](../../reference/tasks/image_generation_task.md). The Image Generation Task accepts an Image Generation Engine configured to use an [Image Generation Driver](./image-generation-drivers.md).
+
+A successful Image Generation Task outputs an [Image Artifact](). The task can be configured to also write the generated image to the filesystem by providing either the `output_file` or `output_dir` fields. The `output_file` field supports file names in the current directory (`my_image.png`), relative directory prefixes (`images/my_image.png`), or absolute paths (`/usr/var/my_image.png`). By setting `output_dir`, the task will generate a file name and place the image in the requested directory.
+
+```python
+from griptape.structures import Agent
+from griptape.engines import ImageGenerationEngine
+from griptape.drivers import OpenAiDalleImageGenerationDriver
+from griptape.tasks import ImageGenerationTask
+
+
+# Create an ImageGenerationDriver configured to use OpenAI's DALL-E 3 model.
+driver = OpenAiDalleImageGenerationDriver(
+    model="dall-e-3",
+    quality="hd",
+    style="natural",
+)
+
+# Create an ImageGenerationEngine configured to use the driver.
+engine = ImageGenerationEngine(
+    image_generation_driver=driver,
+)
+
+# Create an ImageGenerationTask configured to use the engine.
+generate_image_task = ImageGenerationTask(
+    image_generation_engine=engine,
+    output_file="mountain.png",
+)
+
+# Create an agent and add the task to it.
+agent = Agent()
+agent.add_task(generate_image_task)
+
+agent.run("Generate a beautiful image of a mountain landscape on a summer day.")
+```

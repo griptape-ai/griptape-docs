@@ -4,7 +4,7 @@ Griptape Cloud is a managed web service that you can use to deploy and run AI-en
 
 __How do I access Griptape Cloud?__
 
-Griptape Cloud is currently in a private preview phase intended for development and testing evaluation purposes. If you're interested in trying out the private preview, please [apply for early access](https://webforms.pipedrive.com/f/6k34Wv0Ye9456wvshJGnCrbj9UIEIZ2GJsHIbsif4kN0IaR1OnOXhbstBF0qspJL2j). We have begun sending invitations to a limited number of users, and would love to hear more about your intended use case and needs. We appreciate your patience as we expand the program.
+Griptape Cloud is currently in a private preview phase intended for development and testing evaluation purposes. If you're interested in trying it out and providing feedback, please [apply for early access](https://webforms.pipedrive.com/f/6k34Wv0Ye9456wvshJGnCrbj9UIEIZ2GJsHIbsif4kN0IaR1OnOXhbstBF0qspJL2j). We have begun sending invitations to a limited number of users, and would love to hear more about your intended use case and needs. We appreciate your patience as we expand the program.
 
 If you have already received an invitation:
 1. Check your email for a message from hello@griptape.ai containing your temporary Griptape Cloud login credentials. 

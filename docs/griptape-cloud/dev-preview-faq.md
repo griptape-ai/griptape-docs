@@ -68,7 +68,7 @@ from griptape.structures import Agent, Structure
 
 load_dotenv()
 
-def init_structure(*args) -> Structure:
+def init_structure(*args, **init_params) -> Structure:
     return Agent()
 ```
 

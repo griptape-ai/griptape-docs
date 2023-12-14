@@ -4,13 +4,13 @@ Click the link from your Griptape Cloud invitation email or navigate directly to
 ![Auth Dialog](../assets/img/gs-auth.png)
 
 ### Welcome to Griptape Cloud
-WHen you first login to Griptape Cloud, you'll land on a Getting Started page that describes the basic steps in the first run experience. 
+When you first login to Griptape Cloud, you'll land on a Getting Started page that describes the basic steps in the first run experience. 
 
 For the purposes of this quick start, we're going to start by creating an API Key. 
 
 ![Landing Page](../assets/img/gs-first-login.png)
 
-### Create you API Key
+### Create Your API Key
 Griptape's CLI and API use API Keys for authentication. In the left hand navigation bar, click on __API Keys__.
 
 Click the __+ Create API Key__ button on the top left of the API Key page. A dialog box will appear. Name your API Key something appropriate and click __Create New Key__ to continue. 

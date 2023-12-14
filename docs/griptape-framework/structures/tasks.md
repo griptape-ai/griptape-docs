@@ -420,7 +420,7 @@ driver = OpenAiDalleImageGenerationDriver(
 
 # Create an ImageGenerationEngine configured to use the driver.
 engine = ImageGenerationEngine(
-    image_generation_driver=driver,
+    image_driver=driver,
 )
 
 # Create a TextToImageTask configured to use the engine.
@@ -436,7 +436,7 @@ agent.add_task(task)
 agent.run("Generate a beautiful image of a mountain landscape on a summer day.")
 ```
 
-### Image Variation Task 
+### Image Variation Task
 
 The Image Variation Task generates an image using an input image and a text prompt. The input image is used as a basis for generating a new image as requested by the text prompt.
 
@@ -456,7 +456,7 @@ driver = AmazonBedrockImageGenerationDriver(
 
 # Create an ImageGenerationEngine configured to use the driver.
 engine = ImageGenerationEngine(
-    image_generation_driver=driver,
+    image_driver=driver,
 )
 
 # Create an ImageVariationTask configured to use the engine.
@@ -473,7 +473,7 @@ agent.add_task(task)
 agent.run("Generate a beautiful image of a mountain landscape on a snowy winter day.")
 ```
 
-### Image Inpainting Task 
+### Image Inpainting Task
 
 The Image Inpainting Task generates an image using an input image, a mask image, and a text prompt. The input image will be modified within the bounds of the mask image as requested by the text prompt.
 
@@ -493,7 +493,7 @@ driver = AmazonBedrockImageGenerationDriver(
 
 # Create an ImageGenerationEngine configured to use the driver.
 engine = ImageGenerationEngine(
-    image_generation_driver=driver,
+    image_driver=driver,
 )
 
 # Create an ImageInpaintingTask configured to use the engine.
@@ -511,7 +511,7 @@ agent.add_task(task)
 agent.run("Generate a beautiful image of a lake within a mountain landscape on a snowy winter day.")
 ```
 
-### Image Outpainting Task 
+### Image Outpainting Task
 
 The Image Outpainting Task generates an image using an input image, a mask image, and a text prompt. The input image will be modified outside the bounds of a mask image as requested by the text prompt.
 
@@ -531,7 +531,7 @@ driver = AmazonBedrockImageGenerationDriver(
 
 # Create an ImageGenerationEngine configured to use the driver.
 engine = ImageGenerationEngine(
-    image_generation_driver=driver,
+    image_driver=driver,
 )
 
 # Create an ImageOutpaintingTask configured to use the engine.

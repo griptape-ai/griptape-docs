@@ -18,7 +18,7 @@ Successfully configured profile default!
 
 2. __gt cloud list-organizations__ (optional step for validation)
 
-The `list-organizations` command list the __organizations__ you have in your Griptape Cloud account. For Private Preview users, you should only see one entry. 
+The `list-organizations` command lists the __organizations__ you have in your Griptape Cloud account. For Private Preview users, you should only see one entry. 
 ```shell
 user@machine-name ~ % gt cloud list-organizations
 {'organizations': 
@@ -34,7 +34,7 @@ user@machine-name ~ % gt cloud list-organizations
 
 Next, we can use the Griptape CLI to scaffold a sample project that is compatible with Griptape Cloud and has a default structure in place. This is a quick way to get started if you aren't converting an existing Python project to Griptape.
 
-You should see something like the following. In this example, I'm creating an app called _demo_app_ in my Home directory. I'm then verifying it's contents via `ls`. 
+You should see something like the following. In this example, I'm creating an app called _demo_app_ in my Home directory. I'm then verifying its contents via `ls`. 
 
 ```shell
 user@machine-name ~ % gt app new --directory ~/ demo_app

@@ -12,8 +12,11 @@ gt cloud configure
 
 2. __gt cloud list-organizations__ (optional step for validation)
 
-The `list-organizations` command lists the __organizations__ you have in your Griptape Cloud account. For Private Preview users, you should only see one entry. 
+The `list-organizations` command lists the __organizations__ you have in your Griptape Cloud account. For Private Preview users, you should only see one entry.
 ```shell
+gt cloud list-organizations
+```
+``` {: .optional-language-as-class .no-copy}
 user@machine-name ~ % gt cloud list-organizations
 {'organizations': 
 [{'created_at': '2023-11-21T21:42:19.147Z'

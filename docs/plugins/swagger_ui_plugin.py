@@ -7,7 +7,7 @@ from markupsafe import Markup
 config_scheme = {
     "spec_url": "https://cloud.griptape.ai/public/openapi.yaml",
     "template": "swagger.md.tmpl",
-    "outfile": "griptape-cloud/api/api.md",
+    "outfile": "griptape-cloud/api.md",
 }
 
 

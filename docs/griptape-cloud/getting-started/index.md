@@ -1,5 +1,5 @@
-# Login to Griptape Cloud (Private Preview)
-Click the link from your Griptape Cloud invitation email or navigate directly to the [Griptape Cloud Private Preview](https://cloud-preview.griptape.ai/) console.
+# Login to Griptape Cloud (Developer Preview)
+Click the link from your Griptape Cloud invitation email or navigate directly to the [Griptape Cloud Developer Preview](https://cloud-preview.griptape.ai/) console.
 
 ![Auth Dialog](../assets/img/gs-auth.png)
 

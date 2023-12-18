@@ -145,6 +145,7 @@ nav:
           - API Keys: "griptape-cloud/cloud-user-guide/api-keys.md"
       - Griptape CLI:
           - Installation: "griptape-cloud/cli/index.md"
+          - Configuration: "griptape-cloud/cli/configure.md"
       - Cloud API:
           - API Reference: "griptape-cloud/api/api.md"
       - Terms of Service: "griptape-cloud/terms-of-service.md"

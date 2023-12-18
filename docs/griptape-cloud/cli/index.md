@@ -20,22 +20,5 @@ python3 -m pipx install griptape-cli
 gt --help
 ```
 
-### Configuring the Griptape CLI
-
-**API KEY**
-
-Currently, the Griptape CLI looks for an environment variable named `GRIPTAPE_CLOUD_API_KEY`. You can set this variable in whatever way you find most convenient. We plan to remove this requirement in place of a configuration option, but it's required in the current version.
-
-```sh
-export GRIPTAPE_CLOUD_API_KEY=<api_key>
-```
-
-**CLOUD ENDPOINT**
-
-Griptape has multiple cloud endpoints. In some cases, such as the Private Preview, we are using a specific environment to isolate users. The CLI currently looks for an environment variable named `GRIPTAPE_CLOUD_ENDPOINT_URL` and uses that for all CLI commands.
-
-If you're using Griptape in Production, you can skip this step and the CLI will default to the production environment. For Private Preview users, set the following in your environment.
-
-```sh
-export GRIPTAPE_CLOUD_ENDPOINT_URL="https://cloud-preview.griptape.ai"
-```
+### Next steps
+After you've installed the Griptape CLI, you'll need to [configure](configure.md) it using the `gt cloud configure` command. 

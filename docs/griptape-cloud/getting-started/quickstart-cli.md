@@ -2,18 +2,12 @@
 
 Before you can create your first application using the Griptape CLI, make sure you have completed the [Installation](../cli/index.md) steps for the Griptape CLI. 
 
-First, you need to make sure your CLI is configured to your Griptape Cloud environment. Run `gt cloud configure` from your Terminal application. You will be asked to select an _organization_ and an _environment_. Finally, you'll be asked to name this profile. Below, I left the default (_default_).
-
 1. __gt cloud configure__
 
+If you haven't already, you need to make sure your CLI is configured to your Griptape Cloud environment. You can read more about the configuration options and suggested default in [this guide](../cli/configure.md). 
+
 ```shell
-user@machine-name ~ % gt cloud configure
-? Select the organization you want to use: 
-1). default: 5f01a7b7-4d3a-441e-ac92-9ee74h8d28ea
-? Select the environment you want to use: 
-1). default: e9faefbd-fea0-44b8-b4e7-95f728bdbd9f
-Enter a name for this profile [default]:
-Successfully configured profile default!
+gt cloud configure
 ```
 
 2. __gt cloud list-organizations__ (optional step for validation)

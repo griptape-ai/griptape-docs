@@ -1,9 +1,9 @@
 # Griptape Cloud
 Griptape Cloud is a managed platform for running AI-powered agents, pipelines, and workflows.
 
-!!! note "Griptape Cloud is currently in Private Preview"
+!!! note "Griptape Cloud is currently in Developer Preview"
 
-    Griptape Cloud is in Private Preview. For access, please apply for early access [here](https://www.griptape.ai/griptape-cloud/). 
+    Griptape Cloud is in Developer Preview. For access, please apply for early access [here](https://www.griptape.ai/griptape-cloud/). 
 
 ### Run apps, not infrastructure.
 Deploy and run your AI-powered apps on our fully-managed SaaS platform. Simply log in to the web console and click “Create New App.” Next, upload a .zip file containing your app, or start with one of our sample templates.

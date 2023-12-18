@@ -14,6 +14,10 @@ Griptape Cloud expects a certain structure within your application.
 | .env | Currently, Griptape Cloud uses .env files to set application environment variables. This file should have KEY=VALUE pairs for any variables you'd like set in your application's container |
 | requirements.txt | The list of libraries your application depends upon inclusive of the version of the __griptape__ framework you are targetting. |
 
+!!! warning
+
+    Currently Griptape Structures like Agents, Pipelines, and Workflows will default to using OpenAI if a specific driver is not implemented in the application. Make sure you either set an __OPENAI_API_KEY__ value in your __.env__ or load up your appropriate alternative credentials. 
+
 Here is a sample application template you can use as a starting point for your app. 
 
 ```py title="app.py" 

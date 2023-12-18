@@ -7,7 +7,7 @@ from markupsafe import Markup
 config_scheme = {
     "spec_url": "https://cloud.griptape.ai/public/openapi.yaml",
     "template": "swagger.md.tmpl",
-    "outfile": "griptape-cloud/api.md",
+    "outfile": "griptape-cloud/api/api-reference.md",
 }
 
 
@@ -15,7 +15,7 @@ def generate_page_contents(page):
     spec_url = config_scheme["spec_url"]
     tmpl_url = config_scheme["template"]
     env = Environment(
-        loader=FileSystemLoader("docs/griptape-cloud/plugins/tmpl"),
+        loader=FileSystemLoader("docs/plugins/tmpl"),
         autoescape=select_autoescape(["html", "xml"]),
     )
     md = markdown.Markdown()

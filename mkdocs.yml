@@ -88,7 +88,7 @@ nav:
           - Installation: "griptape-cloud/cli/index.md"
           - Configuration: "griptape-cloud/cli/configure.md"
       - Cloud API:
-          - API Reference: "griptape-cloud/api/api.md"
+          - API Reference: "griptape-cloud/api/api-reference.md"
       - Terms of Service: "griptape-cloud/terms-of-service.md"
   - Framework:
       - Overview: "griptape-framework/index.md"

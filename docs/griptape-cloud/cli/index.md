@@ -2,19 +2,19 @@
 
 Installing the Griptape CLI is simple. Follow these steps to install using [pipx](https://github.com/pypa/pipx).
 
-1. Install pipx if you haven't already.
+Step 1. Install pipx if you haven't already.
 
 ```sh
 python3 -m pip install --user pipx
 ```
 
-2. Use pipx to install the Griptape CLI Package.
+Step 2. Use pipx to install the Griptape CLI Package.
 
 ```sh
 python3 -m pipx install griptape-cli
 ```
 
-3. Verify your installation
+Step 3. Verify your installation
 
 ```sh
 gt --help

@@ -34,6 +34,9 @@ Next, we can use the Griptape CLI to scaffold a sample project that is compatibl
 You should see something like the following. In this example, I'm creating an app called _demo_app_ in my Home directory. I'm then verifying its contents via `ls`. 
 
 ```shell
+gt app new --directory ~/ demo_app
+```
+```{: .optional-language-as-class .no-copy}
 user@machine-name ~ % gt app new --directory ~/ demo_app
 Initializing app demo_app
 user@machine-name ~ % ls ~/demo_app

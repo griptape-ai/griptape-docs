@@ -59,7 +59,3 @@ Congratulations. You're ready to run your first Griptape Cloud app. In the right
 Alternatively, you can use poetry. It will take care of locking dependencies for you, although it has its own requirements such as needing a pyproject.toml file.
 
 `poetry export --without-hashes --format=requirements.txt > requirements.txt`
-
-**Do I zip up the whole folder (including the .venv) or do I zip just the app.py and requirements.txt? What about the .env file?**
-
-Zip up the app.py, requirements.txt, and .env file. Make sure requirements.txt and .env files are at the top of the directory, rather than inside a folder.

@@ -15,7 +15,7 @@ def generate_page_contents(page):
     spec_url = config_scheme["spec_url"]
     tmpl_url = config_scheme["template"]
     env = Environment(
-        loader=FileSystemLoader("docs/plugins/tmpl"),
+        loader=FileSystemLoader("docs/griptape-cloud/plugins/tmpl"),
         autoescape=select_autoescape(["html", "xml"]),
     )
     md = markdown.Markdown()

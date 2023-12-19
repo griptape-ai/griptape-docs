@@ -219,3 +219,44 @@ print(f"total tokens: {token_counter.tokens}")
                              place by their developers.
 total tokens: 273
 ```
+
+
+## Inspecting Payloads
+
+You can use the [StartPromptEvent](../../reference/griptape/events/start_prompt_event.md) to inspect the Prompt Stack and final prompt string before it is sent to the LLM. 
+
+```python
+from griptape.structures import Agent
+from griptape.events import (
+    BaseEvent,
+    StartPromptEvent,
+    EventListener,
+)
+
+
+def handler(event: BaseEvent):
+    if isinstance(event, StartPromptEvent):
+        print("Prompt Stack Inputs:")
+        for input in event.prompt_stack.inputs:
+            print(f"{input.role}: {input.content}")
+        print("Final Prompt String:")
+        print(event.prompt)
+
+
+agent = Agent(event_listeners=[EventListener(handler, event_types=[StartPromptEvent])])
+
+agent.run("Write me a poem.")
+```
+```
+...
+Prompt Stack Inputs:
+system:
+user: Write me a poem.
+Final Prompt String:
+
+
+User: Write me a poem.
+
+Assistant:
+...
+```

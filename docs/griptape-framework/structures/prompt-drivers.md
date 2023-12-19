@@ -53,6 +53,9 @@ print(result.value)
 
 Griptape offers the following Prompt Drivers for interacting with LLMs.
 
+!!! warning
+    When overriding a default Prompt Driver, take care to ensure you've updated the Structure's configured Embedding Driver as well. If Task Memory isn't needed, you can avoid compatability issues by setting `task_memory=None` to disable Task Memory in your Structure.
+
 ### OpenAI Chat
 
 The [OpenAiChatPromptDriver](../../reference/griptape/drivers/prompt/openai_chat_prompt_driver.md) connects to the [OpenAI Chat](https://platform.openai.com/docs/guides/chat) API.
@@ -117,10 +120,10 @@ from griptape.drivers import AzureOpenAiChatPromptDriver
 
 agent = Agent(
     prompt_driver=AzureOpenAiChatPromptDriver(
-        api_key=os.environ["AZURE_OPENAI_API_KEY_1"],
+        api_key=os.environ["AZURE_OPENAI_API_KEY"],
         model="gpt-3.5-turbo-16k",
-        azure_deployment=os.environ["AZURE_OPENAI_35_16k_DEPLOYMENT_ID"],
-        azure_endpoint=os.environ["AZURE_OPENAI_API_BASE_1"],
+        azure_deployment=os.environ["AZURE_OPENAI_35_TURBO_16k_DEPLOYMENT_ID"],
+        azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
     ),
     rules=[
         Rule(
@@ -144,10 +147,10 @@ from griptape.drivers import AzureOpenAiCompletionPromptDriver
 
 agent = Agent(
     prompt_driver=AzureOpenAiCompletionPromptDriver(
-        api_key=os.environ["AZURE_OPENAI_API_KEY_1"],
+        api_key=os.environ["AZURE_OPENAI_API_KEY"],
         model="text-davinci-003",
         azure_deployment=os.environ["AZURE_OPENAI_DAVINCI_DEPLOYMENT_ID"],
-        azure_endpoint=os.environ["AZURE_OPENAI_API_BASE_1"],
+        azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
         temperature=1
     ),
 )
@@ -211,7 +214,7 @@ agent.run('Where is the best place to see cherry blossums in Japan?')
 !!! info
     This driver requires the `drivers-prompt-huggingface` [extra](../index.md#extras).
 
-The [HuggingFaceHubPromptDriver](../../reference/griptape/drivers/prompt/hugging_face_hub_prompt_driver.md) connects to the [Hugging Face API](https://huggingface.co/docs/hub/api). It supports models with the following tasks:
+The [HuggingFaceHubPromptDriver](../../reference/griptape/drivers/prompt/huggingface_hub_prompt_driver.md) connects to the [Hugging Face Hub API](https://huggingface.co/docs/hub/api). It supports models with the following tasks:
 
 - text2text-generation
 - text-generation
@@ -244,7 +247,7 @@ def prompt_stack_to_string_converter(prompt_stack: PromptStack) -> str:
 agent = Agent(
     prompt_driver=HuggingFaceHubPromptDriver(
         model="tiiuae/falcon-7b-instruct",
-        api_token=os.environ["HUGGING_FACE_API_TOKEN"],
+        api_token=os.environ["HUGGINGFACE_HUB_ACCESS_TOKEN"],
         prompt_stack_to_string=prompt_stack_to_string_converter,
     ),
     rulesets=[
@@ -269,7 +272,7 @@ agent.run("Hello Girafatron, what is your favorite animal?")
 !!! info
     This driver requires the `drivers-prompt-huggingface` [extra](../index.md#extras).
 
-The [HuggingFaceHubPromptDriver](../../reference/griptape/drivers/prompt/hugging_face_pipeline_prompt_driver.md) uses [Hugging Face Pipelines](https://huggingface.co/docs/transformers/main_classes/pipelines) for inference locally. It supports models with the following tasks:
+The [HuggingFaceHubPromptDriver](../../reference/griptape/drivers/prompt/huggingface_pipeline_prompt_driver.md) uses [Hugging Face Pipelines](https://huggingface.co/docs/transformers/main_classes/pipelines) for inference locally. It supports models with the following tasks:
 
 - text2text-generation
 - text-generation
@@ -305,7 +308,7 @@ def prompt_stack_to_string_converter(prompt_stack: PromptStack) -> str:
 agent = Agent(
     prompt_driver=HuggingFaceHubPromptDriver(
         model="tiiuae/falcon-7b-instruct",
-        api_token=os.environ["HUGGING_FACE_API_TOKEN"],
+        api_token=os.environ["HUGGINGFACE_HUB_ACCESS_TOKEN"],
         prompt_stack_to_string=prompt_stack_to_string_converter,
     ),
     rulesets=[

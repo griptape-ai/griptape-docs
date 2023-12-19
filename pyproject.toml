@@ -20,6 +20,7 @@ mkdocs-literate-nav = "^0.6.0"
 mkdocs-section-index = "^0.3.6"
 pymdown-extensions = "^10.3"
 
+
 [tool.poetry.group.test]
 optional = true
 

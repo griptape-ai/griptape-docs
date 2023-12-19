@@ -120,10 +120,10 @@ from griptape.drivers import AzureOpenAiChatPromptDriver
 
 agent = Agent(
     prompt_driver=AzureOpenAiChatPromptDriver(
-        api_key=os.environ["AZURE_OPENAI_API_KEY_1"],
+        api_key=os.environ["AZURE_OPENAI_API_KEY"],
         model="gpt-3.5-turbo-16k",
-        azure_deployment=os.environ["AZURE_OPENAI_35_16k_DEPLOYMENT_ID"],
-        azure_endpoint=os.environ["AZURE_OPENAI_API_BASE_1"],
+        azure_deployment=os.environ["AZURE_OPENAI_35_TURBO_16k_DEPLOYMENT_ID"],
+        azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
     ),
     rules=[
         Rule(
@@ -147,10 +147,10 @@ from griptape.drivers import AzureOpenAiCompletionPromptDriver
 
 agent = Agent(
     prompt_driver=AzureOpenAiCompletionPromptDriver(
-        api_key=os.environ["AZURE_OPENAI_API_KEY_1"],
+        api_key=os.environ["AZURE_OPENAI_API_KEY"],
         model="text-davinci-003",
         azure_deployment=os.environ["AZURE_OPENAI_DAVINCI_DEPLOYMENT_ID"],
-        azure_endpoint=os.environ["AZURE_OPENAI_API_BASE_1"],
+        azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
         temperature=1
     ),
 )

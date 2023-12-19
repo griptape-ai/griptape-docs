@@ -55,6 +55,7 @@ theme:
     - navigation.expand
     - navigation.top
     - announce.dismiss
+    - toc.follow
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
@@ -73,9 +74,23 @@ nav:
   - Home:
       - Overview: "index.md"
       - Contributing: "contributing.md"
-  - Griptape Cloud:
-      - API Reference: api.md
-  - Griptape Framework:
+  - Cloud:
+      - Overview: "griptape-cloud/index.md"
+      - Developer Preview FAQ: "griptape-cloud/dev-preview-faq.md"
+      - Getting Started:
+          - Quick Start: "griptape-cloud/getting-started/index.md"
+          - Quick Start (CLI): "griptape-cloud/getting-started/quickstart-cli.md"
+          - Quick Start (Sample Templates): "griptape-cloud/getting-started/quickstart-samples.md"
+          - Quick Start (From Scratch): "griptape-cloud/getting-started/quickstart-scratch.md"
+      - Cloud User Guide:
+          - API Keys: "griptape-cloud/cloud-user-guide/api-keys.md"
+      - Griptape CLI:
+          - Installation: "griptape-cloud/cli/index.md"
+          - Configuration: "griptape-cloud/cli/configure.md"
+      - Cloud API:
+          - API Reference: "griptape-cloud/api/api-reference.md"
+      - Terms of Service: "griptape-cloud/terms-of-service.md"
+  - Framework:
       - Overview: "griptape-framework/index.md"
       - Structures:
           - Tasks: "griptape-framework/structures/tasks.md"
@@ -102,7 +117,7 @@ nav:
           - Summary Engines: "griptape-framework/data/summary-engines.md"
           - Vector Store Drivers: "griptape-framework/data/vector-store-drivers.md"
           - SQL Drivers: "griptape-framework/data/sql-drivers.md"
-  - Griptape Tools:
+  - Tools:
       - Overview: "griptape-tools/index.md"
       - Official Tools:
           - AwsIamClient: "griptape-tools/official-tools/aws-iam-client.md"
@@ -125,7 +140,7 @@ nav:
           - WebSearch: "griptape-tools/official-tools/web-search.md"
       - Custom Tools:
           - Building Custom Tools: "griptape-tools/custom-tools/index.md"
-  - Griptape Recipes:
+  - Recipes:
       - Overview: "examples/index.md"
       - Agents:
           - Talk to Redshift: "examples/talk-to-redshift.md"
@@ -135,5 +150,5 @@ nav:
           - Load and Query Pinecone: "examples/load-and-query-pinecone.md"
           - Load and Query Marqo: "examples/load-query-and-chat-marqo.md"
           - Query a Webpage: "examples/query-webpage.md"
-  - Griptape Reference Guide: "reference/"
-  - Griptape Trade School: "https://learn.griptape.ai"
+  - Reference Guide: "reference/"
+  - Trade School: "https://learn.griptape.ai"

@@ -200,11 +200,11 @@ from griptape.engines import CsvExtractionEngine
 # Instantiate the CSV extraction engine
 csv_extraction_engine = CsvExtractionEngine()
 
-# Define some CSV data and columns
+# Define some unstructured data and columns
 csv_data = """
-Name, Age, Address
-John, 25, 123 Main St
-Jane, 30, 456 Elm St
+Alice, 28, lives in New York.
+Bob, 35 lives in California.
+Charlie is 40 and lives in Texas.
 """
 
 columns = ["Name", "Age", "Address"]
@@ -223,15 +223,17 @@ agent.add_task(
 agent.run(csv_data)
 ```
 ```
-[10/20/23 15:06:08] INFO     ExtractionTask 75377d524c1a4b2dad5d08dca43a5ea2    
-                             Input:                                             
-                             Name, Age, Address                                 
-                             John, 25, 123 Main St                              
-                             Jane, 30, 456 Elm St                               
-                                                                                
-[10/20/23 15:06:10] INFO     ExtractionTask 75377d524c1a4b2dad5d08dca43a5ea2    
-                             Output: John,"""25""","""123 Main St"""            
-                             Jane,"""30""","""456 Elm St"""   
+[12/19/23 10:33:11] INFO     ExtractionTask e87fb457edf8423ab8a78583badd7a11
+                             Input:
+                             Alice, 28, lives in New York.
+                             Bob, 35 lives in California.
+                             Charlie is 40 and lives in Texas.
+
+[12/19/23 10:33:13] INFO     ExtractionTask e87fb457edf8423ab8a78583badd7a11
+                             Output: Name,Age,Address
+                             Alice,28,New York
+                             Bob,35,California
+                             Charlie,40,Texas
 ```
 
 ### JSON Extraction
@@ -242,12 +244,13 @@ from griptape.structures import Agent
 from griptape.engines import JsonExtractionEngine
 from schema import Schema
 
-# Define some JSON data
+# Instantiate the json extraction engine
+json_extraction_engine = JsonExtractionEngine()
+
+# Define some unstructured data and a schema
 json_data = """
-[
-  {"Name": "John", "Age": "25", "Address": "123 Main St"},
-  {"Name": "Jane", "Age": "30", "Address": "456 Elm St"}
-]
+Alice (Age 28) lives in New York.
+Bob (Age 35) lives in California.
 """
 user_schema = Schema(
     {"users": [{"name": str, "age": int, "location": str}]}
@@ -256,7 +259,7 @@ user_schema = Schema(
 agent = Agent()
 agent.add_task(
     ExtractionTask(
-        extraction_engine=JsonExtractionEngine(),
+        extraction_engine=json_extraction_engine,
         args={"template_schema": user_schema},
     )
 )
@@ -264,20 +267,15 @@ agent.add_task(
 # Run the agent
 agent.run(json_data)
 ```
-
 ```
-[10/20/23 15:13:01] INFO     ExtractionTask 4fa14a4aa25643faa792e672e10fc36a    
-                             Input:                                             
-                             [                                                  
-                               {"Name": "John", "Age": "25", "Address": "123    
-                             Main St"},                                         
-                               {"Name": "Jane", "Age": "30", "Address": "456 Elm
-                             St"}                                               
-                             ]                                                  
-                                                                                
-[10/20/23 15:13:05] INFO     ExtractionTask 4fa14a4aa25643faa792e672e10fc36a    
-                             Output: {'name': 'John', 'age': '25'}              
-                             {'name': 'Jane', 'age': '30'} 
+[12/19/23 10:37:41] INFO     ExtractionTask 3315cc77f94943a2a2dceccfe44f6a67
+                             Input:
+                             Alice (Age 28) lives in New York.
+                             Bob (Age 35) lives in California.
+
+[12/19/23 10:37:44] INFO     ExtractionTask 3315cc77f94943a2a2dceccfe44f6a67
+                             Output: {'name': 'Alice', 'age': 28, 'location': 'New York'}
+                             {'name': 'Bob', 'age': 35, 'location': 'California'}
 ```
 
 ## Text Summary Task

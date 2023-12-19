@@ -5,7 +5,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup
 
 config_scheme = {
-    "spec_url": "https://cloud.griptape.ai/public/openapi.yaml",
+    "spec_url": "https://cloud-preview.griptape.ai/public/openapi.yaml",
     "template": "swagger.md.tmpl",
     "outfile": "griptape-cloud/api/api-reference.md",
 }

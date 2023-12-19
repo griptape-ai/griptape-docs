@@ -267,6 +267,26 @@ agent = Agent(
 agent.run("Hello Girafatron, what is your favorite animal?")
 ```
 
+#### Text Generation Interface
+
+The [HuggingFaceHubPromptDriver](#hugging-face-hub) also supports [Text Generation Interface](https://huggingface.co/docs/text-generation-inference/basic_tutorials/consuming_tgi#inference-client) for running models locally. To use Text Generation Interface, just set `model` to a TGI endpoint.
+
+```python
+import os
+from griptape.structures import Agent
+from griptape.drivers import HuggingFaceHubPromptDriver
+
+
+agent = Agent(
+    prompt_driver=HuggingFaceHubPromptDriver(
+        model="http://127.0.0.1:8080",
+        api_token=os.environ["HUGGINGFACE_HUB_ACCESS_TOKEN"],
+    ),
+)
+
+agent.run("Write the code for a snake game.")
+```
+
 ### Hugging Face Pipeline
 
 !!! info

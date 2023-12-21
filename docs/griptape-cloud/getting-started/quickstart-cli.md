@@ -33,7 +33,7 @@ Step 3. **gt app new --directory ~/workplace demo_app**
 
 Next, we can use the Griptape CLI to scaffold a sample project that is compatible with Griptape Cloud and has a default structure in place. This is a quick way to get started if you aren't converting an existing Python project to Griptape.
 
-You should see something like the following. In this example, I'm creating an app called _demo_app_ in my Home directory. I'm then verifying its contents via `ls`.
+You should see something like the following. This example is creating an app called _demo_app_ in the workplace directory. The contents can be verified via `ls`.
 
 ```shell
 gt app new --directory ~/workplace demo_app

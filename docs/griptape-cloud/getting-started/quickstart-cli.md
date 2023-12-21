@@ -33,16 +33,16 @@ Step 3. **gt app new --directory ~/workplace demo_app**
 
 Next, we can use the Griptape CLI to scaffold a sample project that is compatible with Griptape Cloud and has a default structure in place. This is a quick way to get started if you aren't converting an existing Python project to Griptape.
 
-You should see something like the following. In this example, I'm creating an app called _demo_app_ in my Home directory. I'm then verifying its contents via `ls`.
+You should see something like the following. This example is creating an app called _demo_app_ in the workplace directory. The contents can be verified via `ls`.
 
 ```shell
-gt app new --directory ~/demo_app
+gt app new --directory ~/workplace demo_app
 ```
 
 ```{: .optional-language-as-class .no-copy}
-user@machine-name ~ % gt app new --directory ~/demo_app
+user@machine-name ~ % gt app new --directory ~/workplace demo_app
 Initializing app demo_app
-user@machine-name ~ % ls ~/demo_app
+user@machine-name ~ % ls ~/workplace/demo_app
 README.md		__pycache__		app.py			requirements.txt	tests
 ```
 
@@ -51,7 +51,7 @@ Step 4. Add your AI variables using a .env file.
 Currently, in Private Preview, Griptape Cloud apps use .env files to store API Keys for services like OpenAI, Amazon Bedrock, Anthropic, Hugging Face.
 
 ```shell
-user@machine-name ~ % cd ~/demo_app
+user@machine-name ~ % cd ~/workplace/demo_app
 user@machine-name demo_app % echo OPENAI_API_KEY="YOUR OPENAI KEY" > .env
 ```
 
@@ -60,7 +60,7 @@ Step 5. Test your application locally
 You can use the Griptape CLI to run your application locally. The default project uses OpenAI, so this will require a valid OPENAI_API_KEY variable in a .env file in your project (step 4).
 
 ```
-user@machine-name demo_app % gt app run --directory ~/demo_app --arg "write me a haiku about a skateboard?"
+user@machine-name demo_app % gt app run --directory ~/workplace/demo_app --arg "write me a haiku about a skateboard?"
 Running app
 
 [ installation of required packages if necessary ]
@@ -89,7 +89,7 @@ Step 7. Deploy your application to the cloud
 You can use the Griptape CLI to deploy your application to the cloud.
 
 ```
-user@machine-name demo_app % gt cloud create-deployment --api-id 12345678-8f3e-4028-9934-42e0cd69860a --directory ~/demo_app
+user@machine-name demo_app % gt cloud create-deployment --api-id 12345678-8f3e-4028-9934-42e0cd69860a --directory ~/workplace/demo_app
 {'app_id': '12345678-8f3e-4028-9934-42e0cd69860a', 'created_at': '2023-12-19T00:16:36.663Z', 'created_by': '12345678-9b16-408a-b5d7-e83044d820f4', 'deployment_id': '12345678-12cd-4003-9ee1-b6b01f7927ea', 'status': 'QUEUED'}
 ```
 

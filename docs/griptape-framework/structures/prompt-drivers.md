@@ -455,6 +455,24 @@ agent.run(
     (D) Other (please explain)"""
 )
 ```
+##### Meta Llama 2
+
+To use this model with Amazon Bedrock, use the [BedrockLlamaPromptModelDriver](../../reference/griptape/drivers/prompt_model/bedrock_llama_prompt_model_driver.md).
+
+```python
+from griptape.structures import Agent
+from griptape.drivers import AmazonBedrockPromptDriver, BedrockLlamaPromptModelDriver
+
+agent = Agent(
+    prompt_driver=AmazonBedrockPromptDriver(
+        model="meta.llama2-13b-chat-v1",
+        prompt_model_driver=BedrockLlamaPromptModelDriver(),
+    ),
+)
+agent.run(
+    "Write an article about impact of high inflation to GDP of a country"
+)
+```
 
 ##### Ai21 Jurassic
 

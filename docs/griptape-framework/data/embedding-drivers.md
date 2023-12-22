@@ -79,11 +79,7 @@ driver = HuggingFaceHubEmbeddingDriver(
     ),
 )
 
-<<<<<<< HEAD
 embeddings = driver.embed_string("Hello world!")
-=======
-results = driver.embed_string("Hello world!")
->>>>>>> 81336e3 (Add Griptape Cloud docs)
 
 # display the first 3 embeddings
 print(embeddings[:3])

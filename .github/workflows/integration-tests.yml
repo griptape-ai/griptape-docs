@@ -71,7 +71,7 @@ jobs:
     steps:
       - name: Checkout actions
         uses: actions/checkout@v3
-      - name: Init environment
-        uses: ./.github/actions/init-environment
+      - name: Init environment 
+        uses: ./.github/actions/init-environment 
       - name: Run integration tests
         run: pytest -xvs tests/integration

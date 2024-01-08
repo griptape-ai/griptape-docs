@@ -81,9 +81,9 @@ results = driver.embed_string("Hello world!")
 # display the first 3 embeddings
 print(embeddings[:3])
 ```
-### Multi Model Prompt Drivers
+### Multi Model Embedding Drivers
 Certain embeddings providers such as Amazon SageMaker support many types of models, each with their own slight differences in parameters and response formats. To support this variation across models, these Embedding Drivers takes a [Embedding Model Driver](../../reference/griptape/drivers/embedding_model/base_embedding_model_driver.md)
-through the [embedding_model_driver](../../reference/griptape/drivers/prompt/base_multi_model_embedding_driver.md#griptape.drivers.embedding.base_multi_model_embedding_driver.BaseMultiModelEmbeddingDriver.embedding_model_driver) parameter.
+through the [embedding_model_driver](../../reference/griptape/drivers/embedding/base_multi_model_embedding_driver.md#griptape.drivers.embedding.base_multi_model_embedding_driver.BaseMultiModelEmbeddingDriver.embedding_model_driver) parameter.
 [Embedding Model Driver](../../reference/griptape/drivers/embedding_model/base_embedding_model_driver.md)s allows for model-specific customization for Embedding Drivers. 
 
 #### SageMaker Embeddings

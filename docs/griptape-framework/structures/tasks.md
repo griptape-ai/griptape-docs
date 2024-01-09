@@ -391,3 +391,46 @@ agent.run("Give me information about Griptape")
                              flexibility when working with large language       
                              models.
 ```
+
+## Code Execution Task
+
+To execute an arbitrary python function, use the [CodeExecutionTask](../../reference/griptape/tasks/text_query_task.md).
+This task takes a python function, and authors can elect to return a custom artifact.
+
+```python 
+from griptape.structures import Pipeline
+from griptape.tasks import CodeExecutionTask, PromptTask
+from griptape.artifacts import BaseArtifact, TextArtifact
+
+
+def character_counter(task: CodeExecutionTask) -> BaseArtifact:
+    result = len(task.input)
+    # Return task.input for non-outputting functions
+    return TextArtifact(str(result))
+
+
+# Instantiate the pipeline
+pipeline = Pipeline()
+
+pipeline.add_tasks(
+
+    # take the first argument from the pipeline `run` method
+    CodeExecutionTask(run_fn=character_counter),
+    # # take the output from the previous task and insert it into the prompt
+    PromptTask("{{args[0]}} using {{ parent_output }} characters")
+)
+
+pipeline.run("Write me a line in a poem")
+```
+
+```
+[01/09/24 15:23:54] INFO     CodeExecutionTask 048b1f548683475187064dde90055f72 
+                             Input: Write me a line in a poem                   
+                    INFO     CodeExecutionTask 048b1f548683475187064dde90055f72 
+                             Output: 25                                         
+                    INFO     PromptTask b6156dc5c0c6404488ab925989e78b01        
+                             Input: Write me a line in a poem using 25          
+                             characters                                         
+[01/09/24 15:24:03] INFO     PromptTask b6156dc5c0c6404488ab925989e78b01        
+                             Output: "Silent code, loud impact."  
+```

@@ -70,7 +70,7 @@ agent = Agent(
     prompt_driver=OpenAiChatPromptDriver(
         api_key=os.environ["OPENAI_API_KEY"],
         temperature=0.1,
-        model="gpt-3.5-turbo-16k",
+        model="gpt-3.5-turbo",
         response_format="json_object",
         seed=42,
     ),
@@ -370,7 +370,7 @@ from griptape.drivers import (
     AmazonSageMakerPromptDriver,
     SageMakerLlamaPromptModelDriver,
 )
-from griptape.structures.structure import Rule
+from griptape.rules import Rule
 
 agent = Agent(
     prompt_driver=AmazonSageMakerPromptDriver(

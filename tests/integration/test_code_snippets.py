@@ -59,7 +59,7 @@ def grab_code_blocks(docstring, lang="python"):
 
 def get_all_code_blocks():
     return [
-        {"id": f"{str(fpath)}-{snippet_num}", "code": snippet}
+        {"id": f"{str(fpath)}-{snippet_num + 1}", "code": snippet}
         for fpath in pathlib.Path("docs").glob("**/*.md")
         for snippet_num, snippet in enumerate(grab_code_blocks(fpath.read_text()))
     ]

@@ -394,7 +394,7 @@ agent.run("Give me information about Griptape")
 
 ## Code Execution Task
 
-To execute an arbitrary python function, use the [CodeExecutionTask](../../reference/griptape/tasks/text_query_task.md).
+To execute an arbitrary Python function, use the [CodeExecutionTask](../../reference/griptape/tasks/text_query_task.md).
 This task takes a python function, and authors can elect to return a custom artifact.
 
 ```python 
@@ -405,7 +405,7 @@ from griptape.artifacts import BaseArtifact, TextArtifact
 
 def character_counter(task: CodeExecutionTask) -> BaseArtifact:
     result = len(task.input)
-    # Return task.input for non-outputting functions
+    # For functions that don't need to return anything, we recommend returning task.input
     return TextArtifact(str(result))
 
 

@@ -1,0 +1,33 @@
+# OutpaintingImageGenerationClient
+
+This tool allows LLMs to generate images using outpainting, where an input image is altered outside of the area specified by a mask image according to a prompt.
+
+```python
+from griptape.structures import Agent
+from griptape.engines import OutpaintingImageGenerationEngine
+from griptape.drivers import AmazonBedrockImageGenerationDriver, \
+    BedrockStableDiffusionImageGenerationModelDriver
+from griptape.tools import OutpaintingImageGenerationClient
+
+
+# Create a driver configured to use Stable Diffusion via Bedrock.
+driver = AmazonBedrockImageGenerationDriver(
+    image_generation_model_driver=BedrockStableDiffusionImageGenerationModelDriver(),
+    model="stability.stable-diffusion-xl-v0",
+)
+
+# Create an engine configured to use the driver.
+engine = OutpaintingImageGenerationEngine(
+    image_generation_driver=driver,
+)
+
+# Create a tool configured to use the engine.
+tool = OutpaintingImageGenerationClient(
+    image_generation_engine=engine,
+)
+
+# Create an agent and provide the tool to it.
+agent = Agent(tools=[tool])
+
+agent.run("Outpaint a forest to the image at mountain.png using the mask at mask.png.")
+```

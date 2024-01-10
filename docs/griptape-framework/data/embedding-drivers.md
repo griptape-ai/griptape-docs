@@ -94,7 +94,7 @@ The [AmazonSageMakerEmbeddingDriver](../../reference/griptape/drivers/embedding/
     This driver requires the `drivers-embedding-amazon-sagemaker` [extra](../index.md#extras).
 
 ##### TensorFlow Hub Models
-```python
+```python ignore
 import os
 from griptape.drivers import AmazonSageMakerEmbeddingDriver, SageMakerTensorFlowHubEmbeddingModelDriver
 
@@ -110,7 +110,7 @@ print(embeddings[:3])
 ```
 
 ##### HuggingFace Models
-```python
+```python ignore
 import os
 from griptape.drivers import AmazonSageMakerEmbeddingDriver, SageMakerHuggingFaceEmbeddingModelDriver
 

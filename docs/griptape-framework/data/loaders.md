@@ -107,7 +107,7 @@ WebLoader().load_collection(
 
 ## Image Loader
 
-The Image Loader is used to load an image from the filesystem, returning an ImageArtifact.
+The Image Loader is used to load an image from the filesystem, returning an [ImageArtifact](./artifacts.md#imageartifact).
 
 ```python
 from griptape.loaders import ImageLoader

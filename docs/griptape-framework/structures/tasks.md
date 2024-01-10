@@ -439,7 +439,7 @@ pipeline.run("Write me a line in a poem")
 
 To generate an image, use one of the following Image Generation Tasks. All Image Generation Tasks accept an Image Generation Engine configured to use an [Image Generation Driver](./image-generation-drivers.md).
 
-All successful Image Generation Tasks will always output an [Image Artifact](). Each task can be configured to additionally write the generated image to disk by providing either the `output_file` or `output_dir` field. The `output_file` field supports file names in the current directory (`my_image.png`), relative directory prefixes (`images/my_image.png`), or absolute paths (`/usr/var/my_image.png`). By setting `output_dir`, the task will generate a file name and place the image in the requested directory.
+All successful Image Generation Tasks will always output an [Image Artifact](../data/artifacts.md#imageartifact). Each task can be configured to additionally write the generated image to disk by providing either the `output_file` or `output_dir` field. The `output_file` field supports file names in the current directory (`my_image.png`), relative directory prefixes (`images/my_image.png`), or absolute paths (`/usr/var/my_image.png`). By setting `output_dir`, the task will generate a file name and place the image in the requested directory.
 
 ### Prompt Image Generation Task
 

@@ -1,8 +1,8 @@
 ## Overview
 
-Image generation drivers are used by [image generation engines](../data/image-generation-engines.md) to build and execute API calls to image generation models.
+Image generation Drivers are used by [image generation Engines](../data/image-generation-engines.md) to build and execute API calls to image generation models.
 
-Use a driver to build an engine, then pass it to a tool for use by an [Agent](../structures/agents.md):
+Provide a Driver when building an [Engine](../data/image-generation-engines.md), then pass it to a [Tool](../tools/index.md) for use by an [Agent](../structures/agents.md):
 
 ```python
 from griptape.structures import Agent
@@ -26,13 +26,13 @@ agent.run("Generate a watercolor painting of a dog riding a skateboard. Save the
 
 ### Amazon Bedrock
 
-The Amazon Bedrock image generation driver provides multi-model access to image generation models hosted by Amazon Bedrock. This driver manages the API calls to the Bedrock API, while the specific model drivers below format the API requests and parse the responses.
+The Amazon Bedrock Driver provides multi-model access to image generation models hosted by Amazon Bedrock. This Driver manages the API calls to the Bedrock API, while the specific Model Drivers below format the API requests and parse the responses.
 
 #### Bedrock Stable Diffusion Model Driver
 
-The Bedrock Stable Diffusion model driver provides support for Stable Diffusion models hosted by Amazon Bedrock. This model driver supports configurations specific to Stable Diffusion, like style presets, clip guidance presets, sampler, and more.
+The Bedrock Stable Diffusion Model Driver provides support for Stable Diffusion models hosted by Amazon Bedrock. This Model Driver supports configurations specific to Stable Diffusion, like style presets, clip guidance presets, and sampler.
 
-This model driver supports negative prompts. When provided (for example, when used with an [image generation engine](../data/image-generation-engines.md) configured with negative rulesets), the image generation request will include negatively-weighted prompts describing features or characteristics to avoid in the resulting generation.
+This Model Driver supports negative prompts. When provided (for example, when used with an [image generation Engine](../data/image-generation-engines.md) configured with [Negative Rulesets](../data/image-generation-engines.md#image-generation-engine-rulesets)), the image generation request will include negatively-weighted prompts describing features or characteristics to avoid in the resulting generation.
 
 ```python
 from griptape.structures import Agent
@@ -48,6 +48,7 @@ model_driver = BedrockStableDiffusionImageGenerationModelDriver(
 
 driver = AmazonBedrockImageGenerationDriver(
     image_generation_model_driver=model_driver,
+    model="stability.stable-diffusion-xl-v0",
 )
 
 engine = PromptImageGenerationEngine(image_generation_driver=driver)
@@ -62,9 +63,9 @@ agent.run("Generate a watercolor painting of a dog riding a skateboard. Save the
 
 #### Amazon Bedrock Titan Image Generator Model Driver
 
-The Amazon Bedrock Titan Image Generator model driver provides support for Titan Image Generator models hosted by Amazon Bedrock. This model driver supports configurations specific to Titan Image Generator, like quality, seed, and cfg_scale.
+The Amazon Bedrock Titan Image Generator Model Driver provides support for Titan Image Generator models hosted by Amazon Bedrock. This Model Driver supports configurations specific to Titan Image Generator, like quality, seed, and cfg_scale.
 
-This model driver supports negative prompts. When provided (for example, when used with an [image generation engine](../data/image-generation-engines.md) configured with negative rulesets), the image generation request will include negatively-weighted prompts describing features or characteristics to avoid in the resulting generation.
+This Model Driver supports negative prompts. When provided (for example, when used with an [image generation engine](../data/image-generation-engines.md) configured with [Negative Rulesets](../data/image-generation-engines.md#image-generation-engine-rulesets)), the image generation request will include negatively-weighted prompts describing features or characteristics to avoid in the resulting generation.
 
 ```python
 from griptape.structures import Agent
@@ -79,6 +80,7 @@ model_driver = BedrockTitanImageGenerationModelDriver(
 
 driver = AmazonBedrockImageGenerationDriver(
     image_generation_model_driver=model_driver,
+    model="stability.stable-diffusion-xl-v0",
 )
 
 engine = PromptImageGenerationEngine(image_generation_driver=driver)
@@ -93,7 +95,7 @@ agent.run("Generate a watercolor painting of a dog riding a skateboard. Save the
 
 ### Azure OpenAI DALL-E
 
-The Azure OpenAI DALL-E image generation driver provides access to OpenAI DALL-E models hosted by Azure. In addition to the configurations provided by the underlying OpenAI DALL-E driver, the Azure OpenAI Dall-E Driver allows configuration of Azure-specific deployment values.
+The Azure OpenAI DALL-E image generation Driver provides access to OpenAI DALL-E models hosted by Azure. In addition to the configurations provided by the underlying OpenAI DALL-E Driver, the Azure OpenAI Dall-E Driver allows configuration of Azure-specific deployment values.
 
 ```python
 from griptape.structures import Agent
@@ -119,11 +121,11 @@ agent.run("Generate a watercolor painting of a dog riding a skateboard. Save the
 
 ### Leonardo.Ai
 
-The Leonardo image generation driver enables image generation using models hosted by [Leonardo.ai](https://leonardo.ai/).
+The Leonardo image generation Driver enables image generation using models hosted by [Leonardo.ai](https://leonardo.ai/).
 
-The Leonardo image generation driver supports configurations like model selection, image size, specifying a generation seed, and generation steps. For details on supported configuration parameters, see [Leonardo.Ai's image generation documentation](https://docs.leonardo.ai/reference/creategeneration).
+This Driver supports configurations like model selection, image size, specifying a generation seed, and generation steps. For details on supported configuration parameters, see [Leonardo.Ai's image generation documentation](https://docs.leonardo.ai/reference/creategeneration).
 
-This driver supports negative prompts. When provided (for example, when used with an [image generation engine](../data/image-generation-engines.md) configured with negative rulesets), the image generation request will include negatively-weighted prompts describing features or characteristics to avoid in the resulting generation.
+This Driver supports negative prompts. When provided (for example, when used with an [image generation engine](../data/image-generation-engines.md) configured with [Negative Rulesets](../data/image-generation-engines.md#image-generation-engine-rulesets)), the image generation request will include negatively-weighted prompts describing features or characteristics to avoid in the resulting generation.
 
 ```python
 import os
@@ -152,9 +154,9 @@ agent.run("Generate a watercolor painting of a dog riding a skateboard. Save the
 
 ### OpenAI DALL-E
 
-The OpenAI DALL-E image generation driver enables image generation using OpenAI DALL-E models. Like other OpenAI drivers, the image generation driver will implicitly load an API key in the `OPENAI_API_KEY` environment variable if one is not explicitly provided.
+The OpenAI DALL-E image generation Driver enables image generation using OpenAI DALL-E models. Like other OpenAI Drivers, the image generation Driver will implicitly load an API key in the `OPENAI_API_KEY` environment variable if one is not explicitly provided.
 
-The OpenAI Dall-E driver supports image generation configurations like style presets, image quality preference, and image size. For details on supported configuration values, see the [OpenAI documentation](https://platform.openai.com/docs/guides/images/introduction).
+The OpenAI Dall-E Driver supports image generation configurations like style presets, image quality preference, and image size. For details on supported configuration values, see the [OpenAI documentation](https://platform.openai.com/docs/guides/images/introduction).
 
 ```python
 from griptape.structures import Agent

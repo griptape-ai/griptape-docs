@@ -112,11 +112,11 @@ print(embeddings[:3])
 ##### HuggingFace Models
 ```python
 import os
-from griptape.drivers import AmazonSageMakerEmbeddingDriver, SageMakerTensorFlowHubEmbeddingModelDriver
+from griptape.drivers import AmazonSageMakerEmbeddingDriver, SageMakerHuggingFaceEmbeddingModelDriver
 
 embedding_driver=AmazonSageMakerEmbeddingDriver(
     model=os.environ["SAGEMAKER_HUGGINGFACE_MODEL"],
-    embedding_model_driver=SageMakerTensorFlowHubEmbeddingModelDriver(),
+    embedding_model_driver=SageMakerHuggingFaceEmbeddingModelDriver(),
 )
 
 results = driver.embed_string("Hello world!")

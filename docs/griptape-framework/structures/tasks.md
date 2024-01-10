@@ -501,11 +501,11 @@ engine = VariationImageGenerationEngine(
 )
 
 # Load input image artifact.
-image_artifact = ImageLoader().loadr("mountain.png")
+image_artifact = ImageLoader().load("mountain.png")
 
 # Create a task configured to use the engine.
-task = VariationImageGenerationEngine(
-    input=("{{ args[0] }}", image_artifact)
+task = VariationImageGenerationTask(
+    input=("{{ args[0] }}", image_artifact),
     image_generation_engine=engine,
 )
 

@@ -17,7 +17,7 @@ driver = OpenAiDalleImageGenerationDriver(
 engine = PromptImageGenerationEngine(image_generation_driver=driver)
 
 agent = Agent(tools=[
-    PromptImageGenerationClient(image_generation_engine=engine),
+    PromptImageGenerationClient(engine=engine),
     FileManager(),
 ])
 
@@ -53,7 +53,7 @@ driver = AmazonBedrockImageGenerationDriver(
 engine = PromptImageGenerationEngine(image_generation_driver=driver)
 
 agent = Agent(tools=[
-    PromptImageGenerationClient(image_generation_engine=engine),
+    PromptImageGenerationClient(engine=engine),
     FileManager(),
 ])
 
@@ -70,10 +70,10 @@ This model driver supports negative prompts. When provided (for example, when us
 from griptape.structures import Agent
 from griptape.tools import PromptImageGenerationClient, FileManager
 from griptape.engines import PromptImageGenerationEngine
-from griptape.drivers import AmazonBedrockImageGenerationDriver\ 
-    BedrockTitanImageGeneratorImageGenerationModelDriver
+from griptape.drivers import AmazonBedrockImageGenerationDriver, \
+    BedrockTitanImageGenerationModelDriver
 
-model_driver = BedrockTitanImageGeneratorImageGenerationModelDriver(
+model_driver = BedrockTitanImageGenerationModelDriver(
     quality="hd",
 )
 
@@ -84,7 +84,7 @@ driver = AmazonBedrockImageGenerationDriver(
 engine = PromptImageGenerationEngine(image_generation_driver=driver)
 
 agent = Agent(tools=[
-    PromptImageGenerationClient(image_generation_engine=engine),
+    PromptImageGenerationClient(engine=engine),
     FileManager(),
 ])
 
@@ -110,7 +110,7 @@ driver = AzureOpenAiDalleImageGenerationDriver(
 engine = PromptImageGenerationEngine(image_generation_driver=driver)
 
 agent = Agent(tools=[
-    PromptImageGenerationClient(image_generation_engine=engine),
+    PromptImageGenerationClient(engine=engine),
     FileManager(),
 ])
 
@@ -143,7 +143,7 @@ driver = LeonardoImageGenerationDriver(
 engine = PromptImageGenerationEngine(image_generation_driver=driver)
 
 agent = Agent(tools=[
-    PromptImageGenerationClient(image_generation_engine=engine),
+    PromptImageGenerationClient(engine=engine),
     FileManager(),
 ])
 
@@ -163,14 +163,14 @@ from griptape.engines import PromptImageGenerationEngine
 from griptape.drivers import OpenAiDalleImageGenerationDriver
 
 driver = OpenAiDalleImageGenerationDriver(
-    model="dall-e-2"
+    model="dall-e-2",
     image_size="512x512",
 )
 
 engine = PromptImageGenerationEngine(image_generation_driver=driver)
 
 agent = Agent(tools=[
-    PromptImageGenerationClient(image_generation_engine=engine),
+    PromptImageGenerationClient(engine=engine),
     FileManager(),
 ])
 

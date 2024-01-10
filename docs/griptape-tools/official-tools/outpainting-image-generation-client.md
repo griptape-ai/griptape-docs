@@ -23,7 +23,7 @@ engine = OutpaintingImageGenerationEngine(
 
 # Create a tool configured to use the engine.
 tool = OutpaintingImageGenerationClient(
-    image_generation_engine=engine,
+    engine=engine,
 )
 
 # Create an agent and provide the tool to it.

@@ -25,7 +25,7 @@ engine = VariationImageGenerationEngine(
 
 # Create a tool configured to use the engine.
 tool = VariationImageGenerationClient(
-    image_generation_engine=engine,
+    engine=engine,
 )
 
 # Create an agent and provide the tool to it.

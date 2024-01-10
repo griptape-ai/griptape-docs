@@ -47,7 +47,7 @@ def grab_code_blocks(docstring, lang="python"):
     block = ""
     codeblocks = []
     for idx, line in enumerate(docstring.split("\n")):
-        if line.startswith("```") and "ignore" not in line:
+        if line.startswith("```"):
             if in_block:
                 codeblocks.append(check_codeblock(block, lang=lang))
                 block = ""
@@ -59,7 +59,7 @@ def grab_code_blocks(docstring, lang="python"):
 
 def get_all_code_blocks():
     return [
-        {"id": f"{fpath.name}-{snippet_num}", "code": snippet}
+        {"id": f"{str(fpath)}-{snippet_num}", "code": snippet}
         for fpath in pathlib.Path("docs").glob("**/*.md")
         for snippet_num, snippet in enumerate(grab_code_blocks(fpath.read_text()))
     ]

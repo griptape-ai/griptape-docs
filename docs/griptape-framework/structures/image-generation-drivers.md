@@ -1,8 +1,8 @@
 ## Overview
 
-Image generation drivers are used by image generation engines to build and execute API calls to image generation models.
+Image generation drivers are used by [image generation engines](../data/image-generation-engines.md) to build and execute API calls to image generation models.
 
-Use a driver to build an engine, then pass it to a tool for use by an Agent:
+Use a driver to build an engine, then pass it to a tool for use by an [Agent](../structures/agents.md):
 
 ```python
 from griptape.structures import Agent
@@ -31,6 +31,8 @@ The Amazon Bedrock image generation driver provides multi-model access to image 
 #### Bedrock Stable Diffusion Model Driver
 
 The Bedrock Stable Diffusion model driver provides support for Stable Diffusion models hosted by Amazon Bedrock. This model driver supports configurations specific to Stable Diffusion, like style presets, clip guidance presets, sampler, and more.
+
+This model driver supports negative prompts. When provided (for example, when used with an [image generation engine](../data/image-generation-engines.md) configured with negative rulesets), the image generation request will include negatively-weighted prompts describing features or characteristics to avoid in the resulting generation.
 
 ```python
 from griptape.structures import Agent
@@ -61,6 +63,8 @@ agent.run("Generate a watercolor painting of a dog riding a skateboard. Save the
 #### Amazon Bedrock Titan Image Generator Model Driver
 
 The Amazon Bedrock Titan Image Generator model driver provides support for Titan Image Generator models hosted by Amazon Bedrock. This model driver supports configurations specific to Titan Image Generator, like quality, seed, and cfg_scale.
+
+This model driver supports negative prompts. When provided (for example, when used with an [image generation engine](../data/image-generation-engines.md) configured with negative rulesets), the image generation request will include negatively-weighted prompts describing features or characteristics to avoid in the resulting generation.
 
 ```python
 from griptape.structures import Agent
@@ -117,7 +121,9 @@ agent.run("Generate a watercolor painting of a dog riding a skateboard. Save the
 
 The Leonardo image generation driver enables image generation using models hosted by [Leonardo.ai](https://leonardo.ai/).
 
-The Leonardo image generation driver supports configurations like model selection, image size, specifying a generation seed, and generation steps. For details on supported configuration parameters, see [Leonardo.Ai's image generation documentation](https://docs.leonardo.ai/reference/creategeneration). 
+The Leonardo image generation driver supports configurations like model selection, image size, specifying a generation seed, and generation steps. For details on supported configuration parameters, see [Leonardo.Ai's image generation documentation](https://docs.leonardo.ai/reference/creategeneration).
+
+This driver supports negative prompts. When provided (for example, when used with an [image generation engine](../data/image-generation-engines.md) configured with negative rulesets), the image generation request will include negatively-weighted prompts describing features or characteristics to avoid in the resulting generation.
 
 ```python
 import os

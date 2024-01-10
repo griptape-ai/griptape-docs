@@ -545,7 +545,7 @@ image_artifact = ImageLoader().load("mountain.png")
 mask_artifact = ImageLoader().load("mask.png")
 
 # Create a task configured to use the engine.
-task = ImageInpaintingTask(
+task = InpaintingImageGenerationTask(
     input=("{{ args[0] }}", image_artifact, mask_artifact),
     image_generation_engine=engine,
 )

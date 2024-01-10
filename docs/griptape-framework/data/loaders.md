@@ -104,3 +104,25 @@ WebLoader().load_collection(
     ["https://www.griptape.ai", "https://docs.griptape.ai"]
 )
 ```
+
+## Image Loader
+
+The Image Loader is used to load an image from the filesystem, returning an ImageArtifact.
+
+```python
+from griptape.loaders import ImageLoader
+
+image_artifact = ImageLoader().load("my_image.png")
+
+image_artifacts = ImageLoader().load_collection("image_1.png", "image_2.png")
+```
+
+By default, the Image Loader will ensure all images are in `png` format. If an image in another format (for example, `jpg`) is loaded, it will be reformatted to `png`. Other formats are supported through the `format` field.
+
+```python
+from griptape.loaders import ImageLoader
+
+
+# Image data in Image Artifact will be in JPG format
+image_artifact_jpg = ImageLoader(format="JPG").load("my_image.png")
+```

@@ -1,10 +1,15 @@
 ## Overview
 
-[Image Generation Engines](../../reference/griptape/engines/image/index.md) facilitate the use of [image generation Drivers](../structures/image-generation-drivers.md) by Tasks and Tools. Each Engine defines a `run` method that accepts the inputs necessary for its image generation mode and provides the request to the configured Driver.
+[Image Generation Engines](../../reference/griptape/engines/image/index.md) facilitate text-to-image and image-to-image generation. Each Engine provides a `run` method that accepts the necessary inputs for its particular mode and provides the request to the configured [Driver](../structures/image-generation-drivers.md).
 
 ### Image Generation Engine Rulesets
 
-[Rulesets](../structures/rulesets.md) provided to image generation Engines are combined with prompts, providing further instruction to image generation models. In addition to typical Rulesets, image generation Engines support Negative Rulesets as arguments to their `run()` methods. Negative Rulesets are used by [image generation drivers](../structures/image-generation-drivers.md) with support for prompt weighting and used to influence the image generation model to avoid undesirable features and characteristics described by negative prompts.
+[Rulesets](../structures/rulesets.md) and Negative Rulesets are used by Engines to influence a model's output. Input rulesets are added to request prompts and can be used to standardize generated images across varying prompts. Negative rulesets are treated as negatively-weighted prompts and can be used to describe features or characteristics that should be avoided in the result.
+
+In the following example, rulesets are provided to the Engine's `run()` method call. These rules are provided to the Driver and influence the model to generate an image in an artistic, watercolor style, while avoiding blurry, photographic characteristics.
+
+!!! note "Not all Drivers support Negative Rulesets"
+    See the [documentation for your Driver](../structures/image-generation-drivers.md) to determine if it supports Negative Rulesets.
 
 ```python
 from griptape.engines import PromptImageGenerationEngine
@@ -24,11 +29,11 @@ engine = PromptImageGenerationEngine(
     image_generation_driver=driver,
 )
 
-positive_ruleset = Ruleset(name="positive rules", rules=[Rule("artistic")])
-negative_ruleset = Ruleset(name="negative rules", rules=[Rule("distorted"), Rule("blurry")])
+positive_ruleset = Ruleset(name="positive rules", rules=[Rule("artistic"), Rule("watercolor")])
+negative_ruleset = Ruleset(name="negative rules", rules=[Rule("blurry"), Rule("photograph")])
 
 engine.run(
-    prompts=["A watercolor painting of a dog riding a skateboard"],
+    prompts=["A dog riding a skateboard"],
     rulesets=[positive_ruleset],
     negative_rulesets=[negative_ruleset],
 )
@@ -62,7 +67,7 @@ engine.run(
 
 ### Variation Image Generation Engine 
 
-This Engine facilitates generating variations of an input image according to a text prompt.
+This Engine facilitates generating variations of an input image according to a text prompt. The input image is used as a reference for the model's generation.
 
 ```python
 from griptape.engines import VariationImageGenerationEngine
@@ -89,7 +94,7 @@ engine.run(
 
 ### Inpainting Image Generation Engine
 
-This Engine facilitates image inpainting, or modifying an input image according to a text prompt within the bounds of a mask defined by mask image.
+This Engine facilitates inpainting, or modifying an input image according to a text prompt within the bounds of a mask defined by mask image. After inpainting, the area specified by the mask is replaced with the model's generation, while the rest of the input image remains the same.
 
 ```python
 from griptape.engines import InpaintingImageGenerationEngine
@@ -118,7 +123,7 @@ engine.run(
 
 ### Outpainting Image Generation Engine
 
-This Engine facilitates image outpainting, or modifying an input image according to a text prompt outside the bounds of a mask defined by a mask image.
+This Engine facilitates outpainting, or modifying an input image according to a text prompt outside the bounds of a mask defined by a mask image. After outpainting, the area of the input image specified by the mask remains the same, while the rest is replaced with the model's generation.
 
 ```python
 from griptape.engines import OutpaintingImageGenerationEngine

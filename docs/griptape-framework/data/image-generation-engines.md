@@ -29,6 +29,8 @@ negative_ruleset = Ruleset(name="negative rules", rules=[Rule("distorted"), Rule
 
 engine.run(
     prompts=["A watercolor painting of a dog riding a skateboard"],
+    rulesets=[positive_ruleset],
+    negative_rulesets=[negative_ruleset],
 )
 ```
 

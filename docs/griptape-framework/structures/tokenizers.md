@@ -62,7 +62,7 @@ print(tokenizer.count_tokens_left("Hello world!"))  # 507
 
 ### Bedrock
 
-#### Claude
+#### Anthropic Claude
 ```python
 from griptape.tokenizers import BedrockClaudeTokenizer
 
@@ -73,7 +73,7 @@ print(tokenizer.count_tokens("Hello world!")) # 2
 print(tokenizer.count_tokens_left("Hello world!")) # 4094
 ```
 
-#### Titan
+#### Amazon Titan
 ```python
 from griptape.tokenizers import BedrockTitanTokenizer
 
@@ -84,7 +84,18 @@ print(tokenizer.count_tokens("Hello world!"))  # 5
 print(tokenizer.count_tokens_left("Hello world!"))  # 4091
 ```
 
-#### Jurassic
+#### Meta Llama 2
+```python
+from griptape.tokenizers import BedrockLlamaTokenizer
+
+
+tokenizer = BedrockLlamaTokenizer(model=BedrockLlamaTokenizer.DEFAULT_MODEL)
+
+print(tokenizer.count_tokens("Hello world!"))  # 2
+print(tokenizer.count_tokens_left("Hello world!"))  # 2046
+```
+
+#### Ai21 Jurassic
 ```python
 from griptape.tokenizers import BedrockJurassicTokenizer
 

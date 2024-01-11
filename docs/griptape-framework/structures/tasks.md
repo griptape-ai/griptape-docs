@@ -4,8 +4,8 @@ A [Task](../../reference/griptape/tasks/index.md) is a purpose-built abstraction
 
 
 ## Context
-Tasks that take input have a field [input_template](../../reference/griptape/tasks/base_text_input_task.md#griptape.tasks.base_text_input_task.BaseTextInputTask.input_template) which lets you define the Task objective. 
-Within the [input_template](../../reference/griptape/tasks/base_text_input_task.md#griptape.tasks.base_text_input_task.BaseTextInputTask.input_template), you can access the following [context](../../reference/griptape/structures/structure.md#griptape.structures.structure.Structure.context) variables:
+Tasks that take input have a field [input](../../reference/griptape/tasks/base_text_input_task.md#griptape.tasks.base_text_input_task.BaseTextInputTask.input) which lets you define the Task objective. 
+Within the [input](../../reference/griptape/tasks/base_text_input_task.md#griptape.tasks.base_text_input_task.BaseTextInputTask.input), you can access the following [context](../../reference/griptape/structures/structure.md#griptape.structures.structure.Structure.context) variables:
 
 * `args`: an array of arguments passed to the `.run()` method.
 * `structure`: the structure that the task belongs to.
@@ -200,11 +200,11 @@ from griptape.engines import CsvExtractionEngine
 # Instantiate the CSV extraction engine
 csv_extraction_engine = CsvExtractionEngine()
 
-# Define some CSV data and columns
+# Define some unstructured data and columns
 csv_data = """
-Name, Age, Address
-John, 25, 123 Main St
-Jane, 30, 456 Elm St
+Alice, 28, lives in New York.
+Bob, 35 lives in California.
+Charlie is 40 and lives in Texas.
 """
 
 columns = ["Name", "Age", "Address"]
@@ -223,15 +223,17 @@ agent.add_task(
 agent.run(csv_data)
 ```
 ```
-[10/20/23 15:06:08] INFO     ExtractionTask 75377d524c1a4b2dad5d08dca43a5ea2    
-                             Input:                                             
-                             Name, Age, Address                                 
-                             John, 25, 123 Main St                              
-                             Jane, 30, 456 Elm St                               
-                                                                                
-[10/20/23 15:06:10] INFO     ExtractionTask 75377d524c1a4b2dad5d08dca43a5ea2    
-                             Output: John,"""25""","""123 Main St"""            
-                             Jane,"""30""","""456 Elm St"""   
+[12/19/23 10:33:11] INFO     ExtractionTask e87fb457edf8423ab8a78583badd7a11
+                             Input:
+                             Alice, 28, lives in New York.
+                             Bob, 35 lives in California.
+                             Charlie is 40 and lives in Texas.
+
+[12/19/23 10:33:13] INFO     ExtractionTask e87fb457edf8423ab8a78583badd7a11
+                             Output: Name,Age,Address
+                             Alice,28,New York
+                             Bob,35,California
+                             Charlie,40,Texas
 ```
 
 ### JSON Extraction
@@ -242,12 +244,13 @@ from griptape.structures import Agent
 from griptape.engines import JsonExtractionEngine
 from schema import Schema
 
-# Define some JSON data
+# Instantiate the json extraction engine
+json_extraction_engine = JsonExtractionEngine()
+
+# Define some unstructured data and a schema
 json_data = """
-[
-  {"Name": "John", "Age": "25", "Address": "123 Main St"},
-  {"Name": "Jane", "Age": "30", "Address": "456 Elm St"}
-]
+Alice (Age 28) lives in New York.
+Bob (Age 35) lives in California.
 """
 user_schema = Schema(
     {"users": [{"name": str, "age": int, "location": str}]}
@@ -256,7 +259,7 @@ user_schema = Schema(
 agent = Agent()
 agent.add_task(
     ExtractionTask(
-        extraction_engine=JsonExtractionEngine(),
+        extraction_engine=json_extraction_engine,
         args={"template_schema": user_schema},
     )
 )
@@ -264,20 +267,15 @@ agent.add_task(
 # Run the agent
 agent.run(json_data)
 ```
-
 ```
-[10/20/23 15:13:01] INFO     ExtractionTask 4fa14a4aa25643faa792e672e10fc36a    
-                             Input:                                             
-                             [                                                  
-                               {"Name": "John", "Age": "25", "Address": "123    
-                             Main St"},                                         
-                               {"Name": "Jane", "Age": "30", "Address": "456 Elm
-                             St"}                                               
-                             ]                                                  
-                                                                                
-[10/20/23 15:13:05] INFO     ExtractionTask 4fa14a4aa25643faa792e672e10fc36a    
-                             Output: {'name': 'John', 'age': '25'}              
-                             {'name': 'Jane', 'age': '30'} 
+[12/19/23 10:37:41] INFO     ExtractionTask 3315cc77f94943a2a2dceccfe44f6a67
+                             Input:
+                             Alice (Age 28) lives in New York.
+                             Bob (Age 35) lives in California.
+
+[12/19/23 10:37:44] INFO     ExtractionTask 3315cc77f94943a2a2dceccfe44f6a67
+                             Output: {'name': 'Alice', 'age': 28, 'location': 'New York'}
+                             {'name': 'Bob', 'age': 35, 'location': 'California'}
 ```
 
 ## Text Summary Task
@@ -392,4 +390,191 @@ agent.run("Give me information about Griptape")
                              APIs. Griptape Agents provide incredible power and 
                              flexibility when working with large language       
                              models.
+```
+
+## Code Execution Task
+
+To execute an arbitrary Python function, use the [CodeExecutionTask](../../reference/griptape/tasks/text_query_task.md).
+This task takes a python function, and authors can elect to return a custom artifact.
+
+```python 
+from griptape.structures import Pipeline
+from griptape.tasks import CodeExecutionTask, PromptTask
+from griptape.artifacts import BaseArtifact, TextArtifact
+
+
+def character_counter(task: CodeExecutionTask) -> BaseArtifact:
+    result = len(task.input)
+    # For functions that don't need to return anything, we recommend returning task.input
+    return TextArtifact(str(result))
+
+
+# Instantiate the pipeline
+pipeline = Pipeline()
+
+pipeline.add_tasks(
+
+    # take the first argument from the pipeline `run` method
+    CodeExecutionTask(run_fn=character_counter),
+    # # take the output from the previous task and insert it into the prompt
+    PromptTask("{{args[0]}} using {{ parent_output }} characters")
+)
+
+pipeline.run("Write me a line in a poem")
+```
+
+```
+[01/09/24 15:23:54] INFO     CodeExecutionTask 048b1f548683475187064dde90055f72 
+                             Input: Write me a line in a poem                   
+                    INFO     CodeExecutionTask 048b1f548683475187064dde90055f72 
+                             Output: 25                                         
+                    INFO     PromptTask b6156dc5c0c6404488ab925989e78b01        
+                             Input: Write me a line in a poem using 25          
+                             characters                                         
+[01/09/24 15:24:03] INFO     PromptTask b6156dc5c0c6404488ab925989e78b01        
+                             Output: "Silent code, loud impact."  
+```
+
+## Image Generation Tasks
+
+To generate an image, use one of the following [Image Generation Tasks](../../reference/griptape/tasks/index.md). All Image Generation Tasks accept an [Image Generation Engine](../data/image-generation-engines.md) configured to use an [Image Generation Driver](./image-generation-drivers.md).
+
+All successful Image Generation Tasks will always output an [Image Artifact](../data/artifacts.md#imageartifact). Each task can be configured to additionally write the generated image to disk by providing either the `output_file` or `output_dir` field. The `output_file` field supports file names in the current directory (`my_image.png`), relative directory prefixes (`images/my_image.png`), or absolute paths (`/usr/var/my_image.png`). By setting `output_dir`, the task will generate a file name and place the image in the requested directory.
+
+### Prompt Image Generation Task
+
+The [Prompt Image Generation Task](../../reference/griptape/tasks/prompt_image_generation_task.md) generates an image from a text prompt.
+
+```python
+from griptape.engines import PromptImageGenerationEngine
+from griptape.drivers import OpenAiImageGenerationDriver
+from griptape.tasks import PromptImageGenerationTask
+
+
+# Create a driver configured to use OpenAI's DALL-E 3 model.
+driver = OpenAiImageGenerationDriver(
+    model="dall-e-3",
+    quality="hd",
+    style="natural",
+)
+
+# Create an engine configured to use the driver.
+engine = PromptImageGenerationEngine(
+    image_generation_driver=driver,
+)
+
+# Create a task configured to use the engine.
+task = PromptImageGenerationTask(
+    input="An image of a mountain on a summer day",
+    image_generation_engine=engine,
+)
+
+task.run()
+```
+
+### Variation Image Generation Task
+
+The [Variation Image Generation Task](../../reference/griptape/tasks/variation_image_generation_task.md) generates an image using an input image and a text prompt. The input image is used as a basis for generating a new image as requested by the text prompt.
+
+```python
+from griptape.engines import VariationImageGenerationEngine
+from griptape.drivers import AmazonBedrockImageGenerationDriver, \
+    BedrockStableDiffusionImageGenerationModelDriver
+from griptape.tasks import VariationImageGenerationTask
+from griptape.loaders import ImageLoader
+
+
+# Create a driver configured to use Stable Diffusion via Bedrock.
+driver = AmazonBedrockImageGenerationDriver(
+    image_generation_model_driver=BedrockStableDiffusionImageGenerationModelDriver(),
+    model="stability.stable-diffusion-xl-v0",
+)
+
+# Create an engine configured to use the driver.
+engine = VariationImageGenerationEngine(
+    image_generation_driver=driver,
+)
+
+# Load input image artifact.
+image_artifact = ImageLoader().load("tests/assets/mountain.png")
+
+# Create a task configured to use the engine.
+task = VariationImageGenerationTask(
+    input=("An image of a mountain landscape on a snowy winter day", image_artifact),
+    image_generation_engine=engine,
+)
+
+task.run()
+```
+
+### Inpainting Image Generation Task
+
+The [Inpainting Image Generation Task](../../reference/griptape/tasks/inpainting_image_generation_task.md) generates an image using an input image, a mask image, and a text prompt. The input image will be modified within the bounds of the mask image as requested by the text prompt.
+
+```python
+from griptape.engines import InpaintingImageGenerationEngine
+from griptape.drivers import AmazonBedrockImageGenerationDriver, \
+    BedrockStableDiffusionImageGenerationModelDriver
+from griptape.tasks import InpaintingImageGenerationTask
+from griptape.loaders import ImageLoader
+
+
+# Create a driver configured to use Stable Diffusion via Bedrock.
+driver = AmazonBedrockImageGenerationDriver(
+    image_generation_model_driver=BedrockStableDiffusionImageGenerationModelDriver(),
+    model="stability.stable-diffusion-xl-v0",
+)
+
+# Create an engine configured to use the driver.
+engine = InpaintingImageGenerationEngine(
+    image_generation_driver=driver,
+)
+
+# Load input image artifacts.
+image_artifact = ImageLoader().load("tests/assets/mountain.png")
+mask_artifact = ImageLoader().load("tests/assets/mountain-mask.png")
+
+# Create a task configured to use the engine.
+task = InpaintingImageGenerationTask(
+    input=("An image of a castle built into the side of a mountain", image_artifact, mask_artifact),
+    image_generation_engine=engine,
+)
+
+task.run()
+```
+
+### Outpainting Image Generation Task
+
+The [Outpainting Image Generation Task](../../reference/griptape/tasks/outpainting_image_generation_task.md) generates an image using an input image, a mask image, and a text prompt. The input image will be modified outside the bounds of a mask image as requested by the text prompt.
+
+```python
+from griptape.engines import OutpaintingImageGenerationEngine
+from griptape.drivers import AmazonBedrockImageGenerationDriver, \
+    BedrockStableDiffusionImageGenerationModelDriver
+from griptape.tasks import OutpaintingImageGenerationTask
+from griptape.loaders import ImageLoader
+
+
+# Create a driver configured to use Stable Diffusion via Bedrock.
+driver = AmazonBedrockImageGenerationDriver(
+    image_generation_model_driver=BedrockStableDiffusionImageGenerationModelDriver(),
+    model="stability.stable-diffusion-xl-v0",
+)
+
+# Create an engine configured to use the driver.
+engine = OutpaintingImageGenerationEngine(
+    image_generation_driver=driver,
+)
+
+# Load input image artifacts.
+image_artifact = ImageLoader().load("tests/assets/mountain.png")
+mask_artifact = ImageLoader().load("tests/assets/mountain-mask.png")
+
+# Create a task configured to use the engine.
+task = OutpaintingImageGenerationTask(
+    input=("An image of a mountain shrouded by clouds", image_artifact, mask_artifact),
+    image_generation_engine=engine,
+)
+
+task.run()
 ```

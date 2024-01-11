@@ -70,7 +70,7 @@ agent = Agent(
     prompt_driver=OpenAiChatPromptDriver(
         api_key=os.environ["OPENAI_API_KEY"],
         temperature=0.1,
-        model="gpt-3.5-turbo-16k",
+        model="gpt-3.5-turbo",
         response_format="json_object",
         seed=42,
     ),
@@ -267,6 +267,26 @@ agent = Agent(
 agent.run("Hello Girafatron, what is your favorite animal?")
 ```
 
+#### Text Generation Interface
+
+The [HuggingFaceHubPromptDriver](#hugging-face-hub) also supports [Text Generation Interface](https://huggingface.co/docs/text-generation-inference/basic_tutorials/consuming_tgi#inference-client) for running models locally. To use Text Generation Interface, just set `model` to a TGI endpoint.
+
+```python ignore
+import os
+from griptape.structures import Agent
+from griptape.drivers import HuggingFaceHubPromptDriver
+
+
+agent = Agent(
+    prompt_driver=HuggingFaceHubPromptDriver(
+        model="http://127.0.0.1:8080",
+        api_token=os.environ["HUGGINGFACE_HUB_ACCESS_TOKEN"],
+    ),
+)
+
+agent.run("Write the code for a snake game.")
+```
+
 ### Hugging Face Pipeline
 
 !!! info
@@ -350,7 +370,7 @@ from griptape.drivers import (
     AmazonSageMakerPromptDriver,
     SageMakerLlamaPromptModelDriver,
 )
-from griptape.structures.structure import Rule
+from griptape.rules import Rule
 
 agent = Agent(
     prompt_driver=AmazonSageMakerPromptDriver(
@@ -453,6 +473,24 @@ agent.run(
     (B) Broken or defective item
     (C) Billing question
     (D) Other (please explain)"""
+)
+```
+##### Meta Llama 2
+
+To use this model with Amazon Bedrock, use the [BedrockLlamaPromptModelDriver](../../reference/griptape/drivers/prompt_model/bedrock_llama_prompt_model_driver.md).
+
+```python
+from griptape.structures import Agent
+from griptape.drivers import AmazonBedrockPromptDriver, BedrockLlamaPromptModelDriver
+
+agent = Agent(
+    prompt_driver=AmazonBedrockPromptDriver(
+        model="meta.llama2-13b-chat-v1",
+        prompt_model_driver=BedrockLlamaPromptModelDriver(),
+    ),
+)
+agent.run(
+    "Write an article about impact of high inflation to GDP of a country"
 )
 ```
 

@@ -3,17 +3,17 @@ Embeddings in Griptape are multidimensional representations of text data. Embedd
 
 Griptape provides a way to build Embedding Drivers that are reused in downstream framework components. Every Embedding Driver has two basic methods that can be used to generate embeddings:
 
-* [embed_text_artifact()](../../reference/griptape/drivers/embedding/base_embedding_driver.md#griptape.drivers.embedding.base_embedding_driver.BaseEmbeddingDriver.embed_text_artifact) for [TextArtifact](../../reference/griptape/artifacts/text_artifact.md)s
-* [embed_string()](../../reference/griptape/drivers/embedding/base_embedding_driver.md#griptape.drivers.embedding.base_embedding_driver.BaseEmbeddingDriver.embed_string) for any string
+* [embed_text_artifact()](../../reference/griptape/drivers/embedding/base_embedding_driver.md#griptape.drivers.embedding.base_embedding_driver.BaseEmbeddingDriver.embed_text_artifact) for [TextArtifact](../../reference/griptape/artifacts/text_artifact.md)s.
+* [embed_string()](../../reference/griptape/drivers/embedding/base_embedding_driver.md#griptape.drivers.embedding.base_embedding_driver.BaseEmbeddingDriver.embed_string) for any string.
 
-!!! info
-    More embedding drivers are coming soon.
+You can optionally provide a [Tokenizer](../structures/tokenizers.md) via the [tokenizer](../../reference/griptape/drivers/embedding/base_embedding_driver.md#griptape.drivers.embedding.base_embedding_driver.BaseEmbeddingDriver.tokenizer) field to have the Driver automatically chunk the input text to fit into the token limit.
 
 ## Embedding Drivers
 
 ### OpenAI Embeddings
 
-The [OpenAiEmbeddingDriver](../../reference/griptape/drivers/embedding/openai_embedding_driver.md) uses [OpenAI Embeddings API](https://platform.openai.com/docs/guides/embeddings) to generate embeddings for texts of arbitrary length. This driver automatically chunks the input text to fit into the token limit.
+The [OpenAiEmbeddingDriver](../../reference/griptape/drivers/embedding/openai_embedding_driver.md) uses the [OpenAI Embeddings API](https://platform.openai.com/docs/guides/embeddings).
+
 
 ```python
 from griptape.drivers import OpenAiEmbeddingDriver
@@ -37,12 +37,12 @@ with updated defaults.
 !!! info
     This driver requires the `drivers-embedding-amazon-bedrock` [extra](../index.md#extras).
 
-The [BedrockTitanEmbeddingDriver](../../reference/griptape/drivers/embedding/bedrock_titan_embedding_driver.md) uses the [Amazon Bedrock Embeddings API](https://docs.aws.amazon.com/bedrock/latest/userguide/embeddings.html).
+The [AmazonBedrockTitanEmbeddingDriver](../../reference/griptape/drivers/embedding/amazon_bedrock_titan_embedding_driver.md) uses the [Amazon Bedrock Embeddings API](https://docs.aws.amazon.com/bedrock/latest/userguide/embeddings.html).
 
 ```python
-from griptape.drivers import BedrockTitanEmbeddingDriver
+from griptape.drivers import AmazonBedrockTitanEmbeddingDriver
 
-embeddings = BedrockTitanEmbeddingDriver().embed_string("Hello world!")
+embeddings = AmazonBedrockTitanEmbeddingDriver().embed_string("Hello world!")
 
 # display the first 3 embeddings
 print(embeddings[:3])
@@ -81,6 +81,49 @@ embeddings = driver.embed_string("Hello world!")
 # display the first 3 embeddings
 print(embeddings[:3])
 ```
+### Multi Model Embedding Drivers
+Certain embeddings providers such as Amazon SageMaker support many types of models, each with their own slight differences in parameters and response formats. To support this variation across models, these Embedding Drivers takes a [Embedding Model Driver](../../reference/griptape/drivers/embedding_model/base_embedding_model_driver.md)
+through the [embedding_model_driver](../../reference/griptape/drivers/embedding/base_multi_model_embedding_driver.md#griptape.drivers.embedding.base_multi_model_embedding_driver.BaseMultiModelEmbeddingDriver.embedding_model_driver) parameter.
+[Embedding Model Driver](../../reference/griptape/drivers/embedding_model/base_embedding_model_driver.md)s allows for model-specific customization for Embedding Drivers. 
+
+#### SageMaker Embeddings
+
+The [AmazonSageMakerEmbeddingDriver](../../reference/griptape/drivers/embedding/amazon_sagemaker_embedding_driver.md) uses the [Amazon SageMaker Endpoints](https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html) to generate embeddings on AWS.
+
+!!! info
+    This driver requires the `drivers-embedding-amazon-sagemaker` [extra](../index.md#extras).
+
+##### TensorFlow Hub Models
+```python ignore
+import os
+from griptape.drivers import AmazonSageMakerEmbeddingDriver, SageMakerTensorFlowHubEmbeddingModelDriver
+
+driver = AmazonSageMakerEmbeddingDriver(
+    model=os.environ["SAGEMAKER_TENSORFLOW_HUB_MODEL"],
+    embedding_model_driver=SageMakerTensorFlowHubEmbeddingModelDriver(),
+)
+
+embeddings = driver.embed_string("Hello world!")
+
+# display the first 3 embeddings
+print(embeddings[:3])
+```
+
+##### HuggingFace Models
+```python ignore
+import os
+from griptape.drivers import AmazonSageMakerEmbeddingDriver, SageMakerHuggingFaceEmbeddingModelDriver
+
+driver = AmazonSageMakerEmbeddingDriver(
+    model=os.environ["SAGEMAKER_HUGGINGFACE_MODEL"],
+    embedding_model_driver=SageMakerHuggingFaceEmbeddingModelDriver(),
+)
+
+embeddings = driver.embed_string("Hello world!")
+
+# display the first 3 embeddings
+print(embeddings[:3])
+```
 
 ### Override Default Structure Embedding Driver
 Here is how you can override the Embedding Driver that is used by default in agents. 
@@ -96,4 +139,3 @@ agent = Agent(
 )
 
 agent.run("based on https://www.griptape.ai/, tell me what Griptape is")
-```

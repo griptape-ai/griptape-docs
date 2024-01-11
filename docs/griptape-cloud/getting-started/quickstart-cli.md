@@ -89,7 +89,7 @@ Step 7. Deploy your application to the cloud
 You can use the Griptape CLI to deploy your application to the cloud.
 
 ```
-user@machine-name demo_app % gt cloud create-deployment --api-id 12345678-8f3e-4028-9934-42e0cd69860a --directory ~/workplace/demo_app
+user@machine-name demo_app % gt cloud create-deployment --app-id 12345678-8f3e-4028-9934-42e0cd69860a --directory ~/workplace/demo_app
 {'app_id': '12345678-8f3e-4028-9934-42e0cd69860a', 'created_at': '2023-12-19T00:16:36.663Z', 'created_by': '12345678-9b16-408a-b5d7-e83044d820f4', 'deployment_id': '12345678-12cd-4003-9ee1-b6b01f7927ea', 'status': 'QUEUED'}
 ```
 

@@ -32,3 +32,7 @@ Each blob has a [name](../../reference/griptape/artifacts/base_artifact.md#gript
 [dir](../../reference/griptape/artifacts/blob_artifact.md#griptape.artifacts.blob_artifact.BlobArtifact.dir) to uniquely identify stored objects.
 
 [TaskMemory](../../reference/griptape/memory/task/task_memory.md) automatically stores [BlobArtifact](../../reference/griptape/artifacts/blob_artifact.md)s returned by tool activities that can be reused by other tools.
+
+## ImageArtifact
+
+An [ImageArtifact](../../reference/griptape/artifacts/image_artifact.md) is used for passing images back to the LLM. In addition to binary image data, an ImageArtifact includes image metadata like MIME type, dimensions, and prompt and model information for images returned by [image generation Drivers](../structures/image-generation-drivers.md). It inherits from [BlobArtifact](#blobartifact).

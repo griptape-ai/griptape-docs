@@ -434,3 +434,147 @@ pipeline.run("Write me a line in a poem")
 [01/09/24 15:24:03] INFO     PromptTask b6156dc5c0c6404488ab925989e78b01        
                              Output: "Silent code, loud impact."  
 ```
+
+## Image Generation Tasks
+
+To generate an image, use one of the following [Image Generation Tasks](../../reference/griptape/tasks/index.md). All Image Generation Tasks accept an [Image Generation Engine](../data/image-generation-engines.md) configured to use an [Image Generation Driver](./image-generation-drivers.md).
+
+All successful Image Generation Tasks will always output an [Image Artifact](../data/artifacts.md#imageartifact). Each task can be configured to additionally write the generated image to disk by providing either the `output_file` or `output_dir` field. The `output_file` field supports file names in the current directory (`my_image.png`), relative directory prefixes (`images/my_image.png`), or absolute paths (`/usr/var/my_image.png`). By setting `output_dir`, the task will generate a file name and place the image in the requested directory.
+
+### Prompt Image Generation Task
+
+The [Prompt Image Generation Task](../../reference/griptape/tasks/prompt_image_generation_task.md) generates an image from a text prompt.
+
+```python
+from griptape.engines import PromptImageGenerationEngine
+from griptape.drivers import OpenAiImageGenerationDriver
+from griptape.tasks import PromptImageGenerationTask
+
+
+# Create a driver configured to use OpenAI's DALL-E 3 model.
+driver = OpenAiImageGenerationDriver(
+    model="dall-e-3",
+    quality="hd",
+    style="natural",
+)
+
+# Create an engine configured to use the driver.
+engine = PromptImageGenerationEngine(
+    image_generation_driver=driver,
+)
+
+# Create a task configured to use the engine.
+task = PromptImageGenerationTask(
+    input="An image of a mountain on a summer day",
+    image_generation_engine=engine,
+)
+
+task.run()
+```
+
+### Variation Image Generation Task
+
+The [Variation Image Generation Task](../../reference/griptape/tasks/variation_image_generation_task.md) generates an image using an input image and a text prompt. The input image is used as a basis for generating a new image as requested by the text prompt.
+
+```python
+from griptape.engines import VariationImageGenerationEngine
+from griptape.drivers import AmazonBedrockImageGenerationDriver, \
+    BedrockStableDiffusionImageGenerationModelDriver
+from griptape.tasks import VariationImageGenerationTask
+from griptape.loaders import ImageLoader
+
+
+# Create a driver configured to use Stable Diffusion via Bedrock.
+driver = AmazonBedrockImageGenerationDriver(
+    image_generation_model_driver=BedrockStableDiffusionImageGenerationModelDriver(),
+    model="stability.stable-diffusion-xl-v0",
+)
+
+# Create an engine configured to use the driver.
+engine = VariationImageGenerationEngine(
+    image_generation_driver=driver,
+)
+
+# Load input image artifact.
+image_artifact = ImageLoader().load("tests/assets/mountain.png")
+
+# Create a task configured to use the engine.
+task = VariationImageGenerationTask(
+    input=("An image of a mountain landscape on a snowy winter day", image_artifact),
+    image_generation_engine=engine,
+)
+
+task.run()
+```
+
+### Inpainting Image Generation Task
+
+The [Inpainting Image Generation Task](../../reference/griptape/tasks/inpainting_image_generation_task.md) generates an image using an input image, a mask image, and a text prompt. The input image will be modified within the bounds of the mask image as requested by the text prompt.
+
+```python
+from griptape.engines import InpaintingImageGenerationEngine
+from griptape.drivers import AmazonBedrockImageGenerationDriver, \
+    BedrockStableDiffusionImageGenerationModelDriver
+from griptape.tasks import InpaintingImageGenerationTask
+from griptape.loaders import ImageLoader
+
+
+# Create a driver configured to use Stable Diffusion via Bedrock.
+driver = AmazonBedrockImageGenerationDriver(
+    image_generation_model_driver=BedrockStableDiffusionImageGenerationModelDriver(),
+    model="stability.stable-diffusion-xl-v0",
+)
+
+# Create an engine configured to use the driver.
+engine = InpaintingImageGenerationEngine(
+    image_generation_driver=driver,
+)
+
+# Load input image artifacts.
+image_artifact = ImageLoader().load("tests/assets/mountain.png")
+mask_artifact = ImageLoader().load("tests/assets/mountain-mask.png")
+
+# Create a task configured to use the engine.
+task = InpaintingImageGenerationTask(
+    input=("An image of a castle built into the side of a mountain", image_artifact, mask_artifact),
+    image_generation_engine=engine,
+)
+
+task.run()
+```
+
+### Outpainting Image Generation Task
+
+The [Outpainting Image Generation Task](../../reference/griptape/tasks/outpainting_image_generation_task.md) generates an image using an input image, a mask image, and a text prompt. The input image will be modified outside the bounds of a mask image as requested by the text prompt.
+
+```python
+from griptape.engines import OutpaintingImageGenerationEngine
+from griptape.drivers import AmazonBedrockImageGenerationDriver, \
+    BedrockStableDiffusionImageGenerationModelDriver
+from griptape.tasks import OutpaintingImageGenerationTask
+from griptape.loaders import ImageLoader
+
+
+# Create a driver configured to use Stable Diffusion via Bedrock.
+driver = AmazonBedrockImageGenerationDriver(
+    image_generation_model_driver=BedrockStableDiffusionImageGenerationModelDriver(),
+    model="stability.stable-diffusion-xl-v0",
+)
+
+# Create an engine configured to use the driver.
+engine = OutpaintingImageGenerationEngine(
+    image_generation_driver=driver,
+)
+
+# Load input image artifacts.
+image_artifact = ImageLoader().load("tests/assets/mountain.png")
+mask_artifact = ImageLoader().load("tests/assets/mountain-mask.png")
+
+# Create a task configured to use the engine.
+task = OutpaintingImageGenerationTask(
+    input=("An image of a mountain shrouded by clouds", image_artifact, mask_artifact),
+    image_generation_engine=engine,
+)
+
+task.run()
+```

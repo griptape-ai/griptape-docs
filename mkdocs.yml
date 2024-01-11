@@ -83,6 +83,7 @@ nav:
           - Quick Start (Sample Templates): "griptape-cloud/getting-started/quickstart-samples.md"
           - Quick Start (From Scratch): "griptape-cloud/getting-started/quickstart-scratch.md"
       - Cloud User Guide:
+          - Overview: "griptape-cloud/cloud-user-guide/index.md"
           - API Keys: "griptape-cloud/cloud-user-guide/api-keys.md"
       - Griptape CLI:
           - Installation: "griptape-cloud/cli/index.md"
@@ -102,6 +103,7 @@ nav:
           - Conversation Memory: "griptape-framework/structures/conversation-memory.md"
           - Rulesets: "griptape-framework/structures/rulesets.md"
           - Events: "griptape-framework/structures/events.md"
+          - Image Generation Drivers: "griptape-framework/structures/image-generation-drivers.md"
       - Tools:
           - Overview: "griptape-framework/tools/index.md"
           - Task Memory: "griptape-framework/tools/task-memory.md"
@@ -117,6 +119,7 @@ nav:
           - Summary Engines: "griptape-framework/data/summary-engines.md"
           - Vector Store Drivers: "griptape-framework/data/vector-store-drivers.md"
           - SQL Drivers: "griptape-framework/data/sql-drivers.md"
+          - Image Generation Engines: "griptape-framework/data/image-generation-engines.md"
   - Tools:
       - Overview: "griptape-tools/index.md"
       - Official Tools:
@@ -138,6 +141,10 @@ nav:
           - VectorStoreClient: "griptape-tools/official-tools/vector-store-client.md"
           - WebScraper: "griptape-tools/official-tools/web-scraper.md"
           - WebSearch: "griptape-tools/official-tools/web-search.md"
+          - PromptImageGenerationClient: "griptape-tools/official-tools/prompt-image-generation-client.md"
+          - VariationImageGenerationClient: "griptape-tools/official-tools/variation-image-generation-client.md"
+          - InpaintingImageGenerationClient: "griptape-tools/official-tools/inpainting-image-generation-client.md"
+          - OutpaintingImageGenerationClient: "griptape-tools/official-tools/outpainting-image-generation-client.md"
       - Custom Tools:
           - Building Custom Tools: "griptape-tools/custom-tools/index.md"
   - Recipes:

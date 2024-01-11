@@ -1,6 +1,6 @@
 ## Overview
 
-Image generation Engines facilitate the use of [image generation drivers](../structures/image-generation-drivers.md) by image generation Tasks and Tools. Each image generation Engine defines a `run` method that accepts the inputs necessary for its image generation mode and provides the request to the configured Driver.
+[Image Generation Engines](../../reference/griptape/engines/image/index.md) facilitate the use of [image generation Drivers](../structures/image-generation-drivers.md) by Tasks and Tools. Each Engine defines a `run` method that accepts the inputs necessary for its image generation mode and provides the request to the configured Driver.
 
 ### Image Generation Engine Rulesets
 

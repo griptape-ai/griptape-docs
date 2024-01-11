@@ -437,16 +437,15 @@ pipeline.run("Write me a line in a poem")
 
 ## Image Generation Tasks
 
-To generate an image, use one of the following Image Generation Tasks. All Image Generation Tasks accept an Image Generation Engine configured to use an [Image Generation Driver](./image-generation-drivers.md).
+To generate an image, use one of the following [Image Generation Tasks](../../reference/griptape/tasks/index.md). All Image Generation Tasks accept an [Image Generation Engine](../data/image-generation-engines.md) configured to use an [Image Generation Driver](./image-generation-drivers.md).
 
 All successful Image Generation Tasks will always output an [Image Artifact](../data/artifacts.md#imageartifact). Each task can be configured to additionally write the generated image to disk by providing either the `output_file` or `output_dir` field. The `output_file` field supports file names in the current directory (`my_image.png`), relative directory prefixes (`images/my_image.png`), or absolute paths (`/usr/var/my_image.png`). By setting `output_dir`, the task will generate a file name and place the image in the requested directory.
 
 ### Prompt Image Generation Task
 
-The Prompt Image Generation Task generates an image from a text prompt.
+The [Prompt Image Generation Task](../../reference/griptape/tasks/prompt_image_generation_task.md) generates an image from a text prompt.
 
 ```python
-from griptape.structures import Agent
 from griptape.engines import PromptImageGenerationEngine
 from griptape.drivers import OpenAiImageGenerationDriver
 from griptape.tasks import PromptImageGenerationTask
@@ -470,15 +469,14 @@ task = PromptImageGenerationTask(
     image_generation_engine=engine,
 )
 
-Agent().add_task(task).run()
+task.run()
 ```
 
 ### Variation Image Generation Task
 
-The Variation Image Generation Task generates an image using an input image and a text prompt. The input image is used as a basis for generating a new image as requested by the text prompt.
+The [Variation Image Generation Task](../../reference/griptape/tasks/variation_image_generation_task.md) generates an image using an input image and a text prompt. The input image is used as a basis for generating a new image as requested by the text prompt.
 
 ```python
-from griptape.structures import Agent
 from griptape.engines import VariationImageGenerationEngine
 from griptape.drivers import AmazonBedrockImageGenerationDriver, \
     BedrockStableDiffusionImageGenerationModelDriver
@@ -506,15 +504,14 @@ task = VariationImageGenerationTask(
     image_generation_engine=engine,
 )
 
-Agent().add_task(task).run()
+task.run()
 ```
 
 ### Inpainting Image Generation Task
 
-The Inpainting Image Generation Task generates an image using an input image, a mask image, and a text prompt. The input image will be modified within the bounds of the mask image as requested by the text prompt.
+The [Inpainting Image Generation Task](../../reference/griptape/tasks/inpainting_image_generation_task.md) generates an image using an input image, a mask image, and a text prompt. The input image will be modified within the bounds of the mask image as requested by the text prompt.
 
 ```python
-from griptape.structures import Agent
 from griptape.engines import InpaintingImageGenerationEngine
 from griptape.drivers import AmazonBedrockImageGenerationDriver, \
     BedrockStableDiffusionImageGenerationModelDriver
@@ -543,15 +540,14 @@ task = InpaintingImageGenerationTask(
     image_generation_engine=engine,
 )
 
-Agent().add_task(task).run()
+task.run()
 ```
 
 ### Outpainting Image Generation Task
 
-The Outpainting Image Generation task generates an image using an input image, a mask image, and a text prompt. The input image will be modified outside the bounds of a mask image as requested by the text prompt.
+The [Outpainting Image Generation Task](../../reference/griptape/tasks/outpainting_image_generation_task.md) generates an image using an input image, a mask image, and a text prompt. The input image will be modified outside the bounds of a mask image as requested by the text prompt.
 
 ```python
-from griptape.structures import Agent
 from griptape.engines import OutpaintingImageGenerationEngine
 from griptape.drivers import AmazonBedrockImageGenerationDriver, \
     BedrockStableDiffusionImageGenerationModelDriver
@@ -580,5 +576,5 @@ task = OutpaintingImageGenerationTask(
     image_generation_engine=engine,
 )
 
-Agent().add_task(task).run()
+task.run()
 ```

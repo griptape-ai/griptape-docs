@@ -25,7 +25,6 @@ pymdown-extensions = "^10.3"
 optional = true
 
 [tool.poetry.group.test.dependencies]
-mktestdocs = "^0.2.1"
 pytest = "^7.4.1"
 griptape = {git = "https://github.com/griptape-ai/griptape", rev = "dev", extras = ["all"]}
 

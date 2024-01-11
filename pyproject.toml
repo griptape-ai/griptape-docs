@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "griptape-docs"
-version = "0.20.0"
+version = "0.21.0"
 description = ""
 authors = ["Griptape <hello@griptape.ai>"]
 license = "Apache 2.0"
@@ -26,7 +26,7 @@ optional = true
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.1"
-griptape = {git = "https://github.com/griptape-ai/griptape", rev = "dev", extras = ["all"]}
+griptape = { git = "https://github.com/griptape-ai/griptape", branch = "dev", extras=["all"] }
 
 [build-system]
 requires = ["poetry-core"]

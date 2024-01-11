@@ -27,7 +27,6 @@ tool = OutpaintingImageGenerationClient(
 )
 
 # Create an agent and provide the tool to it.
-agent = Agent(tools=[tool])
-
-agent.run("Outpaint a forest to the image at mountain.png using the mask at mask.png.")
+Agent(tools=[tool]).run("Generate an image of a mountain shrouded by clouds by outpainting the "
+                        "image at tests/assets/mountain.png using the mask at tests/assets/mask.png.")
 ```

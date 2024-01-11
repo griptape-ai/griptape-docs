@@ -27,7 +27,5 @@ tool = PromptImageGenerationClient(
 )
 
 # Create an agent and provide the tool to it.
-agent = Agent(tools=[tool])
-
-agent.run("Generate an image of a mountain valley on a summer day.")
+Agent(tools=[tool]).run("Generate an image of a mountain on a summer day.")
 ```

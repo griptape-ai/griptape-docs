@@ -29,7 +29,6 @@ tool = VariationImageGenerationClient(
 )
 
 # Create an agent and provide the tool to it.
-agent = Agent(tools=[tool])
-
-agent.run("Generate a variation of the image located at mountain.png.")
+Agent(tools=[tool]).run("Generate a variation of the image located at tests/assets/mountain.png " 
+                        "depicting a mountain on a winter day")
 ```

@@ -448,12 +448,12 @@ The Prompt Image Generation Task generates an image from a text prompt.
 ```python
 from griptape.structures import Agent
 from griptape.engines import PromptImageGenerationEngine
-from griptape.drivers import OpenAiDalleImageGenerationDriver
+from griptape.drivers import OpenAiImageGenerationDriver
 from griptape.tasks import PromptImageGenerationTask
 
 
 # Create a driver configured to use OpenAI's DALL-E 3 model.
-driver = OpenAiDalleImageGenerationDriver(
+driver = OpenAiImageGenerationDriver(
     model="dall-e-3",
     quality="hd",
     style="natural",
@@ -466,14 +466,11 @@ engine = PromptImageGenerationEngine(
 
 # Create a task configured to use the engine.
 task = PromptImageGenerationTask(
+    input="An image of a mountain on a summer day",
     image_generation_engine=engine,
 )
 
-# Create an agent and add the task to it.
-agent = Agent()
-agent.add_task(task)
-
-agent.run("Generate a beautiful image of a mountain landscape on a summer day.")
+Agent().add_task(task).run()
 ```
 
 ### Variation Image Generation Task
@@ -501,19 +498,15 @@ engine = VariationImageGenerationEngine(
 )
 
 # Load input image artifact.
-image_artifact = ImageLoader().load("mountain.png")
+image_artifact = ImageLoader().load("tests/assets/mountain.png")
 
 # Create a task configured to use the engine.
 task = VariationImageGenerationTask(
-    input=("{{ args[0] }}", image_artifact),
+    input=("An image of a mountain landscape on a snowy winter day", image_artifact),
     image_generation_engine=engine,
 )
 
-# Create an agent and add the task to it.
-agent = Agent()
-agent.add_task(task)
-
-agent.run("Generate a beautiful image of a mountain landscape on a snowy winter day.")
+Agent().add_task(task).run()
 ```
 
 ### Inpainting Image Generation Task
@@ -541,20 +534,16 @@ engine = InpaintingImageGenerationEngine(
 )
 
 # Load input image artifacts.
-image_artifact = ImageLoader().load("mountain.png")
-mask_artifact = ImageLoader().load("mask.png")
+image_artifact = ImageLoader().load("tests/assets/mountain.png")
+mask_artifact = ImageLoader().load("tests/assets/mountain-mask.png")
 
 # Create a task configured to use the engine.
 task = InpaintingImageGenerationTask(
-    input=("{{ args[0] }}", image_artifact, mask_artifact),
+    input=("An image of a castle built into the side of a mountain", image_artifact, mask_artifact),
     image_generation_engine=engine,
 )
 
-# Create an agent and add the task to it.
-agent = Agent()
-agent.add_task(task)
-
-agent.run("Generate a beautiful image of a lake within a mountain landscape on a snowy winter day.")
+Agent().add_task(task).run()
 ```
 
 ### Outpainting Image Generation Task
@@ -582,18 +571,14 @@ engine = OutpaintingImageGenerationEngine(
 )
 
 # Load input image artifacts.
-image_artifact = ImageLoader().load("mountain.png")
-mask_artifact = ImageLoader().load("mask.png")
+image_artifact = ImageLoader().load("tests/assets/mountain.png")
+mask_artifact = ImageLoader().load("tests/assets/mountain-mask.png")
 
 # Create a task configured to use the engine.
 task = OutpaintingImageGenerationTask(
-    input=("{{ args[0] }}", image_artifact, mask_artifact),
+    input=("An image of a mountain shrouded by clouds", image_artifact, mask_artifact),
     image_generation_engine=engine,
 )
 
-# Create an agent and add the task to it.
-agent = Agent()
-agent.add_task(task)
-
-agent.run("Generate a beautiful image of a lake within a forest landscape.")
+Agent().add_task(task).run()
 ```

@@ -6,6 +6,32 @@ Image generation Engines facilitate the use of [image generation drivers](../str
 
 [Rulesets](../structures/rulesets.md) provided to image generation Engines are combined with prompts, providing further instruction to image generation models. In addition to typical Rulesets, image generation Engines support Negative Rulesets as arguments to their `run()` methods. Negative Rulesets are used by [image generation drivers](../structures/image-generation-drivers.md) with support for prompt weighting and used to influence the image generation model to avoid undesirable features and characteristics described by negative prompts.
 
+```python
+from griptape.engines import PromptImageGenerationEngine
+from griptape.drivers import AmazonBedrockImageGenerationDriver, \
+    BedrockStableDiffusionImageGenerationModelDriver
+from griptape.rules import Ruleset, Rule
+
+
+# Create a driver configured to use Stable Diffusion via Bedrock.
+driver = AmazonBedrockImageGenerationDriver(
+    image_generation_model_driver=BedrockStableDiffusionImageGenerationModelDriver(),
+    model="stability.stable-diffusion-xl-v0",
+)
+
+# Create an engine configured to use the driver.
+engine = PromptImageGenerationEngine(
+    image_generation_driver=driver,
+)
+
+positive_ruleset = Ruleset(name="positive rules", rules=[Rule("artistic")])
+negative_ruleset = Ruleset(name="negative rules", rules=[Rule("distorted"), Rule("blurry")])
+
+engine.run(
+    prompts=["A watercolor painting of a dog riding a skateboard"],
+)
+```
+
 ### Prompt Image Generation Engine 
 
 This Engine facilitates generating images from text prompts.
@@ -14,7 +40,6 @@ This Engine facilitates generating images from text prompts.
 from griptape.engines import PromptImageGenerationEngine
 from griptape.drivers import AmazonBedrockImageGenerationDriver, \
     BedrockStableDiffusionImageGenerationModelDriver
-from griptape.tools import PromptImageGenerationClient
 
 
 # Create a driver configured to use Stable Diffusion via Bedrock.
@@ -56,7 +81,7 @@ engine = VariationImageGenerationEngine(
 
 engine.run(
     prompts=["A photo of a mountain landscape in winter"],
-    image=ImageLoader().load("mountain.png"),
+    image=ImageLoader().load("tests/assets/mountain.png"),
 )
 ```
 
@@ -83,7 +108,7 @@ engine = InpaintingImageGenerationEngine(
 )
 
 engine.run(
-    prompts=["A photo of a mountain landscape in winter"],
+    prompts=["A photo of a castle built into the side of a mountain"],
     image=ImageLoader().load("mountain.png"),
     mask=ImageLoader().load("mountain-mask.png"),
 )
@@ -111,8 +136,8 @@ engine = OutpaintingImageGenerationEngine(
 )
 
 engine.run(
-    prompts=["A photo of a mountain landscape in winter"],
-    image=ImageLoader().load("mountain.png"),
-    mask=ImageLoader().load("mountain-mask.png"),
+    prompts=["A photo of a mountain shrouded in clouds"],
+    image=ImageLoader().load("tests/assets/mountain.png"),
+    mask=ImageLoader().load("tests/assets/mountain-mask.png"),
 )
 ```

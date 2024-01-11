@@ -28,5 +28,5 @@ tool = InpaintingImageGenerationClient(
 
 # Create an agent and provide the tool to it.
 Agent(tools=[tool]).run("Generate an image of a castle built into the side of a mountain by inpainting the "
-                        "image at tests/assets/mountain.png using the mask at tests/assets/mask.png.")
+                        "image at tests/assets/mountain.png using the mask at tests/assets/mountain-mask.png.")
 ```

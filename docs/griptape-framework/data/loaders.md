@@ -124,5 +124,5 @@ from griptape.loaders import ImageLoader
 
 
 # Image data in artifact will be in JPG format.
-image_artifact_jpg = ImageLoader(format="JPG").load("tests/assets/mountain.png")
+image_artifact_jpg = ImageLoader(format="JPEG").load("tests/assets/mountain.png")
 ```

@@ -116,8 +116,8 @@ engine = InpaintingImageGenerationEngine(
 
 engine.run(
     prompts=["A photo of a castle built into the side of a mountain"],
-    image=ImageLoader().load("mountain.png"),
-    mask=ImageLoader().load("mountain-mask.png"),
+    image=ImageLoader().load("tests/assets/mountain.png"),
+    mask=ImageLoader().load("tests/assets/mountain-mask.png"),
 )
 ```
 

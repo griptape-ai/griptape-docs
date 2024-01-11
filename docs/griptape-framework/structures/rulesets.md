@@ -35,9 +35,9 @@ pipeline = Pipeline(
 )
 
 pipeline.add_tasks(
-    PromptTask(input_template="Respond to this user's question: {{ args[0] }}"),
+    PromptTask(input="Respond to this user's question: {{ args[0] }}"),
     PromptTask(
-        input_template="Extract keywords from this response: {{ parent_output }}"
+        input="Extract keywords from this response: {{ parent_output }}"
     ),
 )
 
@@ -114,7 +114,7 @@ pipeline = Pipeline()
 
 pipeline.add_tasks(
     PromptTask(
-        input_template="Respond to the following prompt: {{ args[0] }}",
+        input="Respond to the following prompt: {{ args[0] }}",
         rulesets=[
             Ruleset(
                 name="Emojis",
@@ -125,7 +125,7 @@ pipeline.add_tasks(
         ]
     ),
     PromptTask(
-        input_template="Determine the sentiment of the following text: {{ parent_output }}",
+        input="Determine the sentiment of the following text: {{ parent_output }}",
         rulesets=[
             Ruleset(
                 name="Diacritic",

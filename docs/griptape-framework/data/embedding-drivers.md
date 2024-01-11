@@ -76,7 +76,7 @@ driver = HuggingFaceHubEmbeddingDriver(
     ),
 )
 
-results = driver.embed_string("Hello world!")
+embeddings = driver.embed_string("Hello world!")
 
 # display the first 3 embeddings
 print(embeddings[:3])
@@ -94,32 +94,32 @@ The [AmazonSageMakerEmbeddingDriver](../../reference/griptape/drivers/embedding/
     This driver requires the `drivers-embedding-amazon-sagemaker` [extra](../index.md#extras).
 
 ##### TensorFlow Hub Models
-```python
+```python ignore
 import os
-from griptape.drivers import HuggingFaceHubEmbeddingDriver
+from griptape.drivers import AmazonSageMakerEmbeddingDriver, SageMakerTensorFlowHubEmbeddingModelDriver
 
-embedding_driver=AmazonSageMakerEmbeddingDriver(
+driver = AmazonSageMakerEmbeddingDriver(
     model=os.environ["SAGEMAKER_TENSORFLOW_HUB_MODEL"],
     embedding_model_driver=SageMakerTensorFlowHubEmbeddingModelDriver(),
 )
 
-results = driver.embed_string("Hello world!")
+embeddings = driver.embed_string("Hello world!")
 
 # display the first 3 embeddings
 print(embeddings[:3])
 ```
 
 ##### HuggingFace Models
-```python
+```python ignore
 import os
-from griptape.drivers import HuggingFaceHubEmbeddingDriver
+from griptape.drivers import AmazonSageMakerEmbeddingDriver, SageMakerHuggingFaceEmbeddingModelDriver
 
-embedding_driver=AmazonSageMakerEmbeddingDriver(
+driver = AmazonSageMakerEmbeddingDriver(
     model=os.environ["SAGEMAKER_HUGGINGFACE_MODEL"],
-    embedding_model_driver=SageMakerTensorFlowHubEmbeddingModelDriver(),
+    embedding_model_driver=SageMakerHuggingFaceEmbeddingModelDriver(),
 )
 
-results = driver.embed_string("Hello world!")
+embeddings = driver.embed_string("Hello world!")
 
 # display the first 3 embeddings
 print(embeddings[:3])

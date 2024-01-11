@@ -70,7 +70,7 @@ agent = Agent(
     prompt_driver=OpenAiChatPromptDriver(
         api_key=os.environ["OPENAI_API_KEY"],
         temperature=0.1,
-        model="gpt-3.5-turbo-16k",
+        model="gpt-3.5-turbo",
         response_format="json_object",
         seed=42,
     ),
@@ -271,7 +271,7 @@ agent.run("Hello Girafatron, what is your favorite animal?")
 
 The [HuggingFaceHubPromptDriver](#hugging-face-hub) also supports [Text Generation Interface](https://huggingface.co/docs/text-generation-inference/basic_tutorials/consuming_tgi#inference-client) for running models locally. To use Text Generation Interface, just set `model` to a TGI endpoint.
 
-```python
+```python ignore
 import os
 from griptape.structures import Agent
 from griptape.drivers import HuggingFaceHubPromptDriver
@@ -370,7 +370,7 @@ from griptape.drivers import (
     AmazonSageMakerPromptDriver,
     SageMakerLlamaPromptModelDriver,
 )
-from griptape.structures.structure import Rule
+from griptape.rules import Rule
 
 agent = Agent(
     prompt_driver=AmazonSageMakerPromptDriver(

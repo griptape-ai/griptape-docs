@@ -36,7 +36,8 @@ vector_store_tool = VectorStoreClient(
     description="Contains information about the Attention Is All You Need paper. "
                 "Use it to answer any related questions.",
     query_engine=engine,
-    namespace=namespace
+    namespace=namespace,
+    off_prompt=False
 )
 
 agent = Agent(

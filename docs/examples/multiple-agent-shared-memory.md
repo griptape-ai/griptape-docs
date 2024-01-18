@@ -18,22 +18,29 @@ import os
 
 load_dotenv()
 
+AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
+
+MONGO_CONNECTION_STRING = os.getenv('MONGO_CONNECTION_STRING')
+MONGO_DATABASE_NAME = os.getenv('MONGO_DATABASE_NAME')
+MONGO_COLLECTION_NAME = os.getenv('MONGO_COLLECTION_NAME')
+
+
 azure_embedding_driver = AzureOpenAiEmbeddingDriver(
     model='text-embedding-ada-002',
-    azure_endpoint='https://griptape-dev2.openai.azure.com/',
+    azure_endpoint=AZURE_OPENAI_ENDPOINT,
     azure_deployment='text-embedding-ada-002'
 )
 
 azure_prompt_driver = AzureOpenAiChatPromptDriver(
     model='gpt-4',
-    azure_endpoint='https://griptape-dev2.openai.azure.com/',
+    azure_endpoint=AZURE_OPENAI_ENDPOINT,
     azure_deployment='gpt-4'
 )
 
 mongo_driver = MongoDbAtlasVectorStoreDriver(
-    connection_string=os.getenv('MONGO_CONNECTION_STRING'),
-    database_name='matt-db',
-    collection_name='matt_collection',
+    connection_string=MONGO_CONNECTION_STRING,
+    database_name=MONGO_DATABASE_NAME,
+    collection_name=MONGO_COLLECTION_NAME,
     embedding_driver=azure_embedding_driver,
 )
 

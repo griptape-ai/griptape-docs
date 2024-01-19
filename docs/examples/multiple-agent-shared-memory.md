@@ -5,7 +5,7 @@ The first `Agent` uses a remote vector store (`MongoDbAtlasVectorStoreDriver` in
 The `MongoDbAtlasVectorStoreDriver` assumes that you have a vector index configured where the path to the content is called `vector`, and the number of dimensions set on the index is `1536`.
 
 ```python
-from dotenv import load_dotenv
+import os
 from griptape.tools import WebScraper, VectorStoreClient, TaskMemoryClient
 from griptape.structures import Agent
 from griptape.drivers import AzureOpenAiChatPromptDriver, AzureOpenAiEmbeddingDriver, MongoDbAtlasVectorStoreDriver
@@ -14,15 +14,15 @@ from griptape.memory import TaskMemory
 from griptape.artifacts import TextArtifact
 from griptape.memory.task.storage import TextArtifactStorage
 
-import os
-
-load_dotenv()
 
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
 
-MONGO_CONNECTION_STRING = os.getenv('MONGO_CONNECTION_STRING')
-MONGO_DATABASE_NAME = os.getenv('MONGO_DATABASE_NAME')
-MONGO_COLLECTION_NAME = os.getenv('MONGO_COLLECTION_NAME')
+MONGODB_HOST = os.getenv("MONGODB_HOST")
+MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
+MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
+MONGODB_DATABASE_NAME = os.getenv("MONGODB_DATABASE_NAME")
+MONGODB_COLLECTION_NAME = os.getenv("MONGODB_COLLECTION_NAME")
+MONGODB_CONNECTION_STRING = f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@{MONGODB_HOST}/{MONGODB_DATABASE_NAME}"
 
 
 azure_embedding_driver = AzureOpenAiEmbeddingDriver(
@@ -38,9 +38,9 @@ azure_prompt_driver = AzureOpenAiChatPromptDriver(
 )
 
 mongo_driver = MongoDbAtlasVectorStoreDriver(
-    connection_string=MONGO_CONNECTION_STRING,
-    database_name=MONGO_DATABASE_NAME,
-    collection_name=MONGO_COLLECTION_NAME,
+    connection_string=MONGODB_CONNECTION_STRING,
+    database_name=MONGODB_DATABASE_NAME,
+    collection_name=MONGODB_COLLECTION_NAME,
     embedding_driver=azure_embedding_driver,
 )
 
@@ -88,6 +88,6 @@ asker = Agent(
 )
 
 if __name__ == "__main__":
-    loader.run("Load https://griptape.ai")
-    asker.run("What is griptape?")
+    loader.run("Load https://medium.com/enterprise-rag/a-first-intro-to-complex-rag-retrieval-augmented-generation-a8624d70090f")
+    asker.run("why is retrieval augmented generation useful?")
 ```

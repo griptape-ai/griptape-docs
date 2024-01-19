@@ -10,7 +10,7 @@ from griptape.tools import WebScraper, VectorStoreClient, TaskMemoryClient
 from griptape.structures import Agent
 from griptape.drivers import AzureOpenAiChatPromptDriver, AzureOpenAiEmbeddingDriver, MongoDbAtlasVectorStoreDriver
 from griptape.engines import VectorQueryEngine, PromptSummaryEngine, CsvExtractionEngine, JsonExtractionEngine
-from griptape.memory import TaskMemory
+from griptape.memory import TaskMemory 
 from griptape.artifacts import TextArtifact
 from griptape.memory.task.storage import TextArtifactStorage
 

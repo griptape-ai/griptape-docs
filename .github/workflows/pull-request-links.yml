@@ -1,12 +1,10 @@
 name: Read the Docs Preview
 on:
-  # pull_request_target:
-  #   types:
-  #     - opened
-  #   paths:
-  #     - "docs/**"
-  pull_request:
-    branches: ["dev"]
+  pull_request_target:
+    types:
+      - opened
+    paths:
+      - "docs/**"
 
 permissions:
   pull-requests: write

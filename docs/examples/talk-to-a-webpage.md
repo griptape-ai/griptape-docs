@@ -34,7 +34,8 @@ vector_store_tool = VectorStoreClient(
     description="Contains information about physics. "
                 "Use it to answer any physics-related questions.",
     query_engine=engine,
-    namespace=namespace
+    namespace=namespace,
+    off_prompt=False
 )
 
 agent = Agent(

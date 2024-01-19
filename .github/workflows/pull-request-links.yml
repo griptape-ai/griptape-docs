@@ -1,8 +1,8 @@
 name: Read the Docs Preview
 on:
   pull_request_target:
-    types:
-      - opened
+    # types:
+    #   - opened
     paths:
       - "docs/**"
 

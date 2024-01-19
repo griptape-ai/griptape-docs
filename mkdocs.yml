@@ -153,6 +153,7 @@ nav:
           - Talk to Redshift: "examples/talk-to-redshift.md"
           - Talk to a Webpage: "examples/talk-to-a-webpage.md"
           - Talk to a PDF: "examples/talk-to-a-pdf.md"
+          - Shared Memory Between Agents: "examples/multiple-agent-shared-memory.md"
       - Data:
           - Load and Query Pinecone: "examples/load-and-query-pinecone.md"
           - Load and Query Marqo: "examples/load-query-and-chat-marqo.md"

@@ -17,3 +17,4 @@ jobs:
         with:
           project-slug: ${{ secrets.READTHEDOCS_PROJECT_SLUG }} 
           single-version: 'false'
+          project-language: ""

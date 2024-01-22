@@ -1,8 +1,10 @@
-This example shows how to use one `Agent` to load content into `TaskMemory` and get that content from another `Agent` using `VectorStoreClient`.
+This example shows how to use one `Agent` to load content into `TaskMemory` and get that content from another `Agent` using `TaskMemoryClient`.
 
-The first `Agent` uses a remote vector store (`MongoDbAtlasVectorStoreDriver` in this example) to handle memory operations. The second `Agent` uses the `VectorStoreClient` with the same `MongoDbAtlasVectorStoreDriver` to get the data.
+The first `Agent` uses a remote vector store (`MongoDbAtlasVectorStoreDriver` in this example) to handle memory operations. The second `Agent` uses the same instance of `TaskMemory` and the `TaskMemoryClient` with the same `MongoDbAtlasVectorStoreDriver` to get the data.
 
-The `MongoDbAtlasVectorStoreDriver` assumes that you have a vector index configured where the path to the content is called `vector`, and the number of dimensions set on the index is `1536`.
+The `MongoDbAtlasVectorStoreDriver` assumes that you have a vector index configured where the path to the content is called `vector`, and the number of dimensions set on the index is `1536` (this is a commonly used number of dimensions for embedding models).
+
+`asker` uses the same instance of `TaskMemory` as `loader` so that `asker` has access to the `namespace_storages` that `loader` has set.
 
 ```python
 import os
@@ -48,11 +50,6 @@ vector_engine = VectorQueryEngine(
     vector_store_driver=mongo_driver,
     prompt_driver=azure_prompt_driver,
 )
-vector_store_tool = VectorStoreClient(
-    description='Can be used for all user queries',
-    query_engine=vector_engine,
-    off_prompt=False
-)
 
 task_memory = TaskMemory(
     artifact_storages={
@@ -75,14 +72,16 @@ loader = Agent(
     tools=[
         WebScraper()
     ],
+    task_memory=task_memory,
     prompt_driver=azure_prompt_driver,
     embedding_driver=azure_embedding_driver,
-    task_memory=task_memory,
 )
 asker = Agent(
     tools=[
-        vector_store_tool
+        TaskMemoryClient(off_prompt=False),
     ],
+    meta_memory=loader.meta_memory,
+    task_memory=loader.task_memory,
     prompt_driver=azure_prompt_driver,
     embedding_driver=azure_embedding_driver,
 )

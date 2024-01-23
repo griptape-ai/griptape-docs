@@ -1,6 +1,6 @@
 # VariationImageGenerationEngine
 
-This tool allows LLMs to generate variations of an input image from a text prompt.
+This Tool allows LLMs to generate variations of an input image from a text prompt. The input image can be provided either by its filepath or by its [Task Memory](../../griptape-framework/tools/task-memory.md) reference. 
 
 ```python
 from griptape.structures import Agent

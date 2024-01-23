@@ -24,6 +24,8 @@ MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
 MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
 MONGODB_DATABASE_NAME = os.getenv("MONGODB_DATABASE_NAME")
 MONGODB_COLLECTION_NAME = os.getenv("MONGODB_COLLECTION_NAME")
+index_name = os.getenv("MONGODB_INDEX_NAME")
+vector_path = os.getenv("MONGODB_VECTOR_PATH")
 MONGODB_CONNECTION_STRING = f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@{MONGODB_HOST}/{MONGODB_DATABASE_NAME}"
 
 
@@ -44,6 +46,8 @@ mongo_driver = MongoDbAtlasVectorStoreDriver(
     database_name=MONGODB_DATABASE_NAME,
     collection_name=MONGODB_COLLECTION_NAME,
     embedding_driver=azure_embedding_driver,
+    index_name=index_name,
+    vector_path=vector_path
 )
 
 vector_engine = VectorQueryEngine(

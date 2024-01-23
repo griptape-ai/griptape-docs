@@ -7,7 +7,6 @@ Griptape provides a way to build drivers for vector DBs where embeddings can be 
 - `upsert_text()` for updating and inserting new arbitrary strings into vector DBs. The method will automatically generate embeddings for a given value.
 - `upsert_vector()` for updating and inserting new vectors directly.
 - `query()` for querying vector DBs.
-- `create_index()`: For easy index creation.
 
 Each vector driver takes a [BaseEmbeddingDriver](../../reference/griptape/drivers/embedding/base_embedding_driver.md) used to dynamically generate embeddings for strings.
 

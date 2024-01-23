@@ -161,7 +161,7 @@ print(result)
 !!! info
     This driver requires the `drivers-vector-mongodb` [extra](../index.md#extras).
 
-The [MongodbAtlasVectorStoreDriver](../../reference/griptape/drivers/vector/mongodb_vector_store_driver.md) provides support for storing vector data in a MongoDB Atlas database.
+The [MongodbAtlasVectorStoreDriver](../../reference/griptape/drivers/vector/mongodb_atlas_vector_store_driver.md) provides support for storing vector data in a MongoDB Atlas database.
 
 Here is an example of how the driver can be used to load and query information in a MongoDb Atlas Cluster:
 
@@ -178,12 +178,64 @@ username = os.getenv("MONGODB_USERNAME")
 password = os.getenv("MONGODB_PASSWORD")
 database_name = os.getenv("MONGODB_DATABASE_NAME")
 collection_name = os.getenv("MONGODB_COLLECTION_NAME")
+index_name = os.getenv("MONGODB_INDEX_NAME")
+vector_path = os.getenv("MONGODB_VECTOR_PATH")
 # Initialize the vector store driver
 vector_store = MongoDbAtlasVectorStoreDriver(
     connection_string=f"mongodb+srv://{username}:{password}@{host}/{database_name}",
     database_name=database_name,
     collection_name=collection_name,
     embedding_driver=embedding_driver,
+    index_name=index_name,
+    vector_path=vector_path,
+)
+
+# Load artifacts from the web
+artifacts = WebLoader(max_tokens=200).load("https://www.griptape.ai")
+
+# Upsert the artifacts into the vector store
+vector_store.upsert_text_artifacts(
+    {
+        "griptape": artifacts,
+    }
+)
+
+result = vector_store.query(query="What is griptape?")
+print(result)
+```
+
+## Azure MongoDB Vector Store Driver
+
+!!! info
+    This driver requires the `drivers-vector-mongodb` [extra](../index.md#extras).
+
+The [AzureMongoDbVectorStoreDriver](../../reference/griptape/drivers/vector/azure_mongodb_vector_store_driver.md) provides support for storing vector data in an Azure CosmosDb database account using the MongoDb vCore API
+
+Here is an example of how the driver can be used to load and query information in an Azure CosmosDb MongoDb vCore database. It is almost the same as the [MongodbAtlasVectorStoreDriver](#mongodb-atlas-vector-store-driver):
+
+```python
+from griptape.drivers import MongoDbAtlasVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.loaders import WebLoader
+import os
+
+# Initialize an embedding driver
+embedding_driver = OpenAiEmbeddingDriver(api_key=os.getenv("OPENAI_API_KEY"))
+
+azure_host = os.getenv("AZURE_MONGODB_HOST")
+username = os.getenv("AZURE_MONGODB_USERNAME")
+password = os.getenv("AZURE_MONGODB_PASSWORD")
+database_name = os.getenv("AZURE_MONGODB_DATABASE_NAME")
+collection_name = os.getenv("AZURE_MONGODB_COLLECTION_NAME")
+index_name = os.getenv("AZURE_MONGODB_INDEX_NAME")
+vector_path = os.getenv("AZURE_MONGODB_VECTOR_PATH")
+# Initialize the vector store driver
+vector_store = AzureMongoDbVectorStoreDriver(
+    connection_string=f"mongodb+srv://{username}:{password}@{host}/{database_name}?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000",
+    database_name=database_name,
+    collection_name=collection_name,
+    embedding_driver=embedding_driver,
+    index_name=index_name,
+    vector_path=vector_path,
 )
 
 # Load artifacts from the web

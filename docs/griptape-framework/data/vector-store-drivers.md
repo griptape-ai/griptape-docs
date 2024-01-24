@@ -204,6 +204,25 @@ result = vector_store.query(query="What is griptape?")
 print(result)
 ```
 
+The format for creating a vector index should look similar to the following:
+```json
+{
+  "fields": [
+    {
+      "numDimensions": 1536,
+      "path": "<path_to_vector>",
+      "similarity": "euclidean",
+      "type": "vector"
+    },
+    {
+      "path": "namespace",
+      "type": "filter"
+    }
+  ]
+}
+```
+Replace `path_to_vector` with the expected field name where the vector content will be.
+
 ## Azure MongoDB Vector Store Driver
 
 !!! info
@@ -290,6 +309,11 @@ vector_store_driver.upsert_text_artifacts(
 
 result = vector_store_driver.query(query="What is griptape?")
 print(result)
+```
+
+The format for creating a vector index should be similar to the following:
+```
+FT.CREATE idx:griptape ON hash PREFIX 1 "griptape:" SCHEMA tag TAG vector VECTOR FLAT 6 TYPE FLOAT32 DIM 1536 DISTANCE_METRIC COSINE
 ```
 
 ## OpenSearch Vector Store Driver

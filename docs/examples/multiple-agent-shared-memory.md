@@ -10,7 +10,7 @@ The `MongoDbAtlasVectorStoreDriver` assumes that you have a vector index configu
 import os
 from griptape.tools import WebScraper, VectorStoreClient, TaskMemoryClient
 from griptape.structures import Agent
-from griptape.drivers import AzureOpenAiChatPromptDriver, AzureOpenAiEmbeddingDriver, MongoDbAtlasVectorStoreDriver
+from griptape.drivers import AzureOpenAiChatPromptDriver, AzureOpenAiEmbeddingDriver, AzureMongoDbVectorStoreDriver
 from griptape.engines import VectorQueryEngine, PromptSummaryEngine, CsvExtractionEngine, JsonExtractionEngine
 from griptape.memory import TaskMemory 
 from griptape.artifacts import TextArtifact
@@ -19,14 +19,14 @@ from griptape.memory.task.storage import TextArtifactStorage
 
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
 
-MONGODB_HOST = os.getenv("MONGODB_HOST")
-MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
-MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
-MONGODB_DATABASE_NAME = os.getenv("MONGODB_DATABASE_NAME")
-MONGODB_COLLECTION_NAME = os.getenv("MONGODB_COLLECTION_NAME")
-MONGODB_INDEX_NAME = os.getenv("MONGODB_INDEX_NAME")
-MONGODB_VECTOR_PATH = os.getenv("MONGODB_VECTOR_PATH")
-MONGODB_CONNECTION_STRING = f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@{MONGODB_HOST}/{MONGODB_DATABASE_NAME}"
+MONGODB_HOST = os.getenv("AZURE_MONGODB_HOST")
+MONGODB_USERNAME = os.getenv("AZURE_MONGODB_USERNAME")
+MONGODB_PASSWORD = os.getenv("AZURE_MONGODB_PASSWORD")
+MONGODB_DATABASE_NAME = os.getenv("AZURE_MONGODB_DATABASE_NAME")
+MONGODB_COLLECTION_NAME = os.getenv("AZURE_MONGODB_COLLECTION_NAME")
+MONGODB_INDEX_NAME = os.getenv("AZURE_MONGODB_INDEX_NAME")
+MONGODB_VECTOR_PATH = os.getenv("AZURE_MONGODB_VECTOR_PATH")
+MONGODB_CONNECTION_STRING = f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@{MONGODB_HOST}/{MONGODB_DATABASE_NAME}?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000"
 
 
 azure_embedding_driver = AzureOpenAiEmbeddingDriver(
@@ -41,7 +41,7 @@ azure_prompt_driver = AzureOpenAiChatPromptDriver(
     azure_deployment='gpt-4'
 )
 
-mongo_driver = MongoDbAtlasVectorStoreDriver(
+mongo_driver = AzureMongoDbVectorStoreDriver(
     connection_string=MONGODB_CONNECTION_STRING,
     database_name=MONGODB_DATABASE_NAME,
     collection_name=MONGODB_COLLECTION_NAME,

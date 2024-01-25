@@ -86,9 +86,12 @@ engine = VariationImageGenerationEngine(
     image_generation_driver=driver,
 )
 
+with open("tests/assets/mountain.png", "rb") as f:
+    image_artifact = ImageLoader().load(f.read())
+    
 engine.run(
     prompts=["A photo of a mountain landscape in winter"],
-    image=ImageLoader().load("tests/assets/mountain.png"),
+    image=image_artifact,
 )
 ```
 
@@ -114,10 +117,16 @@ engine = InpaintingImageGenerationEngine(
     image_generation_driver=driver,
 )
 
+with open("tests/assets/mountain.png", "rb") as f:
+    image_artifact = ImageLoader().load(f.read())
+    
+with open("tests/assets/mountain-mask.png", "rb") as f:
+    mask_artifact = ImageLoader().load(f.read())
+    
 engine.run(
     prompts=["A photo of a castle built into the side of a mountain"],
-    image=ImageLoader().load("tests/assets/mountain.png"),
-    mask=ImageLoader().load("tests/assets/mountain-mask.png"),
+    image=image_artifact,
+    mask=mask_artifact,
 )
 ```
 
@@ -142,9 +151,15 @@ engine = OutpaintingImageGenerationEngine(
     image_generation_driver=driver,
 )
 
+with open("tests/assets/mountain.png", "rb") as f:
+    image_artifact = ImageLoader().load(f.read())
+    
+with open("tests/assets/mountain-mask.png", "rb") as f:
+    mask_artifact = ImageLoader().load(f.read())
+    
 engine.run(
     prompts=["A photo of a mountain shrouded in clouds"],
-    image=ImageLoader().load("tests/assets/mountain.png"),
-    mask=ImageLoader().load("tests/assets/mountain-mask.png"),
+    image=image_artifact,
+    mask=mask_artifact,
 )
 ```

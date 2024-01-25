@@ -496,7 +496,8 @@ engine = VariationImageGenerationEngine(
 )
 
 # Load input image artifact.
-image_artifact = ImageLoader().load("tests/assets/mountain.png")
+with open("tests/assets/mountain.png", "rb") as f:
+    image_artifact = ImageLoader().load(f.read())
 
 # Create a task configured to use the engine.
 task = VariationImageGenerationTask(
@@ -531,8 +532,11 @@ engine = InpaintingImageGenerationEngine(
 )
 
 # Load input image artifacts.
-image_artifact = ImageLoader().load("tests/assets/mountain.png")
-mask_artifact = ImageLoader().load("tests/assets/mountain-mask.png")
+with open("tests/assets/mountain.png", "rb") as f:
+    image_artifact = ImageLoader().load(f.read())
+
+with open("tests/assets/mountain-mask.png", "rb") as f:
+    mask_artifact = ImageLoader().load(f.read())
 
 # Create a task configured to use the engine.
 task = InpaintingImageGenerationTask(
@@ -567,8 +571,11 @@ engine = OutpaintingImageGenerationEngine(
 )
 
 # Load input image artifacts.
-image_artifact = ImageLoader().load("tests/assets/mountain.png")
-mask_artifact = ImageLoader().load("tests/assets/mountain-mask.png")
+with open("tests/assets/mountain.png", "rb") as f:
+    image_artifact = ImageLoader().load(f.read())
+
+with open("tests/assets/mountain-mask.png", "rb") as f:
+    mask_artifact = ImageLoader().load(f.read())
 
 # Create a task configured to use the engine.
 task = OutpaintingImageGenerationTask(

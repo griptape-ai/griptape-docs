@@ -75,7 +75,7 @@ model_driver = BedrockTitanImageGenerationModelDriver()
 
 driver = AmazonBedrockImageGenerationDriver(
     image_generation_model_driver=model_driver,
-    model="stability.stable-diffusion-xl-v0",
+    model="amazon.titan-image-generator-v1",
 )
 
 engine = PromptImageGenerationEngine(image_generation_driver=driver)

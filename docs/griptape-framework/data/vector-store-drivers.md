@@ -356,6 +356,20 @@ result = vector_store_driver.query(query="What is griptape?")
 print(result)
 ```
 
+The body mappings for creating a vector index should look similar to the following:
+```json
+{
+    "mappings": {
+        "properties": {
+            "vector": {"type": "knn_vector", "dimension": 1536},
+            "namespace": {"type": "keyword"},
+            "metadata": {"type": "object", "enabled": true},
+        }
+    },
+}
+```
+Replace `path_to_vector` with the expected field name where the vector content will be.
+
 ## PGVector Vector Store Driver
 
 !!! info

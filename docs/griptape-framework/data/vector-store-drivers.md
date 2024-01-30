@@ -368,7 +368,6 @@ The body mappings for creating a vector index should look similar to the followi
     },
 }
 ```
-Replace `path_to_vector` with the expected field name where the vector content will be.
 
 ## PGVector Vector Store Driver
 

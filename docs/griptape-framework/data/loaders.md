@@ -64,6 +64,8 @@ CsvLoader().load_collection(["tests/assets/cities.csv", "tests/assets/addresses.
 !!! info
     This driver requires the `loaders-dataframe` [extra](../index.md#extras).
 
+Can be used to load [pandas](https://pandas.pydata.org/) [DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html)s into [CsvRowArtifact](../../reference/griptape/artifacts/csv_row_artifact.md)s:
+
 ```python
 import urllib
 import pandas as pd
@@ -150,4 +152,22 @@ from griptape.loaders import ImageLoader
 # Image data in artifact will be in BMP format.
 with open("tests/assets/mountain.png", "rb") as f:
     image_artifact_jpeg = ImageLoader(format="bmp").load(f.read())
+```
+
+
+## Email Loader
+
+!!! info
+    This driver requires the `loaders-email` [extra](../index.md#extras).
+
+Can be used to load email from an imap server:
+
+```python
+from griptape.loaders import EmailLoader
+
+loader = EmailLoader(imap_url="an.email.server.hostname", username="username", password="password")
+
+loader.load(EmailLoader.EmailQuery(label="INBOX"))
+
+loader.load_collection([EmailLoader.EmailQuery(label="INBOX"), EmailLoader.EmailQuery(label="SENT")])
 ```

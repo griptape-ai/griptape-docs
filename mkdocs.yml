@@ -94,32 +94,35 @@ nav:
   - Framework:
       - Overview: "griptape-framework/index.md"
       - Structures:
-          - Tasks: "griptape-framework/structures/tasks.md"
           - Agents: "griptape-framework/structures/agents.md"
           - Pipelines: "griptape-framework/structures/pipelines.md"
           - Workflows: "griptape-framework/structures/workflows.md"
-          - Prompt Drivers: "griptape-framework/structures/prompt-drivers.md"
-          - Tokenizers: "griptape-framework/structures/tokenizers.md"
+          - Tasks: "griptape-framework/structures/tasks.md"
+          - Task Memory: "griptape-framework/tools/task-memory.md"
           - Conversation Memory: "griptape-framework/structures/conversation-memory.md"
           - Rulesets: "griptape-framework/structures/rulesets.md"
-          - Events: "griptape-framework/structures/events.md"
-          - Image Generation Drivers: "griptape-framework/structures/image-generation-drivers.md"
       - Tools:
           - Overview: "griptape-framework/tools/index.md"
-          - Task Memory: "griptape-framework/tools/task-memory.md"
           - Building Custom Tools: "griptape-tools/custom-tools/index.md"
+      - Engines:
+          - Query Engines: "griptape-framework/data/query-engines.md"
+          - Extraction Engines: "griptape-framework/data/extraction-engines.md"
+          - Summary Engines: "griptape-framework/data/summary-engines.md"
+          - Image Generation Engines: "griptape-framework/data/image-generation-engines.md"
+      - Drivers:
+          - Prompt Drivers: "griptape-framework/structures/prompt-drivers.md"
+          - Embedding Drivers: "griptape-framework/data/embedding-drivers.md"
+          - Vector Store Drivers: "griptape-framework/data/vector-store-drivers.md"
+          - Image Generation Drivers: "griptape-framework/structures/image-generation-drivers.md"
+          - SQL Drivers: "griptape-framework/data/sql-drivers.md"
       - Data:
           - Overview: "griptape-framework/data/index.md"
           - Artifacts: "griptape-framework/data/artifacts.md"
-          - Embedding Drivers: "griptape-framework/data/embedding-drivers.md"
           - Chunkers: "griptape-framework/data/chunkers.md"
           - Loaders: "griptape-framework/data/loaders.md"
-          - Extraction Engines: "griptape-framework/data/extraction-engines.md"
-          - Query Engines: "griptape-framework/data/query-engines.md"
-          - Summary Engines: "griptape-framework/data/summary-engines.md"
-          - Vector Store Drivers: "griptape-framework/data/vector-store-drivers.md"
-          - SQL Drivers: "griptape-framework/data/sql-drivers.md"
-          - Image Generation Engines: "griptape-framework/data/image-generation-engines.md"
+      - Misc:
+          - Events: "griptape-framework/structures/events.md"
+          - Tokenizers: "griptape-framework/structures/tokenizers.md"
   - Tools:
       - Overview: "griptape-tools/index.md"
       - Official Tools:

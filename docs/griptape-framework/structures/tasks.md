@@ -187,7 +187,7 @@ agent.run("Give me the answer for 5*4.")
 ## Extraction Task
 
 To extract information from text, use an [ExtractionTask](../../reference/griptape/tasks/extraction_task.md).
-This Task takes an [Extraction Engine](../../griptape-framework/data/extraction-engines.md), and a set of arguments specific to the Engine.
+This Task takes an [Extraction Engine](../../griptape-framework/engines/extraction-engines.md), and a set of arguments specific to the Engine.
 
 
 ### CSV Extraction
@@ -281,7 +281,7 @@ agent.run(json_data)
 ## Text Summary Task
 
 To summarize a text, use the [TextSummaryTask](../../reference/griptape/tasks/text_summary_task.md).
-This Task takes an [Summarization Engine](../../griptape-framework/data/summary-engines.md), and a set of arguments to the engine.
+This Task takes an [Summarization Engine](../../griptape-framework/engines/summary-engines.md), and a set of arguments to the engine.
 
 ```python
 from griptape.structures import Agent
@@ -346,7 +346,7 @@ agent.run(
 ## Text Query Task
 
 To query text, use the [TextQueryTask](../../reference/griptape/tasks/text_query_task.md).
-This Task takes a [Query Engine](../../griptape-framework/data/query-engines.md), and a set of arguments specific to the engine.
+This Task takes a [Query Engine](../../griptape-framework/engines/query-engines.md), and a set of arguments specific to the engine.
 
 ```python
 from griptape.structures import Agent
@@ -437,7 +437,7 @@ pipeline.run("Write me a line in a poem")
 
 ## Image Generation Tasks
 
-To generate an image, use one of the following [Image Generation Tasks](../../reference/griptape/tasks/index.md). All Image Generation Tasks accept an [Image Generation Engine](../data/image-generation-engines.md) configured to use an [Image Generation Driver](./image-generation-drivers.md).
+To generate an image, use one of the following [Image Generation Tasks](../../reference/griptape/tasks/index.md). All Image Generation Tasks accept an [Image Generation Engine](../engines/image-generation-engines.md) configured to use an [Image Generation Driver](../drivers/image-generation-drivers.md).
 
 All successful Image Generation Tasks will always output an [Image Artifact](../data/artifacts.md#imageartifact). Each task can be configured to additionally write the generated image to disk by providing either the `output_file` or `output_dir` field. The `output_file` field supports file names in the current directory (`my_image.png`), relative directory prefixes (`images/my_image.png`), or absolute paths (`/usr/var/my_image.png`). By setting `output_dir`, the task will generate a file name and place the image in the requested directory.
 

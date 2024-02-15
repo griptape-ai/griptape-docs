@@ -2,8 +2,8 @@
 
 **LAST UPDATED: FEBRUARY 14, 2024**
 
-**BY CLICKING** "**I ACCEPT,**"**ACCESSING OUR USING GRIPTAPE INC'S
-("GRIPTAPE"OR "WE" SERVICE**, YOU ("CUSTOMER"OR "YOU" AGREE THAT YOU
+**BY CLICKING "I ACCEPT,"** ACCESSING OUR USING GRIPTAPE INC'S
+("GRIPTAPE"OR "WE" SERVICE**, YOU ("CUSTOMER" OR "YOU" AGREE THAT YOU
 HAVE READ AND UNDERSTOOD, AND, AS A CONDITION TO ITS ACCESS TO OR USE OF
 THE SERVICE, YOU AGREE TO BE BOUND BY, THE FOLLOWING TERMS, INCLUDING
 GRIPTAPE'S PRIVACY POLICY (TOGETHER, THIS "**AGREEMENT**". IF YOU DO NOT
@@ -20,33 +20,33 @@ bind Customer to this Agreement; (ii) Customer agrees to be bound by
 this Agreement; and (iii) the term \"**Customer**\" shall refer to such
 entity.
 
-1.  **USE OF THE SERVICE**.** **Griptape offers an online,
+1.  **USE OF THE SERVICE.** Griptape offers an online,
     software-as-a-service platform, where Griptape hosts software
-    applications ("**Applications**" and enables Customers to deploy,
+    applications ("**Applications**") and enables Customers to deploy,
     run, and manage their Applications on the platform ("**Griptape**"
-    "**Griptape Cloud**" or "**Service**". Applications may include
+    "**Griptape Cloud**" or "**Service**"). Applications may include
     those written using the Griptape framework, which is comprised of
     open source software development tools for interfacing with
     artificial intelligence (AI) systems such as large language models
     (LLMs) and executing other business logic. The Griptape framework is
-    available at and is licensed for use by Customer under an open
-    source license ("**Griptape Framework**". As part of the Service,
-    Griptape may make its API** **(as defined below) and SDK (as defined
-    below) available to Customer.** **The Service, API, and SDK are
-    collectively referred to herein as the "**Griptape IPR**"and any
-    references to the Griptape IPR includes all components and portions
-    thereof. Subject the terms and conditions of this Agreement,
-    Griptape will provide Customer with access the Service using access
-    credentials provided by Griptape to permit Customer ("**Access
-    Credentials**" to access and use the Service. Customer will provide,
-    at its own expense, all equipment and third-party products and/or
-    services necessary to evaluate the Service. Customer must use the
-    Service in compliance with all applicable laws and regulations and
-    related documentation, including, any limitations on the number of
-    users or applications and any limits on memory, storage, and data
-    associated with Customer's use of the Service.
+    available at https://github.com/griptape-ai/griptape and is licensed
+    for use by Customer under an open source license 
+    ("**Griptape Framework**"). As part of the Service, Griptape may
+    make its API (as defined below) and SDK (as defined below) available
+    to Customer. The Service, API, and SDK are collectively referred to
+    herein as the "**Griptape IPR**"and any references to the Griptape
+    IPR includes all components and portions thereof. Subject the terms
+    and conditions of this Agreement, Griptape will provide Customer 
+    with access the Service using access credentials provided by 
+    Griptape to permit Customer to access and use the Service. Customer 
+    will provide, at its own expense, all equipment and third-party 
+    products and/or services necessary to evaluate the Service. Customer
+    must use the Service in compliance with all applicable laws and 
+    regulations and related documentation, including, any limitations on
+    the number of users or applications and any limits on memory, 
+    storage, and data associated with Customer's use of the Service.
 
-2.  **FEES**. Griptape reserves the right to determine pricing for the
+2.  **FEES.** Griptape reserves the right to determine pricing for the
     Service and to charge fees for the Service (or any component,
     feature, or functionality thereof). Griptape will provide Customer
     advance written notice of any such fees before they go into effect
@@ -54,10 +54,10 @@ entity.
     have an opportunity to review and accept any fees that will be
     charged to Customer. All fees are non-refundable.
 
-3.  **AGREEMENT DURATION. **This Agreement will begin on the Effective
+3.  **AGREEMENT DURATION.** This Agreement will begin on the Effective
     Date and continue in effect until the date Griptape terminates
     availability of the Service, unless earlier terminated in accordance
-    with this Agreement ("**Agreement Duration**". Either party may
+    with this Agreement ("**Agreement Duration**"). Either party may
     terminate this Agreement for convenience at any time upon written
     notice to the other party. Griptape may suspend Customer's access to
     the Services at any time. Upon the expiration or termination of this
@@ -67,9 +67,9 @@ entity.
     (Indemnification), and 16 (Miscellaneous) will all survive
     termination of this Agreement.
 
-4.  **USE OF THE API**. Subject to the Customer's compliance with the
+4.  **USE OF THE API.** Subject to the Customer's compliance with the
     Agreement, Griptape will make Griptape's application programming
-    interface and documentation (collectively "**API**" available to
+    interface and documentation (collectively "**API**") available to
     Customer, which will enable users to operate applications that
     interact with AI systems such as LLMs, and grants Customer a
     non-exclusive, non-transferable, non-sublicensable right and license
@@ -84,12 +84,12 @@ entity.
     specified call/query volumes, constitutes abusive or excessive use,
     or otherwise fails to comply with or is inconsistent with this
     Agreement; or (b) make any representations or warranties about the
-    API to any third party.** **
+    API to any third party.
 
-5.  **USE OF THE SDK. **Subject to Customer's compliance with this
+5.  **USE OF THE SDK.** Subject to Customer's compliance with this
     Agreement, Griptape will make available Griptape's software
     development kit consisting of sample code, documentation and the
-    Griptape API ("**SDK**" and grants to Customer a non-exclusive,
+    Griptape API ("**SDK**") and grants to Customer a non-exclusive,
     non-transferable, non-sublicensable right and license under
     Griptape's intellectual property rights in the SDK to: (a) use the
     SDK solely to enable Customer Applications in connection with the
@@ -97,7 +97,7 @@ entity.
     accordance with the documentation included with the SDK and subject
     to any restrictions and limitations specified in such documentation.
 
-6.  **RESTRICTIONS; USAGE**. Customer shall not: (a) modify,
+6.  **RESTRICTIONS; USAGE.** Customer shall not: (a) modify,
     disassemble, create derivative works of, translate, decompile,
     reverse engineer, rent, lease, loan, transfer, or copy any portion
     of the Griptape IPR; (b) input, upload, transmit, or otherwise
@@ -139,9 +139,9 @@ entity.
         modifications, and enhancements to them. Except for those rights
         expressly granted in this Agreement, no other rights to the
         Griptape IPR are granted, either express or implied, to
-        Customer.** **
+        Customer.
 
-    2.  **Customer Data. **Customer hereby grants to Griptape a
+    2.  **Customer Data.** Customer hereby grants to Griptape a
         royalty-free, fully paid up, non-exclusive, and worldwide
         license (with the right to sublicense through multiple tiers),
         during the Agreement Duration, to use, host, copy, store,
@@ -149,7 +149,7 @@ entity.
         of, the Customer Data (as defined below) solely for purposes
         of: (a) providing the Griptape IPR; (b) developing, creating,
         and/or generating the Analytics; and (c) improving, providing,
-        and enhancing the Griptape IPR.** **Customer owns and retains
+        and enhancing the Griptape IPR. Customer owns and retains
         all right, title, and interest, including all related
         intellectual property and proprietary rights, in and to the
         Customer Data. As part of the Griptape IPR, Griptape will,
@@ -157,13 +157,13 @@ entity.
         cloud environment solely for purposes of providing the Griptape
         IPR. Customer is solely responsible for its Customer Data
         (including its content and accuracy, and for backing up Customer
-        Data). For purposes of this Agreement, "**Customer Data**"means
+        Data). For purposes of this Agreement, "**Customer Data**" means
         any data, content, Customer Applications, software code, or
         information that is uploaded, transmitted, submitted, provided,
         or made available by Customer to Griptape in connection with
         Customer's access to or use of the Griptape IPR.
 
-    3.  **Analytics**. Griptape may collect, generate, and derive
+    3.  **Analytics.** Griptape may collect, generate, and derive
         Analytics for Griptape's lawful business purposes, including
         to: (a) use it to monitor, operate, improve, and support the
         Griptape IPR and its performance, security, and stability; (b)
@@ -183,17 +183,17 @@ entity.
         Analytics has been (a) de-identified so that it does not
         individually identify Customer or its users, or (b) aggregated
         with analytics from other Griptape customers. For purposes of
-        this Agreement, "**Analytics**"means the data and information
+        this Agreement, "**Analytics**" means the data and information
         generated or collected by the features and functionalities of
         the Griptape IPR which are designed to generate statistics and
         models, to improve the Griptape IPR and to collect and analyze
         other information and data based on Customer's use of the
         Griptape IPR.
 
-    4.  **Feedback**. If Customer provides Griptape with
+    4.  **Feedback.** If Customer provides Griptape with
         recommendations, suggestions, or other feedback relating to the
         Griptape IPR or any other Griptape products or services
-        ("**Feedback**", Customer hereby grants Griptape an
+        ("**Feedback**"), Customer hereby grants Griptape an
         unrestricted, perpetual, irrevocable, non-exclusive, fully-paid,
         royalty-free right and license to freely use, disclose,
         reproduce, license, distribute, and otherwise exploit the
@@ -204,7 +204,7 @@ entity.
         Customer with attribution or compensation for any Feedback
         provided to Griptape.
 
-1.  **CONFIDENTIALITY; DATA.** Customer will maintain the
+8.  **CONFIDENTIALITY; DATA.** Customer will maintain the
     confidentiality of and not disclose to any third party: (a) the
     terms of this Agreement, (b) all non-public information disclosed or
     otherwise made available by Griptape to Customer under this
@@ -219,10 +219,10 @@ entity.
     relating to Griptape's collection, use, storage, and disclosure of
     Customer's personal information.
 
-2.  **THIRD PARTY PRODUCTS**. For purposes of this Agreement, "**Third
-    Party Products**"means certain third-party applications, systems,
+9.  **THIRD PARTY PRODUCTS.** For purposes of this Agreement, "**Third
+    Party Products**" means certain third-party applications, systems,
     software, products, or services, including services provided by
-    large language model providers ("**LLM Providers**" that
+    large language model providers ("**LLM Providers**") that
     interoperate with the Service and may be used by Customer. If
     Customer elects to enable, access, or use such Third Party Products,
     its access and use of such Third Party Products is governed solely
@@ -255,7 +255,7 @@ entity.
     Third Party Products shall not be deemed sub-processors of personal
     information for any purpose.
 
-3.  **SUPPORT.** Griptape will make commercially reasonable efforts to
+10.  **SUPPORT.** Griptape will make commercially reasonable efforts to
     provide support to Customer in connection with its use of the
     Griptape IPR. Please contact Griptape at hello@griptape.ai if you
     experience any issue with respect to the Griptape IPR. Except as
@@ -264,7 +264,7 @@ entity.
     upgrades, or other technical support to Customer with respect to the
     Griptape IPR or Customer's Customer Data.
 
-4.  **WARRANTY DISCLAIMER.** THE GRIPTAPE IPR IS PROVIDED "AS IS""WITH
+11.  **WARRANTY DISCLAIMER.** THE GRIPTAPE IPR IS PROVIDED "AS IS""WITH
     ALL FAULTS" GRIPTAPE DOES NOT WARRANT THAT THE GRIPTAPE IPR WILL
     OPERATE WITHOUT ERROR OR INTERRUPTION. GRIPTAPE SPECIFICALLY
     DISCLAIMS ALL REPRESENTATIONS AND WARRANTIES, EXPRESS OR IMPLIED,
@@ -283,7 +283,7 @@ entity.
     DEVICE USED IN CONNECTION WITH THE GRIPTAPE IPR) OR ANY LOSS OF
     DATA, INCLUDING CUSTOMER DATA AND CUSTOMER APPLICATIONS.
 
-5.  **WARRANTIES BY CUSTOMER**. Customer represents and warrants to
+12.  **WARRANTIES BY CUSTOMER**. Customer represents and warrants to
     Griptape that: (a) if Customer is an entity, it is (i) a
     corporation, limited liability Griptape, or other business entity
     duly organized, validly existing, and in good standing in the
@@ -312,19 +312,19 @@ entity.
     the purpose of making derivative works, or (iii) be re distributable
     at no charge.
 
-6.  **LIMITATION OF LIABILITY.** THE TOTAL LIABILITY OF GRIPTAPE ARISING
-    OUT OF OR RELATED TO THIS AGREEMENT WILL NOT EXCEED \$100. IN NO
+13.  **LIMITATION OF LIABILITY.** THE TOTAL LIABILITY OF GRIPTAPE ARISING
+    OUT OF OR RELATED TO THIS AGREEMENT WILL NOT EXCEED $100. IN NO
     EVENT WILL GRIPTAPE HAVE LIABILITY FOR ANY INDIRECT, INCIDENTAL,
     SPECIAL, OR CONSEQUENTIAL DAMAGES, EVEN IF ADVISED OF THE
     POSSIBILITY OF THESE DAMAGES. THESE LIMITATIONS WILL APPLY
     NOTWITHSTANDING ANY FAILURE OF ESSENTIAL PURPOSE OF ANY LIMITED
     REMEDY IN THIS AGREEMENT.
 
-7.  **INDEMNIFICATION**. Customer will indemnify, defend and hold
+14.  **INDEMNIFICATION**. Customer will indemnify, defend and hold
     harmless Griptape, its affiliates and their respective directors,
     officers, employers, agents, successors and assigns (collectively,
-    the "**Indemnified Parties**" from and against any and all claims,
-    demands, or actions made by a third party ("**Claims**", and all
+    the "**Indemnified Parties**") from and against any and all claims,
+    demands, or actions made by a third party ("**Claims**"), and all
     liabilities, settlements, costs, damages and fees (including
     reasonable attorneys'fees and costs) incurred or suffered by the
     Indemnified Parties from Claims arising from or in connection
@@ -335,7 +335,7 @@ entity.
     or (e) the gross negligence or willful misconduct of Customer or of
     any third party acting on Customer's behalf.
 
-8.  **MODIFICATIONS**. Griptape reserves the right to update, change or
+15.  **MODIFICATIONS**. Griptape reserves the right to update, change or
     otherwise modify this Agreement on a going-forward basis at any time
     and in our sole discretion. If we update this Agreement, we will
     provide notice of such updates, such as by sending an email
@@ -357,7 +357,7 @@ entity.
     Agreement may be amended only by a written agreement signed by
     authorized representatives of the parties to this Agreement.
 
-9.  **MISCELLANEOUS.** This Agreement will be governed by the laws of
+16.  **MISCELLANEOUS.** This Agreement will be governed by the laws of
     the State of Washington without reference to conflict of law
     principles. All disputes arising out of or related to the Agreement,
     will be subject to the exclusive jurisdiction of the state and

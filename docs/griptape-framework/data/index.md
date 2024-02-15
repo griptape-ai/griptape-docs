@@ -6,7 +6,7 @@ Griptape provides several abstractions for working with data.
 
 [Artifacts](./artifacts.md) are used for passing different types of data, such as text, lists, and blobs, between Griptape components.
 
-[Embedding Drivers](./embedding-drivers.md) are used to generate vector embeddings from text.
+[Embedding Drivers](../drivers/embedding-drivers.md) are used to generate vector embeddings from text.
 
 [Loaders](./loaders.md) are used to load textual data from different sources.
 
@@ -14,8 +14,8 @@ Griptape provides several abstractions for working with data.
 
 **Tokenizers** are used to tokenize and detokenize text in order to track LLM token limits.
 
-[Query Engines](./query-engines.md) are used to search text storages.
+[Query Engines](../engines/query-engines.md) are used to search text storages.
 
-[Vector Store Drivers](./vector-store-drivers.md) are used to store and query vector databases.
+[Vector Store Drivers](../drivers/vector-store-drivers.md) are used to store and query vector databases.
 
-[Prompt Drivers](../structures/prompt-drivers.md) are used to call LLM APIs.
+[Prompt Drivers](../drivers/prompt-drivers.md) are used to call LLM APIs.

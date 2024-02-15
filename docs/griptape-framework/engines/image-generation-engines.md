@@ -1,6 +1,6 @@
 ## Overview
 
-[Image Generation Engines](../../reference/griptape/engines/image/index.md) facilitate text-to-image and image-to-image generation. Each Engine provides a `run` method that accepts the necessary inputs for its particular mode and provides the request to the configured [Driver](../structures/image-generation-drivers.md).
+[Image Generation Engines](../../reference/griptape/engines/image/index.md) facilitate text-to-image and image-to-image generation. Each Engine provides a `run` method that accepts the necessary inputs for its particular mode and provides the request to the configured [Driver](../drivers/image-generation-drivers.md).
 
 ### Image Generation Engine Rulesets
 
@@ -9,7 +9,7 @@
 In the following example, rulesets are provided to the Engine's `run()` method call. These rules are provided to the Driver and influence the model to generate an image in an artistic, watercolor style, while avoiding blurry, photographic characteristics.
 
 !!! note "Not all Drivers support Negative Rulesets"
-    See the [documentation for your Driver](../structures/image-generation-drivers.md) to determine if it supports Negative Rulesets.
+    See the [documentation for your Driver](../drivers/image-generation-drivers.md) to determine if it supports Negative Rulesets.
 
 ```python
 from griptape.engines import PromptImageGenerationEngine

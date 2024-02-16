@@ -101,6 +101,7 @@ nav:
           - Task Memory: "griptape-framework/structures/task-memory.md"
           - Conversation Memory: "griptape-framework/structures/conversation-memory.md"
           - Rulesets: "griptape-framework/structures/rulesets.md"
+          - Config: "griptape-framework/structures/config.md"
       - Tools:
           - Overview: "griptape-framework/tools/index.md"
           - Building Custom Tools: "griptape-tools/custom-tools/index.md"

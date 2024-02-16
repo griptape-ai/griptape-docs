@@ -148,14 +148,8 @@ from griptape.structures import Pipeline
 from griptape.tools import WebScraper
 
 
-pipeline = Pipeline(
-    stream=True,
-    prompt_driver=OpenAiChatPromptDriver(
-        model="gpt-3.5-turbo",
-        stream=True, 
-    ),
-)
-
+pipeline = Pipeline()
+pipeline.config.global_drivers.prompt_driver.stream = True
 pipeline.add_tasks(
     ToolkitTask(
         "Based on https://griptape.ai, tell me what griptape is.",

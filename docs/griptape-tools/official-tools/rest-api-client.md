@@ -14,6 +14,7 @@ from griptape.memory.structure import ConversationMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask
 from griptape.tools import RestApiClient
+from griptape.config import StructureConfig
 
 posts_client = RestApiClient(
     base_url="https://jsonplaceholder.typicode.com",
@@ -117,11 +118,14 @@ posts_client = RestApiClient(
 
 pipeline = Pipeline(
     conversation_memory=ConversationMemory(),
-    prompt_driver=OpenAiChatPromptDriver(
-        model="gpt-4",
-        temperature=0.1
+    config = StructureConfig(
+        global_drivers=StructureGlobalDriversConfig(
+            prompt_driver=OpenAiChatPromptDriver(
+                model="gpt-4",
+                temperature=0.1
+            ),
+        )
     ),
-
 )
 
 pipeline.add_tasks(

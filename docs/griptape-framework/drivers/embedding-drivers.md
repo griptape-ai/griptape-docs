@@ -126,16 +126,21 @@ print(embeddings[:3])
 ```
 
 ### Override Default Structure Embedding Driver
-Here is how you can override the Embedding Driver that is used by default in agents. 
+Here is how you can override the Embedding Driver that is used by default in Structures. 
 
 ```python
 from griptape.structures import Agent
 from griptape.tools import WebScraper, TaskMemoryClient
 from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.config import StructureConfig, OpenAiStructureConfig
 
 agent = Agent(
     tools=[WebScraper(), TaskMemoryClient(off_prompt=False)],
-    embedding_driver=OpenAiEmbeddingDriver()
+    config=OpenAiStructureConfig(
+        global_drivers=StructureGlobalDriversConfig(
+            embedding_driver=OpenAiEmbeddingDriver()
+        )
+    )
 )
 
 agent.run("based on https://www.griptape.ai/, tell me what Griptape is")

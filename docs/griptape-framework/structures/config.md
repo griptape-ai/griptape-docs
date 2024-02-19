@@ -1,14 +1,14 @@
 ## Overview
 
-The [StructureConfig](../../reference/griptape/config/structure_config.py) class allows for the customization of Structures within Griptape, enabling specific settings such as Drivers to be defined for Tasks. 
+The [StructureConfig](../../reference/griptape/config/structure_config.md) class allows for the customization of Structures within Griptape, enabling specific settings such as Drivers to be defined for Tasks. 
 
 ### Premade Configs
 
-Griptape provides predefined [StructureConfig](../../reference/griptape/config/structure_config)'s for widely used services that provide APIs for most Driver types Griptape offers.
+Griptape provides predefined [StructureConfig](../../reference/griptape/config/structure_config.md)'s for widely used services that provide APIs for most Driver types Griptape offers.
 
 #### OpenAI
 
-The [OpenAI Structure Config](../../reference/griptape/config/structure_config.py#griptape.config.structure_config.OpenAIConfig) provides default Drivers for OpenAI's API's. This is the default config for all Structures.
+The [OpenAI Structure Config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.OpenStructureAIConfig) provides default Drivers for OpenAI's API's. This is the default config for all Structures.
 
 
 ```python
@@ -22,7 +22,7 @@ agent = Agent() # This is equivalent to the above
 ```
 
 #### Amazon Bedrock
-The [Amazon Bedrock Structure Config](../../reference/griptape/config/structure_config.py#griptape.config.structure_config.AmazonBedrockConfig) provides default Drivers for Amazon Bedrock's API's.
+The [Amazon Bedrock Structure Config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.AmazonBedrockStructureConfig) provides default Drivers for Amazon Bedrock's API's.
 
 ```python
 from griptape.config import AmazonBedrockStructureConfig
@@ -34,8 +34,8 @@ agent = Agent(
 
 ### Custom Configs
 
-You can create your own [StructureConfig](../../reference/griptape/config/structure_config.py) by overriding the Drivers in [default_config](../../reference/griptape/config/structure_config.py#griptape.config.structure_config.StructureConfig.default_config).
-The [StructureConfig](../../reference/griptape/config/structure_config.py) class includes "Dummy" Drivers for all types, which throw a [DummyException](../../reference/griptape/exceptions/dummy_exception.md) if invoked without being overridden. 
+You can create your own [StructureConfig](../../reference/griptape/config/structure_config.md) by overriding the Drivers in [default_config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.StructureConfig.default_config).
+The [StructureConfig](../../reference/griptape/config/structure_config.md) class includes "Dummy" Drivers for all types, which throw a [DummyException](../../reference/griptape/exceptions/dummy_exception.md) if invoked without being overridden. 
 This approach ensures that you are informed through clear error messages if you attempt to use Structures without proper Driver configurations.
 
 ```python

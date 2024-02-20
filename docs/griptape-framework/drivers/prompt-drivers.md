@@ -123,7 +123,7 @@ agent = Agent(
         api_key=os.environ["AZURE_OPENAI_API_KEY"],
         model="gpt-3.5-turbo-16k",
         azure_deployment=os.environ["AZURE_OPENAI_35_TURBO_16k_DEPLOYMENT_ID"],
-        azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+        azure_endpoint=os.environ["AZURE_OPENAI_API_BASE"],
     ),
     rules=[
         Rule(
@@ -150,7 +150,7 @@ agent = Agent(
         api_key=os.environ["AZURE_OPENAI_API_KEY"],
         model="text-davinci-003",
         azure_deployment=os.environ["AZURE_OPENAI_DAVINCI_DEPLOYMENT_ID"],
-        azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+        azure_endpoint=os.environ["AZURE_OPENAI_API_BASE"],
         temperature=1
     ),
 )

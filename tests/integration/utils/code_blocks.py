@@ -28,7 +28,24 @@ def check_code_block(block: str, lang: str = "python") -> str:
     """
     first_line = block.split("\n")[0]
     if lang:
-        if first_line[3:] != lang:
+        line_elements = first_line[3:].split(" ", 2)
+        if len(line_elements) == 1:
+            block_lang = line_elements[0]
+            title_value = None
+        elif len(line_elements) == 2:
+            block_lang, title = line_elements
+            title_elements = title.replace(" ", "").split("=", 2)
+            if len(title_elements) == 2:
+                _, title_value = title_elements
+            else:
+                title_value = None
+        else:
+            block_lang = None
+            title_value = None
+
+        if block_lang != lang:
+            return ""
+        if title_value == '"PYTEST_IGNORE"':
             return ""
     return "\n".join(block.split("\n")[1:])
 

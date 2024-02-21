@@ -109,12 +109,14 @@ nav:
           - Extraction Engines: "griptape-framework/engines/extraction-engines.md"
           - Summary Engines: "griptape-framework/engines/summary-engines.md"
           - Image Generation Engines: "griptape-framework/engines/image-generation-engines.md"
+          - Image Query Engines: "griptape-framework/engines/image-query-engines.md"
       - Drivers:
           - Prompt Drivers: "griptape-framework/drivers/prompt-drivers.md"
           - Embedding Drivers: "griptape-framework/drivers/embedding-drivers.md"
           - Vector Store Drivers: "griptape-framework/drivers/vector-store-drivers.md"
           - Image Generation Drivers: "griptape-framework/drivers/image-generation-drivers.md"
           - SQL Drivers: "griptape-framework/drivers/sql-drivers.md"
+          - Image Query Drivers: "griptape-framework/drivers/image-query-drivers.md"
       - Data:
           - Overview: "griptape-framework/data/index.md"
           - Artifacts: "griptape-framework/data/artifacts.md"
@@ -148,6 +150,7 @@ nav:
           - VariationImageGenerationClient: "griptape-tools/official-tools/variation-image-generation-client.md"
           - InpaintingImageGenerationClient: "griptape-tools/official-tools/inpainting-image-generation-client.md"
           - OutpaintingImageGenerationClient: "griptape-tools/official-tools/outpainting-image-generation-client.md"
+          - ImageQueryClient: "griptape-tools/official-tools/image-query-client.md"
       - Custom Tools:
           - Building Custom Tools: "griptape-tools/custom-tools/index.md"
   - Recipes:

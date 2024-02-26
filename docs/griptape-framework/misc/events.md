@@ -118,7 +118,7 @@ You can use the [CompletionChunkEvent](../../reference/griptape/events/completio
 from griptape.events import CompletionChunkEvent, EventListener
 from griptape.tasks import ToolkitTask
 from griptape.structures import Pipeline
-from griptape.tools import WebScraper
+from griptape.tools import WebScraper, TaskMemoryClient
 
 
 pipeline = Pipeline(
@@ -130,7 +130,7 @@ pipeline = Pipeline(
 pipeline.add_tasks(
     ToolkitTask(
         "Based on https://griptape.ai, tell me what griptape is.",
-        tools=[WebScraper()],
+        tools=[WebScraper(), TaskMemoryClient(off_prompt=False)],
     ),
 )
 

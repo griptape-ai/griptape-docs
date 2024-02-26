@@ -114,13 +114,14 @@ Here is an example of how the driver can be used to load and query information i
 
 ```python
 import os
-from griptape.drivers import MarqoVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.drivers import MarqoVectorStoreDriver, OpenAiEmbeddingDriver, OpenAiChatPromptDriver
 from griptape.engines import VectorQueryEngine
 from griptape.loaders import WebLoader
 from griptape.tools import VectorStoreClient
 
 # Initialize an embedding driver
 embedding_driver = OpenAiEmbeddingDriver(api_key=os.getenv("OPENAI_API_KEY"))
+prompt_driver = OpenAiChatPromptDriver(model="gpt-3.5-turbo")
 
 # Define the namespace
 namespace = 'griptape-ai'
@@ -134,7 +135,7 @@ vector_store = MarqoVectorStoreDriver(
 )
 
 # Initialize the query engine
-query_engine = VectorQueryEngine(vector_store_driver=vector_store)
+query_engine = VectorQueryEngine(vector_store_driver=vector_store, prompt_driver=prompt_driver)
 
 # Initialize the knowledge base tool
 VectorStoreClient(

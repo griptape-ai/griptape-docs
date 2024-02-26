@@ -4,7 +4,7 @@ import os
 import pytest
 from utils.code_blocks import get_all_code_blocks, check_py_string
 
-code_path = os.environ.get("CODE_PATH")
+code_path = os.environ.get("INTEG_CODE_PATH", "**/*.md")
 all_code_blocks = get_all_code_blocks(code_path)
 
 

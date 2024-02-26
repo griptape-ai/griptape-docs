@@ -73,7 +73,7 @@ def get_code_blocks(docstring: str, lang: str = "python") -> list[str]:
     return [c for c in codeblocks if c != ""]
 
 
-def get_all_code_blocks(path: str = "**/*.md") -> list[dict]:
+def get_all_code_blocks(path: str) -> list[dict]:
     return [
         {"id": f"{str(fpath)}-{block_num + 1}", "code": code_block}
         for fpath in pathlib.Path("docs").glob(path)

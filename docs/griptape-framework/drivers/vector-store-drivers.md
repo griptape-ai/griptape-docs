@@ -234,7 +234,7 @@ The [AzureMongoDbVectorStoreDriver](../../reference/griptape/drivers/vector/azur
 Here is an example of how the driver can be used to load and query information in an Azure CosmosDb MongoDb vCore database. It is almost the same as the [MongodbAtlasVectorStoreDriver](#mongodb-atlas-vector-store-driver):
 
 ```python
-from griptape.drivers import MongoDbAtlasVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.drivers import AzureMongoDbVectorStoreDriver, OpenAiEmbeddingDriver
 from griptape.loaders import WebLoader
 import os
 
@@ -248,9 +248,10 @@ database_name = os.getenv("AZURE_MONGODB_DATABASE_NAME")
 collection_name = os.getenv("AZURE_MONGODB_COLLECTION_NAME")
 index_name = os.getenv("AZURE_MONGODB_INDEX_NAME")
 vector_path = os.getenv("AZURE_MONGODB_VECTOR_PATH")
+
 # Initialize the vector store driver
 vector_store = AzureMongoDbVectorStoreDriver(
-    connection_string=f"mongodb+srv://{username}:{password}@{host}/{database_name}?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000",
+    connection_string=f"mongodb+srv://{username}:{password}@{azure_host}/{database_name}?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000",
     database_name=database_name,
     collection_name=collection_name,
     embedding_driver=embedding_driver,
@@ -292,7 +293,7 @@ embedding_driver = OpenAiEmbeddingDriver(api_key=os.getenv("OPENAI_API_KEY"))
 
 vector_store_driver = RedisVectorStoreDriver(
     host=os.getenv("REDIS_HOST"),
-    port=os.getenv("REDIS_PORT"),
+    port=os.getenv("REDIS_PORT", 6379),
     password=os.getenv("REDIS_PASSWORD"),
     index=os.getenv("REDIS_INDEX"),
     embedding_driver=embedding_driver,
@@ -364,9 +365,9 @@ The body mappings for creating a vector index should look similar to the followi
         "properties": {
             "vector": {"type": "knn_vector", "dimension": 1536},
             "namespace": {"type": "keyword"},
-            "metadata": {"type": "object", "enabled": true},
+            "metadata": {"type": "object", "enabled": true}
         }
-    },
+    }
 }
 ```
 

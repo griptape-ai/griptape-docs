@@ -10,7 +10,7 @@ build:
       - poetry config virtualenvs.create false
       - git clone -b $([ $READTHEDOCS_VERSION_NAME = "latest" ] && echo "main" || echo "dev") https://github.com/griptape-ai/griptape.git
     post_install:
-      - poetry install --with docs
+      - VIRTUAL_ENV=$READTHEDOCS_VIRTUALENV_PATH poetry install --with docs
 
 mkdocs:
   configuration: mkdocs.yml

@@ -18,7 +18,9 @@ from griptape.memory.task.storage import TextArtifactStorage, BlobArtifactStorag
 from griptape.structures import Agent
 from griptape.tools import WebScraper, FileManager, TaskMemoryClient
 from griptape.engines import VectorQueryEngine, PromptSummaryEngine, CsvExtractionEngine, JsonExtractionEngine
-from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver, OpenAiChatPromptDriver
+
+prompt_driver = OpenAiChatPromptDriver(model="gpt-3.5-turbo")
 
 """
 Define task memory for storing textual and
@@ -33,11 +35,18 @@ task_memory = TaskMemory(
             query_engine=VectorQueryEngine(
                 vector_store_driver=LocalVectorStoreDriver(
                     embedding_driver=OpenAiEmbeddingDriver()
-                )
+                ), 
+                prompt_driver=prompt_driver,
             ),
-            summary_engine=PromptSummaryEngine(),
-            csv_extraction_engine=CsvExtractionEngine(),
-            json_extraction_engine=JsonExtractionEngine()
+            summary_engine=PromptSummaryEngine(
+                prompt_driver=prompt_driver,
+            ),
+            csv_extraction_engine=CsvExtractionEngine(
+                prompt_driver=prompt_driver,
+            ),
+            json_extraction_engine=JsonExtractionEngine(
+                prompt_driver=prompt_driver,
+            ),
         ),
         BlobArtifact: BlobArtifactStorage()
     }

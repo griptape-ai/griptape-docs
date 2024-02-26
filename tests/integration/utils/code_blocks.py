@@ -10,6 +10,7 @@ def check_py_string(source: str) -> None:
     Does not return anything, but exceptions raised by the source
     will propagate out unmodified
     """
+    print(source)
     try:
         exec(source, {"__MODULE__": "__main__"})
     except Exception:
@@ -72,9 +73,9 @@ def get_code_blocks(docstring: str, lang: str = "python") -> list[str]:
     return [c for c in codeblocks if c != ""]
 
 
-def get_all_code_blocks() -> list[dict]:
+def get_all_code_blocks(path: str) -> list[dict]:
     return [
         {"id": f"{str(fpath)}-{block_num + 1}", "code": code_block}
-        for fpath in pathlib.Path("docs").glob("**/*.md")
+        for fpath in pathlib.Path("docs").glob(path)
         for block_num, code_block in enumerate(get_code_blocks(fpath.read_text()))
     ]

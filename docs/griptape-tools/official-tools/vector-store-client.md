@@ -7,11 +7,13 @@ from griptape.structures import Agent
 from griptape.tools import VectorStoreClient, TaskMemoryClient
 from griptape.loaders import WebLoader
 from griptape.engines import VectorQueryEngine
-from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
-
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver, OpenAiChatPromptDriver
 
 engine = VectorQueryEngine(
-    vector_store_driver=LocalVectorStoreDriver(embedding_driver=OpenAiEmbeddingDriver())
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-3.5-turbo"),
+    vector_store_driver=LocalVectorStoreDriver(
+        embedding_driver=OpenAiEmbeddingDriver(),
+    ),
 )
 
 engine.upsert_text_artifacts(

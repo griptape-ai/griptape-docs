@@ -12,13 +12,23 @@ By default, Griptape augments all tool outputs with [TaskMemory](../../reference
 Here is an example of how memory can be used in unison with multiple tools to store and load content:
 
 ```python
+import os 
+
 from griptape.artifacts import TextArtifact, BlobArtifact
 from griptape.memory import TaskMemory
 from griptape.memory.task.storage import TextArtifactStorage, BlobArtifactStorage
 from griptape.structures import Agent
 from griptape.tools import WebScraper, FileManager, TaskMemoryClient
 from griptape.engines import VectorQueryEngine, PromptSummaryEngine, CsvExtractionEngine, JsonExtractionEngine
-from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver, AzureOpenAiChatPromptDriver
+
+# Initialize a prompt driver
+prompt_driver = AzureOpenAiChatPromptDriver(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    model="gpt-3.5-turbo-16k",
+    azure_deployment=os.environ["AZURE_OPENAI_35_TURBO_16k_DEPLOYMENT_ID"],
+    azure_endpoint=os.environ["AZURE_OPENAI_API_BASE"],
+)
 
 """
 Define task memory for storing textual and
@@ -33,11 +43,18 @@ task_memory = TaskMemory(
             query_engine=VectorQueryEngine(
                 vector_store_driver=LocalVectorStoreDriver(
                     embedding_driver=OpenAiEmbeddingDriver()
-                )
+                ), 
+                prompt_driver=prompt_driver,
             ),
-            summary_engine=PromptSummaryEngine(),
-            csv_extraction_engine=CsvExtractionEngine(),
-            json_extraction_engine=JsonExtractionEngine()
+            summary_engine=PromptSummaryEngine(
+                prompt_driver=prompt_driver,
+            ),
+            csv_extraction_engine=CsvExtractionEngine(
+                prompt_driver=prompt_driver,
+            ),
+            json_extraction_engine=JsonExtractionEngine(
+                prompt_driver=prompt_driver,
+            ),
         ),
         BlobArtifact: BlobArtifactStorage()
     }

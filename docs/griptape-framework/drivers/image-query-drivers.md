@@ -4,9 +4,10 @@ Image Query Drivers are used by [Image Query Engines](../engines/image-query-eng
 
 ## OpenAiVisionImageQueryDriver
 
-The [OpenAiVisionImageQueryDriver](../../reference/griptape/drivers/image_query/openai_vision_image_query_driver.md) is used to query images using the OpenAI Vision API. Here is an example of how to use it:
+!!! info
+    This Driver defaults to using the `gpt-4-vision-preview` model. As other multimodal models are released, they can be specified using the `model` field. While the `max_tokens` field is optional, it is recommended to set this to a value that corresponds to the desired response length. Without an explicit value, the model will default to very short responses. See [OpenAI's documentation](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) for more information on how to relate token count to response length.
 
-This Driver defaults to using the `gpt-4-vision-preview` model. As other multimodal models are released, they can be specified using the `model` field. While the `max_tokens` field is optional, it is recommended to set this to a value that corresponds to the desired response length. Without an explicit value, the model will default to very short responses. See [OpenAI's documentation](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) for more information on how to relate token count to response length.
+The [OpenAiVisionImageQueryDriver](../../reference/griptape/drivers/image_query/openai_vision_image_query_driver.md) is used to query images using the OpenAI Vision API. Here is an example of how to use it:
 
 ```python
 from griptape.drivers import OpenAiVisionImageQueryDriver

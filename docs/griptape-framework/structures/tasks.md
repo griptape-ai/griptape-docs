@@ -193,24 +193,14 @@ This Task takes an [Extraction Engine](../../griptape-framework/engines/extracti
 ### CSV Extraction
 
 ```python
-import os
-
-from griptape.drivers import AzureOpenAiChatPromptDriver
+from griptape.drivers import OpenAiChatPromptDriver
 from griptape.tasks import ExtractionTask
 from griptape.structures import Agent
 from griptape.engines import CsvExtractionEngine
 
-# Initialize a prompt driver
-prompt_driver = AzureOpenAiChatPromptDriver(
-    api_key=os.environ["AZURE_OPENAI_API_KEY"],
-    model="gpt-3.5-turbo-16k",
-    azure_deployment=os.environ["AZURE_OPENAI_35_TURBO_16k_DEPLOYMENT_ID"],
-    azure_endpoint=os.environ["AZURE_OPENAI_API_BASE"],
-)
-
 # Instantiate the CSV extraction engine
 csv_extraction_engine = CsvExtractionEngine(
-    prompt_driver=prompt_driver,
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-3.5-turbo")
 )
 
 # Define some unstructured data and columns
@@ -252,25 +242,16 @@ agent.run(csv_data)
 ### JSON Extraction
 
 ```python
-import os 
 from schema import Schema 
 
-from griptape.drivers import AzureOpenAiChatPromptDriver
+from griptape.drivers import OpenAiChatPromptDriver
 from griptape.tasks import ExtractionTask
 from griptape.structures import Agent
 from griptape.engines import JsonExtractionEngine
 
-# Initialize a prompt driver
-prompt_driver = AzureOpenAiChatPromptDriver(
-    api_key=os.environ["AZURE_OPENAI_API_KEY"],
-    model="gpt-3.5-turbo-16k",
-    azure_deployment=os.environ["AZURE_OPENAI_35_TURBO_16k_DEPLOYMENT_ID"],
-    azure_endpoint=os.environ["AZURE_OPENAI_API_BASE"],
-)
-
 # Instantiate the json extraction engine
 json_extraction_engine = JsonExtractionEngine(
-    prompt_driver=prompt_driver,
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-3.5-turbo"),
 )
 
 # Define some unstructured data and a schema
@@ -375,22 +356,12 @@ To query text, use the [TextQueryTask](../../reference/griptape/tasks/text_query
 This Task takes a [Query Engine](../../griptape-framework/engines/query-engines.md), and a set of arguments specific to the engine.
 
 ```python
-import os 
-
-from griptape.drivers import AzureOpenAiChatPromptDriver
+from griptape.drivers import OpenAiChatPromptDriver
 from griptape.structures import Agent
 from griptape.tasks import TextQueryTask
 from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 from griptape.engines import VectorQueryEngine
 from griptape.artifacts import TextArtifact
-
-# Initialize a prompt driver
-prompt_driver = AzureOpenAiChatPromptDriver(
-    api_key=os.environ["AZURE_OPENAI_API_KEY"],
-    model="gpt-3.5-turbo-16k",
-    azure_deployment=os.environ["AZURE_OPENAI_35_TURBO_16k_DEPLOYMENT_ID"],
-    azure_endpoint=os.environ["AZURE_OPENAI_API_BASE"],
-)
 
 # Initialize Embedding Driver and Vector Store Driver
 vector_store_driver = LocalVectorStoreDriver(embedding_driver=OpenAiEmbeddingDriver())
@@ -403,7 +374,7 @@ artifact = TextArtifact(
 # Create a VectorQueryEngine using the LocalVectorStoreDriver
 vector_query_engine = VectorQueryEngine(
     vector_store_driver=vector_store_driver,
-    prompt_driver=prompt_driver,
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-3.5-turbo")
 )
 vector_query_engine.upsert_text_artifact(artifact=artifact)
 

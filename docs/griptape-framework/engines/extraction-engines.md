@@ -11,22 +11,12 @@ The CSV Extraction Engine is designed specifically for extracting data from CSV-
     The CSV Extraction Engine requires the `column_names` parameter for specifying the columns to be extracted.
 
 ```python
-import os 
-
-from griptape.drivers import AzureOpenAiChatPromptDriver
+from griptape.drivers import OpenAiChatPromptDriver
 from griptape.engines import CsvExtractionEngine
-
-# Initialize a prompt driver
-prompt_driver = AzureOpenAiChatPromptDriver(
-    api_key=os.environ["AZURE_OPENAI_API_KEY"],
-    model="gpt-3.5-turbo-16k",
-    azure_deployment=os.environ["AZURE_OPENAI_35_TURBO_16k_DEPLOYMENT_ID"],
-    azure_endpoint=os.environ["AZURE_OPENAI_API_BASE"],
-)
 
 # Initialize the CsvExtractionEngine instance
 csv_engine = CsvExtractionEngine(
-    prompt_driver=prompt_driver,
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-3.5-turbo"),
 )
 
 # Define some unstructured data
@@ -57,21 +47,14 @@ The JSON Extraction Engine is tailored for extracting data from JSON-formatted c
     The JSON Extraction Engine requires the `template_schema` parameter for specifying the structure to be extracted.
 
 ```python
-import os 
 from schema import Schema 
 
-from griptape.drivers import AzureOpenAiChatPromptDriver
+from griptape.drivers import OpenAiChatPromptDriver
 from griptape.engines import JsonExtractionEngine
 
-# Initialize a prompt driver
-prompt_driver = AzureOpenAiChatPromptDriver(
-    api_key=os.environ["AZURE_OPENAI_API_KEY"],
-    model="gpt-3.5-turbo-16k",
-    azure_deployment=os.environ["AZURE_OPENAI_35_TURBO_16k_DEPLOYMENT_ID"],
-    azure_endpoint=os.environ["AZURE_OPENAI_API_BASE"],
+json_engine = JsonExtractionEngine(
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-3.5-turbo"),
 )
-
-json_engine = JsonExtractionEngine(prompt_driver=prompt_driver)
 
 # Define some unstructured data
 sample_json_text = """

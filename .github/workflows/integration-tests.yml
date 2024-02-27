@@ -9,6 +9,8 @@ jobs:
     services:
       postgres:
         image: pgvector/pgvector:pg16
+        ports:
+          - 5432
         env:
           POSTGRES_USER: ${{ secrets.INTEG_POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.INTEG_POSTGRES_PASSWORD }}

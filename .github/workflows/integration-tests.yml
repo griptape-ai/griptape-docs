@@ -6,6 +6,18 @@ on:
 
 jobs:
   test:
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: ${{ secrets.INTEG_POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.INTEG_POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.INTEG_POSTGRES_DB }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -83,6 +95,9 @@ jobs:
       LEONARDO_MODEL_ID: ${{ secrets.INTEG_LEONARDO_MODEL_ID }}
       SAGEMAKER_TENSORFLOW_HUB_MODEL: ${{ secrets.INTEG_SAGEMAKER_TENSORFLOW_HUB_MODEL }}
       SAGEMAKER_HUGGINGFACE_MODEL: ${{ secrets.INTEG_SAGEMAKER_HUGGINGFACE_MODEL }}
+      POSTGRES_USER: ${{ secrets.INTEG_POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.INTEG_POSTGRES_PASSWORD }}
+      POSTGRES_DB: ${{ secrets.INTEG_POSTGRES_DB }}
 
     steps:
       - name: Checkout actions

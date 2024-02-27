@@ -98,6 +98,8 @@ jobs:
       POSTGRES_USER: ${{ secrets.INTEG_POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.INTEG_POSTGRES_PASSWORD }}
       POSTGRES_DB: ${{ secrets.INTEG_POSTGRES_DB }}
+      POSTGRES_HOST: ${{ secrets.INTEG_POSTGRES_HOST }}
+      POSTGRES_PORT: ${{ secrets.INTEG_POSTGRES_PORT }}
 
     steps:
       - name: Checkout actions

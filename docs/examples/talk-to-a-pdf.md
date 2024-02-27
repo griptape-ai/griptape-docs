@@ -9,7 +9,7 @@ from griptape.loaders import PdfLoader
 from griptape.structures import Agent
 from griptape.tools import VectorStoreClient
 from griptape.utils import Chat
-from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver, OpenAiChatPromptDriver
 
 
 namespace = "attention"
@@ -17,6 +17,9 @@ namespace = "attention"
 response = requests.get("https://arxiv.org/pdf/1706.03762.pdf")
 
 engine = VectorQueryEngine(
+    prompt_driver=OpenAiChatPromptDriver(
+        model="gpt-3.5-turbo",
+    ),
     vector_store_driver=LocalVectorStoreDriver(
         embedding_driver=OpenAiEmbeddingDriver(
             api_key=os.getenv("OPENAI_API_KEY")

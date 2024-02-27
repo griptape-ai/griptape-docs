@@ -47,20 +47,12 @@ SqlLoader(
 Can be used to load CSV files into [CsvRowArtifact](../../reference/griptape/artifacts/csv_row_artifact.md)s:
 
 ```python
-import urllib
 from griptape.loaders import CsvLoader
 
-urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv", "cities.csv")
+CsvLoader().load("tests/assets/cities.csv")
 
-CsvLoader().load(
-    "cities.csv"
-)
-
-urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/addresses.csv", "addresses.csv")
-
-CsvLoader().load_collection(
-    ["cities.csv", "addresses.csv"]
-)
+CsvLoader().load_collection(["tests/assets/cities.csv", "tests/assets/addresses.csv"])
+```
 ```
 
 ## Text Loader

@@ -6,11 +6,12 @@ on:
 
 jobs:
   test:
+    runs-on: ubuntu-latest
     services:
       postgres:
         image: pgvector/pgvector:pg16
         ports:
-          - 5432
+          - 5432:5432
         env:
           POSTGRES_USER: ${{ secrets.INTEG_POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.INTEG_POSTGRES_PASSWORD }}
@@ -20,7 +21,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:

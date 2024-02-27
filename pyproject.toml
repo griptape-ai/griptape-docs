@@ -26,7 +26,7 @@ optional = true
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.1"
-griptape = { git = "https://github.com/griptape-ai/griptape", branch = "french/240226_pinecone-version", extras=["all"] }
+griptape = { git = "https://github.com/griptape-ai/griptape", branch = "dev", extras=["all"] }
 
 [build-system]
 requires = ["poetry-core"]

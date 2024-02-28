@@ -8,21 +8,22 @@ Griptape provides predefined [StructureConfig](../../reference/griptape/config/s
 
 #### OpenAI
 
-The [OpenAI Structure Config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.OpenStructureAIConfig) provides default Drivers for OpenAI's API's. This is the default config for all Structures.
+The [OpenAI Structure Config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.OpenStructureAIConfig) provides default Drivers for OpenAI's APIs. This is the default config for all Structures.
 
 
 ```python
-from griptape.config import OpenAIStructureConfig
+from griptape.structures import Agent
+from griptape.config import OpenAiStructureConfig
 
 agent = Agent(
-    config=OpenAIStructureConfig()
+    config=OpenAiStructureConfig()
 )
 
 agent = Agent() # This is equivalent to the above
 ```
 
 #### Amazon Bedrock
-The [Amazon Bedrock Structure Config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.AmazonBedrockStructureConfig) provides default Drivers for Amazon Bedrock's API's.
+The [Amazon Bedrock Structure Config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.AmazonBedrockStructureConfig) provides default Drivers for Amazon Bedrock's APIs.
 
 ```python
 from griptape.config import AmazonBedrockStructureConfig
@@ -39,6 +40,7 @@ The [StructureConfig](../../reference/griptape/config/structure_config.md) class
 This approach ensures that you are informed through clear error messages if you attempt to use Structures without proper Driver configurations.
 
 ```python
+import os
 from griptape.structures import Agent
 from griptape.config import StructureConfig, StructureGlobalDriversConfig
 from griptape.drivers import AnthropicPromptDriver

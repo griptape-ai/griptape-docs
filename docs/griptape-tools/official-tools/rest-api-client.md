@@ -14,7 +14,7 @@ from griptape.memory.structure import ConversationMemory
 from griptape.structures import Pipeline
 from griptape.tasks import ToolkitTask
 from griptape.tools import RestApiClient
-from griptape.config import StructureConfig
+from griptape.config import StructureConfig, StructureGlobalDriversConfig
 
 posts_client = RestApiClient(
     base_url="https://jsonplaceholder.typicode.com",

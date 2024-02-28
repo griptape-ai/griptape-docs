@@ -22,7 +22,6 @@ from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver, Open
 prompt_driver = OpenAiChatPromptDriver(model="gpt-3.5-turbo")
 
 agent = Agent(
-    task_memory=task_memory,
     tools=[WebScraper(), FileManager(), TaskMemoryClient(off_prompt=True)]
 )
 

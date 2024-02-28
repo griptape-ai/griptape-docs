@@ -70,7 +70,7 @@ import os
 from griptape.structures import Agent
 from griptape.drivers import OpenAiChatPromptDriver
 from griptape.rules import Rule
-from griptape.config import StructureConfig
+from griptape.config import StructureConfig, StructureGlobalDriversConfig
 
 agent = Agent(
     config=StructureConfig(

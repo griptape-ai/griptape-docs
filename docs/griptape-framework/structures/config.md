@@ -26,6 +26,7 @@ agent = Agent() # This is equivalent to the above
 The [Amazon Bedrock Structure Config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.AmazonBedrockStructureConfig) provides default Drivers for Amazon Bedrock's APIs.
 
 ```python
+from griptape.structures import Agent
 from griptape.config import AmazonBedrockStructureConfig
 
 agent = Agent(

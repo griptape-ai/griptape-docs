@@ -13,7 +13,7 @@ engine = ImageQueryEngine(
     image_query_driver=driver,
 )
 
-with("tests/assets/mountain.png", "rb") as f:
+with open("tests/assets/mountain.png", "rb") as f:
     image_artifact = ImageLoader().load(f.read())
 
 engine.run("Describe the weather in the image", [image_artifact])

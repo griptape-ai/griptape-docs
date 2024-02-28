@@ -10,7 +10,6 @@ def check_py_string(source: str) -> None:
     Does not return anything, but exceptions raised by the source
     will propagate out unmodified
     """
-    print(source)
     try:
         exec(source, {"__MODULE__": "__main__"})
     except Exception:

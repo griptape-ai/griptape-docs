@@ -55,4 +55,3 @@ dist/**
 # mkdocs build output
 site
 griptape
-docs/assets/

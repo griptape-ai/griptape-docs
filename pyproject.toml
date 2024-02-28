@@ -9,8 +9,6 @@ repository = "https://github.com/griptape-ai/griptape-docs"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.12"
-
-[tool.poetry.group.docs.dependencies]
 mkdocs = "^1.5.2"
 mkdocs-material = "^9.2.8"
 mkdocs-glightbox = "^0.3.4"

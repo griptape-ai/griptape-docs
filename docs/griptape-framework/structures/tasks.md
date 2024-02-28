@@ -193,12 +193,15 @@ This Task takes an [Extraction Engine](../../griptape-framework/engines/extracti
 ### CSV Extraction
 
 ```python
+from griptape.drivers import OpenAiChatPromptDriver
 from griptape.tasks import ExtractionTask
 from griptape.structures import Agent
 from griptape.engines import CsvExtractionEngine
 
 # Instantiate the CSV extraction engine
-csv_extraction_engine = CsvExtractionEngine()
+csv_extraction_engine = CsvExtractionEngine(
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-3.5-turbo")
+)
 
 # Define some unstructured data and columns
 csv_data = """
@@ -239,13 +242,17 @@ agent.run(csv_data)
 ### JSON Extraction
 
 ```python
+from schema import Schema 
+
+from griptape.drivers import OpenAiChatPromptDriver
 from griptape.tasks import ExtractionTask
 from griptape.structures import Agent
 from griptape.engines import JsonExtractionEngine
-from schema import Schema
 
 # Instantiate the json extraction engine
-json_extraction_engine = JsonExtractionEngine()
+json_extraction_engine = JsonExtractionEngine(
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-3.5-turbo"),
+)
 
 # Define some unstructured data and a schema
 json_data = """
@@ -349,13 +356,14 @@ To query text, use the [TextQueryTask](../../reference/griptape/tasks/text_query
 This Task takes a [Query Engine](../../griptape-framework/engines/query-engines.md), and a set of arguments specific to the engine.
 
 ```python
+from griptape.drivers import OpenAiChatPromptDriver
 from griptape.structures import Agent
 from griptape.tasks import TextQueryTask
 from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 from griptape.engines import VectorQueryEngine
 from griptape.artifacts import TextArtifact
 
-# Initiate Embedding Driver and Vector Store Driver
+# Initialize Embedding Driver and Vector Store Driver
 vector_store_driver = LocalVectorStoreDriver(embedding_driver=OpenAiEmbeddingDriver())
 
 artifact = TextArtifact(
@@ -364,7 +372,10 @@ artifact = TextArtifact(
 )
 
 # Create a VectorQueryEngine using the LocalVectorStoreDriver
-vector_query_engine = VectorQueryEngine(vector_store_driver=vector_store_driver)
+vector_query_engine = VectorQueryEngine(
+    vector_store_driver=vector_store_driver,
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-3.5-turbo")
+)
 vector_query_engine.upsert_text_artifact(artifact=artifact)
 
 # Instantiate the agent and add TextQueryTask with the VectorQueryEngine

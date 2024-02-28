@@ -88,26 +88,6 @@ agent.run("Blue sky at dusk.")
 !!! info
     `response_format` and `seed` are unique to the OpenAI Chat Prompt Driver and Azure OpenAi Chat Prompt Driver.
 
-### OpenAI Completion
-
-The [OpenAiCompletionPromptDriver](../../reference/griptape/drivers/prompt/openai_completion_prompt_driver.md) connects to the [OpenAI Completion](https://platform.openai.com/docs/guides/completion) API.
-
-```python
-import os
-from griptape.structures import Agent
-from griptape.drivers import OpenAiCompletionPromptDriver
-
-agent = Agent(
-    prompt_driver=OpenAiCompletionPromptDriver(
-        api_key=os.environ['OPENAI_API_KEY'],
-        temperature=.1,
-        model="text-davinci-003"
-    ),
-)
-
-agent.run("Output a python function that implements the fibonacci sequence.")
-```
-
 ### Azure OpenAI Chat
 
 The [AzureOpenAiChatPromptDriver](../../reference/griptape/drivers/prompt/azure_openai_chat_prompt_driver.md) connects to Azure OpenAI [Chat Completion](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference) APIs.
@@ -363,7 +343,7 @@ The [AmazonSageMakerPromptDriver](../../reference/griptape/drivers/prompt/amazon
 
 ##### LLaMA
 
-```python
+```python title="PYTEST_IGNORE"
 import os
 from griptape.structures import Agent
 from griptape.drivers import (
@@ -391,7 +371,7 @@ agent.run("Hello!")
 
 ##### Falcon
 
-```python
+```python title="PYTEST_IGNORE"
 import os
 from griptape.structures import Agent
 from griptape.drivers import (

@@ -11,10 +11,13 @@ The CSV Extraction Engine is designed specifically for extracting data from CSV-
     The CSV Extraction Engine requires the `column_names` parameter for specifying the columns to be extracted.
 
 ```python
+from griptape.drivers import OpenAiChatPromptDriver
 from griptape.engines import CsvExtractionEngine
 
 # Initialize the CsvExtractionEngine instance
-csv_engine = CsvExtractionEngine()
+csv_engine = CsvExtractionEngine(
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-3.5-turbo"),
+)
 
 # Define some unstructured data
 sample_text = """
@@ -44,10 +47,14 @@ The JSON Extraction Engine is tailored for extracting data from JSON-formatted c
     The JSON Extraction Engine requires the `template_schema` parameter for specifying the structure to be extracted.
 
 ```python
-from griptape.engines import JsonExtractionEngine
-from schema import Schema
+from schema import Schema 
 
-json_engine = JsonExtractionEngine()
+from griptape.drivers import OpenAiChatPromptDriver
+from griptape.engines import JsonExtractionEngine
+
+json_engine = JsonExtractionEngine(
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-3.5-turbo"),
+)
 
 # Define some unstructured data
 sample_json_text = """

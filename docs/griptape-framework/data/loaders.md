@@ -6,6 +6,9 @@ multiple documents with [load_collection()](../../reference/griptape/loaders/bas
 
 ## Pdf Loader
 
+!!! info
+    This driver requires the `loaders-pdf` [extra](../index.md#extras).
+
 Inherits from the [TextLoader](../../reference/griptape/loaders/text_loader.md) and can be used to load PDFs from a path or from an IO stream:
 
 ```python
@@ -55,6 +58,33 @@ CsvLoader().load_collection(["tests/assets/cities.csv", "tests/assets/addresses.
 ```
 ```
 
+
+## Dataframe Loader
+
+!!! info
+    This driver requires the `loaders-dataframe` [extra](../index.md#extras).
+
+Can be used to load [pandas](https://pandas.pydata.org/) [DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html)s into [CsvRowArtifact](../../reference/griptape/artifacts/csv_row_artifact.md)s:
+
+```python
+import urllib
+import pandas as pd
+from griptape.loaders import DataframeLoader
+
+urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv", "cities.csv")
+
+artifacts = loader.load()
+
+DataframeLoader().load(pd.read_csv(path))
+
+urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/addresses.csv", "addresses.csv")
+
+CsvLoader().load_collection(
+    [pd.read_csv('cities.csv'), pd.read_csv('addresses.csv')]
+)
+```
+
+
 ## Text Loader
 
 Used to load arbitrary text and text files:
@@ -83,6 +113,9 @@ You can set a custom [tokenizer](../../reference/griptape/loaders/text_loader.md
 
 ## Web Loader
 
+!!! info
+    This driver requires the `loaders-web` [extra](../index.md#extras).
+
 Inherits from the [TextLoader](../../reference/griptape/loaders/text_loader.md) and can be used to load web pages:
 
 ```python
@@ -98,6 +131,9 @@ WebLoader().load_collection(
 ```
 
 ## Image Loader
+
+!!! info
+    This driver requires the `loaders-image` [extra](../index.md#extras).
 
 The Image Loader is used to load an image as an [ImageArtifact](./artifacts.md#imageartifact). The Loader operates on image bytes that can be sourced from files on disk, downloaded images, or images in memory.
 
@@ -116,4 +152,22 @@ from griptape.loaders import ImageLoader
 # Image data in artifact will be in BMP format.
 with open("tests/assets/mountain.png", "rb") as f:
     image_artifact_jpeg = ImageLoader(format="bmp").load(f.read())
+```
+
+
+## Email Loader
+
+!!! info
+    This driver requires the `loaders-email` [extra](../index.md#extras).
+
+Can be used to load email from an imap server:
+
+```python
+from griptape.loaders import EmailLoader
+
+loader = EmailLoader(imap_url="an.email.server.hostname", username="username", password="password")
+
+loader.load(EmailLoader.EmailQuery(label="INBOX"))
+
+loader.load_collection([EmailLoader.EmailQuery(label="INBOX"), EmailLoader.EmailQuery(label="SENT")])
 ```

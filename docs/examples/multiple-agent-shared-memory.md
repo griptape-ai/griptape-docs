@@ -15,6 +15,7 @@ from griptape.engines import VectorQueryEngine, PromptSummaryEngine, CsvExtracti
 from griptape.memory import TaskMemory 
 from griptape.artifacts import TextArtifact
 from griptape.memory.task.storage import TextArtifactStorage
+from griptape.config import StructureConfig, StructureGlobalDriversConfig
 
 
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_API_BASE")
@@ -50,35 +51,17 @@ mongo_driver = AzureMongoDbVectorStoreDriver(
     vector_path=MONGODB_VECTOR_PATH
 )
 
-vector_engine = VectorQueryEngine(
-    vector_store_driver=mongo_driver,
-    prompt_driver=azure_prompt_driver,
-)
-
-task_memory = TaskMemory(
-    artifact_storages={
-        TextArtifact: TextArtifactStorage(
-            query_engine=vector_engine,
-            summary_engine=PromptSummaryEngine(
-                prompt_driver=azure_prompt_driver
-            ),
-            csv_extraction_engine=CsvExtractionEngine(
-                prompt_driver=azure_prompt_driver
-            ),
-            json_extraction_engine=JsonExtractionEngine(
-                prompt_driver=azure_prompt_driver
-            )
-        ),
-    },
-)
-
 loader = Agent(
     tools=[
         WebScraper()
     ],
-    task_memory=task_memory,
-    prompt_driver=azure_prompt_driver,
-    embedding_driver=azure_embedding_driver,
+    config=StructureConfig(
+        global_drivers=StructureGlobalDriversConfig(
+            prompt_driver=azure_prompt_driver,
+            vector_store_driver=mongo_driver,
+            embedding_driver=azure_embedding_driver
+        )
+    ),
 )
 asker = Agent(
     tools=[
@@ -86,8 +69,6 @@ asker = Agent(
     ],
     meta_memory=loader.meta_memory,
     task_memory=loader.task_memory,
-    prompt_driver=azure_prompt_driver,
-    embedding_driver=azure_embedding_driver,
 )
 
 if __name__ == "__main__":

@@ -13,7 +13,6 @@ Here is an example of how memory can be used in unison with multiple tools to st
 
 ```python
 from griptape.artifacts import TextArtifact, BlobArtifact
-from griptape.memory import TaskMemory
 from griptape.memory.task.storage import TextArtifactStorage, BlobArtifactStorage
 from griptape.structures import Agent
 from griptape.tools import WebScraper, FileManager, TaskMemoryClient
@@ -22,38 +21,7 @@ from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver, Open
 
 prompt_driver = OpenAiChatPromptDriver(model="gpt-3.5-turbo")
 
-"""
-Define task memory for storing textual and
-non-textual content.
-"""
-task_memory = TaskMemory(
-    # Disable all memory activities, so we can use
-    # TaskMemoryClient as a tool later.
-    allowlist=[],
-    artifact_storages={
-        TextArtifact: TextArtifactStorage(
-            query_engine=VectorQueryEngine(
-                vector_store_driver=LocalVectorStoreDriver(
-                    embedding_driver=OpenAiEmbeddingDriver()
-                ), 
-                prompt_driver=prompt_driver,
-            ),
-            summary_engine=PromptSummaryEngine(
-                prompt_driver=prompt_driver,
-            ),
-            csv_extraction_engine=CsvExtractionEngine(
-                prompt_driver=prompt_driver,
-            ),
-            json_extraction_engine=JsonExtractionEngine(
-                prompt_driver=prompt_driver,
-            ),
-        ),
-        BlobArtifact: BlobArtifactStorage()
-    }
-)
-
 agent = Agent(
-    task_memory=task_memory,
     tools=[WebScraper(), FileManager(), TaskMemoryClient(off_prompt=True)]
 )
 

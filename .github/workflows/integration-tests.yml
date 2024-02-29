@@ -1,10 +1,26 @@
 name: Integration Tests
 
-on: workflow_dispatch
+on:
+  pull_request:
+    branches: [ "main", "dev" ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: ${{ secrets.INTEG_POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.INTEG_POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.INTEG_POSTGRES_DB }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     strategy:
       fail-fast: false
       matrix:
@@ -38,6 +54,15 @@ jobs:
       MONGODB_DATABASE_NAME: ${{ secrets.INTEG_MONGODB_DATABASE_NAME }}
       MONGODB_COLLECTION_NAME: ${{ secrets.INTEG_MONGODB_COLLECTION_NAME }}
       MONGODB_PASSWORD: ${{ secrets.INTEG_MONGODB_PASSWORD }}
+      MONGODB_INDEX_NAME: ${{ secrets.INTEG_MONGODB_INDEX_NAME }}
+      MONGODB_VECTOR_PATH: ${{ secrets.INTEG_MONGODB_VECTOR_PATH }}
+      AZURE_MONGODB_HOST: ${{ secrets.INTEG_AZURE_MONGODB_HOST }}
+      AZURE_MONGODB_USERNAME: ${{ secrets.INTEG_AZURE_MONGODB_USERNAME }}
+      AZURE_MONGODB_PASSWORD: ${{ secrets.INTEG_AZURE_MONGODB_PASSWORD }}
+      AZURE_MONGODB_DATABASE_NAME: ${{ secrets.INTEG_AZURE_MONGODB_DATABASE_NAME }}
+      AZURE_MONGODB_COLLECTION_NAME: ${{ secrets.INTEG_AZURE_MONGODB_COLLECTION_NAME }}
+      AZURE_MONGODB_INDEX_NAME: ${{ secrets.INTEG_AZURE_MONGODB_INDEX_NAME }}
+      AZURE_MONGODB_VECTOR_PATH: ${{ secrets.INTEG_AZURE_MONGODB_VECTOR_PATH }}
       AMAZON_OPENSEARCH_HOST: ${{ secrets.INTEG_AMAZON_OPENSEARCH_HOST }}
       AMAZON_OPENSEARCH_INDEX_NAME: ${{ secrets.INTEG_AMAZON_OPENSEARCH_INDEX_NAME }}
       GOOGLE_API_KEY: ${{ secrets.INTEG_GOOGLE_API_KEY }}
@@ -66,12 +91,18 @@ jobs:
       AZURE_OPENAI_DALL_E_3_DEPLOYMENT_ID: ${{ secrets.INTEG_AZURE_OPENAI_DALL_E_3_DEPLOYMENT_ID }}
       AZURE_OPENAI_DEV_2_API_BASE: ${{ secrets.INTEG_AZURE_OPENAI_DEV_2_API_BASE }}
       AZURE_OPENAI_DEV_2_API_KEY: ${{ secrets.INTEG_AZURE_OPENAI_DEV_2_API_KEY }}
+      AZURE_OPENAI_API_BASE: ${{ secrets.INTEG_AZURE_OPENAI_API_BASE }}
       COHERE_API_KEY: ${{ secrets.INTEG_COHERE_API_KEY }}
       GOOGLE_OWNER_EMAIL: ${{ secrets.INTEG_GOOGLE_OWNER_EMAIL }}
       LEONARDO_API_KEY: ${{ secrets.INTEG_LEONARDO_API_KEY }}
       LEONARDO_MODEL_ID: ${{ secrets.INTEG_LEONARDO_MODEL_ID }}
       SAGEMAKER_TENSORFLOW_HUB_MODEL: ${{ secrets.INTEG_SAGEMAKER_TENSORFLOW_HUB_MODEL }}
       SAGEMAKER_HUGGINGFACE_MODEL: ${{ secrets.INTEG_SAGEMAKER_HUGGINGFACE_MODEL }}
+      POSTGRES_USER: ${{ secrets.INTEG_POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.INTEG_POSTGRES_PASSWORD }}
+      POSTGRES_DB: ${{ secrets.INTEG_POSTGRES_DB }}
+      POSTGRES_HOST: ${{ secrets.INTEG_POSTGRES_HOST }}
+      POSTGRES_PORT: ${{ secrets.INTEG_POSTGRES_PORT }}
 
     steps:
       - name: Checkout actions

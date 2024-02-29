@@ -47,20 +47,12 @@ SqlLoader(
 Can be used to load CSV files into [CsvRowArtifact](../../reference/griptape/artifacts/csv_row_artifact.md)s:
 
 ```python
-import urllib
 from griptape.loaders import CsvLoader
 
-urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv", "cities.csv")
+CsvLoader().load("tests/assets/cities.csv")
 
-CsvLoader().load(
-    "cities.csv"
-)
-
-urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/addresses.csv", "addresses.csv")
-
-CsvLoader().load_collection(
-    ["cities.csv", "addresses.csv"]
-)
+CsvLoader().load_collection(["tests/assets/cities.csv", "tests/assets/addresses.csv"])
+```
 ```
 
 ## Text Loader
@@ -107,22 +99,21 @@ WebLoader().load_collection(
 
 ## Image Loader
 
-The Image Loader is used to load an image from the filesystem, returning an [ImageArtifact](./artifacts.md#imageartifact).
+The Image Loader is used to load an image as an [ImageArtifact](./artifacts.md#imageartifact). The Loader operates on image bytes that can be sourced from files on disk, downloaded images, or images in memory.
 
 ```python
 from griptape.loaders import ImageLoader
 
-
-image_artifact = ImageLoader().load("tests/assets/mountain.png")
-image_artifacts = ImageLoader().load_collection(paths=["tests/assets/mountain.png", "tests/assets/mountain.jpg"])
+with open("tests/assets/mountain.png", "rb") as f:
+    disk_image_artifact = ImageLoader().load(f.read())
 ```
 
-By default, the Image Loader will ensure all images are in `png` format. If an image in another format (for example, `jpg`) is loaded, it will be reformatted to `png`. Other formats are supported through the `format` field.
+By default, the Image Loader will load images in their native format, but not all models work on all formats. To normalize the format of Artifacts returned by the Loader, set the `format` field.
 
 ```python
 from griptape.loaders import ImageLoader
 
-
-# Image data in artifact will be in JPG format.
-image_artifact_jpg = ImageLoader(format="JPEG").load("tests/assets/mountain.png")
+# Image data in artifact will be in BMP format.
+with open("tests/assets/mountain.png", "rb") as f:
+    image_artifact_jpeg = ImageLoader(format="bmp").load(f.read())
 ```

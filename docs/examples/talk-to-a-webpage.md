@@ -8,12 +8,15 @@ from griptape.rules import Ruleset, Rule
 from griptape.structures import Agent
 from griptape.tools import VectorStoreClient
 from griptape.utils import Chat
-from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver, OpenAiChatPromptDriver
 
 
 namespace = "physics-wiki"
 
 engine = VectorQueryEngine(
+    prompt_driver=OpenAiChatPromptDriver(
+        model="gpt-3.5-turbo",
+    ),
     vector_store_driver=LocalVectorStoreDriver(
         embedding_driver=OpenAiEmbeddingDriver(
             api_key=os.getenv("OPENAI_API_KEY")

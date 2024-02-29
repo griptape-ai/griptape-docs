@@ -118,7 +118,7 @@ You can use the [CompletionChunkEvent](../../reference/griptape/events/completio
 from griptape.events import CompletionChunkEvent, EventListener
 from griptape.tasks import ToolkitTask
 from griptape.structures import Pipeline
-from griptape.tools import WebScraper
+from griptape.tools import WebScraper, TaskMemoryClient
 
 
 pipeline = Pipeline(
@@ -130,7 +130,7 @@ pipeline = Pipeline(
 pipeline.add_tasks(
     ToolkitTask(
         "Based on https://griptape.ai, tell me what griptape is.",
-        tools=[WebScraper()],
+        tools=[WebScraper(), TaskMemoryClient(off_prompt=False)],
     ),
 )
 
@@ -141,13 +141,15 @@ You can also use the [Stream](../../reference/griptape/utils/stream.md) utility 
 [CompletionChunkEvent](../../reference/griptape/events/completion_chunk_event.md)s in a Python iterator.
 
 ```python
+from griptape.drivers import OpenAiChatPromptDriver
 from griptape.utils import Stream
 from griptape.tasks import ToolkitTask
 from griptape.structures import Pipeline
 from griptape.tools import WebScraper
 
 
-pipeline = Pipeline(stream=True)
+pipeline = Pipeline()
+pipeline.config.global_drivers.prompt_driver.stream = True
 pipeline.add_tasks(
     ToolkitTask(
         "Based on https://griptape.ai, tell me what griptape is.",

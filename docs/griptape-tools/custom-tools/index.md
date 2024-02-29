@@ -1,4 +1,4 @@
-# Custom Tools
+## Overview
 
 Building your own tools is easy with Griptape!
 
@@ -30,7 +30,7 @@ To add Python dependencies for your tool, add a `requirements.txt` file. The too
 
 Next, create a `tool.py` file with the following code:
 
-```python
+```python title="PYTEST_IGNORE"
 import random
 from griptape.artifacts import TextArtifact
 from griptape.tools import BaseTool
@@ -58,7 +58,7 @@ class RandomNumberGenerator(BaseTool):
 
 Finally, let's test our tool:
 
-```python
+```python title="PYTEST_IGNORE"
 from griptape.structures import Agent
 from rng_tool.tool import RandomNumberGenerator
 

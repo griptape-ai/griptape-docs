@@ -6,7 +6,7 @@ Griptape provides a way to build Embedding Drivers that are reused in downstream
 * [embed_text_artifact()](../../reference/griptape/drivers/embedding/base_embedding_driver.md#griptape.drivers.embedding.base_embedding_driver.BaseEmbeddingDriver.embed_text_artifact) for [TextArtifact](../../reference/griptape/artifacts/text_artifact.md)s.
 * [embed_string()](../../reference/griptape/drivers/embedding/base_embedding_driver.md#griptape.drivers.embedding.base_embedding_driver.BaseEmbeddingDriver.embed_string) for any string.
 
-You can optionally provide a [Tokenizer](../structures/tokenizers.md) via the [tokenizer](../../reference/griptape/drivers/embedding/base_embedding_driver.md#griptape.drivers.embedding.base_embedding_driver.BaseEmbeddingDriver.tokenizer) field to have the Driver automatically chunk the input text to fit into the token limit.
+You can optionally provide a [Tokenizer](../misc/tokenizers.md) via the [tokenizer](../../reference/griptape/drivers/embedding/base_embedding_driver.md#griptape.drivers.embedding.base_embedding_driver.BaseEmbeddingDriver.tokenizer) field to have the Driver automatically chunk the input text to fit into the token limit.
 
 ## Embedding Drivers
 
@@ -94,7 +94,7 @@ The [AmazonSageMakerEmbeddingDriver](../../reference/griptape/drivers/embedding/
     This driver requires the `drivers-embedding-amazon-sagemaker` [extra](../index.md#extras).
 
 ##### TensorFlow Hub Models
-```python
+```python title="PYTEST_IGNORE"
 import os
 from griptape.drivers import AmazonSageMakerEmbeddingDriver, SageMakerTensorFlowHubEmbeddingModelDriver
 
@@ -110,7 +110,7 @@ print(embeddings[:3])
 ```
 
 ##### HuggingFace Models
-```python
+```python title="PYTEST_IGNORE"
 import os
 from griptape.drivers import AmazonSageMakerEmbeddingDriver, SageMakerHuggingFaceEmbeddingModelDriver
 
@@ -126,16 +126,21 @@ print(embeddings[:3])
 ```
 
 ### Override Default Structure Embedding Driver
-Here is how you can override the Embedding Driver that is used by default in agents. 
+Here is how you can override the Embedding Driver that is used by default in Structures. 
 
 ```python
 from griptape.structures import Agent
 from griptape.tools import WebScraper, TaskMemoryClient
 from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.config import StructureConfig, OpenAiStructureConfig
 
 agent = Agent(
     tools=[WebScraper(), TaskMemoryClient(off_prompt=False)],
-    embedding_driver=OpenAiEmbeddingDriver()
+    config=OpenAiStructureConfig(
+        global_drivers=StructureGlobalDriversConfig(
+            embedding_driver=OpenAiEmbeddingDriver()
+        )
+    )
 )
 
 agent.run("based on https://www.griptape.ai/, tell me what Griptape is")

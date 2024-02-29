@@ -7,9 +7,11 @@ Griptape provides a way to build drivers for vector DBs where embeddings can be 
 - `upsert_text()` for updating and inserting new arbitrary strings into vector DBs. The method will automatically generate embeddings for a given value.
 - `upsert_vector()` for updating and inserting new vectors directly.
 - `query()` for querying vector DBs.
-- `create_index()`: For easy index creation.
 
 Each vector driver takes a [BaseEmbeddingDriver](../../reference/griptape/drivers/embedding/base_embedding_driver.md) used to dynamically generate embeddings for strings.
+
+!!! info
+    When working with vector database indexes with Griptape drivers, make sure the number of dimensions is equal to 1536. Nearly all embedding models create vectors with this number of dimensions. Check the documentation for your vector database on how to create/update vector indexes.
 
 !!! info
     More vector drivers are coming soon.
@@ -112,13 +114,14 @@ Here is an example of how the driver can be used to load and query information i
 
 ```python
 import os
-from griptape.drivers import MarqoVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.drivers import MarqoVectorStoreDriver, OpenAiEmbeddingDriver, OpenAiChatPromptDriver
 from griptape.engines import VectorQueryEngine
 from griptape.loaders import WebLoader
 from griptape.tools import VectorStoreClient
 
 # Initialize an embedding driver
 embedding_driver = OpenAiEmbeddingDriver(api_key=os.getenv("OPENAI_API_KEY"))
+prompt_driver = OpenAiChatPromptDriver(model="gpt-3.5-turbo")
 
 # Define the namespace
 namespace = 'griptape-ai'
@@ -132,7 +135,7 @@ vector_store = MarqoVectorStoreDriver(
 )
 
 # Initialize the query engine
-query_engine = VectorQueryEngine(vector_store_driver=vector_store)
+query_engine = VectorQueryEngine(vector_store_driver=vector_store, prompt_driver=prompt_driver)
 
 # Initialize the knowledge base tool
 VectorStoreClient(
@@ -159,7 +162,7 @@ print(result)
 !!! info
     This driver requires the `drivers-vector-mongodb` [extra](../index.md#extras).
 
-The [MongodbAtlasVectorStoreDriver](../../reference/griptape/drivers/vector/mongodb_vector_store_driver.md) provides support for storing vector data in a MongoDB Atlas database.
+The [MongodbAtlasVectorStoreDriver](../../reference/griptape/drivers/vector/mongodb_atlas_vector_store_driver.md) provides support for storing vector data in a MongoDB Atlas database.
 
 Here is an example of how the driver can be used to load and query information in a MongoDb Atlas Cluster:
 
@@ -176,12 +179,84 @@ username = os.getenv("MONGODB_USERNAME")
 password = os.getenv("MONGODB_PASSWORD")
 database_name = os.getenv("MONGODB_DATABASE_NAME")
 collection_name = os.getenv("MONGODB_COLLECTION_NAME")
+index_name = os.getenv("MONGODB_INDEX_NAME")
+vector_path = os.getenv("MONGODB_VECTOR_PATH")
 # Initialize the vector store driver
 vector_store = MongoDbAtlasVectorStoreDriver(
     connection_string=f"mongodb+srv://{username}:{password}@{host}/{database_name}",
     database_name=database_name,
     collection_name=collection_name,
     embedding_driver=embedding_driver,
+    index_name=index_name,
+    vector_path=vector_path,
+)
+
+# Load artifacts from the web
+artifacts = WebLoader(max_tokens=200).load("https://www.griptape.ai")
+
+# Upsert the artifacts into the vector store
+vector_store.upsert_text_artifacts(
+    {
+        "griptape": artifacts,
+    }
+)
+
+result = vector_store.query(query="What is griptape?")
+print(result)
+```
+
+The format for creating a vector index should look similar to the following:
+```json
+{
+  "fields": [
+    {
+      "numDimensions": 1536,
+      "path": "<path_to_vector>",
+      "similarity": "euclidean",
+      "type": "vector"
+    },
+    {
+      "path": "namespace",
+      "type": "filter"
+    }
+  ]
+}
+```
+Replace `path_to_vector` with the expected field name where the vector content will be.
+
+## Azure MongoDB Vector Store Driver
+
+!!! info
+    This driver requires the `drivers-vector-mongodb` [extra](../index.md#extras).
+
+The [AzureMongoDbVectorStoreDriver](../../reference/griptape/drivers/vector/azure_mongodb_vector_store_driver.md) provides support for storing vector data in an Azure CosmosDb database account using the MongoDb vCore API
+
+Here is an example of how the driver can be used to load and query information in an Azure CosmosDb MongoDb vCore database. It is almost the same as the [MongodbAtlasVectorStoreDriver](#mongodb-atlas-vector-store-driver):
+
+```python
+from griptape.drivers import AzureMongoDbVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.loaders import WebLoader
+import os
+
+# Initialize an embedding driver
+embedding_driver = OpenAiEmbeddingDriver(api_key=os.getenv("OPENAI_API_KEY"))
+
+azure_host = os.getenv("AZURE_MONGODB_HOST")
+username = os.getenv("AZURE_MONGODB_USERNAME")
+password = os.getenv("AZURE_MONGODB_PASSWORD")
+database_name = os.getenv("AZURE_MONGODB_DATABASE_NAME")
+collection_name = os.getenv("AZURE_MONGODB_COLLECTION_NAME")
+index_name = os.getenv("AZURE_MONGODB_INDEX_NAME")
+vector_path = os.getenv("AZURE_MONGODB_VECTOR_PATH")
+
+# Initialize the vector store driver
+vector_store = AzureMongoDbVectorStoreDriver(
+    connection_string=f"mongodb+srv://{username}:{password}@{azure_host}/{database_name}?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000",
+    database_name=database_name,
+    collection_name=collection_name,
+    embedding_driver=embedding_driver,
+    index_name=index_name,
+    vector_path=vector_path,
 )
 
 # Load artifacts from the web
@@ -218,7 +293,7 @@ embedding_driver = OpenAiEmbeddingDriver(api_key=os.getenv("OPENAI_API_KEY"))
 
 vector_store_driver = RedisVectorStoreDriver(
     host=os.getenv("REDIS_HOST"),
-    port=os.getenv("REDIS_PORT"),
+    port=os.getenv("REDIS_PORT", 6379),
     password=os.getenv("REDIS_PASSWORD"),
     index=os.getenv("REDIS_INDEX"),
     embedding_driver=embedding_driver,
@@ -236,6 +311,11 @@ vector_store_driver.upsert_text_artifacts(
 
 result = vector_store_driver.query(query="What is griptape?")
 print(result)
+```
+
+The format for creating a vector index should be similar to the following:
+```
+FT.CREATE idx:griptape ON hash PREFIX 1 "griptape:" SCHEMA tag TAG vector VECTOR FLAT 6 TYPE FLOAT32 DIM 1536 DISTANCE_METRIC COSINE
 ```
 
 ## OpenSearch Vector Store Driver
@@ -278,6 +358,19 @@ result = vector_store_driver.query(query="What is griptape?")
 print(result)
 ```
 
+The body mappings for creating a vector index should look similar to the following:
+```json
+{
+    "mappings": {
+        "properties": {
+            "vector": {"type": "knn_vector", "dimension": 1536},
+            "namespace": {"type": "keyword"},
+            "metadata": {"type": "object", "enabled": true}
+        }
+    }
+}
+```
+
 ## PGVector Vector Store Driver
 
 !!! info
@@ -295,11 +388,11 @@ from griptape.loaders import WebLoader
 # Initialize an embedding driver.
 embedding_driver = OpenAiEmbeddingDriver(api_key=os.getenv("OPENAI_API_KEY"))
 
-db_user = os.getenv("DB_USER")
-db_pass = os.getenv("DB_PASSWORD")
-db_host = os.getenv("DB_HOST")
-db_port = os.getenv("DB_PORT")
-db_name = os.getenv("DB_NAME")
+db_user = os.getenv("POSTGRES_USER")
+db_pass = os.getenv("POSTGRES_PASSWORD")
+db_host = os.getenv("POSTGRES_HOST")
+db_port = os.getenv("POSTGRES_PORT")
+db_name = os.getenv("POSTGRES_DB")
 db_connection_string = f"postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
 vector_store_driver = PgVectorVectorStoreDriver(
     connection_string=db_connection_string,

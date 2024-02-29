@@ -15,7 +15,7 @@ Griptape’s design philosophy is based on the following tenets:
 
 ### OpenAI API Key
 First, configure an OpenAI client by [getting an API key](https://platform.openai.com/account/api-keys) and adding it to your environment as `OPENAI_API_KEY`. 
-By default, Griptape uses [OpenAI Completions API](https://platform.openai.com/docs/guides/completion) to execute LLM prompts, but other LLMs can be configured with the use of [Prompt Drivers](./structures/prompt-drivers.md).
+By default, Griptape uses [OpenAI Completions API](https://platform.openai.com/docs/guides/completion) to execute LLM prompts, but other LLMs can be configured with the use of [Prompt Drivers](./drivers/prompt-drivers.md).
 
 ### Using pip
 
@@ -54,7 +54,7 @@ To install just the core dependencies:
 poetry add griptape
 ```
 
-To install specific extras (e.g., drivers for [AnthropicPromptDriver](./structures/prompt-drivers.md#anthropic) and [PineconeVectorStoreDriver](./data/vector-store-drivers.md#pinecone)):
+To install specific extras (e.g., drivers for [AnthropicPromptDriver](./drivers/prompt-drivers.md#anthropic) and [PineconeVectorStoreDriver](./drivers/vector-store-drivers.md#pinecone)):
 ```
 poetry add griptape[drivers-prompt-anthropic,drivers-vector-pinecone]
 ```
@@ -102,7 +102,7 @@ Agents on their own are fun, but let's add some capabilities to them using Gript
 from griptape.structures import Agent
 from griptape.tools import Calculator
 
-calculator = Calculator()
+calculator = Calculator(off_prompt=False)
 
 agent = Agent(
    tools=[calculator]

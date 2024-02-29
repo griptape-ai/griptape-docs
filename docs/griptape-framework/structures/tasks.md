@@ -187,18 +187,21 @@ agent.run("Give me the answer for 5*4.")
 ## Extraction Task
 
 To extract information from text, use an [ExtractionTask](../../reference/griptape/tasks/extraction_task.md).
-This Task takes an [Extraction Engine](../../griptape-framework/data/extraction-engines.md), and a set of arguments specific to the Engine.
+This Task takes an [Extraction Engine](../../griptape-framework/engines/extraction-engines.md), and a set of arguments specific to the Engine.
 
 
 ### CSV Extraction
 
 ```python
+from griptape.drivers import OpenAiChatPromptDriver
 from griptape.tasks import ExtractionTask
 from griptape.structures import Agent
 from griptape.engines import CsvExtractionEngine
 
 # Instantiate the CSV extraction engine
-csv_extraction_engine = CsvExtractionEngine()
+csv_extraction_engine = CsvExtractionEngine(
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-3.5-turbo")
+)
 
 # Define some unstructured data and columns
 csv_data = """
@@ -239,13 +242,17 @@ agent.run(csv_data)
 ### JSON Extraction
 
 ```python
+from schema import Schema 
+
+from griptape.drivers import OpenAiChatPromptDriver
 from griptape.tasks import ExtractionTask
 from griptape.structures import Agent
 from griptape.engines import JsonExtractionEngine
-from schema import Schema
 
 # Instantiate the json extraction engine
-json_extraction_engine = JsonExtractionEngine()
+json_extraction_engine = JsonExtractionEngine(
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-3.5-turbo"),
+)
 
 # Define some unstructured data and a schema
 json_data = """
@@ -281,7 +288,7 @@ agent.run(json_data)
 ## Text Summary Task
 
 To summarize a text, use the [TextSummaryTask](../../reference/griptape/tasks/text_summary_task.md).
-This Task takes an [Summarization Engine](../../griptape-framework/data/summary-engines.md), and a set of arguments to the engine.
+This Task takes an [Summarization Engine](../../griptape-framework/engines/summary-engines.md), and a set of arguments to the engine.
 
 ```python
 from griptape.structures import Agent
@@ -346,16 +353,17 @@ agent.run(
 ## Text Query Task
 
 To query text, use the [TextQueryTask](../../reference/griptape/tasks/text_query_task.md).
-This Task takes a [Query Engine](../../griptape-framework/data/query-engines.md), and a set of arguments specific to the engine.
+This Task takes a [Query Engine](../../griptape-framework/engines/query-engines.md), and a set of arguments specific to the engine.
 
 ```python
+from griptape.drivers import OpenAiChatPromptDriver
 from griptape.structures import Agent
 from griptape.tasks import TextQueryTask
 from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
 from griptape.engines import VectorQueryEngine
 from griptape.artifacts import TextArtifact
 
-# Initiate Embedding Driver and Vector Store Driver
+# Initialize Embedding Driver and Vector Store Driver
 vector_store_driver = LocalVectorStoreDriver(embedding_driver=OpenAiEmbeddingDriver())
 
 artifact = TextArtifact(
@@ -364,7 +372,10 @@ artifact = TextArtifact(
 )
 
 # Create a VectorQueryEngine using the LocalVectorStoreDriver
-vector_query_engine = VectorQueryEngine(vector_store_driver=vector_store_driver)
+vector_query_engine = VectorQueryEngine(
+    vector_store_driver=vector_store_driver,
+    prompt_driver=OpenAiChatPromptDriver(model="gpt-3.5-turbo")
+)
 vector_query_engine.upsert_text_artifact(artifact=artifact)
 
 # Instantiate the agent and add TextQueryTask with the VectorQueryEngine
@@ -437,7 +448,7 @@ pipeline.run("Write me a line in a poem")
 
 ## Image Generation Tasks
 
-To generate an image, use one of the following [Image Generation Tasks](../../reference/griptape/tasks/index.md). All Image Generation Tasks accept an [Image Generation Engine](../data/image-generation-engines.md) configured to use an [Image Generation Driver](./image-generation-drivers.md).
+To generate an image, use one of the following [Image Generation Tasks](../../reference/griptape/tasks/index.md). All Image Generation Tasks accept an [Image Generation Engine](../engines/image-generation-engines.md) configured to use an [Image Generation Driver](../drivers/image-generation-drivers.md).
 
 All successful Image Generation Tasks will always output an [Image Artifact](../data/artifacts.md#imageartifact). Each task can be configured to additionally write the generated image to disk by providing either the `output_file` or `output_dir` field. The `output_file` field supports file names in the current directory (`my_image.png`), relative directory prefixes (`images/my_image.png`), or absolute paths (`/usr/var/my_image.png`). By setting `output_dir`, the task will generate a file name and place the image in the requested directory.
 
@@ -496,7 +507,8 @@ engine = VariationImageGenerationEngine(
 )
 
 # Load input image artifact.
-image_artifact = ImageLoader().load("tests/assets/mountain.png")
+with open("tests/assets/mountain.png", "rb") as f:
+    image_artifact = ImageLoader().load(f.read())
 
 # Create a task configured to use the engine.
 task = VariationImageGenerationTask(
@@ -531,8 +543,11 @@ engine = InpaintingImageGenerationEngine(
 )
 
 # Load input image artifacts.
-image_artifact = ImageLoader().load("tests/assets/mountain.png")
-mask_artifact = ImageLoader().load("tests/assets/mountain-mask.png")
+with open("tests/assets/mountain.png", "rb") as f:
+    image_artifact = ImageLoader().load(f.read())
+
+with open("tests/assets/mountain-mask.png", "rb") as f:
+    mask_artifact = ImageLoader().load(f.read())
 
 # Create a task configured to use the engine.
 task = InpaintingImageGenerationTask(
@@ -567,8 +582,11 @@ engine = OutpaintingImageGenerationEngine(
 )
 
 # Load input image artifacts.
-image_artifact = ImageLoader().load("tests/assets/mountain.png")
-mask_artifact = ImageLoader().load("tests/assets/mountain-mask.png")
+with open("tests/assets/mountain.png", "rb") as f:
+    image_artifact = ImageLoader().load(f.read())
+
+with open("tests/assets/mountain-mask.png", "rb") as f:
+    mask_artifact = ImageLoader().load(f.read())
 
 # Create a task configured to use the engine.
 task = OutpaintingImageGenerationTask(

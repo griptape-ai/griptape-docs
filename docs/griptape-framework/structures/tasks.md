@@ -596,3 +596,38 @@ task = OutpaintingImageGenerationTask(
 
 task.run()
 ```
+
+## Image Query Task
+
+The [Image Query Task](../../references/griptape/tasks/image_query_task.py) executes a natural language query on one or more input images. This Task uses an [Image Query Engine](../engines/image-query-engines.md) configured with an [Image Query Driver](../drivers/image-query-drivers.py) to perform the query. The functionality provided by this Task depend on the capabilities of the model provided by the Driver.
+
+This Task accepts two inputs: a query (represented by either a string or a [Text Artifact](../data/artifacts.md#textartifact)) and a list of [Image Artifacts](../data/artifacts.md#imageartifact) or a Callable returning these two values.
+
+```python
+from griptape.engines import ImageQueryEngine
+from griptape.drivers import OpenAiVisionImageQueryDriver
+from griptape.tasks import ImageQueryTask
+
+
+# Create a driver configured to use OpenAI's GPT-4 Vision model.
+driver = OpenAiVisionImageQueryDriver(
+    max_tokens=100,
+)
+
+# Create an engine configured to use the driver.
+engine = ImageQueryEngine(
+    image_query_driver=driver,
+)
+
+# Load the input image artifact.
+with open("tests/assets/mountain.png", "rb") as f:
+    image_artifact = ImageLoadaer().load(f.read())
+
+# Create a task configured to use the engine.
+task = ImageQueryTask(
+    input=("Describe the weather in this image", [image_artifact]),
+    image_query_engine=engine,
+)
+
+task.run()
+```

@@ -5,7 +5,7 @@ The [Image Query Engine](../../reference/griptape/engines/image_query/image_quer
 ```python
 from griptape.drivers import OpenAiVisionImageQueryDriver
 from griptape.engines import ImageQueryEngine
-from griptape.loaders import ImageLoader 
+from griptape.loaders import ImageLoader
 
 driver = OpenAiVisionImageQueryDriver(
     model="gpt-4-vision-preview",
@@ -13,6 +13,7 @@ driver = OpenAiVisionImageQueryDriver(
 
 engine = ImageQueryEngine(
     image_query_driver=driver,
+    max_tokens=100
 )
 
 with open("tests/assets/mountain.png", "rb") as f:
@@ -20,3 +21,7 @@ with open("tests/assets/mountain.png", "rb") as f:
 
 engine.run("Describe the weather in the image", [image_artifact])
 ```
+
+You'll want to modify `max_token` depending on the use case. Lower values to subjectively describe an image, higher values to parse text, etc.
+
+Currently there is no way to automatically set `max_tokens` to all remaining tokens.

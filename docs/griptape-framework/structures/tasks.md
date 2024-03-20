@@ -460,6 +460,7 @@ The [Prompt Image Generation Task](../../reference/griptape/tasks/prompt_image_g
 from griptape.engines import PromptImageGenerationEngine
 from griptape.drivers import OpenAiImageGenerationDriver
 from griptape.tasks import PromptImageGenerationTask
+from griptape.structures import Pipeline
 
 
 # Create a driver configured to use OpenAI's DALL-E 3 model.
@@ -474,13 +475,19 @@ engine = PromptImageGenerationEngine(
     image_generation_driver=driver,
 )
 
-# Create a task configured to use the engine.
-task = PromptImageGenerationTask(
-    input="An image of a mountain on a summer day",
-    image_generation_engine=engine,
+# Instantiate a pipeline.
+pipeline = Pipeline()
+
+# Add a PromptImageGenerationTask to the pipeline.
+pipeline.add_tasks(
+    PromptImageGenerationTask(
+        input="{{ args[0] }}",
+        image_generation_engine=engine,
+        output_dir="images/",
+    )
 )
 
-task.run()
+pipeline.run("An image of a mountain on a summer day")
 ```
 
 ### Variation Image Generation Task
@@ -493,6 +500,7 @@ from griptape.drivers import AmazonBedrockImageGenerationDriver, \
     BedrockStableDiffusionImageGenerationModelDriver
 from griptape.tasks import VariationImageGenerationTask
 from griptape.loaders import ImageLoader
+from griptape.structures import Pipeline
 
 
 # Create a driver configured to use Stable Diffusion via Bedrock.
@@ -510,13 +518,19 @@ engine = VariationImageGenerationEngine(
 with open("tests/assets/mountain.png", "rb") as f:
     image_artifact = ImageLoader().load(f.read())
 
-# Create a task configured to use the engine.
-task = VariationImageGenerationTask(
-    input=("An image of a mountain landscape on a snowy winter day", image_artifact),
-    image_generation_engine=engine,
+# Instatiate a pipeline.
+pipeline = Pipeline()
+
+# Add a VariationImageGenerationTask to the pipeline.
+pipeline.add_task(
+    VariationImageGenerationTask(
+        input=("{{ args[0] }}", image_artifact),
+        image_generation_engine=engine,
+        output_dir="images/",
+    )
 )
 
-task.run()
+pipeline.run("An image of a mountain landscape on a snowy winter day")
 ```
 
 ### Inpainting Image Generation Task
@@ -529,6 +543,7 @@ from griptape.drivers import AmazonBedrockImageGenerationDriver, \
     BedrockStableDiffusionImageGenerationModelDriver
 from griptape.tasks import InpaintingImageGenerationTask
 from griptape.loaders import ImageLoader
+from griptape.structures import Pipeline
 
 
 # Create a driver configured to use Stable Diffusion via Bedrock.
@@ -549,13 +564,19 @@ with open("tests/assets/mountain.png", "rb") as f:
 with open("tests/assets/mountain-mask.png", "rb") as f:
     mask_artifact = ImageLoader().load(f.read())
 
-# Create a task configured to use the engine.
-task = InpaintingImageGenerationTask(
-    input=("An image of a castle built into the side of a mountain", image_artifact, mask_artifact),
-    image_generation_engine=engine,
+# Instantiate a pipeline.
+pipeline = Pipeline()
+
+# Add an InpaintingImageGenerationTask to the pipeline.
+pipeline.add_task(
+    InpaintingImageGenerationTask(
+        input=("{{ args[0] }}", image_artifact, mask_artifact),
+        image_generation_engine=engine,
+        output_dir="images/"
+    )
 )
 
-task.run()
+pipeline.run("An image of a castle built into the side of a mountain")
 ```
 
 ### Outpainting Image Generation Task
@@ -568,6 +589,7 @@ from griptape.drivers import AmazonBedrockImageGenerationDriver, \
     BedrockStableDiffusionImageGenerationModelDriver
 from griptape.tasks import OutpaintingImageGenerationTask
 from griptape.loaders import ImageLoader
+from griptape.structures import Pipeline
 
 
 # Create a driver configured to use Stable Diffusion via Bedrock.
@@ -588,11 +610,59 @@ with open("tests/assets/mountain.png", "rb") as f:
 with open("tests/assets/mountain-mask.png", "rb") as f:
     mask_artifact = ImageLoader().load(f.read())
 
-# Create a task configured to use the engine.
-task = OutpaintingImageGenerationTask(
-    input=("An image of a mountain shrouded by clouds", image_artifact, mask_artifact),
-    image_generation_engine=engine,
+# Instantiate a pipeline.
+pipeline = Pipeline()
+
+# Add an OutpaintingImageGenerationTask to the pipeline.
+pipeline.add_task(
+    OutpaintingImageGenerationTask(
+        input=("{{ args[0] }}", image_artifact, mask_artifact),
+        image_generation_engine=engine,
+        output_dir="images/",
+    )
 )
 
-task.run()
+pipeline.run("An image of a mountain shrouded by clouds")
+```
+
+## Image Query Task
+
+The [Image Query Task](../../reference/griptape/tasks/image_query_task.md) executes a natural language query on one or more input images. This Task uses an [Image Query Engine](../engines/image-query-engines.md) configured with an [Image Query Driver](../drivers/image-query-drivers.md) to perform the query. The functionality provided by this Task depend on the capabilities of the model provided by the Driver.
+
+This Task accepts two inputs: a query (represented by either a string or a [Text Artifact](../data/artifacts.md#textartifact)) and a list of [Image Artifacts](../data/artifacts.md#imageartifact) or a Callable returning these two values.
+
+```python
+from griptape.engines import ImageQueryEngine
+from griptape.drivers import OpenAiVisionImageQueryDriver
+from griptape.tasks import ImageQueryTask
+from griptape.loaders import ImageLoader
+from griptape.structures import Pipeline
+
+
+# Create a driver configured to use OpenAI's GPT-4 Vision model.
+driver = OpenAiVisionImageQueryDriver(
+    max_tokens=100,
+)
+
+# Create an engine configured to use the driver.
+engine = ImageQueryEngine(
+    image_query_driver=driver,
+)
+
+# Load the input image artifact.
+with open("tests/assets/mountain.png", "rb") as f:
+    image_artifact = ImageLoader().load(f.read())
+
+# Instantiate a pipeline.
+pipeline = Pipeline()
+
+# Add an ImageQueryTask to the pipeline.
+pipeline.add_task(
+    ImageQueryTask(
+        input=("{{ args[0] }}", [image_artifact]),
+        image_query_engine=engine,
+    )
+)
+
+pipeline.run("Describe the weather in the image")
 ```

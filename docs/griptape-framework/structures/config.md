@@ -34,6 +34,18 @@ agent = Agent(
 )
 ```
 
+#### Google
+The [Google Structure Config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.GoogleStructureConfig) provides default Drivers for Google's Gemini APIs.
+
+```python
+from griptape.structures import Agent
+from griptape.config import GoogleStructureConfig
+
+agent = Agent(
+    config=GoogleStructureConfig()
+)
+```
+
 ### Custom Configs
 
 You can create your own [StructureConfig](../../reference/griptape/config/structure_config.md) by overriding the Drivers in [default_config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.StructureConfig.default_config).

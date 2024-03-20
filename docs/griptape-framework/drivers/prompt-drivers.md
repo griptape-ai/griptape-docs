@@ -209,7 +209,7 @@ agent = Agent(
     config=StructureConfig(
         global_drivers=StructureGlobalDriversConfig(
             prompt_driver=AnthropicPromptDriver(
-                model="claude-2",
+                model="claude-3-opus-20240229",
                 api_key=os.environ['ANTHROPIC_API_KEY'],
             )
         )
@@ -521,7 +521,7 @@ agent = Agent(
     config=StructureConfig(
         global_drivers=StructureGlobalDriversConfig(
             prompt_driver=AmazonBedrockPromptDriver(
-                model="anthropic.claude-v2",
+                model="anthropic.claude-3-sonnet-20240229-v1:0",
                 prompt_model_driver=BedrockClaudePromptModelDriver(
                     top_p=1,
                 ),

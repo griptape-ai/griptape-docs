@@ -197,7 +197,7 @@ agent.run('What is the sentiment of this review? Review: "I really enjoyed this 
 !!! info
     This driver requires the `drivers-prompt-anthropic` [extra](../index.md#extras).
 
-The [AnthropicPromptDriver](../../reference/griptape/drivers/prompt/anthropic_prompt_driver.md) connects to the Anthropic [Completions](https://docs.anthropic.com/claude/reference/complete_post) API.
+The [AnthropicPromptDriver](../../reference/griptape/drivers/prompt/anthropic_prompt_driver.md) connects to the Anthropic [Messages](https://docs.anthropic.com/claude/reference/messages_post) API.
 
 ```python
 import os

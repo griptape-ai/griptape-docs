@@ -126,6 +126,27 @@ embeddings = driver.embed_string("Hello world!")
 print(embeddings[:3])
 ```
 
+
+### VoyageAI Embeddings
+The [VoyageAiEmbeddingDriver](../../reference/griptape/drivers/embedding/voyageai_embedding_driver.md) uses the [VoyageAI Embeddings API](https://www.voyageai.com/).
+
+!!! info
+    This driver requires the `drivers-embedding-voyageai` [extra](../index.md#extras).
+
+```python
+import os
+from griptape.drivers import VoyageAiEmbeddingDriver
+
+driver = VoyageAiEmbeddingDriver(
+    api_key=os.environ["VOYAGEAI_API_KEY"]
+)
+
+embeddings = driver.embed_string("Hello world!")
+
+# display the first 3 embeddings
+print(embeddings[:3])
+```
+
 ### Override Default Structure Embedding Driver
 Here is how you can override the Embedding Driver that is used by default in Structures. 
 

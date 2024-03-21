@@ -15,7 +15,7 @@ from griptape.chunkers import TextChunker
 from griptape.tokenizers import OpenAiTokenizer
 TextChunker(
      # set an optional custom tokenizer
-     tokenizer=OpenAiTokenizer(model=OpenAiTokenizer.DEFAULT_OPENAI_GPT_4_MODEL),
+     tokenizer=OpenAiTokenizer(model="gpt-4"),
      # optionally modify default number of tokens
      max_tokens=100
 ).chunk("long text")

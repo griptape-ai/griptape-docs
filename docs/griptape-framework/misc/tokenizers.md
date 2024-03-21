@@ -13,7 +13,7 @@ Tokenizers are a low level abstraction that you will rarely interact with direct
 from griptape.tokenizers import OpenAiTokenizer
 
 
-tokenizer = OpenAiTokenizer(model=OpenAiTokenizer.DEFAULT_OPENAI_GPT_4_MODEL)
+tokenizer = OpenAiTokenizer(model="gpt-4")
 
 print(tokenizer.count_tokens("Hello world!"))  # 3
 print(tokenizer.count_tokens_left("Hello world!"))  # 8181
@@ -27,7 +27,7 @@ from griptape.tokenizers import CohereTokenizer
 
 
 tokenizer = CohereTokenizer(
-    model=CohereTokenizer.DEFAULT_MODEL, client=Client(os.environ["COHERE_API_KEY"])
+    model="command", client=Client(os.environ["COHERE_API_KEY"])
 )
 
 print(tokenizer.count_tokens("Hello world!"))  # 3
@@ -40,7 +40,7 @@ print(tokenizer.count_tokens_left("Hello world!"))  # 2045
 from griptape.tokenizers import AnthropicTokenizer
 
 
-tokenizer = AnthropicTokenizer(model=AnthropicTokenizer.DEFAULT_MODEL)
+tokenizer = AnthropicTokenizer(model="claude-3-opus-20240229")
 
 print(tokenizer.count_tokens("Hello world!"))  # 2
 print(tokenizer.count_tokens_left("Hello world!"))  # 99997
@@ -67,7 +67,7 @@ print(tokenizer.count_tokens_left("Hello world!"))  # 507
 from griptape.tokenizers import BedrockClaudeTokenizer
 
 
-tokenizer = BedrockClaudeTokenizer(model=BedrockClaudeTokenizer.DEFAULT_MODEL)
+tokenizer = BedrockClaudeTokenizer(model="anthropic.claude-3-sonnet-20240229-v1:0")
 
 print(tokenizer.count_tokens("Hello world!")) # 2
 print(tokenizer.count_tokens_left("Hello world!")) # 4094
@@ -78,7 +78,7 @@ print(tokenizer.count_tokens_left("Hello world!")) # 4094
 from griptape.tokenizers import BedrockTitanTokenizer
 
 
-tokenizer = BedrockTitanTokenizer(model=BedrockTitanTokenizer.DEFAULT_MODEL)
+tokenizer = BedrockTitanTokenizer(model="amazon.titan-text-express-v1")
 
 print(tokenizer.count_tokens("Hello world!"))  # 5
 print(tokenizer.count_tokens_left("Hello world!"))  # 4091
@@ -89,7 +89,7 @@ print(tokenizer.count_tokens_left("Hello world!"))  # 4091
 from griptape.tokenizers import BedrockLlamaTokenizer
 
 
-tokenizer = BedrockLlamaTokenizer(model=BedrockLlamaTokenizer.DEFAULT_MODEL)
+tokenizer = BedrockLlamaTokenizer(model="meta.llama2-13b-chat-v1")
 
 print(tokenizer.count_tokens("Hello world!"))  # 2
 print(tokenizer.count_tokens_left("Hello world!"))  # 2046
@@ -100,7 +100,7 @@ print(tokenizer.count_tokens_left("Hello world!"))  # 2046
 from griptape.tokenizers import BedrockJurassicTokenizer
 
 
-tokenizer = BedrockJurassicTokenizer(model=BedrockJurassicTokenizer.DEFAULT_MODEL)
+tokenizer = BedrockJurassicTokenizer(model="ai21.j2-ultra-v1")
 
 print(tokenizer.count_tokens("Hello world!"))  # 3
 print(tokenizer.count_tokens_left("Hello world!"))  # 8189

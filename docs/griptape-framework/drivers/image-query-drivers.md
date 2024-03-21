@@ -8,7 +8,7 @@ Image Query Drivers are used by [Image Query Engines](../engines/image-query-eng
 ## AnthropicImageQueryDriver
 
 !!! info
-    This Driver does not have a default model. You must specify one using the `model` field. In order to tune `max_tokens`, see [Anthropic's documentation on image tokens](https://docs.anthropic.com/claude/docs/vision#image-costs) for more information on how to relate token count to response length.
+    In order to tune `max_tokens`, see [Anthropic's documentation on image tokens](https://docs.anthropic.com/claude/docs/vision#image-costs) for more information on how to relate token count to response length.
 
 The [AnthropicImageQueryDriver](../../reference/griptape/drivers/image_query/anthropic_image_query_driver.md) is used to query images using Anthropic's Claude 3 multi-modal model. Here is an example of how to use it:
 
@@ -62,7 +62,7 @@ print(result)
 ## OpenAiVisionImageQueryDriver
 
 !!! info
-    This Driver defaults to using the `gpt-4-vision-preview` model. As other multimodal models are released, they can be specified using the `model` field. In order to tune `max_tokens`, see [OpenAI's documentation](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) for more information on how to relate token count to response length.
+    In order to tune `max_tokens`, see [OpenAI's documentation](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) for more information on how to relate token count to response length.
 
 The [OpenAiVisionImageQueryDriver](../../reference/griptape/drivers/image_query/openai_vision_image_query_driver.md) is used to query images using the OpenAI Vision API. Here is an example of how to use it:
 
@@ -104,12 +104,14 @@ session = boto3.Session(
     region_name="us-west-2"
 )
 
+driver = AmazonBedrockImageQueryDriver(
+    image_query_model_driver=BedrockClaudeImageQueryModelDriver(),
+    model="anthropic.claude-3-sonnet-20240229-v1:0",
+    session=session
+)
+
 engine = ImageQueryEngine(
-    image_query_driver=AmazonBedrockImageQueryDriver(
-        image_query_model_driver=BedrockClaudeImageQueryModelDriver(),
-        model="anthropic.claude-3-sonnet-20240229-v1:0",
-        session=session
-    ),
+    image_query_driver=driver
 )
 
 with open("images/mountain.png", "rb") as f:

@@ -62,7 +62,7 @@ print(result)
 ## OpenAiVisionImageQueryDriver
 
 !!! info
-    This Driver defaults to using the `gpt-4-vision-preview` model. As other multimodal models are released, they can be specified using the `model` field. In order to tune `max_ouput_tokens`, see [OpenAI's documentation](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) for more information on how to relate token count to response length.
+    This Driver defaults to using the `gpt-4-vision-preview` model. As other multimodal models are released, they can be specified using the `model` field. In order to tune `max_tokens`, see [OpenAI's documentation](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) for more information on how to relate token count to response length.
 
 The [OpenAiVisionImageQueryDriver](../../reference/griptape/drivers/image_query/openai_vision_image_query_driver.md) is used to query images using the OpenAI Vision API. Here is an example of how to use it:
 
@@ -73,7 +73,7 @@ from griptape.loaders import ImageLoader
 
 driver = OpenAiVisionImageQueryDriver(
     model="gpt-4-vision-preview",
-    max_ouput_tokens=256,
+    max_tokens=256,
 )
 
 engine = ImageQueryEngine(

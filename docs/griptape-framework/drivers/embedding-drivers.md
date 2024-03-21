@@ -153,16 +153,24 @@ Here is how you can override the Embedding Driver that is used by default in Str
 ```python
 from griptape.structures import Agent
 from griptape.tools import WebScraper, TaskMemoryClient
-from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
-from griptape.config import StructureConfig, OpenAiStructureConfig
+from griptape.drivers import (
+    OpenAiChatPromptDriver,
+    VoyageAiEmbeddingDriver,
+)
+from griptape.config import (
+    StructureGlobalDriversConfig,
+    StructureConfig,
+)
 
 agent = Agent(
     tools=[WebScraper(), TaskMemoryClient(off_prompt=False)],
-    config=OpenAiStructureConfig(
+    config=StructureConfig(
         global_drivers=StructureGlobalDriversConfig(
-            embedding_driver=OpenAiEmbeddingDriver()
+            prompt_driver=OpenAiChatPromptDriver(model="gpt-4"),
+            embedding_driver=VoyageAiEmbeddingDriver(),
         )
-    )
+    ),
 )
 
 agent.run("based on https://www.griptape.ai/, tell me what Griptape is")
+```

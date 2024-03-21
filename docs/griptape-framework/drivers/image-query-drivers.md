@@ -3,12 +3,12 @@
 Image Query Drivers are used by [Image Query Engines](../engines/image-query-engines.md) to execute natural language queries on the contents of images. You can specify the provider and model used to query the image by providing the Engine with a particular Image Query Driver.
 
 !!! info
-    All Image Query Drivers default to a `max_output_tokens` of 256. It is recommend that you set this value to correspond to the desired response length. 
+    All Image Query Drivers default to a `max_tokens` of 256. It is recommend that you set this value to correspond to the desired response length. 
 
 ## AnthropicImageQueryDriver
 
 !!! info
-    This Driver does not have a default model. You must specify one using the `model` field. In order to tune `max_ouput_tokens`, see [Anthropic's documentation on image tokens](https://docs.anthropic.com/claude/docs/vision#image-costs) for more information on how to relate token count to response length.
+    This Driver does not have a default model. You must specify one using the `model` field. In order to tune `max_tokens`, see [Anthropic's documentation on image tokens](https://docs.anthropic.com/claude/docs/vision#image-costs) for more information on how to relate token count to response length.
 
 The [AnthropicImageQueryDriver](../../reference/griptape/drivers/image_query/anthropic_image_query_driver.md) is used to query images using Anthropic's Claude 3 multi-modal model. Here is an example of how to use it:
 
@@ -19,7 +19,7 @@ from griptape.loaders import ImageLoader
 
 driver = AnthropicImageQueryDriver(
     model="claude-3-sonnet-20240229",
-    max_output_tokens=1024,
+    max_tokens=1024,
 )
 
 engine = ImageQueryEngine(
@@ -41,7 +41,7 @@ from griptape.loaders import ImageLoader
 
 driver = AnthropicImageQueryDriver(
     model="claude-3-sonnet-20240229",
-    max_output_tokens=1024,
+    max_tokens=1024,
 )
 
 engine = ImageQueryEngine(
@@ -92,7 +92,7 @@ The [Amazon Bedrock Image Query Driver](../../reference/griptape/drivers/image_q
 
 ### Claude
 
-The [BedrockClaudeImageQueryModelDriver](../../reference/griptape/drivers/image_query_models/bedrock_claude_image_query_model_driver.md) provides support for Claude models hosted by Bedrock.
+The [BedrockClaudeImageQueryModelDriver](../../reference/griptape/drivers/image_query_model/bedrock_claude_image_query_model_driver.md) provides support for Claude models hosted by Bedrock.
 
 ```python
 from griptape.drivers import AmazonBedrockImageQueryDriver, BedrockClaudeImageQueryModelDriver

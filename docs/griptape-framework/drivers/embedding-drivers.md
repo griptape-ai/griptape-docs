@@ -138,7 +138,7 @@ import os
 from griptape.drivers import VoyageAiEmbeddingDriver
 
 driver = VoyageAiEmbeddingDriver(
-    api_key=os.environ["VOYAGEAI_API_KEY"]
+    api_key=os.environ["VOYAGE_API_KEY"]
 )
 
 embeddings = driver.embed_string("Hello world!")

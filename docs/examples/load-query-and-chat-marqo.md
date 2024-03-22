@@ -1,4 +1,4 @@
-```python
+```python title="PYTEST_IGNORE"
 import os
 from griptape import utils
 from griptape.drivers import MarqoVectorStoreDriver

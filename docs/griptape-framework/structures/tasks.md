@@ -641,6 +641,7 @@ from griptape.structures import Pipeline
 
 # Create a driver configured to use OpenAI's GPT-4 Vision model.
 driver = OpenAiVisionImageQueryDriver(
+    model="gpt-4-1106-preview",
     max_tokens=100,
 )
 

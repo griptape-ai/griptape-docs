@@ -7,11 +7,12 @@ from griptape.drivers import OpenAiVisionImageQueryDriver
 from griptape.engines import ImageQueryEngine
 from griptape.loaders import ImageLoader
 
-driver = OpenAiVisionImageQueryDriver()
+driver = OpenAiVisionImageQueryDriver(
+    max_tokens=100
+)
 
 engine = ImageQueryEngine(
     image_query_driver=driver,
-    max_tokens=100
 )
 
 with open("tests/assets/mountain.png", "rb") as f:

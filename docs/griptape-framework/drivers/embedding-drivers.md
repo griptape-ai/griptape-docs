@@ -116,9 +116,6 @@ import os
 from griptape.drivers import AmazonSageMakerEmbeddingDriver, SageMakerHuggingFaceEmbeddingModelDriver
 
 driver = AmazonSageMakerEmbeddingDriver(
-    model=os.environ["SAGEMAKER_HUGGINGFACE_MODEL"],
-    embedding_model_driver=SageMakerHuggingFaceEmbeddingModelDriver(),
-)
 
 embeddings = driver.embed_string("Hello world!")
 

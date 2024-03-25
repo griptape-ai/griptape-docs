@@ -48,7 +48,7 @@ agent = Agent(
 
 #### Anthropic
 
-The [Anthropic Structure Config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.AnthropicStructureConfig) provides default Drivers for Anthropic's APIs.
+The [Anthropic Structure Config](../../reference/griptape/config/anthropic_structure_config.md) provides default Drivers for Anthropic's APIs.
 
 !!! info
     Anthropic does not provide an embeddings API which means you will need to use another service for embeddings.

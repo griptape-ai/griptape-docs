@@ -8,7 +8,7 @@ Griptape provides predefined [StructureConfig](../../reference/griptape/config/s
 
 #### OpenAI
 
-The [OpenAI Structure Config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.OpenStructureAIConfig) provides default Drivers for OpenAI's APIs. This is the default config for all Structures.
+The [OpenAI Structure Config](../../reference/griptape/config/openai_structure_config.md) provides default Drivers for OpenAI's APIs. This is the default config for all Structures.
 
 
 ```python
@@ -23,7 +23,7 @@ agent = Agent() # This is equivalent to the above
 ```
 
 #### Amazon Bedrock
-The [Amazon Bedrock Structure Config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.AmazonBedrockStructureConfig) provides default Drivers for Amazon Bedrock's APIs.
+The [Amazon Bedrock Structure Config](../../reference/griptape/config/amazon_bedrock_structure_config.md) provides default Drivers for Amazon Bedrock's APIs.
 
 ```python
 from griptape.structures import Agent
@@ -31,6 +31,18 @@ from griptape.config import AmazonBedrockStructureConfig
 
 agent = Agent(
     config=AmazonBedrockStructureConfig()
+)
+```
+
+#### Google
+The [Google Structure Config](../../reference/griptape/config/google_structure_config.md) provides default Drivers for Google's Gemini APIs.
+
+```python
+from griptape.structures import Agent
+from griptape.config import GoogleStructureConfig
+
+agent = Agent(
+    config=GoogleStructureConfig()
 )
 ```
 

@@ -51,6 +51,24 @@ print(embeddings[:3])
 [-0.234375, -0.024902344, -0.14941406]
 ```
 
+### Google Embeddings
+!!! info
+    This driver requires the `drivers-embedding-google` [extra](../index.md#extras).
+
+The [GoogleEmbeddingDriver](../../reference/griptape/drivers/embedding/google_embedding_driver.md) uses the [Google Embeddings API](https://ai.google.dev/tutorials/python_quickstart#use_embeddings).
+
+```python
+from griptape.drivers import GoogleEmbeddingDriver
+
+embeddings = GoogleEmbeddingDriver().embed_string("Hello world!")
+
+# display the first 3 embeddings
+print(embeddings[:3])
+```
+```
+[0.0588633, 0.0033929371, -0.072810836]
+```
+
 ### Hugging Face Hub Embeddings
 
 !!! info

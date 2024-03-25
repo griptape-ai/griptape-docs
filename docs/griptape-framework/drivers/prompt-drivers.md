@@ -219,6 +219,33 @@ agent = Agent(
 agent.run('Where is the best place to see cherry blossums in Japan?')
 ```
 
+### Google
+
+!!! info
+    This driver requires the `drivers-prompt-google` [extra](../index.md#extras).
+
+The [GooglePromptDriver](../../reference/griptape/drivers/prompt/google_prompt_driver.md) connects to the [Google Generative AI](https://ai.google.dev/tutorials/python_quickstart#generate_text_from_text_inputs) API.
+
+```python
+import os
+from griptape.structures import Agent
+from griptape.drivers import GooglePromptDriver
+from griptape.config import StructureConfig, StructureGlobalDriversConfig
+
+agent = Agent(
+    config=StructureConfig(
+        global_drivers=StructureGlobalDriversConfig(
+            prompt_driver=GooglePromptDriver(
+                model="gemini-pro",
+                api_key=os.environ['GOOGLE_API_KEY'],
+            )
+        )
+    )
+)
+
+agent.run('Briefly explain how a computer works to a young child.')
+```
+
 ### Hugging Face Hub
 
 !!! info

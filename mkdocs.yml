@@ -101,6 +101,7 @@ nav:
           - Image Generation Drivers: "griptape-framework/drivers/image-generation-drivers.md"
           - SQL Drivers: "griptape-framework/drivers/sql-drivers.md"
           - Image Query Drivers: "griptape-framework/drivers/image-query-drivers.md"
+          - Web Scraper Drivers: "griptape-framework/drivers/web-scraper-drivers.md"
       - Data:
           - Overview: "griptape-framework/data/index.md"
           - Artifacts: "griptape-framework/data/artifacts.md"

@@ -197,7 +197,7 @@ agent.run('What is the sentiment of this review? Review: "I really enjoyed this 
 !!! info
     This driver requires the `drivers-prompt-anthropic` [extra](../index.md#extras).
 
-The [AnthropicPromptDriver](../../reference/griptape/drivers/prompt/anthropic_prompt_driver.md) connects to the Anthropic [Completions](https://docs.anthropic.com/claude/reference/complete_post) API.
+The [AnthropicPromptDriver](../../reference/griptape/drivers/prompt/anthropic_prompt_driver.md) connects to the Anthropic [Messages](https://docs.anthropic.com/claude/reference/messages_post) API.
 
 ```python
 import os
@@ -209,7 +209,7 @@ agent = Agent(
     config=StructureConfig(
         global_drivers=StructureGlobalDriversConfig(
             prompt_driver=AnthropicPromptDriver(
-                model="claude-2",
+                model="claude-3-opus-20240229",
                 api_key=os.environ['ANTHROPIC_API_KEY'],
             )
         )
@@ -521,7 +521,7 @@ agent = Agent(
     config=StructureConfig(
         global_drivers=StructureGlobalDriversConfig(
             prompt_driver=AmazonBedrockPromptDriver(
-                model="anthropic.claude-v2",
+                model="anthropic.claude-3-sonnet-20240229-v1:0",
                 prompt_model_driver=BedrockClaudePromptModelDriver(
                     top_p=1,
                 ),

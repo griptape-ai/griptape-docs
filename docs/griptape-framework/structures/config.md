@@ -46,6 +46,25 @@ agent = Agent(
 )
 ```
 
+#### Anthropic
+
+The [Anthropic Structure Config](../../reference/griptape/config/anthropic_structure_config.md) provides default Drivers for Anthropic's APIs.
+
+!!! info
+    Anthropic does not provide an embeddings API which means you will need to use another service for embeddings.
+    The `AnthropicStructureConfig` defaults to using `VoyageAiEmbeddingDriver` which integrates with [VoyageAI](https://www.voyageai.com/), the service used in Anthropic's [embeddings documentation](https://docs.anthropic.com/claude/docs/embeddings).
+    To override the default embedding driver, see: [Override Default Structure Embedding Driver](../drivers/embedding-drivers.md#override-default-structure-embedding-driver).
+
+
+```python
+from griptape.structures import Agent
+from griptape.config import AnthropicStructureConfig
+
+agent = Agent(
+    config=AnthropicStructureConfig()
+)
+```
+
 ### Custom Configs
 
 You can create your own [StructureConfig](../../reference/griptape/config/structure_config.md) by overriding the Drivers in [default_config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.StructureConfig.default_config).
@@ -62,7 +81,7 @@ agent = Agent(
     config=StructureConfig(
         global_drivers=StructureGlobalDriversConfig(
             prompt_driver=AnthropicPromptDriver(
-                model="claude-2",
+                model="claude-3-sonnet-20240229",
                 api_key=os.environ["ANTHROPIC_API_KEY"],
             )
         )

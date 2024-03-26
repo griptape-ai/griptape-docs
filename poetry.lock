@@ -209,6 +209,56 @@ tests-mypy = ["mypy (>=1.6)", "pytest-mypy-plugins"]
 tests-no-zope = ["attrs[tests-mypy]", "cloudpickle", "hypothesis", "pympler", "pytest (>=4.3.0)", "pytest-xdist[psutil]"]
 
 [[package]]
+name = "azure-common"
+version = "1.1.28"
+description = "Microsoft Azure Client Library for Python (Common)"
+optional = false
+python-versions = "*"
+files = [
+    {file = "azure-common-1.1.28.zip", hash = "sha256:4ac0cd3214e36b6a1b6a442686722a5d8cc449603aa833f3f0f40bda836704a3"},
+    {file = "azure_common-1.1.28-py2.py3-none-any.whl", hash = "sha256:5c12d3dcf4ec20599ca6b0d3e09e86e146353d443e7fcc050c9a19c1f9df20ad"},
+]
+
+[[package]]
+name = "azure-core"
+version = "1.30.1"
+description = "Microsoft Azure Core Library for Python"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "azure-core-1.30.1.tar.gz", hash = "sha256:26273a254131f84269e8ea4464f3560c731f29c0c1f69ac99010845f239c1a8f"},
+    {file = "azure_core-1.30.1-py3-none-any.whl", hash = "sha256:7c5ee397e48f281ec4dd773d67a0a47a0962ed6fa833036057f9ea067f688e74"},
+]
+
+[package.dependencies]
+requests = ">=2.21.0"
+six = ">=1.11.0"
+typing-extensions = ">=4.6.0"
+
+[package.extras]
+aio = ["aiohttp (>=3.0)"]
+
+[[package]]
+name = "azure-storage-blob"
+version = "12.19.1"
+description = "Microsoft Azure Blob Storage Client Library for Python"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "azure-storage-blob-12.19.1.tar.gz", hash = "sha256:13e16ba42fc54ac2c7e8f976062173a5c82b9ec0594728e134aac372965a11b0"},
+    {file = "azure_storage_blob-12.19.1-py3-none-any.whl", hash = "sha256:c5530dc51c21c9564e4eb706cd499befca8819b10dd89716d3fc90d747556243"},
+]
+
+[package.dependencies]
+azure-core = ">=1.28.0,<2.0.0"
+cryptography = ">=2.1.4"
+isodate = ">=0.6.1"
+typing-extensions = ">=4.3.0"
+
+[package.extras]
+aio = ["azure-core[aio] (>=1.28.0,<2.0.0)"]
+
+[[package]]
 name = "babel"
 version = "2.14.0"
 description = "Internationalization utilities"
@@ -245,17 +295,17 @@ lxml = ["lxml"]
 
 [[package]]
 name = "boto3"
-version = "1.34.69"
+version = "1.34.70"
 description = "The AWS SDK for Python"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "boto3-1.34.69-py3-none-any.whl", hash = "sha256:2e25ef6bd325217c2da329829478be063155897d8d3b29f31f7f23ab548519b1"},
-    {file = "boto3-1.34.69.tar.gz", hash = "sha256:898a5fed26b1351352703421d1a8b886ef2a74be6c97d5ecc92432ae01fda203"},
+    {file = "boto3-1.34.70-py3-none-any.whl", hash = "sha256:8d7902e2c0c62837457ba18146e3feaf1dec62018617edc5c0336b65b305b682"},
+    {file = "boto3-1.34.70.tar.gz", hash = "sha256:54150a52eb93028b8e09df00319e8dcb68be7459333d5da00d706d75ba5130d6"},
 ]
 
 [package.dependencies]
-botocore = ">=1.34.69,<1.35.0"
+botocore = ">=1.34.70,<1.35.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.10.0,<0.11.0"
 
@@ -264,13 +314,13 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "boto3-stubs"
-version = "1.34.69"
-description = "Type annotations for boto3 1.34.69 generated with mypy-boto3-builder 7.23.2"
+version = "1.34.70"
+description = "Type annotations for boto3 1.34.70 generated with mypy-boto3-builder 7.23.2"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "boto3-stubs-1.34.69.tar.gz", hash = "sha256:93fb4f8640cd01a70e9d3c94395c67fb6197f5e6623d2f39f18357b5b9adbdfc"},
-    {file = "boto3_stubs-1.34.69-py3-none-any.whl", hash = "sha256:804984bfdc3651762894b961892db9d455b1da6d92c904b14d9dd0f3bf8d06be"},
+    {file = "boto3-stubs-1.34.70.tar.gz", hash = "sha256:5a517854d01e1ca5d8117ecd60fd04870f6eb91008fad675dd6aff3629f317b5"},
+    {file = "boto3_stubs-1.34.70-py3-none-any.whl", hash = "sha256:ac2b86655ed52d837542784866f68b8cbcfdd6483adbac0e2ec102f08b4911b2"},
 ]
 
 [package.dependencies]
@@ -326,7 +376,7 @@ bedrock-agent = ["mypy-boto3-bedrock-agent (>=1.34.0,<1.35.0)"]
 bedrock-agent-runtime = ["mypy-boto3-bedrock-agent-runtime (>=1.34.0,<1.35.0)"]
 bedrock-runtime = ["mypy-boto3-bedrock-runtime (>=1.34.0,<1.35.0)"]
 billingconductor = ["mypy-boto3-billingconductor (>=1.34.0,<1.35.0)"]
-boto3 = ["boto3 (==1.34.69)", "botocore (==1.34.69)"]
+boto3 = ["boto3 (==1.34.70)", "botocore (==1.34.70)"]
 braket = ["mypy-boto3-braket (>=1.34.0,<1.35.0)"]
 budgets = ["mypy-boto3-budgets (>=1.34.0,<1.35.0)"]
 ce = ["mypy-boto3-ce (>=1.34.0,<1.35.0)"]
@@ -669,13 +719,13 @@ xray = ["mypy-boto3-xray (>=1.34.0,<1.35.0)"]
 
 [[package]]
 name = "botocore"
-version = "1.34.69"
+version = "1.34.70"
 description = "Low-level, data-driven core of boto 3."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "botocore-1.34.69-py3-none-any.whl", hash = "sha256:d3802d076d4d507bf506f9845a6970ce43adc3d819dd57c2791f5c19ed6e5950"},
-    {file = "botocore-1.34.69.tar.gz", hash = "sha256:d1ab2bff3c2fd51719c2021d9fa2f30fbb9ed0a308f69e9a774ac92c8091380a"},
+    {file = "botocore-1.34.70-py3-none-any.whl", hash = "sha256:c86944114e85c8a8d5da06fb84f2609ed3bd23cd2fc06b30250bef7e37e8c589"},
+    {file = "botocore-1.34.70.tar.gz", hash = "sha256:fa03d4972cd57d505e6c0eb5d7c7a1caeb7dd49e84f963f7ebeca41fe8ab736e"},
 ]
 
 [package.dependencies]
@@ -691,13 +741,13 @@ crt = ["awscrt (==0.19.19)"]
 
 [[package]]
 name = "botocore-stubs"
-version = "1.34.68"
+version = "1.34.69"
 description = "Type annotations and code completion for botocore"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "botocore_stubs-1.34.68-py3-none-any.whl", hash = "sha256:8a1366ab41b49c1ce0445e1dec813f24c699ecd37a935d7b2bf3aaa72cf52883"},
-    {file = "botocore_stubs-1.34.68.tar.gz", hash = "sha256:f631c5b64a720bb586f95ba05704c10bb2f928296882b644cfa294fb35b50dd6"},
+    {file = "botocore_stubs-1.34.69-py3-none-any.whl", hash = "sha256:0c3835c775db1387246c1ba8063b197604462fba8603d9b36b5dc60297197b2f"},
+    {file = "botocore_stubs-1.34.69.tar.gz", hash = "sha256:463248fd1d6e7b68a0c57bdd758d04c6bd0c5c2c3bfa81afdf9d64f0930b59bc"},
 ]
 
 [package.dependencies]
@@ -791,6 +841,17 @@ files = [
 
 [package.dependencies]
 pycparser = "*"
+
+[[package]]
+name = "chardet"
+version = "4.0.0"
+description = "Universal encoding detector for Python 2 and 3"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+files = [
+    {file = "chardet-4.0.0-py2.py3-none-any.whl", hash = "sha256:f864054d66fd9118f2e67044ac8981a54775ec5b67aed0441892edb553d21da5"},
+    {file = "chardet-4.0.0.tar.gz", hash = "sha256:0d6f53a15db4120f2b08c94f11e7d93d2c911ee118b6b30a04ec3ee8310179fa"},
+]
 
 [[package]]
 name = "charset-normalizer"
@@ -907,13 +968,13 @@ colorama = {version = "*", markers = "platform_system == \"Windows\""}
 
 [[package]]
 name = "cohere"
-version = "5.1.1"
+version = "5.1.2"
 description = ""
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "cohere-5.1.1-py3-none-any.whl", hash = "sha256:b04b52cf84e08c344d9fefc5d86900646fe10690896e21c4778a528bb59b48fb"},
-    {file = "cohere-5.1.1.tar.gz", hash = "sha256:a4d908662ca3dd2edb5d5e701877c803a5c93669ded9c2287c4659de88f06cc1"},
+    {file = "cohere-5.1.2-py3-none-any.whl", hash = "sha256:7782e32cba671fc04203c3b56a9ce1b70e9459d7c983e8576b04d394fbe809f5"},
+    {file = "cohere-5.1.2.tar.gz", hash = "sha256:21af5ed6edcf939062c41240040316084cd7e753cf3207f661f68abb4bbbe846"},
 ]
 
 [package.dependencies]
@@ -958,6 +1019,45 @@ files = [
 langcodes = ">=3.3.0"
 tld = {version = ">=0.13", markers = "python_version >= \"3.7\""}
 urllib3 = {version = ">=1.26,<3", markers = "python_version >= \"3.7\""}
+
+[[package]]
+name = "cryptography"
+version = "3.4.8"
+description = "cryptography is a package which provides cryptographic recipes and primitives to Python developers."
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "cryptography-3.4.8-cp36-abi3-macosx_10_10_x86_64.whl", hash = "sha256:a00cf305f07b26c351d8d4e1af84ad7501eca8a342dedf24a7acb0e7b7406e14"},
+    {file = "cryptography-3.4.8-cp36-abi3-macosx_11_0_arm64.whl", hash = "sha256:f44d141b8c4ea5eb4dbc9b3ad992d45580c1d22bf5e24363f2fbf50c2d7ae8a7"},
+    {file = "cryptography-3.4.8-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:0a7dcbcd3f1913f664aca35d47c1331fce738d44ec34b7be8b9d332151b0b01e"},
+    {file = "cryptography-3.4.8-cp36-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:34dae04a0dce5730d8eb7894eab617d8a70d0c97da76b905de9efb7128ad7085"},
+    {file = "cryptography-3.4.8-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1eb7bb0df6f6f583dd8e054689def236255161ebbcf62b226454ab9ec663746b"},
+    {file = "cryptography-3.4.8-cp36-abi3-manylinux_2_24_x86_64.whl", hash = "sha256:9965c46c674ba8cc572bc09a03f4c649292ee73e1b683adb1ce81e82e9a6a0fb"},
+    {file = "cryptography-3.4.8-cp36-abi3-musllinux_1_1_aarch64.whl", hash = "sha256:3c4129fc3fdc0fa8e40861b5ac0c673315b3c902bbdc05fc176764815b43dd1d"},
+    {file = "cryptography-3.4.8-cp36-abi3-musllinux_1_1_x86_64.whl", hash = "sha256:695104a9223a7239d155d7627ad912953b540929ef97ae0c34c7b8bf30857e89"},
+    {file = "cryptography-3.4.8-cp36-abi3-win32.whl", hash = "sha256:21ca464b3a4b8d8e86ba0ee5045e103a1fcfac3b39319727bc0fc58c09c6aff7"},
+    {file = "cryptography-3.4.8-cp36-abi3-win_amd64.whl", hash = "sha256:3520667fda779eb788ea00080124875be18f2d8f0848ec00733c0ec3bb8219fc"},
+    {file = "cryptography-3.4.8-pp36-pypy36_pp73-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:d2a6e5ef66503da51d2110edf6c403dc6b494cc0082f85db12f54e9c5d4c3ec5"},
+    {file = "cryptography-3.4.8-pp36-pypy36_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a305600e7a6b7b855cd798e00278161b681ad6e9b7eca94c721d5f588ab212af"},
+    {file = "cryptography-3.4.8-pp36-pypy36_pp73-manylinux_2_24_x86_64.whl", hash = "sha256:3fa3a7ccf96e826affdf1a0a9432be74dc73423125c8f96a909e3835a5ef194a"},
+    {file = "cryptography-3.4.8-pp37-pypy37_pp73-macosx_10_10_x86_64.whl", hash = "sha256:d9ec0e67a14f9d1d48dd87a2531009a9b251c02ea42851c060b25c782516ff06"},
+    {file = "cryptography-3.4.8-pp37-pypy37_pp73-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:5b0fbfae7ff7febdb74b574055c7466da334a5371f253732d7e2e7525d570498"},
+    {file = "cryptography-3.4.8-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:94fff993ee9bc1b2440d3b7243d488c6a3d9724cc2b09cdb297f6a886d040ef7"},
+    {file = "cryptography-3.4.8-pp37-pypy37_pp73-manylinux_2_24_x86_64.whl", hash = "sha256:8695456444f277af73a4877db9fc979849cd3ee74c198d04fc0776ebc3db52b9"},
+    {file = "cryptography-3.4.8-pp37-pypy37_pp73-win_amd64.whl", hash = "sha256:cd65b60cfe004790c795cc35f272e41a3df4631e2fb6b35aa7ac6ef2859d554e"},
+    {file = "cryptography-3.4.8.tar.gz", hash = "sha256:94cc5ed4ceaefcbe5bf38c8fba6a21fc1d365bb8fb826ea1688e3370b2e24a1c"},
+]
+
+[package.dependencies]
+cffi = ">=1.12"
+
+[package.extras]
+docs = ["sphinx (>=1.6.5,!=1.8.0,!=3.1.0,!=3.1.1)", "sphinx-rtd-theme"]
+docstest = ["doc8", "pyenchant (>=1.6.11)", "sphinxcontrib-spelling (>=4.0.1)", "twine (>=1.12.0)"]
+pep8test = ["black", "flake8", "flake8-import-order", "pep8-naming"]
+sdist = ["setuptools-rust (>=0.11.4)"]
+ssh = ["bcrypt (>=3.1.5)"]
+test = ["hypothesis (>=1.11.4,!=3.79.2)", "iso8601", "pretend", "pytest (>=6.0)", "pytest-cov", "pytest-subtests", "pytest-xdist", "pytz"]
 
 [[package]]
 name = "cryptography"
@@ -1090,18 +1190,18 @@ test = ["pytest (>=6)"]
 
 [[package]]
 name = "filelock"
-version = "3.13.1"
+version = "3.13.3"
 description = "A platform independent file lock."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "filelock-3.13.1-py3-none-any.whl", hash = "sha256:57dbda9b35157b05fb3e58ee91448612eb674172fab98ee235ccb0b5bee19a1c"},
-    {file = "filelock-3.13.1.tar.gz", hash = "sha256:521f5f56c50f8426f5e03ad3b281b490a87ef15bc6c526f168290f0c7148d44e"},
+    {file = "filelock-3.13.3-py3-none-any.whl", hash = "sha256:5ffa845303983e7a0b7ae17636509bc97997d58afeafa72fb141a17b152284cb"},
+    {file = "filelock-3.13.3.tar.gz", hash = "sha256:a79895a25bbefdf55d1a2a0a80968f7dbb28edcd6d4234a0afb3f37ecde4b546"},
 ]
 
 [package.extras]
-docs = ["furo (>=2023.9.10)", "sphinx (>=7.2.6)", "sphinx-autodoc-typehints (>=1.24)"]
-testing = ["covdefaults (>=2.3)", "coverage (>=7.3.2)", "diff-cover (>=8)", "pytest (>=7.4.3)", "pytest-cov (>=4.1)", "pytest-mock (>=3.12)", "pytest-timeout (>=2.2)"]
+docs = ["furo (>=2023.9.10)", "sphinx (>=7.2.6)", "sphinx-autodoc-typehints (>=1.25.2)"]
+testing = ["covdefaults (>=2.3)", "coverage (>=7.3.2)", "diff-cover (>=8.0.1)", "pytest (>=7.4.3)", "pytest-cov (>=4.1)", "pytest-mock (>=3.12)", "pytest-timeout (>=2.2)"]
 typing = ["typing-extensions (>=4.8)"]
 
 [[package]]
@@ -1687,13 +1787,13 @@ socks = ["socksio (==1.*)"]
 
 [[package]]
 name = "huggingface-hub"
-version = "0.21.4"
+version = "0.22.0"
 description = "Client library to download and publish models, datasets and other repos on the huggingface.co hub"
 optional = false
 python-versions = ">=3.8.0"
 files = [
-    {file = "huggingface_hub-0.21.4-py3-none-any.whl", hash = "sha256:df37c2c37fc6c82163cdd8a67ede261687d80d1e262526d6c0ce73b6b3630a7b"},
-    {file = "huggingface_hub-0.21.4.tar.gz", hash = "sha256:e1f4968c93726565a80edf6dc309763c7b546d0cfe79aa221206034d50155531"},
+    {file = "huggingface_hub-0.22.0-py3-none-any.whl", hash = "sha256:72dea96299751699180184c06a4689e54cbfacecb1a3d08ac7a269c884bb17c3"},
+    {file = "huggingface_hub-0.22.0.tar.gz", hash = "sha256:304f1e235c68c0a9f58bced47f13d6df241a5b4e3678f4981aa1e4f4bce63f6d"},
 ]
 
 [package.dependencies]
@@ -1706,15 +1806,16 @@ tqdm = ">=4.42.1"
 typing-extensions = ">=3.7.4.3"
 
 [package.extras]
-all = ["InquirerPy (==0.3.4)", "Jinja2", "Pillow", "aiohttp", "gradio", "jedi", "mypy (==1.5.1)", "numpy", "pydantic (>1.1,<2.0)", "pydantic (>1.1,<3.0)", "pytest", "pytest-asyncio", "pytest-cov", "pytest-env", "pytest-rerunfailures", "pytest-vcr", "pytest-xdist", "ruff (>=0.1.3)", "soundfile", "types-PyYAML", "types-requests", "types-simplejson", "types-toml", "types-tqdm", "types-urllib3", "typing-extensions (>=4.8.0)", "urllib3 (<2.0)"]
+all = ["InquirerPy (==0.3.4)", "Jinja2", "Pillow", "aiohttp", "gradio", "jedi", "minijinja (>=1.0)", "mypy (==1.5.1)", "numpy", "pytest", "pytest-asyncio", "pytest-cov", "pytest-env", "pytest-rerunfailures", "pytest-vcr", "pytest-xdist", "ruff (>=0.3.0)", "soundfile", "types-PyYAML", "types-requests", "types-simplejson", "types-toml", "types-tqdm", "types-urllib3", "typing-extensions (>=4.8.0)", "urllib3 (<2.0)"]
 cli = ["InquirerPy (==0.3.4)"]
-dev = ["InquirerPy (==0.3.4)", "Jinja2", "Pillow", "aiohttp", "gradio", "jedi", "mypy (==1.5.1)", "numpy", "pydantic (>1.1,<2.0)", "pydantic (>1.1,<3.0)", "pytest", "pytest-asyncio", "pytest-cov", "pytest-env", "pytest-rerunfailures", "pytest-vcr", "pytest-xdist", "ruff (>=0.1.3)", "soundfile", "types-PyYAML", "types-requests", "types-simplejson", "types-toml", "types-tqdm", "types-urllib3", "typing-extensions (>=4.8.0)", "urllib3 (<2.0)"]
+dev = ["InquirerPy (==0.3.4)", "Jinja2", "Pillow", "aiohttp", "gradio", "jedi", "minijinja (>=1.0)", "mypy (==1.5.1)", "numpy", "pytest", "pytest-asyncio", "pytest-cov", "pytest-env", "pytest-rerunfailures", "pytest-vcr", "pytest-xdist", "ruff (>=0.3.0)", "soundfile", "types-PyYAML", "types-requests", "types-simplejson", "types-toml", "types-tqdm", "types-urllib3", "typing-extensions (>=4.8.0)", "urllib3 (<2.0)"]
 fastai = ["fastai (>=2.4)", "fastcore (>=1.3.27)", "toml"]
 hf-transfer = ["hf-transfer (>=0.1.4)"]
-inference = ["aiohttp", "pydantic (>1.1,<2.0)", "pydantic (>1.1,<3.0)"]
-quality = ["mypy (==1.5.1)", "ruff (>=0.1.3)"]
+inference = ["aiohttp", "minijinja (>=1.0)"]
+quality = ["mypy (==1.5.1)", "ruff (>=0.3.0)"]
 tensorflow = ["graphviz", "pydot", "tensorflow"]
-testing = ["InquirerPy (==0.3.4)", "Jinja2", "Pillow", "aiohttp", "gradio", "jedi", "numpy", "pydantic (>1.1,<2.0)", "pydantic (>1.1,<3.0)", "pytest", "pytest-asyncio", "pytest-cov", "pytest-env", "pytest-rerunfailures", "pytest-vcr", "pytest-xdist", "soundfile", "urllib3 (<2.0)"]
+tensorflow-testing = ["keras (<3.0)", "tensorflow"]
+testing = ["InquirerPy (==0.3.4)", "Jinja2", "Pillow", "aiohttp", "gradio", "jedi", "minijinja (>=1.0)", "numpy", "pytest", "pytest-asyncio", "pytest-cov", "pytest-env", "pytest-rerunfailures", "pytest-vcr", "pytest-xdist", "soundfile", "urllib3 (<2.0)"]
 torch = ["safetensors", "torch"]
 typing = ["types-PyYAML", "types-requests", "types-simplejson", "types-toml", "types-tqdm", "types-urllib3", "typing-extensions (>=4.8.0)"]
 
@@ -1758,6 +1859,20 @@ files = [
     {file = "iniconfig-2.0.0-py3-none-any.whl", hash = "sha256:b6a85871a79d2e3b22d2d1b94ac2824226a63c6b741c88f7ae975f18b6778374"},
     {file = "iniconfig-2.0.0.tar.gz", hash = "sha256:2d91e135bf72d31a410b17c16da610a82cb55f6b0477d1a902134b24a455b8b3"},
 ]
+
+[[package]]
+name = "isodate"
+version = "0.6.1"
+description = "An ISO 8601 date/time/duration parser and formatter"
+optional = false
+python-versions = "*"
+files = [
+    {file = "isodate-0.6.1-py2.py3-none-any.whl", hash = "sha256:0751eece944162659049d35f4f549ed815792b38793f07cf73381c1c87cbed96"},
+    {file = "isodate-0.6.1.tar.gz", hash = "sha256:48c5881de7e8b0a0d648cb024c8062dc84e7b840ed81e864c7614fd3c127bde9"},
+]
+
+[package.dependencies]
+six = "*"
 
 [[package]]
 name = "jinja2"
@@ -2104,6 +2219,24 @@ files = [
 
 [[package]]
 name = "marqo"
+version = "2.1.0"
+description = "Tensor search for humans"
+optional = false
+python-versions = ">=3"
+files = [
+    {file = "marqo-2.1.0-py3-none-any.whl", hash = "sha256:9e72fab00dd48ff4c0cf085114b532f23843d2354870f24b6b57b0e83678b0ea"},
+    {file = "marqo-2.1.0.tar.gz", hash = "sha256:a400013c27d5439026cf909d60fe893a152174627e31fcd0b4de9b32fa278cfe"},
+]
+
+[package.dependencies]
+packaging = "*"
+pydantic = "<2.0.0"
+requests = "*"
+typing-extensions = ">=4.5.0"
+urllib3 = "*"
+
+[[package]]
+name = "marqo"
 version = "3.2.0"
 description = "Tensor search for humans"
 optional = false
@@ -2263,13 +2396,13 @@ mkdocs = ">=1.0.3"
 
 [[package]]
 name = "mkdocs-material"
-version = "9.5.14"
+version = "9.5.15"
 description = "Documentation that simply works"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "mkdocs_material-9.5.14-py3-none-any.whl", hash = "sha256:a45244ac221fda46ecf8337f00ec0e5cb5348ab9ffb203ca2a0c313b0d4dbc27"},
-    {file = "mkdocs_material-9.5.14.tar.gz", hash = "sha256:2a1f8e67cda2587ab93ecea9ba42d0ca61d1d7b5fad8cf690eeaeb39dcd4b9af"},
+    {file = "mkdocs_material-9.5.15-py3-none-any.whl", hash = "sha256:e5c96dec3d19491de49ca643fc1dbb92b278e43cdb816c775bc47db77d9b62fb"},
+    {file = "mkdocs_material-9.5.15.tar.gz", hash = "sha256:39f03cca45e82bf54eb7456b5a18bd252eabfdd67f237a229471484a0a4d4635"},
 ]
 
 [package.dependencies]
@@ -2514,13 +2647,13 @@ typing-extensions = {version = ">=4.1.0", markers = "python_version < \"3.12\""}
 
 [[package]]
 name = "mypy-boto3-sagemaker"
-version = "1.34.64"
-description = "Type annotations for boto3.SageMaker 1.34.64 service generated with mypy-boto3-builder 7.23.2"
+version = "1.34.70"
+description = "Type annotations for boto3.SageMaker 1.34.70 service generated with mypy-boto3-builder 7.23.2"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "mypy-boto3-sagemaker-1.34.64.tar.gz", hash = "sha256:49fd53d5aa913081199ae036287e6dcee8530cdf327c5203ffe8740c25b1c2cd"},
-    {file = "mypy_boto3_sagemaker-1.34.64-py3-none-any.whl", hash = "sha256:cacf9e4489a0d47a8052968bd7906f835079d39b00dadf8711718557b1872c26"},
+    {file = "mypy-boto3-sagemaker-1.34.70.tar.gz", hash = "sha256:58e3768f4650f71deaab598e3b332f4fc8c94ae262a431c3a78231b01f3c1828"},
+    {file = "mypy_boto3_sagemaker-1.34.70-py3-none-any.whl", hash = "sha256:33415a9bfb51e42ed8ed37c5bf481faee12603dec76a6a5edb6bf2425baf9b1e"},
 ]
 
 [package.dependencies]
@@ -2573,13 +2706,13 @@ files = [
 
 [[package]]
 name = "openai"
-version = "1.14.2"
+version = "1.14.3"
 description = "The official Python library for the openai API"
 optional = false
 python-versions = ">=3.7.1"
 files = [
-    {file = "openai-1.14.2-py3-none-any.whl", hash = "sha256:a48b3c4d635b603952189ac5a0c0c9b06c025b80eb2900396939f02bb2104ac3"},
-    {file = "openai-1.14.2.tar.gz", hash = "sha256:e5642f7c02cf21994b08477d7bb2c1e46d8f335d72c26f0396c5f89b15b5b153"},
+    {file = "openai-1.14.3-py3-none-any.whl", hash = "sha256:7a465994a7ccf677a110c6cc2ef9d86229bad42c060b585b67049aa749f3b774"},
+    {file = "openai-1.14.3.tar.gz", hash = "sha256:37b514e9c0ff45383ec9b242abd0f7859b1080d4b54b61393ed341ecad1b8eb9"},
 ]
 
 [package.dependencies]
@@ -2611,6 +2744,30 @@ python-dateutil = "*"
 requests = ">=2.4.0,<3.0.0"
 six = "*"
 urllib3 = ">=1.26.18"
+
+[package.extras]
+async = ["aiohttp (>=3,<4)"]
+develop = ["black", "botocore", "coverage (<8.0.0)", "jinja2", "mock", "myst-parser", "pytest (>=3.0.0)", "pytest-cov", "pytest-mock (<4.0.0)", "pytz", "pyyaml", "requests (>=2.0.0,<3.0.0)", "sphinx", "sphinx-copybutton", "sphinx-rtd-theme"]
+docs = ["aiohttp (>=3,<4)", "myst-parser", "sphinx", "sphinx-copybutton", "sphinx-rtd-theme"]
+kerberos = ["requests-kerberos"]
+
+[[package]]
+name = "opensearch-py"
+version = "2.5.0"
+description = "Python client for OpenSearch"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,<4,>=2.7"
+files = [
+    {file = "opensearch-py-2.5.0.tar.gz", hash = "sha256:0dde4ac7158a717d92a8cd81964cb99705a4b80bcf9258ba195b9a9f23f5226d"},
+    {file = "opensearch_py-2.5.0-py2.py3-none-any.whl", hash = "sha256:cf093a40e272b60663f20417fc1264ac724dcf1e03c1a4542a6b44835b1e6c49"},
+]
+
+[package.dependencies]
+certifi = ">=2022.12.07"
+python-dateutil = "*"
+requests = ">=2.4.0,<3.0.0"
+six = "*"
+urllib3 = ">=1.26.18,<2"
 
 [package.extras]
 async = ["aiohttp (>=3,<4)"]
@@ -3303,6 +3460,25 @@ zstd = ["zstandard"]
 
 [[package]]
 name = "pyopenssl"
+version = "20.0.1"
+description = "Python wrapper module around the OpenSSL library"
+optional = false
+python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*"
+files = [
+    {file = "pyOpenSSL-20.0.1-py2.py3-none-any.whl", hash = "sha256:818ae18e06922c066f777a33f1fca45786d85edfe71cd043de6379337a7f274b"},
+    {file = "pyOpenSSL-20.0.1.tar.gz", hash = "sha256:4c231c759543ba02560fcd2480c48dcec4dae34c9da7d3747c508227e0624b51"},
+]
+
+[package.dependencies]
+cryptography = ">=3.2"
+six = ">=1.5.2"
+
+[package.extras]
+docs = ["sphinx", "sphinx-rtd-theme"]
+test = ["flaky", "pretend", "pytest (>=3.0.1)"]
+
+[[package]]
+name = "pyopenssl"
 version = "23.2.0"
 description = "Python wrapper module around the OpenSSL library"
 optional = false
@@ -3943,6 +4119,22 @@ files = [
 contextlib2 = ">=0.5.5"
 
 [[package]]
+name = "setuptools"
+version = "69.2.0"
+description = "Easily download, build, install, upgrade, and uninstall Python packages"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "setuptools-69.2.0-py3-none-any.whl", hash = "sha256:c21c49fb1042386df081cb5d86759792ab89efca84cf114889191cd09aacc80c"},
+    {file = "setuptools-69.2.0.tar.gz", hash = "sha256:0ff4183f8f42cd8fa3acea16c45205521a4ef28f73c6391d8a25e92893134f2e"},
+]
+
+[package.extras]
+docs = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "pygments-github-lexers (==0.0.5)", "rst.linker (>=1.9)", "sphinx (<7.2.5)", "sphinx (>=3.5)", "sphinx-favicon", "sphinx-inline-tabs", "sphinx-lint", "sphinx-notfound-page (>=1,<2)", "sphinx-reredirects", "sphinxcontrib-towncrier"]
+testing = ["build[virtualenv]", "filelock (>=3.4.0)", "importlib-metadata", "ini2toml[lite] (>=0.9)", "jaraco.develop (>=7.21)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "mypy (==1.9)", "packaging (>=23.2)", "pip (>=19.1)", "pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=2.2)", "pytest-home (>=0.5)", "pytest-mypy (>=0.9.1)", "pytest-perf", "pytest-ruff (>=0.2.1)", "pytest-timeout", "pytest-xdist (>=3)", "tomli", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel"]
+testing-integration = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "packaging (>=23.2)", "pytest", "pytest-enabler", "pytest-xdist", "tomli", "virtualenv (>=13.0.0)", "wheel"]
+
+[[package]]
 name = "simplejson"
 version = "3.19.2"
 description = "Simple, fast, extensible JSON encoder/decoder for Python"
@@ -4070,6 +4262,55 @@ files = [
     {file = "sniffio-1.3.1-py3-none-any.whl", hash = "sha256:2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2"},
     {file = "sniffio-1.3.1.tar.gz", hash = "sha256:f4324edc670a0f49750a81b895f35c3adb843cca46f0530f79fc1babb23789dc"},
 ]
+
+[[package]]
+name = "snowflake-connector-python"
+version = "2.6.1"
+description = "Snowflake Connector for Python"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "snowflake-connector-python-2.6.1.tar.gz", hash = "sha256:dbe6f7d84debd27b117e17fdb280be27695cf6ae54009c49495584d1b7776d1b"},
+    {file = "snowflake_connector_python-2.6.1-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:c5d0a5661c3e7e17195d4dd1d946136c160b533b9afe6038a4c922e1a564debb"},
+    {file = "snowflake_connector_python-2.6.1-cp36-cp36m-manylinux2010_x86_64.whl", hash = "sha256:428d2cae8f723130d80e31036f3b20d711f8455937b2b3dace8697cced54b83d"},
+    {file = "snowflake_connector_python-2.6.1-cp36-cp36m-manylinux2014_x86_64.whl", hash = "sha256:7d1a4d10967803b875533ac4793a7273677db5901d05978eb397af33ff1f5bf9"},
+    {file = "snowflake_connector_python-2.6.1-cp36-cp36m-win_amd64.whl", hash = "sha256:cff31e3a24984683bbe1c351e4151a67dfe57e298c36cac1afde632d43e12f65"},
+    {file = "snowflake_connector_python-2.6.1-cp37-cp37m-macosx_10_14_x86_64.whl", hash = "sha256:146e52e76ec4de2dc07fa76ceaad51af60592ea5c1c60bd7778b7955502650e4"},
+    {file = "snowflake_connector_python-2.6.1-cp37-cp37m-manylinux2010_x86_64.whl", hash = "sha256:04d623a1c1099ee1b4f4dbae2249d600b7cc3409688b44c157a67e6bdd6bf348"},
+    {file = "snowflake_connector_python-2.6.1-cp37-cp37m-manylinux2014_x86_64.whl", hash = "sha256:ad1c78acfa496cb567735410f5289b595657991256a6c4ada2af65fcd6676e65"},
+    {file = "snowflake_connector_python-2.6.1-cp37-cp37m-win_amd64.whl", hash = "sha256:55fef4b0c25eecb9af315e206e2fd7b9f754ebf9fec99b74d358e60228b508d2"},
+    {file = "snowflake_connector_python-2.6.1-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:76b632f8db5b6f305297b73b5a0c06cba72ddeb140e6d94a4eb94e2d1827c4fb"},
+    {file = "snowflake_connector_python-2.6.1-cp38-cp38-manylinux2010_x86_64.whl", hash = "sha256:f5a31cdb14e2f6bcc659bfebd4160d155b3a6620f2af64fde51b62676721a9e7"},
+    {file = "snowflake_connector_python-2.6.1-cp38-cp38-manylinux2014_x86_64.whl", hash = "sha256:103ca8d2be9a5fcab41dd27827361a6490feaa7984bfcb73d620e16062bab21b"},
+    {file = "snowflake_connector_python-2.6.1-cp38-cp38-win_amd64.whl", hash = "sha256:9eeebd9e03abb600dee5d25eeba3e6be07ef60dc2afeffb974c95f4655532dea"},
+    {file = "snowflake_connector_python-2.6.1-cp39-cp39-macosx_10_14_universal2.whl", hash = "sha256:d9f0a6fc896419d9d81d0c4bc2400902d0a69048eb97e5c0a76fe3cb2e2b0f5c"},
+    {file = "snowflake_connector_python-2.6.1-cp39-cp39-manylinux2010_x86_64.whl", hash = "sha256:6e675b86f563a4ae343fc1eb401fc9158764165a12b14781ed4059a2326fa239"},
+    {file = "snowflake_connector_python-2.6.1-cp39-cp39-manylinux2014_x86_64.whl", hash = "sha256:8bf73ed4fbf164a6ef7e78f4c3460cd30a128499cb1bfa23fa7e215a5fca8dae"},
+    {file = "snowflake_connector_python-2.6.1-cp39-cp39-win_amd64.whl", hash = "sha256:e2462afa35fd5df25f68375ff9df607c169f66f89adabaa2ed5500566b287803"},
+]
+
+[package.dependencies]
+asn1crypto = ">0.24.0,<2.0.0"
+azure-common = "<2.0.0"
+azure-storage-blob = ">=12.0.0,<13.0.0"
+boto3 = ">=1.4.4,<2.0.0"
+certifi = ">=2017.4.17"
+cffi = ">=1.9,<2.0.0"
+chardet = ">=3.0.2,<5"
+cryptography = ">=2.5.0,<4.0.0"
+idna = ">=2.5,<4"
+oscrypto = "<2.0.0"
+pycryptodomex = ">=3.2,<3.5.0 || >3.5.0,<4.0.0"
+pyjwt = "<3.0.0"
+pyOpenSSL = ">=16.2.0,<21.0.0"
+pytz = "*"
+requests = "<3.0.0"
+setuptools = ">34.0.0"
+
+[package.extras]
+development = ["Cython", "coverage", "mock", "more-itertools", "numpy (<1.21.0)", "pendulum (!=2.1.1)", "pexpect", "pytest (<6.3.0)", "pytest-cov", "pytest-rerunfailures", "pytest-timeout", "pytest-xdist", "pytz", "pytzdata"]
+pandas = ["pandas (>=1.0.0,<1.4.0)", "pyarrow (>=5.0.0,<5.1.0)"]
+secure-local-storage = ["keyring (!=16.1.0,<22.0.0)"]
 
 [[package]]
 name = "snowflake-connector-python"
@@ -4677,6 +4918,23 @@ files = [
 brotli = ["brotli (==1.0.9)", "brotli (>=1.0.9)", "brotlicffi (>=0.8.0)", "brotlipy (>=0.6.0)"]
 secure = ["certifi", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "ipaddress", "pyOpenSSL (>=0.14)", "urllib3-secure-extra"]
 socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
+
+[[package]]
+name = "urllib3"
+version = "2.2.1"
+description = "HTTP library with thread-safe connection pooling, file post, and more."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "urllib3-2.2.1-py3-none-any.whl", hash = "sha256:450b20ec296a467077128bff42b73080516e71b56ff59a60a02bef2232c4fa9d"},
+    {file = "urllib3-2.2.1.tar.gz", hash = "sha256:d0570876c61ab9e520d776c38acbbb5b05a776d3f9ff98a5c8fd5162a444cf19"},
+]
+
+[package.extras]
+brotli = ["brotli (>=1.0.9)", "brotlicffi (>=0.8.0)"]
+h2 = ["h2 (>=4,<5)"]
+socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
+zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
 name = "voyageai"

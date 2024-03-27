@@ -9,7 +9,9 @@ from griptape.drivers import OpenAiVisionImageQueryDriver
 from griptape.engines import ImageQueryEngine 
 
 # Create an Image Query Driver.
-driver = OpenAiVisionImageQueryDriver()
+driver = OpenAiVisionImageQueryDriver(
+    model="gpt-4-vision-preview"
+)
     
 # Create an Image Query Engine configured to use the driver.
 engine = ImageQueryEngine(

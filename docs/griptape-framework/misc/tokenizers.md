@@ -13,10 +13,11 @@ Tokenizers are a low level abstraction that you will rarely interact with direct
 from griptape.tokenizers import OpenAiTokenizer
 
 
-tokenizer = OpenAiTokenizer(model=OpenAiTokenizer.DEFAULT_OPENAI_GPT_4_MODEL)
+tokenizer = OpenAiTokenizer(model="gpt-4")
 
-print(tokenizer.count_tokens("Hello world!"))  # 3
-print(tokenizer.count_tokens_left("Hello world!"))  # 8181
+print(tokenizer.count_tokens("Hello world!"))
+print(tokenizer.count_input_tokens_left("Hello world!"))
+print(tokenizer.count_output_tokens_left("Hello world!"))
 ```
 
 ### Cohere
@@ -27,11 +28,12 @@ from griptape.tokenizers import CohereTokenizer
 
 
 tokenizer = CohereTokenizer(
-    model=CohereTokenizer.DEFAULT_MODEL, client=Client(os.environ["COHERE_API_KEY"])
+    model="command", client=Client(os.environ["COHERE_API_KEY"])
 )
 
-print(tokenizer.count_tokens("Hello world!"))  # 3
-print(tokenizer.count_tokens_left("Hello world!"))  # 2045
+print(tokenizer.count_tokens("Hello world!"))
+print(tokenizer.count_input_tokens_left("Hello world!"))
+print(tokenizer.count_output_tokens_left("Hello world!"))
 ```
 
 ### Anthropic
@@ -40,10 +42,24 @@ print(tokenizer.count_tokens_left("Hello world!"))  # 2045
 from griptape.tokenizers import AnthropicTokenizer
 
 
-tokenizer = AnthropicTokenizer(model=AnthropicTokenizer.DEFAULT_MODEL)
+tokenizer = AnthropicTokenizer(model="claude-3-opus-20240229")
 
-print(tokenizer.count_tokens("Hello world!"))  # 2
-print(tokenizer.count_tokens_left("Hello world!"))  # 99997
+print(tokenizer.count_tokens("Hello world!"))
+print(tokenizer.count_input_tokens_left("Hello world!"))
+print(tokenizer.count_output_tokens_left("Hello world!"))
+```
+
+### Google
+
+```python
+import os
+from griptape.tokenizers import GoogleTokenizer
+
+tokenizer = GoogleTokenizer(model="gemini-pro", api_key=os.environ["GOOGLE_API_KEY"])
+
+print(tokenizer.count_tokens("Hello world!"))
+print(tokenizer.count_input_tokens_left("Hello world!"))
+print(tokenizer.count_output_tokens_left("Hello world!"))
 ```
 
 ### Hugging Face
@@ -53,11 +69,13 @@ from griptape.tokenizers import HuggingFaceTokenizer
 
 
 tokenizer = HuggingFaceTokenizer(
+    max_output_tokens=512,
     tokenizer=AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
 )
 
-print(tokenizer.count_tokens("Hello world!"))  # 5
-print(tokenizer.count_tokens_left("Hello world!"))  # 507
+print(tokenizer.count_tokens("Hello world!"))
+print(tokenizer.count_input_tokens_left("Hello world!"))
+print(tokenizer.count_output_tokens_left("Hello world!"))
 ```
 
 ### Bedrock
@@ -67,10 +85,11 @@ print(tokenizer.count_tokens_left("Hello world!"))  # 507
 from griptape.tokenizers import BedrockClaudeTokenizer
 
 
-tokenizer = BedrockClaudeTokenizer(model=BedrockClaudeTokenizer.DEFAULT_MODEL)
+tokenizer = BedrockClaudeTokenizer(model="anthropic.claude-3-sonnet-20240229-v1:0")
 
-print(tokenizer.count_tokens("Hello world!")) # 2
-print(tokenizer.count_tokens_left("Hello world!")) # 4094
+print(tokenizer.count_tokens("Hello world!"))
+print(tokenizer.count_input_tokens_left("Hello world!"))
+print(tokenizer.count_output_tokens_left("Hello world!"))
 ```
 
 #### Amazon Titan
@@ -78,10 +97,11 @@ print(tokenizer.count_tokens_left("Hello world!")) # 4094
 from griptape.tokenizers import BedrockTitanTokenizer
 
 
-tokenizer = BedrockTitanTokenizer(model=BedrockTitanTokenizer.DEFAULT_MODEL)
+tokenizer = BedrockTitanTokenizer(model="amazon.titan-text-express-v1")
 
-print(tokenizer.count_tokens("Hello world!"))  # 5
-print(tokenizer.count_tokens_left("Hello world!"))  # 4091
+print(tokenizer.count_tokens("Hello world!"))
+print(tokenizer.count_input_tokens_left("Hello world!"))
+print(tokenizer.count_output_tokens_left("Hello world!"))
 ```
 
 #### Meta Llama 2
@@ -89,10 +109,11 @@ print(tokenizer.count_tokens_left("Hello world!"))  # 4091
 from griptape.tokenizers import BedrockLlamaTokenizer
 
 
-tokenizer = BedrockLlamaTokenizer(model=BedrockLlamaTokenizer.DEFAULT_MODEL)
+tokenizer = BedrockLlamaTokenizer(model="meta.llama2-13b-chat-v1")
 
-print(tokenizer.count_tokens("Hello world!"))  # 2
-print(tokenizer.count_tokens_left("Hello world!"))  # 2046
+print(tokenizer.count_tokens("Hello world!"))
+print(tokenizer.count_input_tokens_left("Hello world!"))
+print(tokenizer.count_output_tokens_left("Hello world!"))
 ```
 
 #### Ai21 Jurassic
@@ -100,10 +121,11 @@ print(tokenizer.count_tokens_left("Hello world!"))  # 2046
 from griptape.tokenizers import BedrockJurassicTokenizer
 
 
-tokenizer = BedrockJurassicTokenizer(model=BedrockJurassicTokenizer.DEFAULT_MODEL)
+tokenizer = BedrockJurassicTokenizer(model="ai21.j2-ultra-v1")
 
-print(tokenizer.count_tokens("Hello world!"))  # 3
-print(tokenizer.count_tokens_left("Hello world!"))  # 8189
+print(tokenizer.count_tokens("Hello world!"))
+print(tokenizer.count_input_tokens_left("Hello world!"))
+print(tokenizer.count_output_tokens_left("Hello world!"))
 ```
 
 
@@ -113,8 +135,9 @@ Not all LLM providers have a public tokenizer API. In this case, you can use the
 ```python
 from griptape.tokenizers import SimpleTokenizer
 
-tokenizer = SimpleTokenizer(max_tokens=1024, characters_per_token=6)
+tokenizer = SimpleTokenizer(max_input_tokens=1024, max_output_tokens=1024, characters_per_token=6)
 
-print(tokenizer.count_tokens("Hello world!")) # 2
-print(tokenizer.count_tokens_left("Hello world!")) # 1022
+print(tokenizer.count_tokens("Hello world!"))
+print(tokenizer.count_input_tokens_left("Hello world!"))
+print(tokenizer.count_output_tokens_left("Hello world!"))
 ```

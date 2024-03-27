@@ -103,6 +103,7 @@ jobs:
       POSTGRES_DB: ${{ secrets.INTEG_POSTGRES_DB }}
       POSTGRES_HOST: ${{ secrets.INTEG_POSTGRES_HOST }}
       POSTGRES_PORT: ${{ secrets.INTEG_POSTGRES_PORT }}
+      VOYAGE_API_KEY: ${{ secrets.INTEG_VOYAGE_API_KEY }}
 
     steps:
       - name: Checkout actions

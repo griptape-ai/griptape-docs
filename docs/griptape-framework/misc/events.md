@@ -12,8 +12,8 @@ from griptape.events import (
     BaseEvent,
     StartTaskEvent,
     FinishTaskEvent,
-    StartActionSubtaskEvent,
-    FinishActionSubtaskEvent,
+    StartActionsSubtaskEvent,
+    FinishActionsSubtaskEvent,
     StartPromptEvent,
     FinishPromptEvent,
     EventListener
@@ -27,8 +27,8 @@ agent = Agent(
         EventListener(handler, event_types=[
             StartTaskEvent,
             FinishTaskEvent,
-            StartActionSubtaskEvent,
-            FinishActionSubtaskEvent,
+            StartActionsSubtaskEvent,
+            FinishActionsSubtaskEvent,
             StartPromptEvent,
             FinishPromptEvent
         ])

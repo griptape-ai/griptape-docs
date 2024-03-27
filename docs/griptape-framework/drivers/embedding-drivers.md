@@ -51,6 +51,24 @@ print(embeddings[:3])
 [-0.234375, -0.024902344, -0.14941406]
 ```
 
+### Google Embeddings
+!!! info
+    This driver requires the `drivers-embedding-google` [extra](../index.md#extras).
+
+The [GoogleEmbeddingDriver](../../reference/griptape/drivers/embedding/google_embedding_driver.md) uses the [Google Embeddings API](https://ai.google.dev/tutorials/python_quickstart#use_embeddings).
+
+```python
+from griptape.drivers import GoogleEmbeddingDriver
+
+embeddings = GoogleEmbeddingDriver().embed_string("Hello world!")
+
+# display the first 3 embeddings
+print(embeddings[:3])
+```
+```
+[0.0588633, 0.0033929371, -0.072810836]
+```
+
 ### Hugging Face Hub Embeddings
 
 !!! info
@@ -70,6 +88,7 @@ driver = HuggingFaceHubEmbeddingDriver(
     api_token=os.environ["HUGGINGFACE_HUB_ACCESS_TOKEN"],
     model="sentence-transformers/all-MiniLM-L6-v2",
     tokenizer=HuggingFaceTokenizer(
+        max_output_tokens=512,
         tokenizer=AutoTokenizer.from_pretrained(
             "sentence-transformers/all-MiniLM-L6-v2"
         )
@@ -125,22 +144,51 @@ embeddings = driver.embed_string("Hello world!")
 print(embeddings[:3])
 ```
 
+### VoyageAI Embeddings
+The [VoyageAiEmbeddingDriver](../../reference/griptape/drivers/embedding/voyageai_embedding_driver.md) uses the [VoyageAI Embeddings API](https://www.voyageai.com/).
+
+!!! info
+    This driver requires the `drivers-embedding-voyageai` [extra](../index.md#extras).
+
+```python
+import os
+from griptape.drivers import VoyageAiEmbeddingDriver
+
+driver = VoyageAiEmbeddingDriver(
+    api_key=os.environ["VOYAGE_API_KEY"]
+)
+
+embeddings = driver.embed_string("Hello world!")
+
+# display the first 3 embeddings
+print(embeddings[:3])
+```
+
 ### Override Default Structure Embedding Driver
 Here is how you can override the Embedding Driver that is used by default in Structures. 
 
 ```python
 from griptape.structures import Agent
 from griptape.tools import WebScraper, TaskMemoryClient
-from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
-from griptape.config import StructureConfig, OpenAiStructureConfig
+from griptape.drivers import (
+    OpenAiChatPromptDriver,
+    VoyageAiEmbeddingDriver,
+)
+from griptape.config import (
+    StructureGlobalDriversConfig,
+    StructureConfig,
+)
 
 agent = Agent(
     tools=[WebScraper(), TaskMemoryClient(off_prompt=False)],
-    config=OpenAiStructureConfig(
+    config=StructureConfig(
         global_drivers=StructureGlobalDriversConfig(
-            embedding_driver=OpenAiEmbeddingDriver()
+            prompt_driver=OpenAiChatPromptDriver(model="gpt-4"),
+            embedding_driver=VoyageAiEmbeddingDriver(),
         )
-    )
+    ),
 )
 
 agent.run("based on https://www.griptape.ai/, tell me what Griptape is")
+```
+

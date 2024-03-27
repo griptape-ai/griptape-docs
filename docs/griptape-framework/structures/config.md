@@ -8,7 +8,7 @@ Griptape provides predefined [StructureConfig](../../reference/griptape/config/s
 
 #### OpenAI
 
-The [OpenAI Structure Config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.OpenStructureAIConfig) provides default Drivers for OpenAI's APIs. This is the default config for all Structures.
+The [OpenAI Structure Config](../../reference/griptape/config/openai_structure_config.md) provides default Drivers for OpenAI's APIs. This is the default config for all Structures.
 
 
 ```python
@@ -23,7 +23,7 @@ agent = Agent() # This is equivalent to the above
 ```
 
 #### Amazon Bedrock
-The [Amazon Bedrock Structure Config](../../reference/griptape/config/structure_config.md#griptape.config.structure_config.AmazonBedrockStructureConfig) provides default Drivers for Amazon Bedrock's APIs.
+The [Amazon Bedrock Structure Config](../../reference/griptape/config/amazon_bedrock_structure_config.md) provides default Drivers for Amazon Bedrock's APIs.
 
 ```python
 from griptape.structures import Agent
@@ -31,6 +31,37 @@ from griptape.config import AmazonBedrockStructureConfig
 
 agent = Agent(
     config=AmazonBedrockStructureConfig()
+)
+```
+
+#### Google
+The [Google Structure Config](../../reference/griptape/config/google_structure_config.md) provides default Drivers for Google's Gemini APIs.
+
+```python
+from griptape.structures import Agent
+from griptape.config import GoogleStructureConfig
+
+agent = Agent(
+    config=GoogleStructureConfig()
+)
+```
+
+#### Anthropic
+
+The [Anthropic Structure Config](../../reference/griptape/config/anthropic_structure_config.md) provides default Drivers for Anthropic's APIs.
+
+!!! info
+    Anthropic does not provide an embeddings API which means you will need to use another service for embeddings.
+    The `AnthropicStructureConfig` defaults to using `VoyageAiEmbeddingDriver` which integrates with [VoyageAI](https://www.voyageai.com/), the service used in Anthropic's [embeddings documentation](https://docs.anthropic.com/claude/docs/embeddings).
+    To override the default embedding driver, see: [Override Default Structure Embedding Driver](../drivers/embedding-drivers.md#override-default-structure-embedding-driver).
+
+
+```python
+from griptape.structures import Agent
+from griptape.config import AnthropicStructureConfig
+
+agent = Agent(
+    config=AnthropicStructureConfig()
 )
 ```
 
@@ -50,7 +81,7 @@ agent = Agent(
     config=StructureConfig(
         global_drivers=StructureGlobalDriversConfig(
             prompt_driver=AnthropicPromptDriver(
-                model="claude-2",
+                model="claude-3-sonnet-20240229",
                 api_key=os.environ["ANTHROPIC_API_KEY"],
             )
         )

@@ -56,7 +56,6 @@ CsvLoader().load("tests/assets/cities.csv")
 
 CsvLoader().load_collection(["tests/assets/cities.csv", "tests/assets/addresses.csv"])
 ```
-```
 
 
 ## Dataframe Loader

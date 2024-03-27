@@ -144,7 +144,6 @@ embeddings = driver.embed_string("Hello world!")
 print(embeddings[:3])
 ```
 
-
 ### VoyageAI Embeddings
 The [VoyageAiEmbeddingDriver](../../reference/griptape/drivers/embedding/voyageai_embedding_driver.md) uses the [VoyageAI Embeddings API](https://www.voyageai.com/).
 
@@ -192,3 +191,4 @@ agent = Agent(
 
 agent.run("based on https://www.griptape.ai/, tell me what Griptape is")
 ```
+

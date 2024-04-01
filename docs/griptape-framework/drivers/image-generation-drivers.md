@@ -46,7 +46,7 @@ model_driver = BedrockStableDiffusionImageGenerationModelDriver(
 
 driver = AmazonBedrockImageGenerationDriver(
     image_generation_model_driver=model_driver,
-    model="stability.stable-diffusion-xl-v0",
+    model="stability.stable-diffusion-xl-v1",
 )
 
 engine = PromptImageGenerationEngine(image_generation_driver=driver)

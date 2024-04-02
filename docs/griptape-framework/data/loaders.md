@@ -72,8 +72,6 @@ from griptape.loaders import DataFrameLoader
 
 urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv", "cities.csv")
 
-artifacts = loader.load()
-
 DataFrameLoader().load(pd.read_csv(path))
 
 urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/addresses.csv", "addresses.csv")

@@ -68,17 +68,11 @@ Can be used to load [pandas](https://pandas.pydata.org/) [DataFrame](https://pan
 ```python
 import urllib
 import pandas as pd
-from griptape.loaders import DataFrameLoader
+from griptape.loaders import DataFrameLoader, CsvLoader
 
 urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv", "cities.csv")
 
-DataFrameLoader().load(pd.read_csv(path))
-
-urllib.request.urlretrieve("https://people.sc.fsu.edu/~jburkardt/data/csv/addresses.csv", "addresses.csv")
-
-CsvLoader().load_collection(
-    [pd.read_csv('cities.csv'), pd.read_csv('addresses.csv')]
-)
+DataFrameLoader().load(pd.read_csv("cities.csv"))
 ```
 
 

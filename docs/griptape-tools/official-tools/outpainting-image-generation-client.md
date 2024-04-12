@@ -13,7 +13,7 @@ from griptape.tools import OutpaintingImageGenerationClient
 # Create a driver configured to use Stable Diffusion via Bedrock.
 driver = AmazonBedrockImageGenerationDriver(
     image_generation_model_driver=BedrockStableDiffusionImageGenerationModelDriver(),
-    model="stability.stable-diffusion-xl-v0",
+    model="stability.stable-diffusion-xl-v1",
 )
 
 # Create an engine configured to use the driver.

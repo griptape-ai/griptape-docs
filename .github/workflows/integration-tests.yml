@@ -1,8 +1,10 @@
-name: Integration Tests
+name: Docs Integration Tests
 
 on:
   pull_request:
     branches: [ "main", "dev" ]
+
+
 
 jobs:
   test:
@@ -106,9 +108,19 @@ jobs:
       VOYAGE_API_KEY: ${{ secrets.INTEG_VOYAGE_API_KEY }}
 
     steps:
+      - name: Get all changed docs files
+        id: changed-markdown-files
+        uses: tj-actions/changed-files@v43
+        with:
+          files: |
+            docs:
+              - docs/**.md
       - name: Checkout actions
         uses: actions/checkout@v3
       - name: Init environment 
         uses: ./.github/actions/init-environment 
       - name: Run integration tests
-        run: pytest -v tests/integration
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        run: pytest -v ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+        env:
+          DOCS_ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.docs_all_changed_files }}

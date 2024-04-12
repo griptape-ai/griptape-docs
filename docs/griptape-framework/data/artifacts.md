@@ -33,6 +33,10 @@ Each blob has a [name](../../reference/griptape/artifacts/base_artifact.md#gript
 
 [TaskMemory](../../reference/griptape/memory/task/task_memory.md) automatically stores [BlobArtifact](../../reference/griptape/artifacts/blob_artifact.md)s returned by tool activities that can be reused by other tools.
 
+## MediaArtifact
+
+A [MediaArtifact](../../reference/griptape/artifacts/media_artifact.md) is used for passing media between models and Structures. In addition to underlying binary data, a MediaArtifact includes metadata like media type, format, MIME type, and information about the prompt and model used to generate the media. It inherits from [BlobArtifact](#blobartifact) and serves as the base class for specific media Artifacts like the [ImageArtifact](#imageartifact).
+
 ## ImageArtifact
 
-An [ImageArtifact](../../reference/griptape/artifacts/image_artifact.md) is used for passing images back to the LLM. In addition to binary image data, an ImageArtifact includes image metadata like MIME type, dimensions, and prompt and model information for images returned by [image generation Drivers](../drivers/image-generation-drivers.md). It inherits from [BlobArtifact](#blobartifact).
+An [ImageArtifact](../../reference/griptape/artifacts/image_artifact.md) is used for passing images between models and Structures. In addition to binary image data, an ImageArtifact includes image metadata like MIME type, dimensions, and prompt and model information for images returned by [image generation Drivers](../drivers/image-generation-drivers.md). It inherits from [MediaArtifact](#mediaartifact).

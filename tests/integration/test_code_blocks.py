@@ -4,12 +4,8 @@ import os
 import pytest
 from utils.code_blocks import get_all_code_blocks, check_py_string
 
-docs_all_changed_files = os.environ.get("DOCS_ALL_CHANGED_FILES", "").splitlines()
-
-all_code_blocks = [
-    get_all_code_blocks(changed_file) for changed_file in docs_all_changed_files
-]
-all_code_blocks = [block for sublist in all_code_blocks for block in sublist]
+code_path = os.environ.get("INTEG_CODE_PATH", "**/*.md")
+all_code_blocks = get_all_code_blocks(code_path)
 
 
 @pytest.mark.parametrize(
